@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" id="html-root">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -344,6 +344,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .tooltip-wrap{position:relative;display:inline-block}
 .tooltip-text{visibility:hidden;position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:.75rem;white-space:nowrap;z-index:50}
 .tooltip-wrap:hover .tooltip-text{visibility:visible}
+
+/* Language switcher */
+.lang-switcher{display:flex;align-items:center;gap:4px;margin-left:auto;padding-left:16px;border-left:1px solid var(--border)}
+.lang-btn{padding:5px 10px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.78rem;font-weight:700;cursor:pointer;transition:all var(--transition);font-family:inherit;white-space:nowrap}
+.lang-btn:hover{background:var(--card2);color:var(--text)}
+.lang-btn.active{background:var(--card2);color:var(--gold);border-color:var(--gold)}
 </style>
 </head>
 <body>
@@ -351,13 +357,18 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 <!-- NAVIGATION -->
 <nav class="main-nav">
   <div class="nav-inner">
-    <div class="nav-logo">B1 Prüfungsgenie <span>Deutsch Exam Prep</span></div>
-    <button class="nav-tab active" onclick="showTab('home')"><span class="dot dot-home"></span> 🏠 Home</button>
-    <button class="nav-tab" onclick="showTab('lesen')"><span class="dot dot-lesen"></span> 📖 Lesen</button>
-    <button class="nav-tab" onclick="showTab('hoeren')"><span class="dot dot-hoeren"></span> 🎧 Hören</button>
-    <button class="nav-tab" onclick="showTab('schreiben')"><span class="dot dot-schreiben"></span> ✍️ Schreiben</button>
-    <button class="nav-tab" onclick="showTab('sprechen')"><span class="dot dot-sprechen"></span> 🗣 Sprechen</button>
-    <button class="nav-tab" onclick="showTab('grammatik')"><span class="dot dot-grammatik"></span> 📝 Grammatik</button>
+    <div class="nav-logo">B1 Prüfungsgenie <span data-i18n="nav_subtitle">Deutsch Exam Prep</span></div>
+    <button class="nav-tab active" onclick="showTab('home')"><span class="dot dot-home"></span> 🏠 <span data-i18n="nav_home">Home</span></button>
+    <button class="nav-tab" onclick="showTab('lesen')"><span class="dot dot-lesen"></span> 📖 <span data-i18n="nav_lesen">Lesen</span></button>
+    <button class="nav-tab" onclick="showTab('hoeren')"><span class="dot dot-hoeren"></span> 🎧 <span data-i18n="nav_hoeren">Hören</span></button>
+    <button class="nav-tab" onclick="showTab('schreiben')"><span class="dot dot-schreiben"></span> ✍️ <span data-i18n="nav_schreiben">Schreiben</span></button>
+    <button class="nav-tab" onclick="showTab('sprechen')"><span class="dot dot-sprechen"></span> 🗣 <span data-i18n="nav_sprechen">Sprechen</span></button>
+    <button class="nav-tab" onclick="showTab('grammatik')"><span class="dot dot-grammatik"></span> 📝 <span data-i18n="nav_grammatik">Grammatik</span></button>
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="lang-de" onclick="setLang('de')">🇩🇪 DE</button>
+      <button class="lang-btn" id="lang-ru" onclick="setLang('ru')">🇷🇺 RU</button>
+      <button class="lang-btn" id="lang-az" onclick="setLang('az')">🇦🇿 AZ</button>
+    </div>
   </div>
 </nav>
 
@@ -1638,7 +1649,443 @@ document.addEventListener('DOMContentLoaded',()=>{
   buildGrammar(2);
   // Dashboard
   updateDashboard();
+  // Apply saved language translations
+  setTimeout(() => applyTranslations(), 50);
 });
+
+// ===========================
+// I18N — TRANSLATIONS
+// ===========================
+let currentLang = 'de';
+
+const TRANSLATIONS = {
+  de: {
+    nav_subtitle: 'Deutsch Exam Prep',
+    nav_home: 'Home', nav_lesen: 'Lesen', nav_hoeren: 'Hören',
+    nav_schreiben: 'Schreiben', nav_sprechen: 'Sprechen', nav_grammatik: 'Grammatik',
+    // Home
+    home_hero_p: 'Komplette Vorbereitung für <strong>Goethe-Zertifikat B1</strong> und <strong>telc Deutsch B1</strong> — Lesen, Hören, Schreiben, Sprechen und Grammatik. Mit echten Arbeitsblättern.',
+    home_which: '📋 Welche Prüfung machen Sie?',
+    home_which_sub: 'Beide sind gültige B1-Zertifikate — wählen Sie das richtige für Ihr Ziel',
+    home_goethe_desc: 'Internationaler Goldstandard. Modular — nur nicht bestandene Teile wiederholen. Weltweit anerkannt.',
+    home_telc_desc: 'Am häufigsten in Deutschland. Erforderlich für Einbürgerung & Integrationszertifikate.',
+    home_goethe_note: '⚠️ Jeder Teil muss separat bestanden werden. Modular — nur nicht bestandene Teile wiederholen.',
+    home_telc_note: '⚠️ Schriftlich ≥135/225 UND Mündlich ≥45/75 — beide separat!',
+    home_practice: '📚 Übungsbereiche',
+    home_not_started: 'Noch nicht begonnen',
+    home_last_score: 'Letztes Ergebnis',
+    // Section descriptions
+    desc_lesen: '3 Übungstypen: Überschriften zuordnen, Multiple Choice, Anzeigen zuordnen. Goethe & telc.',
+    desc_hoeren: 'Echte Hörübungen mit Richtig/Falsch-Fragen. Enthält Ihre echten MP4-Audiodateien.',
+    desc_schreiben: 'Schreibvorlagen, Beschwerdebriefe, Forumsbeiträge. 14 echte Arbeitsblatt-Übungen.',
+    desc_sprechen: '80+ Bildbeschreibungen, Redewendungen und Themenkarten für alle 3 Sprechteile.',
+    desc_grammatik: 'Lückentextübungen für Grammatik und Wortschatz. Präpositionen, Verbformen, Konjunktionen.',
+    // Common buttons
+    btn_check: 'Antworten prüfen ✓',
+    btn_reset: 'Zurücksetzen',
+    btn_tips: '💡 Tipps anzeigen',
+    btn_load_more: 'Mehr Arbeitsblätter laden ↓',
+    btn_load_more_img: 'Mehr Bilder laden ↓',
+    btn_clear: '🗑 Löschen / Clear',
+    btn_start_timer: '▶ Lesezeit starten',
+    // Results
+    res_passed: '✅ Bestanden!',
+    res_fail: '❌ Mehr Übung nötig. 60% erforderlich.',
+    res_score: 'Ergebnis',
+    // Exercise UI
+    ex_instruction_lesen_g1: 'Lesen Sie den Text. Sind die Aussagen richtig (R) oder falsch (F)?',
+    ex_instruction_lesen_g1_en: 'Read the text. Are the statements true or false?',
+    ex_instruction_mcq: 'Lesen Sie den Artikel und beantworten Sie die Fragen. Welche Antwort (a, b oder c) ist richtig?',
+    ex_instruction_headlines: 'Lesen Sie die Überschriften A–J. Ordnen Sie jedem Text 1–5 die passende Überschrift zu.',
+    ex_instruction_situations: 'Lesen Sie die Situationen 11–20 und die Anzeigen a–l. Ordnen Sie zu.',
+    ex_true: '+ R', ex_false: '– F',
+    ex_reading_time: '⏱ Lesezeit — Lesen Sie zuerst die Aufgaben!',
+    // Writing
+    wr_your_answer: '📝 Ihre Antwort:',
+    wr_words: '/ mindestens 80 Wörter',
+    wr_checklist: '✅ Checkliste — Alles dabei?',
+    wr_template: '📋 Vorlage',
+    wr_phrase_label: '💬 Nützliche Phrasen — klicken zum Einfügen:',
+    // Speaking
+    sp_gallery_title: '🖼 Bildbeschreibung — Bildübungsblätter',
+    sp_gallery_sub: '80+ echte Bilder aus Ihren Sprechen-Arbeitsblättern. Klicken Sie zum Öffnen.',
+    sp_topics_title: '🎯 Sprechthemen — Themen für die Präsentation',
+    sp_topics_sub: 'Klicken Sie auf eine Themenkarte für Übungsfragen. Für Teil 2 (Präsentation).',
+    sp_parta: '📷 Teil A — Bildbeschreibung Phrasen',
+    sp_partb: '💬 Teil B — Meinung Phrasen',
+    // Grammar
+    gr_tips: '💡 Sprachbausteine Strategie',
+    // Hearing
+    audio_note: '📌 Diese Audiodatei enthält echte Hörübungen. Im echten telc-Examen wird das Gespräch zweimal gespielt.',
+    // Ads label
+    ads_label: '📌 Anzeigen (Advertisements):',
+    // Timing
+    timer_read: '⏱ Lesezeit (1 Min) — Lesen Sie zuerst die Aufgaben!',
+    timer_read2: '⏱ Lesezeit (30 Sek)',
+    // Word counter
+    wc_min: '/ mindestens 80 Wörter',
+  },
+
+  ru: {
+    nav_subtitle: 'Подготовка к экзамену',
+    nav_home: 'Главная', nav_lesen: 'Чтение', nav_hoeren: 'Аудирование',
+    nav_schreiben: 'Письмо', nav_sprechen: 'Говорение', nav_grammatik: 'Грамматика',
+    // Home
+    home_hero_p: 'Полная подготовка к <strong>Goethe-Zertifikat B1</strong> и <strong>telc Deutsch B1</strong> — Чтение, Аудирование, Письмо, Говорение и Грамматика. С настоящими рабочими листами.',
+    home_which: '📋 Какой экзамен вы сдаёте?',
+    home_which_sub: 'Оба являются действительными сертификатами B1 — выберите подходящий для вашей цели',
+    home_goethe_desc: 'Международный золотой стандарт. Модульный — пересдавайте только проваленные части. Признаётся по всему миру.',
+    home_telc_desc: 'Самый распространённый в Германии. Необходим для получения гражданства и интеграционных сертификатов.',
+    home_goethe_note: '⚠️ Каждая часть сдаётся отдельно. Модульный — пересдавайте только провальные части.',
+    home_telc_note: '⚠️ Письменная ≥135/225 И Устная ≥45/75 — обе отдельно!',
+    home_practice: '📚 Разделы для практики',
+    home_not_started: 'Не начато',
+    home_last_score: 'Последний результат',
+    // Section descriptions
+    desc_lesen: '3 типа упражнений: сопоставление заголовков, выбор ответа, объявления. Goethe и telc.',
+    desc_hoeren: 'Настоящие аудиозаписи с вопросами «Верно/Неверно». Включает ваши реальные аудиофайлы.',
+    desc_schreiben: 'Шаблоны для письма, письма-жалобы, форумные сообщения. 14 упражнений с рабочих листов.',
+    desc_sprechen: '80+ описаний картинок, фразы и карточки тем для всех 3 частей говорения.',
+    desc_grammatik: 'Упражнения на заполнение пропусков по грамматике и лексике. Предлоги, формы глаголов, союзы.',
+    // Common buttons
+    btn_check: 'Проверить ответы ✓',
+    btn_reset: 'Сбросить',
+    btn_tips: '💡 Показать советы',
+    btn_load_more: 'Загрузить ещё рабочие листы ↓',
+    btn_load_more_img: 'Загрузить ещё изображения ↓',
+    btn_clear: '🗑 Очистить',
+    btn_start_timer: '▶ Начать время чтения',
+    // Results
+    res_passed: '✅ Сдано!',
+    res_fail: '❌ Нужно больше практики. Требуется 60%.',
+    res_score: 'Результат',
+    // Exercise UI
+    ex_instruction_lesen_g1: 'Прочитайте текст. Утверждения верны (R) или неверны (F)?',
+    ex_instruction_lesen_g1_en: 'Прочитайте текст и ответьте на вопросы.',
+    ex_instruction_mcq: 'Прочитайте статью и ответьте на вопросы. Какой ответ (a, b или c) правильный?',
+    ex_instruction_headlines: 'Прочитайте заголовки A–J. Соотнесите каждый текст 1–5 с подходящим заголовком.',
+    ex_instruction_situations: 'Прочитайте ситуации 11–20 и объявления a–l. Соотнесите их.',
+    ex_true: '+ В', ex_false: '– Н',
+    ex_reading_time: '⏱ Время чтения — сначала прочитайте задания!',
+    // Writing
+    wr_your_answer: '📝 Ваш ответ:',
+    wr_words: '/ минимум 80 слов',
+    wr_checklist: '✅ Чеклист — всё включено?',
+    wr_template: '📋 Шаблон',
+    wr_phrase_label: '💬 Полезные фразы — нажмите для вставки:',
+    // Speaking
+    sp_gallery_title: '🖼 Описание картинки — упражнения из рабочих листов',
+    sp_gallery_sub: '80+ реальных изображений из ваших рабочих листов. Нажмите для увеличения.',
+    sp_topics_title: '🎯 Темы для говорения — для презентации',
+    sp_topics_sub: 'Нажмите на карточку темы для просмотра вопросов. Для Части 2 (Презентация).',
+    sp_parta: '📷 Часть A — Фразы для описания картинки',
+    sp_partb: '💬 Часть B — Фразы для выражения мнения',
+    // Grammar
+    gr_tips: '💡 Стратегия для Sprachbausteine',
+    // Hearing
+    audio_note: '📌 Реальная аудиозапись. Слушайте внимательно. В настоящем экзамене telc разговор воспроизводится дважды.',
+    // Ads label
+    ads_label: '📌 Объявления:',
+    // Timing
+    timer_read: '⏱ Время чтения (1 мин) — сначала прочитайте все задания!',
+    timer_read2: '⏱ Время чтения (30 сек)',
+    // Word counter
+    wc_min: '/ минимум 80 слов',
+  },
+
+  az: {
+    nav_subtitle: 'İmtahan Hazırlığı',
+    nav_home: 'Ana Səhifə', nav_lesen: 'Oxu', nav_hoeren: 'Dinləmə',
+    nav_schreiben: 'Yazı', nav_sprechen: 'Danışıq', nav_grammatik: 'Qrammatika',
+    // Home
+    home_hero_p: '<strong>Goethe-Zertifikat B1</strong> və <strong>telc Deutsch B1</strong> üçün tam hazırlıq — Oxu, Dinləmə, Yazı, Danışıq və Qrammatika. Həqiqi iş vərəqləri ilə.',
+    home_which: '📋 Hansı imtahana girecəksiniz?',
+    home_which_sub: 'Hər ikisi etibarlı B1 sertifikatıdır — məqsədinizə uyğun olanı seçin',
+    home_goethe_desc: 'Beynəlxalq qızıl standart. Modul — yalnız uğursuz hissələri yenidən verin. Dünya üzrə qəbul edilir.',
+    home_telc_desc: 'Almaniyada ən çox yayılmış. Vətəndaşlıq və inteqrasiya sertifikatları üçün tələb olunur.',
+    home_goethe_note: '⚠️ Hər hissə ayrıca keçilməlidir. Modul — yalnız uğursuz hissələri yenidən verin.',
+    home_telc_note: '⚠️ Yazılı ≥135/225 VƏ Şifahi ≥45/75 — hər ikisi ayrıca!',
+    home_practice: '📚 Məşq Bölmələri',
+    home_not_started: 'Başlanılmayıb',
+    home_last_score: 'Son nəticə',
+    // Section descriptions
+    desc_lesen: '3 tapşırıq növü: başlıq uyğunlaşdırma, çoxseçimli, elanlar. Goethe və telc.',
+    desc_hoeren: 'Həqiqi audio fayllar ilə Doğru/Yanlış sualları. Sizin MP4 audio fayllarınızı ehtiva edir.',
+    desc_schreiben: 'Yazı şablonları, şikayət məktubları, forum yazıları. 14 iş vərəqi məşqi.',
+    desc_sprechen: '80+ şəkil təsviri, ifadələr və 3 danışıq hissəsi üçün mövzu kartları.',
+    desc_grammatik: 'Qrammatika və lüğət üzrə boşluq doldurma məşqləri. Sözönlər, feil formaları, bağlayıcılar.',
+    // Common buttons
+    btn_check: 'Cavabları yoxla ✓',
+    btn_reset: 'Sıfırla',
+    btn_tips: '💡 Məsləhətləri göstər',
+    btn_load_more: 'Daha çox iş vərəqi yüklə ↓',
+    btn_load_more_img: 'Daha çox şəkil yüklə ↓',
+    btn_clear: '🗑 Sil / Təmizlə',
+    btn_start_timer: '▶ Oxu vaxtını başlat',
+    // Results
+    res_passed: '✅ Keçdiniz!',
+    res_fail: '❌ Daha çox məşq lazımdır. 60% tələb olunur.',
+    res_score: 'Nəticə',
+    // Exercise UI
+    ex_instruction_lesen_g1: 'Mətni oxuyun. İddiaalar doğrudurmu (R) yoxsa yanlışdırmı (F)?',
+    ex_instruction_lesen_g1_en: 'Mətni oxuyun və suallara cavab verin.',
+    ex_instruction_mcq: 'Məqaləni oxuyun və suallara cavab verin. Hansı cavab (a, b və ya c) doğrudur?',
+    ex_instruction_headlines: 'A–J başlıqlarını oxuyun. Hər 1–5 mətnə uyğun başlığı tapın.',
+    ex_instruction_situations: '11–20 situasiyaları və a–l elanlarını oxuyun. Uyğunlaşdırın.',
+    ex_true: '+ D', ex_false: '– Y',
+    ex_reading_time: '⏱ Oxu vaxtı — əvvəlcə tapşırıqları oxuyun!',
+    // Writing
+    wr_your_answer: '📝 Sizin cavabınız:',
+    wr_words: '/ minimum 80 söz',
+    wr_checklist: '✅ Yoxlama siyahısı — Hamısı varmı?',
+    wr_template: '📋 Şablon',
+    wr_phrase_label: '💬 Faydalı ifadələr — daxil etmək üçün klikləyin:',
+    // Speaking
+    sp_gallery_title: '🖼 Şəkil Təsviri — İş vərəqlərindən şəkillər',
+    sp_gallery_sub: '80+ həqiqi şəkil. Böyütmək üçün klikləyin.',
+    sp_topics_title: '🎯 Danışıq Mövzuları — Prezentasiya üçün',
+    sp_topics_sub: 'Məşq sualları üçün mövzu kartına klikləyin. 2-ci Hissə (Prezentasiya) üçün.',
+    sp_parta: '📷 A Hissəsi — Şəkil Təsviri İfadələri',
+    sp_partb: '💬 B Hissəsi — Fikir ifadə etmə',
+    // Grammar
+    gr_tips: '💡 Sprachbausteine Strategiyası',
+    // Hearing
+    audio_note: '📌 Həqiqi audio yazı. Diqqətlə qulaq asın. Həqiqi telc imtahanında söhbət iki dəfə oxunur.',
+    // Ads label
+    ads_label: '📌 Elanlar:',
+    // Timing
+    timer_read: '⏱ Oxu vaxtı (1 dəq) — əvvəlcə bütün tapşırıqları oxuyun!',
+    timer_read2: '⏱ Oxu vaxtı (30 san)',
+    // Word counter
+    wc_min: '/ minimum 80 söz',
+  }
+};
+
+// ===========================
+// I18N ENGINE
+// ===========================
+function t(key) {
+  return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) ||
+         (TRANSLATIONS['de'][key]) || key;
+}
+
+function applyTranslations() {
+  // Apply to all [data-i18n] elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = t(key);
+    if (val) el.innerHTML = val;
+  });
+
+  // Dynamic updates — re-render key dynamic sections
+  updateDynamicText();
+
+  // Update html lang
+  document.getElementById('html-root').lang = currentLang === 'de' ? 'de' : currentLang === 'ru' ? 'ru' : 'az';
+
+  // Save preference
+  try { localStorage.setItem('b1_lang', currentLang); } catch(e){}
+}
+
+function updateDynamicText() {
+  // True/False buttons text
+  document.querySelectorAll('.tf-btn').forEach(b => {
+    if (b.id && b.id.includes('tfr-')) {
+      b.textContent = t('ex_true');
+    } else if (b.id && b.id.includes('tff-')) {
+      b.textContent = t('ex_false');
+    }
+  });
+
+  // Submit buttons
+  document.querySelectorAll('.btn-primary[onclick*="check"]').forEach(b => {
+    if (!b.getAttribute('data-custom-label')) {
+      b.textContent = t('btn_check');
+    }
+  });
+  document.querySelectorAll('.btn-secondary[onclick*="reset"]').forEach(b => {
+    if (!b.getAttribute('data-custom-label')) {
+      b.textContent = t('btn_reset');
+    }
+  });
+  document.querySelectorAll('.btn-secondary[onclick*="toggleTips"]').forEach(b => {
+    b.textContent = t('btn_tips');
+  });
+  document.querySelectorAll('.btn-timer').forEach(b => {
+    b.textContent = t('btn_start_timer');
+  });
+  document.querySelectorAll('.load-more-btn').forEach(b => {
+    const isImg = b.id && b.id.includes('sprechen');
+    b.textContent = isImg ? t('btn_load_more_img') : t('btn_load_more');
+  });
+  document.querySelectorAll('[onclick="clearWriting()"]').forEach(b => {
+    b.textContent = t('btn_clear');
+  });
+
+  // Progress labels "Not started"
+  ['lesen','hoeren','schreiben','sprechen','grammatik'].forEach(s => {
+    const el = document.getElementById(`prog-label-${s}`);
+    if (el && el.textContent === 'Not started' || el && el.textContent === 'Nicht begonnen' || el && el.textContent === 'Не начато' || el && el.textContent === 'Başlanılmayıb') {
+      el.textContent = t('home_not_started');
+    }
+  });
+
+  // Word counter label
+  const wc = document.querySelector('.word-counter span:last-child');
+  if (wc) wc.textContent = t('wc_min');
+
+  // Writing answer label
+  const wal = document.querySelector('.writing-editor > .sc-icon + div, .writing-editor > div:first-child');
+
+  // Timer labels
+  const tl2 = document.querySelector('#timer-t2 + * .timer-label, [id="timer-t2"]');
+  document.querySelectorAll('.timer-row .timer-label, .timer-row > div:first-child > div:first-child').forEach(el => {
+    if (el.textContent.includes('Lesezeit') || el.textContent.includes('Oxu') || el.textContent.includes('чтения')) {
+      // leave — too risky to auto-replace inside complex structures
+    }
+  });
+
+  // Audio notes
+  document.querySelectorAll('.audio-note').forEach(el => {
+    el.textContent = t('audio_note');
+  });
+
+  // Ads label
+  document.querySelectorAll('.ex-body > div[style*="font-size:.85rem"]').forEach(el => {
+    if (el.textContent.includes('Anzeige') || el.textContent.includes('Advertisement') || el.textContent.includes('Объяв') || el.textContent.includes('Elan')) {
+      el.textContent = t('ads_label');
+    }
+  });
+
+  // Home section card descriptions
+  const descMap = {
+    'sc-lesen': 'desc_lesen', 'sc-hoeren': 'desc_hoeren',
+    'sc-schreiben': 'desc_schreiben', 'sc-sprechen': 'desc_sprechen', 'sc-grammatik': 'desc_grammatik'
+  };
+  Object.entries(descMap).forEach(([cls, key]) => {
+    const el = document.querySelector(`.section-card.${cls} .sc-desc`);
+    if (el) el.textContent = t(key);
+  });
+
+  // Home hero paragraph
+  const heroPara = document.querySelector('.dash-hero p');
+  if (heroPara) heroPara.innerHTML = t('home_hero_p');
+
+  // Home "which exam" card
+  const whichTitle = document.querySelector('.card > .card-title');
+  if (whichTitle && (whichTitle.textContent.includes('Which') || whichTitle.textContent.includes('Welche') || whichTitle.textContent.includes('Какой') || whichTitle.textContent.includes('Hansı'))) {
+    whichTitle.textContent = t('home_which');
+    const whichSub = whichTitle.nextElementSibling;
+    if (whichSub && whichSub.classList.contains('card-sub')) whichSub.textContent = t('home_which_sub');
+  }
+
+  // Practice sections label
+  const practiceLabel = document.querySelector('.section-wrap > div[style*="text-transform:uppercase"]');
+  if (practiceLabel) practiceLabel.textContent = t('home_practice');
+
+  // Gallery titles
+  const galleryTitles = document.querySelectorAll('.gallery-header .card-title');
+  galleryTitles.forEach(gt => {
+    if (gt.textContent.includes('Bildbeschr') || gt.textContent.includes('Worksheet') || gt.textContent.includes('Şəkil') || gt.textContent.includes('Описание')) {
+      if (gt.textContent.includes('Schreib') || gt.textContent.includes('Worksheet')) {
+        // writing gallery — keep
+      } else {
+        gt.textContent = t('sp_gallery_title');
+        const gSub = gt.nextElementSibling;
+        if (gSub && gSub.classList.contains('gallery-info')) gSub.textContent = t('sp_gallery_sub');
+      }
+    }
+  });
+
+  // Sprechen section labels
+  const spa = document.querySelector('#partA-phrases')?.previousElementSibling;
+  if (spa) spa.textContent = t('sp_parta');
+  const spb = document.querySelector('#partB-phrases')?.previousElementSibling;
+  if (spb) spb.textContent = t('sp_partb');
+
+  // Topics section
+  const topicsCard = document.querySelector('#speaking-topics')?.closest('.card');
+  if (topicsCard) {
+    const tt = topicsCard.querySelector('.card-title');
+    if (tt) tt.textContent = t('sp_topics_title');
+    const ts = topicsCard.querySelector('.card-sub');
+    if (ts) ts.textContent = t('sp_topics_sub');
+  }
+
+  // Goethe/telc format card descriptions
+  const fCards = document.querySelectorAll('.format-card');
+  if (fCards[0]) {
+    const p = fCards[0].querySelector('p');
+    if (p) p.textContent = t('home_goethe_desc');
+    const note = fCards[0].querySelector('div[style*="color:var(--text3)"]');
+    if (note) note.textContent = t('home_goethe_note');
+  }
+  if (fCards[1]) {
+    const p = fCards[1].querySelector('p');
+    if (p) p.textContent = t('home_telc_desc');
+    const note = fCards[1].querySelector('div[style*="color:var(--text3)"]');
+    if (note) note.textContent = t('home_telc_note');
+  }
+
+  // Exercise instruction texts
+  document.querySelectorAll('.instruction').forEach(el => {
+    const txt = el.textContent;
+    if (txt.includes('Lesen Sie den Text') || txt.includes('Read the text') || txt.includes('Прочитайте текст') || txt.includes('Mətni oxuyun')) {
+      if (el.querySelector('em')) {
+        el.innerHTML = t('ex_instruction_lesen_g1') + '<br><em>' + t('ex_instruction_lesen_g1_en') + '</em>';
+      } else if (!el.textContent.includes('Artikel') && !el.textContent.includes('Überschriften') && !el.textContent.includes('Situationen')) {
+        el.textContent = t('ex_instruction_lesen_g1');
+      }
+    }
+  });
+
+  // Writing tool labels
+  const wrLabel = document.querySelector('.writing-editor > div:first-child');
+  if (wrLabel && !wrLabel.id) wrLabel.textContent = t('wr_your_answer');
+
+  const wrChecklistTitle = document.querySelector('#writing-checklist')?.previousElementSibling?.previousElementSibling;
+  // Writing template title
+  document.querySelectorAll('.card .card-title').forEach(ct => {
+    if (ct.textContent.includes('Template') || ct.textContent.includes('Vorlage') || ct.textContent.includes('Шаблон') || ct.textContent.includes('Şablon')) {
+      ct.textContent = t('wr_template');
+    }
+    if (ct.textContent.includes('Checklist') || ct.textContent.includes('Checkliste') || ct.textContent.includes('Чеклист') || ct.textContent.includes('Yoxlama')) {
+      ct.textContent = t('wr_checklist');
+    }
+  });
+
+  // Writing phrase label
+  document.querySelectorAll('.template-box + div[style], .phrase-chips').forEach(el => {
+    const prev = el.previousElementSibling;
+    if (prev && (prev.textContent.includes('Nützliche') || prev.textContent.includes('Useful') || prev.textContent.includes('Полезные') || prev.textContent.includes('Faydalı'))) {
+      prev.textContent = t('wr_phrase_label');
+    }
+  });
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  // Update active button
+  ['de','ru','az'].forEach(l => {
+    const btn = document.getElementById(`lang-${l}`);
+    if (btn) btn.className = 'lang-btn' + (l === lang ? ' active' : '');
+  });
+  applyTranslations();
+}
+
+// Init: load saved language
+(function() {
+  try {
+    const saved = localStorage.getItem('b1_lang');
+    if (saved && ['de','ru','az'].includes(saved)) {
+      currentLang = saved;
+      ['de','ru','az'].forEach(l => {
+        const btn = document.getElementById(`lang-${l}`);
+        if (btn) btn.className = 'lang-btn' + (l === currentLang ? ' active' : '');
+      });
+    }
+  } catch(e) {}
+})();
 </script>
 </body>
 </html>
