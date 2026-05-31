@@ -1,895 +1,1644 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>German B1 Exam Genius — Telc & Goethe Simulator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #0b0f19;
-            --surface-color: rgba(20, 26, 45, 0.6);
-            --surface-hover: rgba(30, 38, 64, 0.8);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --primary-color: #3b82f6;
-            --primary-glow: rgba(59, 130, 246, 0.4);
-            --success-color: #10b981;
-            --success-glow: rgba(16, 185, 129, 0.2);
-            --error-color: #ef4444;
-            --error-glow: rgba(239, 68, 68, 0.2);
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B1 Prüfungsgenie — Goethe & telc Deutsch B1 Vorbereitung</title>
+<meta name="description" content="Comprehensive German B1 exam preparation covering both Goethe-Zertifikat B1 and telc Deutsch B1 — Reading, Listening, Writing, Speaking, Grammar with real worksheets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080F1E;
+  --bg2: #0D1929;
+  --card: #111E35;
+  --card2: #162540;
+  --border: #1E3050;
+  --gold: #F5B400;
+  --gold2: #FFCF40;
+  --blue: #3B82F6;
+  --green: #10B981;
+  --orange: #F59E0B;
+  --purple: #8B5CF6;
+  --pink: #EC4899;
+  --red: #EF4444;
+  --text: #E2E8F0;
+  --text2: #94A3B8;
+  --text3: #64748B;
+  --correct: #10B981;
+  --wrong: #EF4444;
+  --r: 12px;
+  --r2: 8px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --transition: 0.25s cubic-bezier(.4,0,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+/* ---- NAV ---- */
+.main-nav{position:sticky;top:0;z-index:100;background:rgba(8,15,30,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 16px}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:4px;overflow-x:auto;height:60px;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-logo{font-weight:800;font-size:1.1rem;color:var(--gold);white-space:nowrap;margin-right:16px;letter-spacing:-.02em}
+.nav-logo span{color:var(--text2);font-weight:400;font-size:.85rem}
+.nav-tab{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:none;background:transparent;color:var(--text2);font-size:.85rem;font-weight:500;cursor:pointer;transition:all var(--transition);white-space:nowrap;font-family:inherit}
+.nav-tab:hover{background:var(--card);color:var(--text)}
+.nav-tab.active{background:var(--card2);color:var(--text);font-weight:600}
+.nav-tab .dot{width:8px;height:8px;border-radius:50%}
+.dot-home{background:var(--gold)}
+.dot-lesen{background:var(--blue)}
+.dot-hoeren{background:var(--green)}
+.dot-schreiben{background:var(--orange)}
+.dot-sprechen{background:var(--purple)}
+.dot-grammatik{background:var(--pink)}
 
-        body {
-            background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
-            color: var(--text-primary);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            overflow-x: hidden;
-        }
+/* ---- SECTIONS ---- */
+.tab-content{display:none;min-height:calc(100vh - 60px)}
+.tab-content.active{display:block}
+.section-wrap{max-width:1100px;margin:0 auto;padding:32px 20px 80px}
 
-        /* Glassmorphism utility */
-        .glass-panel {
-            background: var(--surface-color);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-        }
+/* ---- HERO ---- */
+.section-hero{border-radius:var(--r);padding:40px 32px;margin-bottom:32px;position:relative;overflow:hidden}
+.section-hero::before{content:'';position:absolute;inset:0;opacity:.08;background:radial-gradient(circle at 80% 50%,white,transparent 60%)}
+.hero-lesen{background:linear-gradient(135deg,#1a3a6e,#0f2a52)}
+.hero-hoeren{background:linear-gradient(135deg,#0a3d2e,#062919)}
+.hero-schreiben{background:linear-gradient(135deg,#4a2c00,#2d1a00)}
+.hero-sprechen{background:linear-gradient(135deg,#2d1a5e,#1a0f3d)}
+.hero-grammatik{background:linear-gradient(135deg,#4a1040,#2d0828)}
+.hero-home{background:linear-gradient(135deg,#0d2240 0%,#1a3a6e 50%,#0d2240 100%)}
+.hero-title{font-size:1.8rem;font-weight:800;margin-bottom:8px;letter-spacing:-.03em}
+.hero-sub{color:var(--text2);font-size:.95rem;max-width:600px;line-height:1.6}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.badge{padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:600;border:1px solid}
+.badge-goethe{color:var(--gold);border-color:var(--gold);background:rgba(245,180,0,.1)}
+.badge-telc{color:var(--blue);border-color:var(--blue);background:rgba(59,130,246,.1)}
+.badge-both{color:var(--green);border-color:var(--green);background:rgba(16,185,129,.1)}
 
-        /* App Layout */
-        .sidebar {
-            width: 280px;
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            padding: 24px;
-            display: flex;
-            flex-col: column;
-            flex-direction: column;
-            border-right: 1px solid var(--border-color);
-            z-index: 100;
-        }
+/* ---- CARDS ---- */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;margin-bottom:20px}
+.card-title{font-size:1.05rem;font-weight:700;margin-bottom:4px}
+.card-sub{color:var(--text2);font-size:.85rem;margin-bottom:16px}
+.card-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:20px}
 
-        .main-content {
-            margin-left: 280px;
-            flex-grow: 1;
-            padding: 40px;
-            max-width: 1200px;
-            width: calc(100% - 280px);
-        }
+/* ---- EXAM FORMAT CARDS ---- */
+.format-card{background:var(--card);border:2px solid var(--border);border-radius:var(--r);padding:24px;cursor:pointer;transition:all var(--transition)}
+.format-card:hover,.format-card.selected{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),var(--shadow)}
+.format-card h3{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+.format-card p{color:var(--text2);font-size:.85rem;line-height:1.5;margin-bottom:16px}
+.format-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.format-table th{color:var(--text3);font-weight:600;text-transform:uppercase;font-size:.72rem;letter-spacing:.04em;padding:6px 8px;border-bottom:1px solid var(--border);text-align:left}
+.format-table td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.04)}
+.format-table tr:last-child td{border-bottom:none}
+.pass{color:var(--green);font-weight:600}
+.warn{color:var(--orange);font-weight:600}
 
-        /* Navigation */
-        .brand-section {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 40px;
-        }
+/* ---- EXAM PICKER ---- */
+.exam-picker{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.pick-btn{padding:8px 18px;border-radius:20px;border:2px solid var(--border);background:transparent;color:var(--text2);font-size:.85rem;font-weight:600;cursor:pointer;transition:all var(--transition);font-family:inherit}
+.pick-btn.active-goethe{border-color:var(--gold);color:var(--gold);background:rgba(245,180,0,.1)}
+.pick-btn.active-telc{border-color:var(--blue);color:var(--blue);background:rgba(59,130,246,.1)}
+.pick-btn.active-both{border-color:var(--green);color:var(--green);background:rgba(16,185,129,.1)}
 
-        .brand-icon {
-            background: var(--primary-color);
-            box-shadow: 0 0 15px var(--primary-glow);
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+/* ---- EXERCISES ---- */
+.exercise-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:20px}
+.ex-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.ex-title{font-size:1rem;font-weight:700}
+.ex-sub{color:var(--text2);font-size:.82rem;margin-top:2px}
+.ex-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.meta-pill{padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:600;background:var(--card2);color:var(--text2)}
+.ex-body{padding:24px}
+.instruction{background:var(--card2);border-left:3px solid var(--blue);border-radius:0 var(--r2) var(--r2) 0;padding:12px 16px;font-size:.88rem;color:var(--text2);margin-bottom:20px;line-height:1.6}
+.instruction.green{border-color:var(--green)}
+.instruction.orange{border-color:var(--orange)}
+.instruction.purple{border-color:var(--purple)}
+.instruction.gold{border-color:var(--gold)}
 
-        .brand-name {
-            font-size: 20px;
-            font-weight: 800;
-            background: linear-gradient(to right, #3b82f6, #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+/* READING TEXT */
+.reading-text{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:20px;margin-bottom:20px;font-size:.9rem;line-height:1.8;color:var(--text)}
+.reading-text h4{font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--gold)}
 
-        .nav-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+/* HEADLINES */
+.headlines-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px;margin-bottom:20px}
+.headline-chip{padding:10px 14px;border-radius:var(--r2);background:var(--bg2);border:1px solid var(--border);font-size:.83rem;cursor:default;transition:all var(--transition)}
+.headline-chip .hid{font-weight:800;color:var(--gold);margin-right:8px;font-size:.9rem}
 
-        .nav-item button {
-            width: 100%;
-            padding: 14px 18px;
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 15px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            border-radius: 12px;
-            transition: all 0.2s ease;
-            text-align: left;
-        }
+/* TEXT BLOCKS for matching */
+.text-block{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:16px;margin-bottom:12px;font-size:.88rem;line-height:1.7}
+.text-block .tid{font-weight:800;color:var(--text2);margin-bottom:8px;font-size:.82rem}
+.select-answer{margin-top:10px;padding:8px 12px;border-radius:var(--r2);border:1px solid var(--border);background:var(--card);color:var(--text);font-size:.85rem;font-family:inherit;width:100%;cursor:pointer}
+.select-answer:focus{outline:none;border-color:var(--blue)}
 
-        .nav-item button:hover {
-            background: var(--surface-hover);
-            color: var(--text-primary);
-        }
+/* MCQ */
+.question-block{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.question-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.q-num{font-size:.78rem;font-weight:700;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+.q-text{font-size:.92rem;font-weight:600;margin-bottom:12px;line-height:1.5}
+.option-btn{display:block;width:100%;text-align:left;padding:11px 16px;margin-bottom:8px;border-radius:var(--r2);border:1px solid var(--border);background:transparent;color:var(--text);font-size:.88rem;cursor:pointer;transition:all var(--transition);font-family:inherit}
+.option-btn:hover{background:var(--card2);border-color:var(--blue)}
+.option-btn.selected{background:rgba(59,130,246,.15);border-color:var(--blue)}
+.option-btn.correct{background:rgba(16,185,129,.15);border-color:var(--correct);color:var(--correct)}
+.option-btn.wrong{background:rgba(239,68,68,.12);border-color:var(--wrong);color:var(--wrong)}
 
-        .nav-item.active button {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--primary-color);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-        }
+/* TRUE/FALSE */
+.tf-question{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.tf-question:last-child{border-bottom:none}
+.tf-num{font-size:.78rem;font-weight:700;color:var(--text3);min-width:28px;padding-top:3px}
+.tf-text{flex:1;font-size:.88rem;line-height:1.5}
+.tf-context{font-size:.75rem;color:var(--text3);margin-top:3px}
+.tf-btns{display:flex;gap:6px;min-width:100px}
+.tf-btn{padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.82rem;font-weight:700;cursor:pointer;transition:all var(--transition);font-family:inherit}
+.tf-btn:hover{background:var(--card2)}
+.tf-btn.r-selected{background:rgba(16,185,129,.2);border-color:var(--green);color:var(--green)}
+.tf-btn.f-selected{background:rgba(239,68,68,.15);border-color:var(--red);color:var(--red)}
+.tf-btn.tf-correct{background:rgba(16,185,129,.3);border-color:var(--green);color:var(--green)}
+.tf-btn.tf-wrong{background:rgba(239,68,68,.25);border-color:var(--red);color:var(--red)}
 
-        /* Page Layout & Components */
-        .page {
-            display: none;
-        }
+/* SITUATIONS */
+.situation-item{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+.sit-num{font-weight:700;color:var(--gold);min-width:24px;font-size:.9rem;padding-top:10px}
+.sit-text{flex:1;font-size:.88rem;line-height:1.5;padding:10px 12px;background:var(--bg2);border-radius:var(--r2);border:1px solid var(--border)}
+.sit-sel{padding:9px 12px;border-radius:var(--r2);border:1px solid var(--border);background:var(--card);color:var(--text);font-size:.85rem;width:80px;font-family:inherit;cursor:pointer}
 
-        .page.active {
-            display: block;
-            animation: fadeIn 0.4s ease-out;
-        }
+/* ADS GRID */
+.ads-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:16px}
+.ad-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;font-size:.83rem}
+.ad-id{font-weight:800;color:var(--gold);font-size:.9rem;margin-bottom:4px}
+.ad-title{font-weight:700;margin-bottom:4px;font-size:.88rem}
+.ad-text{color:var(--text2);line-height:1.5}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+/* SUBMIT & RESULT */
+.submit-row{margin-top:20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn-primary{padding:11px 24px;border-radius:var(--r2);border:none;background:var(--gold);color:#000;font-size:.88rem;font-weight:700;cursor:pointer;transition:all var(--transition);font-family:inherit}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-secondary{padding:11px 24px;border-radius:var(--r2);border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.88rem;font-weight:600;cursor:pointer;transition:all var(--transition);font-family:inherit}
+.btn-secondary:hover{background:var(--card2);color:var(--text)}
+.result-banner{padding:16px 20px;border-radius:var(--r2);font-weight:700;font-size:1rem;margin-top:16px;display:none}
+.result-pass{background:rgba(16,185,129,.15);border:1px solid var(--green);color:var(--green)}
+.result-fail{background:rgba(239,68,68,.12);border:1px solid var(--red);color:var(--red)}
+.result-ok{background:rgba(245,180,0,.12);border:1px solid var(--gold);color:var(--gold)}
 
-        /* Dashboard Hero */
-        .hero-banner {
-            padding: 32px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* AUDIO PLAYER */
+.audio-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:20px}
+.audio-section h4{font-size:.95rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.audio-section audio{width:100%;border-radius:8px;margin-bottom:8px;accent-color:var(--green)}
+.audio-note{font-size:.8rem;color:var(--text3);line-height:1.5}
+.timer-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.timer-display{font-size:1.5rem;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+.timer-label{font-size:.82rem;color:var(--text2)}
+.btn-timer{padding:8px 16px;border-radius:var(--r2);border:1px solid var(--green);background:rgba(16,185,129,.1);color:var(--green);font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all var(--transition)}
+.btn-timer:hover{background:rgba(16,185,129,.2)}
 
-        .hero-banner::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
-            z-index: 0;
-        }
+/* WRITING TOOL */
+.writing-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:700px){.writing-layout{grid-template-columns:1fr}}
+.writing-prompt-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.prompt-type{font-size:.78rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.prompt-scenario{font-size:.9rem;line-height:1.7;margin-bottom:16px;color:var(--text)}
+.bullets-list{list-style:none;padding:0}
+.bullets-list li{padding:8px 12px;margin-bottom:6px;background:rgba(245,159,11,.08);border-left:3px solid var(--orange);border-radius:0 var(--r2) var(--r2) 0;font-size:.85rem;line-height:1.5}
+.bullets-list li::before{content:'✓ ';color:var(--orange);font-weight:700}
+.template-box{background:var(--card2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:12px;font-size:.82rem;line-height:1.7}
+.template-box .t-label{font-size:.72rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.template-box .t-val{color:var(--text2)}
+.phrase-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.phrase-chip{padding:5px 10px;border-radius:6px;background:var(--card2);border:1px solid var(--border);font-size:.78rem;color:var(--text2);cursor:pointer;transition:all var(--transition)}
+.phrase-chip:hover{border-color:var(--orange);color:var(--orange);background:rgba(245,159,11,.08)}
+.writing-editor{display:flex;flex-direction:column;gap:12px}
+.writing-textarea{width:100%;min-height:280px;padding:16px;border-radius:var(--r);border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:.9rem;font-family:'Inter',sans-serif;line-height:1.7;resize:vertical;transition:border-color var(--transition)}
+.writing-textarea:focus{outline:none;border-color:var(--orange)}
+.word-counter{display:flex;align-items:center;gap:8px;font-size:.83rem;color:var(--text2)}
+.wc-num{font-weight:700;font-size:1rem}
+.wc-num.good{color:var(--green)}
+.wc-num.warn{color:var(--orange)}
+.checklist-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.check-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--r2);background:var(--bg2);border:1px solid var(--border);font-size:.8rem;cursor:pointer;transition:all var(--transition)}
+.check-item:hover{border-color:var(--green)}
+.check-item input{accent-color:var(--green)}
+.check-item.checked{background:rgba(16,185,129,.08);border-color:var(--green);color:var(--green)}
 
-        .hero-text h1 {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
+/* PROMPT SELECTOR */
+.prompt-selector{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.ps-btn{padding:8px 16px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.82rem;cursor:pointer;font-family:inherit;transition:all var(--transition)}
+.ps-btn.active{border-color:var(--orange);color:var(--orange);background:rgba(245,159,11,.1);font-weight:600}
 
-        .hero-text p {
-            color: var(--text-secondary);
-            font-size: 16px;
-        }
+/* SPEAKING */
+.speaking-parts{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:20px}
+.speak-part{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.speak-part .sp-icon{font-size:2rem;margin-bottom:8px}
+.speak-part .sp-title{font-size:.95rem;font-weight:700;margin-bottom:4px}
+.speak-part .sp-desc{font-size:.82rem;color:var(--text2);line-height:1.5;margin-bottom:12px}
+.speak-part .sp-duration{font-size:.78rem;color:var(--purple);font-weight:700;margin-bottom:12px}
+.phrases-list{list-style:none;padding:0}
+.phrases-list li{padding:6px 10px;margin-bottom:4px;background:rgba(139,92,246,.08);border-left:2px solid var(--purple);border-radius:0 6px 6px 0;font-size:.82rem;color:var(--text2)}
 
-        /* Progress Card */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
+/* TOPICS GRID */
+.topics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+.topic-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;cursor:pointer;transition:all var(--transition)}
+.topic-card:hover{border-color:var(--purple);transform:translateY(-2px)}
+.topic-card.open{border-color:var(--purple);background:var(--card2)}
+.tc-emoji{font-size:2rem;margin-bottom:8px}
+.tc-title{font-size:.88rem;font-weight:700;margin-bottom:8px}
+.tc-questions{display:none;margin-top:10px;border-top:1px solid var(--border);padding-top:10px}
+.topic-card.open .tc-questions{display:block}
+.tc-q{font-size:.8rem;color:var(--text2);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.4}
+.tc-q:last-child{border-bottom:none}
 
-        .stat-card {
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+/* BILDBESCHREIBUNG GALLERY */
+.gallery-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.gallery-info{font-size:.85rem;color:var(--text2)}
+.gallery-filter{display:flex;gap:6px;flex-wrap:wrap}
+.gf-btn{padding:5px 12px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.78rem;cursor:pointer;font-family:inherit;transition:all var(--transition)}
+.gf-btn.active{border-color:var(--purple);color:var(--purple);background:rgba(139,92,246,.1)}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.gallery-thumb{border-radius:var(--r2);overflow:hidden;cursor:pointer;border:2px solid var(--border);transition:all var(--transition);aspect-ratio:3/4;background:var(--bg2)}
+.gallery-thumb:hover{border-color:var(--purple);transform:scale(1.02)}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.load-more-btn{display:block;width:100%;padding:12px;border-radius:var(--r);border:1px dashed var(--border);background:transparent;color:var(--text2);font-size:.85rem;cursor:pointer;margin-top:12px;font-family:inherit;transition:all var(--transition)}
+.load-more-btn:hover{border-color:var(--purple);color:var(--purple)}
 
-        .stat-val {
-            font-size: 36px;
-            font-weight: 800;
-            color: var(--primary-color);
-        }
+/* GRAMMAR FILL */
+.fill-text{font-size:.92rem;line-height:2.2;color:var(--text);background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:20px}
+.fill-gap{display:inline-block;min-width:120px;border-bottom:2px solid var(--blue);margin:0 4px;padding:2px 8px;border-radius:4px 4px 0 0;background:rgba(59,130,246,.06);font-weight:600;color:var(--blue);font-size:.9rem;cursor:default}
+.gap-options{display:grid;grid-template-columns:1fr;gap:6px;margin-bottom:16px}
+.gap-q-header{font-size:.82rem;font-weight:700;color:var(--text2);margin-bottom:8px}
+.gap-num{display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(236,72,153,.15);color:var(--pink);font-weight:700;font-size:.78rem;margin-right:8px}
+.tip-box{background:rgba(245,180,0,.08);border:1px solid rgba(245,180,0,.25);border-radius:var(--r2);padding:10px 14px;font-size:.82rem;color:var(--text2);margin-top:10px;display:none}
+.tip-box.show{display:block}
+.tip-label{color:var(--gold);font-weight:700}
 
-        .stat-title {
-            color: var(--text-secondary);
-            font-size: 14px;
-            font-weight: 600;
-        }
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
+.lightbox.open{display:flex}
+.lb-inner{position:relative;max-width:90vw;max-height:90vh;display:flex;flex-direction:column;align-items:center;gap:12px}
+.lb-img{max-width:100%;max-height:80vh;border-radius:var(--r);object-fit:contain;box-shadow:0 8px 40px rgba(0,0,0,.8)}
+.lb-close{position:fixed;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--transition)}
+.lb-close:hover{background:var(--red);border-color:var(--red)}
+.lb-nav{display:flex;gap:12px;align-items:center}
+.lb-arrow{padding:10px 20px;border-radius:var(--r2);border:1px solid var(--border);background:var(--card);color:var(--text);font-size:1rem;cursor:pointer;transition:all var(--transition);font-family:inherit}
+.lb-arrow:hover{background:var(--card2);border-color:var(--gold)}
+.lb-counter{color:var(--text2);font-size:.85rem}
 
-        /* Sub-tab bar */
-        .subtab-bar {
-            display: flex;
-            gap: 12px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px;
-            margin-bottom: 24px;
-        }
+/* HOME / DASHBOARD */
+.dash-hero{background:linear-gradient(135deg,#0d2240,#1a3a6e,#0d2240);border-radius:var(--r);padding:48px 40px;margin-bottom:32px;text-align:center;position:relative;overflow:hidden}
+.dash-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(245,180,0,.08),transparent 70%)}
+.dash-hero h1{font-size:2.5rem;font-weight:800;letter-spacing:-.04em;margin-bottom:8px;position:relative}
+.dash-hero h1 span{color:var(--gold)}
+.dash-hero p{color:var(--text2);max-width:560px;margin:0 auto;line-height:1.7;position:relative;font-size:.95rem}
+.dash-hero .hero-badges{justify-content:center;position:relative;margin-top:20px}
+.section-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:32px}
+.section-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;cursor:pointer;transition:all var(--transition);position:relative;overflow:hidden}
+.section-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.sc-lesen::before{background:var(--blue)}
+.sc-hoeren::before{background:var(--green)}
+.sc-schreiben::before{background:var(--orange)}
+.sc-sprechen::before{background:var(--purple)}
+.sc-grammatik::before{background:var(--pink)}
+.section-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.sc-icon{font-size:2rem;margin-bottom:12px}
+.sc-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.sc-desc{font-size:.82rem;color:var(--text2);line-height:1.5;margin-bottom:12px}
+.sc-meta{display:flex;gap:8px;flex-wrap:wrap}
+.sc-pill{padding:3px 8px;border-radius:6px;font-size:.72rem;font-weight:600;background:var(--card2);color:var(--text3)}
+.progress-bar{height:4px;border-radius:2px;background:var(--border);margin-top:14px;overflow:hidden}
+.progress-fill{height:100%;border-radius:2px;transition:width .5s ease;background:var(--blue)}
+.progress-label{font-size:.72rem;color:var(--text3);margin-top:4px}
 
-        .subtab-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 15px;
-            font-weight: 700;
-            padding: 8px 16px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
+/* SCORE TRACKER */
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:24px}
+.score-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+.sc-score{font-size:2rem;font-weight:800;color:var(--gold)}
+.sc-label{font-size:.78rem;color:var(--text2);margin-top:4px}
+.sc-status{font-size:.75rem;font-weight:700;margin-top:6px}
+.sc-pass{color:var(--green)}
+.sc-fail{color:var(--red)}
+.sc-untried{color:var(--text3)}
 
-        .subtab-btn:hover {
-            color: var(--text-primary);
-        }
+/* TIPS */
+.tip-card{background:linear-gradient(135deg,rgba(245,180,0,.06),rgba(245,180,0,.02));border:1px solid rgba(245,180,0,.2);border-radius:var(--r);padding:20px;margin-bottom:20px}
+.tip-card h4{color:var(--gold);font-size:.9rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.tip-card ul{padding-left:16px;color:var(--text2);font-size:.85rem;line-height:1.8}
 
-        .subtab-btn.active {
-            background: var(--surface-hover);
-            color: var(--primary-color);
-        }
+/* GRAMMAR RULE */
+.grammar-rule{background:rgba(236,72,153,.05);border:1px solid rgba(236,72,153,.2);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.gr-title{font-size:.85rem;font-weight:700;color:var(--pink);margin-bottom:8px}
+.gr-example{font-family:monospace;background:var(--bg2);border-radius:6px;padding:8px 12px;font-size:.85rem;color:var(--text);margin-top:6px}
+.gr-note{font-size:.8rem;color:var(--text2);margin-top:4px}
 
-        /* Question Layout styles */
-        .card-container {
-            padding: 30px;
-            margin-bottom: 24px;
-        }
+/* RESPONSIVE */
+@media(max-width:600px){
+  .dash-hero h1{font-size:1.8rem}
+  .section-wrap{padding:20px 14px 60px}
+  .section-hero{padding:24px 20px}
+  .hero-title{font-size:1.4rem}
+  .writing-layout{grid-template-columns:1fr}
+  .checklist-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+}
 
-        .section-header {
-            margin-bottom: 24px;
-            border-left: 4px solid var(--primary-color);
-            padding-left: 14px;
-        }
+/* Fade-in animation */
+.tab-content.active{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-        .section-header h2 {
-            font-size: 22px;
-            font-weight: 800;
-        }
-
-        .section-header p {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-top: 4px;
-        }
-
-        /* Multiple Choice & Form fields */
-        .option-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .option-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .option-item:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: var(--primary-color);
-        }
-
-        .option-item input[type="radio"] {
-            accent-color: var(--primary-color);
-            width: 18px;
-            height: 18px;
-        }
-
-        /* Select box styling */
-        select.custom-select {
-            background: #141b2c;
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 14px;
-            outline: none;
-            width: 100%;
-            max-width: 300px;
-        }
-
-        /* Flashcard widget */
-        .flashcard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
-        }
-
-        .flashcard {
-            height: 180px;
-            perspective: 1000px;
-            cursor: pointer;
-        }
-
-        .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            border-radius: 16px;
-        }
-
-        .flashcard.flipped .card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-        }
-
-        .card-front {
-            background: linear-gradient(135deg, rgba(20, 26, 45, 0.9) 0%, rgba(30, 38, 64, 0.9) 100%);
-            color: var(--primary-color);
-        }
-
-        .card-back {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(20, 26, 45, 0.9) 100%);
-            color: var(--text-primary);
-            transform: rotateY(180deg);
-        }
-
-        /* Action buttons */
-        .btn {
-            background: var(--primary-color);
-            color: #fff;
-            padding: 12px 28px;
-            border: none;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 15px var(--primary-glow);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: none;
-        }
-
-        /* Scoring layout feedback */
-        .grade-correct {
-            border: 2px solid var(--success-color) !important;
-            background-color: rgba(16, 185, 129, 0.06) !important;
-        }
-
-        .grade-error {
-            border: 2px solid var(--error-color) !important;
-            background-color: rgba(239, 68, 68, 0.06) !important;
-        }
-
-        /* Responsiveness */
-        @media(max-width: 900px) {
-            .sidebar {
-                display: none;
-            }
-            .main-content {
-                margin-left: 0;
-                width: 100%;
-                padding: 20px;
-            }
-        }
-    </style>
+/* Tooltip */
+.tooltip-wrap{position:relative;display:inline-block}
+.tooltip-text{visibility:hidden;position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:.75rem;white-space:nowrap;z-index:50}
+.tooltip-wrap:hover .tooltip-text{visibility:visible}
+</style>
 </head>
 <body>
 
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar glass-panel">
-        <div class="brand-section">
-            <div class="brand-icon">
-                <span class="material-symbols-outlined" style="color: #fff;">school</span>
-            </div>
-            <span class="brand-name">B1 Genius</span>
-        </div>
-        <nav style="flex-grow: 1;">
-            <ul class="nav-list">
-                <li class="nav-item active" id="nav-dashboard">
-                    <button onclick="navigateTo('dashboard')">
-                        <span class="material-symbols-outlined">dashboard</span>Dashboard
-                    </button>
-                </li>
-                <li class="nav-item" id="nav-lesen">
-                    <button onclick="navigateTo('lesen')">
-                        <span class="material-symbols-outlined">menu_book</span>Leseverstehen
-                    </button>
-                </li>
-                <li class="nav-item" id="nav-bausteine">
-                    <button onclick="navigateTo('bausteine')">
-                        <span class="material-symbols-outlined">gavel</span>Sprachbausteine
-                    </button>
-                </li>
-                <li class="nav-item" id="nav-schreiben">
-                    <button onclick="navigateTo('schreiben')">
-                        <span class="material-symbols-outlined">edit_note</span>Schreiben Mock
-                    </button>
-                </li>
-                <li class="nav-item" id="nav-vocab">
-                    <button onclick="navigateTo('vocab')">
-                        <span class="material-symbols-outlined">analytics</span>Wortschatz Deck
-                    </button>
-                </li>
-            </ul>
-        </nav>
-        <div class="user-footer" style="display: flex; align-items: center; gap: 12px; border-t: 1px solid var(--border-color); pt-16;">
-            <span class="material-symbols-outlined" style="color: var(--success-color);">verified_user</span>
-            <div>
-                <p style="font-size: 13px; font-weight: 700;">Toghrul</p>
-                <p style="font-size: 11px; color: var(--text-secondary);">B1 Prep Active</p>
-            </div>
-        </div>
-    </aside>
+<!-- NAVIGATION -->
+<nav class="main-nav">
+  <div class="nav-inner">
+    <div class="nav-logo">B1 Prüfungsgenie <span>Deutsch Exam Prep</span></div>
+    <button class="nav-tab active" onclick="showTab('home')"><span class="dot dot-home"></span> 🏠 Home</button>
+    <button class="nav-tab" onclick="showTab('lesen')"><span class="dot dot-lesen"></span> 📖 Lesen</button>
+    <button class="nav-tab" onclick="showTab('hoeren')"><span class="dot dot-hoeren"></span> 🎧 Hören</button>
+    <button class="nav-tab" onclick="showTab('schreiben')"><span class="dot dot-schreiben"></span> ✍️ Schreiben</button>
+    <button class="nav-tab" onclick="showTab('sprechen')"><span class="dot dot-sprechen"></span> 🗣 Sprechen</button>
+    <button class="nav-tab" onclick="showTab('grammatik')"><span class="dot dot-grammatik"></span> 📝 Grammatik</button>
+  </div>
+</nav>
 
-    <!-- Main Content Canvas -->
-    <main class="main-content">
+<!-- =================== HOME =================== -->
+<section id="home" class="tab-content active">
+<div class="section-wrap">
+  <div class="dash-hero">
+    <h1>🇩🇪 B1 <span>Prüfungsgenie</span></h1>
+    <p>Complete preparation for both <strong>Goethe-Zertifikat B1</strong> and <strong>telc Deutsch B1</strong> — Reading, Listening, Writing, Speaking, and Grammar. Built from your real worksheets.</p>
+    <div class="hero-badges">
+      <span class="badge badge-goethe">🦁 Goethe-Zertifikat B1</span>
+      <span class="badge badge-telc">🇩🇪 telc Deutsch B1</span>
+      <span class="badge badge-both">✅ 232 Real Worksheets</span>
+    </div>
+  </div>
+
+  <!-- Exam Format Comparison -->
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title">📋 Which exam are you taking?</div>
+    <div class="card-sub">Both are valid B1 certificates — choose the right one for your purpose</div>
+    <div class="card-row">
+      <div class="format-card">
+        <h3>🦁 Goethe-Zertifikat B1</h3>
+        <p>International gold standard. Modular — retake only failed sections. Accepted worldwide for study and immigration.</p>
+        <table class="format-table">
+          <tr><th>Section</th><th>Time</th><th>Pass Mark</th></tr>
+          <tr><td>Lesen</td><td>65 min</td><td class="pass">60/100</td></tr>
+          <tr><td>Hören</td><td>40 min</td><td class="pass">60/100</td></tr>
+          <tr><td>Schreiben</td><td>60 min</td><td class="pass">60/100</td></tr>
+          <tr><td>Sprechen</td><td>15 min</td><td class="pass">60/100</td></tr>
+        </table>
+        <div style="margin-top:12px;font-size:.78rem;color:var(--text3)">⚠️ Must pass EACH section separately. Modular — retake only failed parts.</div>
+      </div>
+      <div class="format-card">
+        <h3>🇩🇪 telc Deutsch B1</h3>
+        <p>Most common in Germany. Required for citizenship & integration certificates. Written + Oral graded separately.</p>
+        <table class="format-table">
+          <tr><th>Section</th><th>Time</th><th>Pass Mark</th></tr>
+          <tr><td>Leseverstehen</td><td>90 min*</td><td class="pass">45/75</td></tr>
+          <tr><td>Sprachbausteine</td><td>*shared</td><td class="pass">18/30</td></tr>
+          <tr><td>Hörverstehen</td><td>30 min</td><td class="pass">45/75</td></tr>
+          <tr><td>Schriftl. Ausdruck</td><td>30 min</td><td class="pass">27/45</td></tr>
+          <tr><td>Mündl. Prüfung</td><td>15 min</td><td class="pass">45/75</td></tr>
+        </table>
+        <div style="margin-top:12px;font-size:.78rem;color:var(--text3)">⚠️ Written ≥135/225 AND Oral ≥45/75 — both separately!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section Cards -->
+  <div style="font-size:.9rem;font-weight:700;color:var(--text2);margin-bottom:14px;letter-spacing:.04em;text-transform:uppercase">📚 Practice Sections</div>
+  <div class="section-cards">
+    <div class="section-card sc-lesen" onclick="showTab('lesen')">
+      <div class="sc-icon">📖</div>
+      <div class="sc-title">Lesen / Leseverstehen</div>
+      <div class="sc-desc">3 exercise types: headline matching, multiple choice, ads matching. Both Goethe & telc formats.</div>
+      <div class="sc-meta"><span class="sc-pill">Goethe: 5 parts</span><span class="sc-pill">telc: 3 parts</span><span class="sc-pill">65 min</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-lesen" style="width:0%;background:var(--blue)"></div></div>
+      <div class="progress-label" id="prog-label-lesen">Not started</div>
+    </div>
+    <div class="section-card sc-hoeren" onclick="showTab('hoeren')">
+      <div class="sc-icon">🎧</div>
+      <div class="sc-title">Hören / Hörverstehen</div>
+      <div class="sc-desc">Real audio exercises with True/False questions. Includes your actual MP4 audio files.</div>
+      <div class="sc-meta"><span class="sc-pill">Goethe: 4 parts</span><span class="sc-pill">telc: 3 parts</span><span class="sc-pill">30-40 min</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-hoeren" style="width:0%;background:var(--green)"></div></div>
+      <div class="progress-label" id="prog-label-hoeren">Not started</div>
+    </div>
+    <div class="section-card sc-schreiben" onclick="showTab('schreiben')">
+      <div class="sc-icon">✍️</div>
+      <div class="sc-title">Schreiben / Schriftl. Ausdruck</div>
+      <div class="sc-desc">Writing templates, complaint letters, forum posts. Browse 14 real worksheet exercises.</div>
+      <div class="sc-meta"><span class="sc-pill">Goethe: 3 tasks</span><span class="sc-pill">telc: 1 letter</span><span class="sc-pill">30-60 min</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-schreiben" style="width:0%;background:var(--orange)"></div></div>
+      <div class="progress-label" id="prog-label-schreiben">Not started</div>
+    </div>
+    <div class="section-card sc-sprechen" onclick="showTab('sprechen')">
+      <div class="sc-icon">🗣</div>
+      <div class="sc-title">Sprechen / Mündliche Prüfung</div>
+      <div class="sc-desc">80+ Bildbeschreibung image exercises, speaking phrases, topic cards for all 3 speaking parts.</div>
+      <div class="sc-meta"><span class="sc-pill">Goethe & telc: 3 parts</span><span class="sc-pill">15 min</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-sprechen" style="width:0%;background:var(--purple)"></div></div>
+      <div class="progress-label" id="prog-label-sprechen">Not started</div>
+    </div>
+    <div class="section-card sc-grammatik" onclick="showTab('grammatik')">
+      <div class="sc-icon">📝</div>
+      <div class="sc-title">Sprachbausteine (telc only)</div>
+      <div class="sc-desc">Grammar & vocabulary fill-in exercises. Prepositions, verb forms, conjunctions, word choice.</div>
+      <div class="sc-meta"><span class="sc-pill">telc: 2 parts</span><span class="sc-pill">Part of 90-min block</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-grammatik" style="width:0%;background:var(--pink)"></div></div>
+      <div class="progress-label" id="prog-label-grammatik">Not started</div>
+    </div>
+  </div>
+
+  <!-- Key Grammar Rules -->
+  <div class="card">
+    <div class="card-title">⚡ Top 5 Grammar Rules You Must Know</div>
+    <div class="card-sub">The most common mistakes at B1 level — learn these first</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:8px">
+      <div class="grammar-rule"><div class="gr-title">1. Verb at the END in Nebensätze</div><div class="gr-example">Ich komme nicht, <strong>weil</strong> ich müde <strong>bin</strong>.</div><div class="gr-note">After: weil, dass, ob, wenn, obwohl, damit...</div></div>
+      <div class="grammar-rule"><div class="gr-title">2. Konjunktiv II — Wishes & Polite</div><div class="gr-example">Wenn ich Zeit <strong>hätte</strong>, <strong>würde</strong> ich reisen.</div><div class="gr-note">wäre, hätte, würde + Inf., könnte, müsste</div></div>
+      <div class="grammar-rule"><div class="gr-title">3. Passiv — Something is done</div><div class="gr-example">Das Formular <strong>muss ausgefüllt werden</strong>.</div><div class="gr-note">werden + Partizip II (or: sein + Partizip II)</div></div>
+      <div class="grammar-rule"><div class="gr-title">4. Relativsätze — Describing nouns</div><div class="gr-example">Das Buch, <strong>das</strong> ich lese, ist interessant.</div><div class="gr-note">der/die/das agree with noun's gender & case</div></div>
+      <div class="grammar-rule"><div class="gr-title">5. weil vs. denn</div><div class="gr-example">...weil ich krank <strong>bin</strong>. / denn ich <strong>bin</strong> krank.</div><div class="gr-note">weil → verb last. denn → verb normal (main clause).</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- =================== LESEN =================== -->
+<section id="lesen" class="tab-content">
+<div class="section-wrap">
+  <div class="section-hero hero-lesen">
+    <div class="hero-title">📖 Lesen — Leseverstehen</div>
+    <div class="hero-sub">Practice all reading task types for both Goethe-Zertifikat B1 (5 parts) and telc Deutsch B1 (3 parts). Select your exam format below.</div>
+    <div class="hero-badges"><span class="badge badge-goethe">🦁 Goethe: 65 min · 30 items · 5 parts</span><span class="badge badge-telc">🇩🇪 telc: 90 min (shared) · 25 items · 3 parts</span></div>
+  </div>
+
+  <div class="exam-picker">
+    <div style="font-size:.85rem;font-weight:600;color:var(--text2);align-self:center;margin-right:4px">Exam:</div>
+    <button class="pick-btn active-goethe" id="lesen-goethe-btn" onclick="setLesenExam('goethe')">🦁 Goethe B1</button>
+    <button class="pick-btn" id="lesen-telc-btn" onclick="setLesenExam('telc')">🇩🇪 telc B1</button>
+  </div>
+
+  <!-- GOETHE READING -->
+  <div id="lesen-goethe">
+    <!-- Part 1: T/F Blog -->
+    <div class="exercise-card" id="ex-lesen-g1">
+      <div class="ex-header">
+        <div><div class="ex-title">Teil 1 — Globales Leseverstehen</div><div class="ex-sub">Read a blog/email and answer True/False</div>
+        <div class="ex-meta"><span class="meta-pill">🦁 Goethe</span><span class="meta-pill">⏱ ~10 min</span><span class="meta-pill">8 Fragen</span><span class="meta-pill">Part 1 of 5</span></div></div>
+      </div>
+      <div class="ex-body">
+        <div class="instruction">Lesen Sie den Text. Sind die Aussagen richtig (R) oder falsch (F)?<br><em>Read the text. Are the statements true or false?</em></div>
+        <div class="reading-text"><h4>📝 Mein erstes Jahr in Deutschland</h4>
+Liebe Freunde und Familie,<br><br>
+ich lebe jetzt seit einem Jahr in München und ich möchte euch von meinen Erfahrungen erzählen. Am Anfang war es nicht einfach. Die Sprache war das größte Problem, aber ich habe einen Deutschkurs an der VHS besucht und mein Deutsch wird jeden Tag besser.<br><br>
+Was mir am besten gefällt: die Pünktlichkeit! In Deutschland kommen Busse und Bahnen immer pünktlich. Das ist so anders als in meiner Heimat. Auch die Trennung von Müll finde ich interessant — man muss den Abfall in verschiedene Tonnen werfen: Papier, Glas, Plastik und Restmüll.<br><br>
+Das Wetter ist allerdings manchmal schwierig für mich. Im Winter ist es sehr kalt und es gibt nicht viel Sonne. Aber ich habe schon neue Freunde gefunden, und das hilft sehr!<br><br>
+Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gut, aber manchmal träume ich von den Gerichten meiner Mutter.</div>
+        <div id="tf-g1-qs"></div>
+        <div class="submit-row">
+          <button class="btn-primary" onclick="checkTF('g1', [{t:true},{t:false},{t:false},{t:true},{t:false},{t:true},{t:true},{t:false}])">Antworten prüfen ✓</button>
+          <button class="btn-secondary" onclick="resetTF('g1')">Zurücksetzen</button>
+        </div>
+        <div id="result-g1" class="result-banner"></div>
+      </div>
+    </div>
+
+    <!-- Part 2: MCQ -->
+    <div class="exercise-card" id="ex-lesen-g2">
+      <div class="ex-header">
+        <div><div class="ex-title">Teil 2 — Detailliertes Leseverstehen</div><div class="ex-sub">Read a newspaper article, answer 5 multiple-choice questions</div>
+        <div class="ex-meta"><span class="meta-pill">🦁 Goethe</span><span class="meta-pill">⏱ ~15 min</span><span class="meta-pill">5 Fragen</span><span class="meta-pill">Part 2 of 5</span></div></div>
+      </div>
+      <div class="ex-body">
+        <div class="instruction">Lesen Sie den Artikel und beantworten Sie die Fragen. Welche Antwort (a, b oder c) ist richtig?</div>
+        <div class="reading-text">
+          <h4>📰 Das kauf ich! Nicht.</h4>
+          Niedrige Zinsen und die Gefahr steigender Preise: Geld auszugeben erscheint vielen Menschen derzeit ratsamer, als es anzulegen. Viele Kaufentscheidungen fällen wir im Vertrauen auf unsere Erfahrung.<br><br>
+          Geld verdienen ist nicht einfach, aber es auszugeben: noch schwieriger. Das findet jedenfalls Steffen L. aus Schleswig-Holstein. Er arbeitet im mittleren Management eines IT-Dienstleisters — ein gut bezahlter Job. Gerade hat sich der Mittvierziger einen Porsche Cayenne gekauft. 75.000 Euro, bar bezahlt. Er will Geld ausgeben, hat sich das sogar vorgenommen. Doch es fällt ihm schwer.<br><br>
+          Konsumieren wollen und es doch nicht tun: Damit ist Steffen L. nicht allein. Geringverdiener geben einen größeren Teil ihres Einkommens für Grundbedürfnisse aus. Gutverdiener hingegen sparen mehr und haben mehr Geld für Freizeit — aber nicht unbedingt mehr Zeit dafür.
+        </div>
+        <div id="mcq-g2-qs"></div>
+        <div class="submit-row">
+          <button class="btn-primary" onclick="checkMCQ('g2')">Antworten prüfen ✓</button>
+          <button class="btn-secondary" onclick="resetMCQ('g2')">Zurücksetzen</button>
+        </div>
+        <div id="result-g2" class="result-banner"></div>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <h4>💡 Goethe Lesen Tips</h4>
+      <ul>
+        <li>Part 1 (T/F): Statements are PARAPHRASED — look for same idea in different words</li>
+        <li>Part 2 (MCQ): Read questions FIRST, then scan the text for answers</li>
+        <li>Part 3 (Ads): Match ALL conditions, not just one keyword</li>
+        <li>Parts 4-5: Comments matching — note WHO says WHAT, some commenters may appear twice</li>
+        <li>Never leave a blank — guess if unsure, no penalty for wrong answers!</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TELC READING -->
+  <div id="lesen-telc" style="display:none">
+    <!-- Teil 1: Headlines -->
+    <div class="exercise-card">
+      <div class="ex-header">
+        <div><div class="ex-title">Leseverstehen Teil 1 — Globalverstehen</div><div class="ex-sub">Match 5 short texts to headlines A–J (5 extra distractors!)</div>
+        <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">⏱ ~10 min</span><span class="meta-pill">5 items</span></div></div>
+      </div>
+      <div class="ex-body">
+        <div class="instruction green">Lesen Sie die Überschriften A–J. Ordnen Sie jedem Text 1–5 die passende Überschrift zu. Jede Überschrift kann nur einmal benutzt werden.</div>
+        <div class="headlines-grid" id="telc-headlines"></div>
+        <div id="telc-texts-1"></div>
+        <div class="submit-row">
+          <button class="btn-primary" onclick="checkHeadlines()">Antworten prüfen ✓</button>
+          <button class="btn-secondary" onclick="resetHeadlines()">Zurücksetzen</button>
+        </div>
+        <div id="result-headlines" class="result-banner"></div>
+      </div>
+    </div>
+
+    <!-- Teil 2: MCQ -->
+    <div class="exercise-card">
+      <div class="ex-header">
+        <div><div class="ex-title">Leseverstehen Teil 2 — Detailverstehen</div><div class="ex-sub">Read a long article, answer 5 multiple-choice questions</div>
+        <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">⏱ ~15 min</span><span class="meta-pill">5 items</span></div></div>
+      </div>
+      <div class="ex-body">
+        <div class="instruction green">Lesen Sie den Text und die Aufgaben. Welche Lösung (a, b oder c) ist richtig?</div>
+        <div class="reading-text">
+          <h4>📰 Das kauf ich! Nicht.</h4>
+          Niedrige Zinsen und die Gefahr steigender Preise: Geld auszugeben erscheint vielen Menschen derzeit ratsamer, als es anzulegen.<br><br>
+          Steffen L. aus Schleswig-Holstein arbeitet im mittleren Management — ein gut bezahlter Job. Gerade hat sich der Mittvierziger einen Porsche Cayenne für 75.000 Euro bar gekauft. Er will Geld ausgeben, doch es fällt ihm schwer.<br><br>
+          Geringverdiener geben einen größeren Anteil für Grundbedürfnisse aus. Gutverdiener sparen mehr und haben mehr Geld für Freizeit — aber nicht unbedingt mehr Zeit.
+        </div>
+        <div id="mcq-t2-qs"></div>
+        <div class="submit-row">
+          <button class="btn-primary" onclick="checkMCQ('t2')">Antworten prüfen ✓</button>
+          <button class="btn-secondary" onclick="resetMCQ('t2')">Zurücksetzen</button>
+        </div>
+        <div id="result-t2" class="result-banner"></div>
+      </div>
+    </div>
+
+    <!-- Teil 3: Situations to Ads -->
+    <div class="exercise-card">
+      <div class="ex-header">
+        <div><div class="ex-title">Leseverstehen Teil 3 — Selektives Verstehen</div><div class="ex-sub">Match 10 situations to the right advertisement (a–l). No match = x</div>
+        <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">⏱ ~15 min</span><span class="meta-pill">10 items</span></div></div>
+      </div>
+      <div class="ex-body">
+        <div class="instruction green">Lesen Sie die Situationen 11–20 und die Anzeigen a–l. Ordnen Sie zu. Wenn keine Anzeige passt, wählen Sie x.</div>
+        <div id="situations-list"></div>
+        <div style="font-size:.85rem;font-weight:700;color:var(--text2);margin:16px 0 10px">📌 Anzeigen (Advertisements):</div>
+        <div class="ads-grid" id="ads-grid"></div>
+        <div class="submit-row">
+          <button class="btn-primary" onclick="checkSituations()">Antworten prüfen ✓</button>
+          <button class="btn-secondary" onclick="resetSituations()">Zurücksetzen</button>
+        </div>
+        <div id="result-situations" class="result-banner"></div>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <h4>💡 telc Lesen Tips</h4>
+      <ul>
+        <li>Teil 1: Only 5 of 10 headlines are correct — 5 are distractors to confuse you</li>
+        <li>Teil 2: Questions are NOT in the same order as the text — read all options carefully</li>
+        <li>Teil 3: Read ALL conditions in each situation, not just the main keyword</li>
+        <li>Scan, don't translate — look for keywords, numbers, names</li>
+        <li>You have 90 min for Lesen + Sprachbausteine combined — spend ~45 min on each</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- =================== HÖREN =================== -->
+<section id="hoeren" class="tab-content">
+<div class="section-wrap">
+  <div class="section-hero hero-hoeren">
+    <div class="hero-title">🎧 Hören — Hörverstehen</div>
+    <div class="hero-sub">Real listening exercises with True/False questions. Includes your actual audio recordings. Select exam format to see the right task types.</div>
+    <div class="hero-badges"><span class="badge badge-goethe">🦁 Goethe: 40 min · 4 parts · 30 items</span><span class="badge badge-telc">🇩🇪 telc: 30 min · 3 parts · 20 items</span></div>
+  </div>
+
+  <div class="exam-picker">
+    <div style="font-size:.85rem;font-weight:600;color:var(--text2);align-self:center;margin-right:4px">Exam:</div>
+    <button class="pick-btn active-goethe" id="hoeren-goethe-btn" onclick="setHoerenExam('goethe')">🦁 Goethe B1</button>
+    <button class="pick-btn" id="hoeren-telc-btn" onclick="setHoerenExam('telc')">🇩🇪 telc B1</button>
+  </div>
+
+  <!-- GOETHE LISTENING -->
+  <div id="hoeren-goethe">
+    <div class="exercise-card">
+      <div class="ex-header">
+        <div><div class="ex-title">Hören Teil 1 (Goethe) — Kurze Monologe</div><div class="ex-sub">5 short audio clips, 2 questions each (T/F + MCQ)</div>
+        <div class="ex-meta"><span class="meta-pill">🦁 Goethe</span><span class="meta-pill">Played TWICE each</span><span class="meta-pill">10 items</span><span class="meta-pill">Part 1 of 4</span></div></div>
+      </div>
+      <div class="ex-body">
+        <div class="instruction green">Sie hören fünf kurze Texte. Jeder Text wird zweimal gespielt. Beantworten Sie zu jedem Text zwei Fragen.</div>
+        <div class="audio-section">
+          <h4>🎵 Übungs-Audio — Hörverstehen</h4>
+          <audio controls preload="none" id="audio-g1">
+            <source src="audio/hoerverstehen_teil1.mp4" type="audio/mp4">
+            Your browser does not support audio.
+          </audio>
+          <div class="audio-note">📌 This audio contains real listening practice. Listen carefully and answer the questions below. In the real Goethe exam, each short clip is played twice.</div>
+        </div>
+        <div id="goethe-mcq-clips"></div>
+        <div class="submit-row">
+          <button class="btn-primary" onclick="checkGoethePart1()">Antworten prüfen ✓</button>
+          <button class="btn-secondary" onclick="resetGoethePart1()">Zurücksetzen</button>
+        </div>
+        <div id="result-g-p1" class="result-banner"></div>
+      </div>
+    </div>
+    <div class="tip-card">
+      <h4>💡 Goethe Hören Tips</h4>
+      <ul>
+        <li>Read all questions BEFORE the audio starts (use the preparation time!)</li>
+        <li>Underline keywords in each question</li>
+        <li>In T/F: if the statement sounds right but doesn't answer the SPECIFIC question → FALSE</li>
+        <li>Don't be distracted by unfamiliar words — focus on the overall message</li>
+        <li>Never leave blank — guess if unsure, no negative marking!</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TELC LISTENING -->
+  <div id="hoeren-telc" style="display:none">
+    <!-- Teil 2: Au Pair T/F -->
+    <div class="exercise-card">
+      <div class="ex-header">
+        <div><div class="ex-title">Hörverstehen Teil 2 — Detailverstehen</div><div class="ex-sub">Listen to a conversation about Au Pair, answer 10 True/False questions</div>
+        <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">Played ONCE</span><span class="meta-pill">10 items</span></div></div>
+      </div>
+      <div class="ex-body">
+        <div class="instruction green">Sie hören ein Gespräch zum Thema <strong>Au Pair</strong>. Sie hören das Gespräch zweimal. Sind die Aussagen richtig (+) oder falsch (–)?</div>
         
-        <!-- PAGE 1: DASHBOARD -->
-        <section id="page-dashboard" class="page active">
-            <div class="hero-banner glass-panel">
-                <div class="hero-text">
-                    <h1>Willkommen, Toghrul!</h1>
-                    <p>Track your B1 mock exam preparation and practice your interactive vocabulary cards.</p>
-                </div>
-                <div class="hero-button">
-                    <button class="btn" onclick="navigateTo('lesen')">Start Reading Section</button>
-                </div>
-            </div>
+        <div class="timer-row">
+          <div>
+            <div style="font-size:.78rem;color:var(--text3);margin-bottom:4px">⏱ Lesezeit (1 Min) — Lesen Sie zuerst die Aufgaben!</div>
+            <div class="timer-display" id="timer-t2">1:00</div>
+          </div>
+          <button class="btn-timer" onclick="startTimer('t2', 60)">▶ Start Lesezeit</button>
+        </div>
 
-            <div class="stats-grid">
-                <div class="stat-card glass-panel">
-                    <span class="stat-title">Overall Score</span>
-                    <span id="stat-overall" class="stat-val">0%</span>
-                </div>
-                <div class="stat-card glass-panel">
-                    <span class="stat-title">Reading Tasks</span>
-                    <span id="stat-reading" class="stat-val">0 / 20</span>
-                </div>
-                <div class="stat-card glass-panel">
-                    <span class="stat-title">Language Elements</span>
-                    <span id="stat-grammar" class="stat-val">0 / 7</span>
-                </div>
-                <div class="stat-card glass-panel">
-                    <span class="stat-title">Vocab Mastered</span>
-                    <span id="stat-vocab" class="stat-val">0 / 28</span>
-                </div>
-            </div>
+        <div class="audio-section">
+          <h4>🎵 Hörverstehen — Gespräch: Au Pair</h4>
+          <audio controls preload="none" id="audio-t2">
+            <source src="audio/hoerverstehen_teil1.mp4" type="audio/mp4">
+          </audio>
+          <div class="audio-note">📌 Real audio recording. Listen carefully. In the real telc exam this conversation is played twice.</div>
+        </div>
+        <div id="tf-t2-qs"></div>
+        <div class="submit-row">
+          <button class="btn-primary" onclick="checkTF('t2', [{t:true},{t:true},{t:true},{t:false},{t:false},{t:false},{t:true},{t:false},{t:true},{t:true}])">Antworten prüfen ✓</button>
+          <button class="btn-secondary" onclick="resetTF('t2')">Zurücksetzen</button>
+        </div>
+        <div id="result-t2" class="result-banner"></div>
+      </div>
+    </div>
 
-            <div class="card-container glass-panel">
-                <div class="section-header">
-                    <h2>Your B1 Exam Preparation Guidelines</h2>
-                    <p>Goethe & Telc matching layouts and grading standards.</p>
-                </div>
-                <div style="line-height: 1.6; color: var(--text-secondary); font-size: 15px; display: flex; flex-direction: column; gap: 12px;">
-                    <p>💡 **Reading (Leseverstehen)** requires matching headlines (Teil 1), analyzing details (Teil 2), and mapping situations to advertisements (Teil 3). Aim for 60%+ in each section.</p>
-                    <p>💡 **Grammar (Sprachbausteine)** evaluates your vocabulary and grammar precision within continuous letters. Use the drop-down practice elements inside the tab to practice.</p>
-                    <p>💡 **Writing (Schreiben)** requires structuring your email with standard greetings (e.g., "Liebe Maike," or "Sehr geehrte Damen und Herren,") and answering all 4 prompts.</p>
-                </div>
-            </div>
+    <!-- Teil 3: 5 short clips -->
+    <div class="exercise-card">
+      <div class="ex-header">
+        <div><div class="ex-title">Hörverstehen Teil 3 — Selektives Verstehen</div><div class="ex-sub">5 short audio clips, True/False for each</div>
+        <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">Played TWICE each</span><span class="meta-pill">5 items</span></div></div>
+      </div>
+      <div class="ex-body">
+        <div class="instruction green">Sie hören fünf kurze Texte. Die Texte werden zweimal gespielt. Richtig (+) oder Falsch (–)?</div>
+        <div class="timer-row">
+          <div>
+            <div style="font-size:.78rem;color:var(--text3);margin-bottom:4px">⏱ Lesezeit (30 Sek)</div>
+            <div class="timer-display" id="timer-t3">0:30</div>
+          </div>
+          <button class="btn-timer" onclick="startTimer('t3', 30)">▶ Start</button>
+        </div>
+        <div class="audio-section">
+          <h4>🎵 Hörverstehen — 5 kurze Texte</h4>
+          <audio controls preload="none" id="audio-t3">
+            <source src="audio/hoerverstehen_teil2.mp4" type="audio/mp4">
+          </audio>
+        </div>
+        <div id="tf-t3-qs"></div>
+        <div class="submit-row">
+          <button class="btn-primary" onclick="checkTF('t3', [{t:false},{t:false},{t:true},{t:false},{t:false}])">Antworten prüfen ✓</button>
+          <button class="btn-secondary" onclick="resetTF('t3')">Zurücksetzen</button>
+        </div>
+        <div id="result-t3" class="result-banner"></div>
+      </div>
+    </div>
 
-            <!-- Original Exam Worksheets -->
-            <div class="card-container glass-panel" style="margin-top: 30px;">
-                <div class="section-header">
-                    <h2>Original Exam Worksheets &amp; Images</h2>
-                    <p>Reference sheets found in your B1 Drive folder.</p>
-                </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
-                    <div class="glass-panel" style="padding: 12px; text-align: center; background: rgba(255,255,255,0.01);">
-                        <p style="font-size: 13px; margin-bottom: 10px; color: var(--text-secondary);">Worksheet Page 1</p>
-                        <img src="images/WhatsApp%20Image%202026-05-29%20at%2011.44.45.jpeg" alt="Worksheet 1" style="max-width: 100%; max-height: 450px; object-fit: contain; border-radius: 10px; border: 1px solid var(--border-color);">
-                    </div>
-                    <div class="glass-panel" style="padding: 12px; text-align: center; background: rgba(255,255,255,0.01);">
-                        <p style="font-size: 13px; margin-bottom: 10px; color: var(--text-secondary);">Worksheet Page 2</p>
-                        <img src="images/WhatsApp%20Image%202026-05-29%20at%2011.44.46.jpeg" alt="Worksheet 2" style="max-width: 100%; max-height: 450px; object-fit: contain; border-radius: 10px; border: 1px solid var(--border-color);">
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="tip-card">
+      <h4>💡 telc Hören Tips</h4>
+      <ul>
+        <li>Teil 1 (Global): Listen for main topic only — don't get lost in details</li>
+        <li>Teil 2 (Detail): You have 1 minute to read all 10 questions FIRST — use it!</li>
+        <li>Teil 3 (Short clips): Focus on the specific information the question asks about</li>
+        <li>True/False trap: A text can MENTION something without it being TRUE for the statement</li>
+        <li>All 20 questions are True/False in telc — no multiple choice in listening!</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
 
-        <!-- PAGE 2: LESEVERSTEHEN -->
-        <section id="page-lesen" class="page">
-            <div class="subtab-bar">
-                <button id="btn-sub-l1" class="subtab-btn active" onclick="switchSubL(1)">Teil 1 (Headlines)</button>
-                <button id="btn-sub-l2" class="subtab-btn" onclick="switchSubL(2)">Teil 2 (Detailvers.)</button>
-                <button id="btn-sub-l3" class="subtab-btn" onclick="switchSubL(3)">Teil 3 (Anzeigen)</button>
-            </div>
+<!-- =================== SCHREIBEN =================== -->
+<section id="schreiben" class="tab-content">
+<div class="section-wrap">
+  <div class="section-hero hero-schreiben">
+    <div class="hero-title">✍️ Schreiben — Schriftlicher Ausdruck</div>
+    <div class="hero-sub">Practice writing formal letters, complaint emails, forum posts. Use the template and word counter. Browse all real worksheet exercises from your PDFs.</div>
+    <div class="hero-badges"><span class="badge badge-goethe">🦁 Goethe: 3 tasks (informal + forum + formal)</span><span class="badge badge-telc">🇩🇪 telc: 1 letter/email, 4 bullet points</span></div>
+  </div>
 
-            <!-- Lesen Teil 1 -->
-            <div id="lesen-t1" class="lesen-subpage">
-                <div class="card-container glass-panel">
-                    <div class="section-header">
-                        <h2>Leseverstehen — Teil 1</h2>
-                        <p>Match the short German blog posts with their corresponding headline.</p>
-                    </div>
-                    <div class="glass-panel" style="padding: 16px; margin-bottom: 24px; font-size: 14px; background: rgba(255,255,255,0.01);">
-                        <strong>Available Headlines:</strong>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; color: var(--text-secondary);">
-                            <div><strong>A:</strong> Doppelt so viele Studenten...</div>
-                            <div><strong>F:</strong> Hackerangriff auf Fluggesellschaft</div>
-                            <div><strong>G:</strong> Bewegung - Warum Sport so gesund ist</div>
-                            <div><strong>H:</strong> Vorsicht bei Reisegewinnen</div>
-                            <div><strong>I:</strong> Wasser weltweit - Weltwassertag</div>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 20px;">
-                        <div class="glass-panel" style="padding: 20px;">
-                            <p style="margin-bottom: 12px; font-style: italic; line-height: 1.6;">"Fast jeder zweite Deutsche bewegt sich zu wenig - und gefährdet so seine Gesundheit, warnen Wissenschaftler und Experten. Aber auch weltweit sieht es nicht besser aus. Sitzen auf der Arbeit, sitzen in der U-Bahn, sitzen vorm Computer: Mehr als 1,4 Milliarden Menschen sitzen zu viel."</p>
-                            <select id="l1-opt-0" class="custom-select">
-                                <option value="">-- Choose Headline --</option>
-                                <option value="A">A</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option>
-                            </select>
-                        </div>
-                        <div class="glass-panel" style="padding: 20px;">
-                            <p style="margin-bottom: 12px; font-style: italic; line-height: 1.6;">"Junge Menschen in Deutschland erreichen einen höheren Bildungsabschluss als die Generation ihrer Eltern. 33 Prozent der 30- bis 36-Jährigen verfügen über einen Hochschulabschluss. Bei den heute 60- bis 66-Jährigen liegt der Anteil bei 20 Prozent."</p>
-                            <select id="l1-opt-1" class="custom-select">
-                                <option value="">-- Choose Headline --</option>
-                                <option value="A">A</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option>
-                            </select>
-                        </div>
-                        <div class="glass-panel" style="padding: 20px;">
-                            <p style="margin-bottom: 12px; font-style: italic; line-height: 1.6;">"Trinkwasser ist kostbar. Am 22. März findet jährlich der Weltwassertag statt, um die Bedeutung des Wassers für die Menschheit zu würdigen und die breite Öffentlichkeit auf Probleme aufmerksam zu machen."</p>
-                            <select id="l1-opt-2" class="custom-select">
-                                <option value="">-- Choose Headline --</option>
-                                <option value="A">A</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="exam-picker">
+    <div style="font-size:.85rem;font-weight:600;color:var(--text2);align-self:center;margin-right:4px">Exercise:</div>
+    <div class="prompt-selector" id="prompt-selector"></div>
+  </div>
 
-            <!-- Lesen Teil 2 -->
-            <div id="lesen-t2" class="lesen-subpage" style="display: none;">
-                <div class="card-container glass-panel">
-                    <div class="section-header">
-                        <h2>Leseverstehen — Teil 2</h2>
-                        <p>Read the text and answer multiple-choice questions.</p>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.02); padding: 24px; border-radius: 12px; line-height: 1.7; font-size: 15px; margin-bottom: 30px; max-height: 250px; overflow-y: auto;">
-                        <strong>Das kauf ich! Nicht.</strong><br><br>
-                        Niedrige Zinsen, die Gefahr steigender Preise und dann noch Weihnachten: Geld auszugeben erscheint vielen Menschen derzeit ratsamer, als es anzulegen. Steffen L. aus Schleswig-Holstein arbeitet im mittleren Management eines IT-Dienstleisters, es ist ein gut bezahlter Job. Gerade hat er sich einen Audi A4 gekauft. Und wenn er und seine Frau einkaufen, achten sie auf Qualität. Fleisch etwa holen sie beim Metzger, auch wenn es mehr kostet. "Die Kohle muss raus", sagt L.
-                        Wenig Spielraum haben Verbraucher mit einem niedrigen Einkommen. Sie geben einen fast doppelt so hohen Anteil ihres Geldes für Lebensmittel aus wie Haushalte mit hohem Einkommen. L. ist nun der freiwilligen Feuerwehr beigetreten, um zu verhindern, dass andere Menschen ihr Hab und Gut verlieren.
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 24px;">
-                        <div>
-                            <p style="font-weight: 700; margin-bottom: 8px;">6. Viele Menschen bevorzugen es derzeit,</p>
-                            <select id="l2-opt-6" class="custom-select">
-                                <option value="">-- Select Answer --</option>
-                                <option value="a">a. Geld zu sparen, als es auszugeben.</option>
-                                <option value="b">b. Geld auszugeben, als es anzulegen.</option>
-                                <option value="c">c. weniger Geld zu verdienen.</option>
-                            </select>
-                        </div>
-                        <div>
-                            <p style="font-weight: 700; margin-bottom: 8px;">7. Steffen L. aus Schleswig-Holstein</p>
-                            <select id="l2-opt-7" class="custom-select">
-                                <option value="">-- Select Answer --</option>
-                                <option value="a">a. findet Sparen wichtig.</option>
-                                <option value="b">b. ist Geringverdiener.</option>
-                                <option value="c">c. möchte mehr Geld ausgeben.</option>
-                            </select>
-                        </div>
-                        <div>
-                            <p style="font-weight: 700; margin-bottom: 8px;">8. Geringverdiener</p>
-                            <select id="l2-opt-8" class="custom-select">
-                                <option value="">-- Select Answer --</option>
-                                <option value="a">a. geben einen höheren Anteil für Lebensmittel aus.</option>
-                                <option value="b">b. geben kaum Geld für Lebensmittel aus.</option>
-                                <option value="c">c. wollen mehr Geld für Lebensmittel haben.</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="writing-layout">
+    <div>
+      <div class="writing-prompt-card" id="writing-prompt-display"></div>
+      <div class="card" style="margin-top:16px">
+        <div class="card-title">📋 Template</div>
+        <div id="writing-template"></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <div class="card-title" style="margin-bottom:12px">✅ Checklist — Alles dabei?</div>
+        <div class="checklist-grid" id="writing-checklist"></div>
+      </div>
+    </div>
+    <div class="writing-editor">
+      <div style="font-size:.85rem;font-weight:600;color:var(--text2);margin-bottom:8px">📝 Your Answer:</div>
+      <textarea class="writing-textarea" id="writing-area" placeholder="Schreiben Sie hier Ihre Antwort... / Write your answer here..." oninput="updateWordCount()"></textarea>
+      <div class="word-counter">
+        <span class="wc-num" id="word-count">0</span>
+        <span>/ mindestens 80 Wörter</span>
+      </div>
+      <button class="btn-primary" style="align-self:flex-start" onclick="clearWriting()">🗑 Löschen / Clear</button>
+      <div style="font-size:.82rem;color:var(--text3);line-height:1.5">💡 Tip: Write shorter, correct sentences. It's better to use correct grammar with simple words than to write complex sentences with many errors.</div>
+    </div>
+  </div>
 
-            <!-- Lesen Teil 3 -->
-            <div id="lesen-t3" class="lesen-subpage" style="display: none;">
-                <div class="card-container glass-panel">
-                    <div class="section-header">
-                        <h2>Leseverstehen — Teil 3</h2>
-                        <p>Match the situation description with the advertisement banner (a–k) or choose X.</p>
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 20px;">
-                        <div class="glass-panel" style="padding: 20px; display: flex; flex-direction: column; gap: 8px;">
-                            <p><strong>Situation 11:</strong> Sie möchten Sport machen und erstmal schauen, welche Sportart Ihnen Spaß macht.</p>
-                            <select id="l3-opt-11" class="custom-select">
-                                <option value="">-- Match Ad --</option>
-                                <option value="f">Ad f: Volleyball Schnupperkurs für Anfänger</option>
-                                <option value="a">Ad a: Werbeagentur AL Design</option>
-                                <option value="j">Ad j: Sprachbörse Köln B2</option>
-                                <option value="x">No Ad Fits (X)</option>
-                            </select>
-                        </div>
-                        <div class="glass-panel" style="padding: 20px; display: flex; flex-direction: column; gap: 8px;">
-                            <p><strong>Situation 12:</strong> Sie haben die B1-Prüfung bestanden. Sie möchten nun weiterlernen und sich für die B2-Prüfung anmelden.</p>
-                            <select id="l3-opt-12" class="custom-select">
-                                <option value="">-- Match Ad --</option>
-                                <option value="f">Ad f: Volleyball Schnupperkurs für Anfänger</option>
-                                <option value="a">Ad a: Werbeagentur AL Design</option>
-                                <option value="j">Ad j: Sprachbörse Köln B2</option>
-                                <option value="x">No Ad Fits (X)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- Worksheet Gallery -->
+  <div class="card" style="margin-top:32px">
+    <div class="gallery-header">
+      <div>
+        <div class="card-title">📄 Worksheet Gallery — Schreibaufgaben aus Ihren PDFs</div>
+        <div class="gallery-info">Real writing exercises from your scanned worksheets — complaint letters, formal emails</div>
+      </div>
+    </div>
+    <div class="gallery-grid" id="schreiben-gallery"></div>
+    <button class="load-more-btn" id="schreiben-load-more" onclick="loadMoreWriting()">Load more worksheets ↓</button>
+  </div>
+</div>
+</section>
 
-            <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
-                <button class="btn" onclick="gradeReading()">Submit Reading Section</button>
-            </div>
-        </section>
+<!-- =================== SPRECHEN =================== -->
+<section id="sprechen" class="tab-content">
+<div class="section-wrap">
+  <div class="section-hero hero-sprechen">
+    <div class="hero-title">🗣 Sprechen — Mündliche Prüfung</div>
+    <div class="hero-sub">Practice all 3 speaking parts for both exam formats. Browse 80+ real Bildbeschreibung exercises from your PDFs. Learn key phrases for each part.</div>
+    <div class="hero-badges"><span class="badge badge-goethe">🦁 Goethe: 15 min + 15 min prep</span><span class="badge badge-telc">🇩🇪 telc: 15 min + 20 min prep</span></div>
+  </div>
 
-        <!-- PAGE 3: SPRACHBAUSTEINE -->
-        <section id="page-bausteine" class="page">
-            <div class="card-container glass-panel">
-                <div class="section-header">
-                    <h2>Sprachbausteine (Language Elements)</h2>
-                    <p>Select the grammatically correct words to complete the letter.</p>
-                </div>
+  <div class="exam-picker">
+    <div style="font-size:.85rem;font-weight:600;color:var(--text2);align-self:center;margin-right:4px">Exam:</div>
+    <button class="pick-btn active-goethe" id="sprechen-goethe-btn" onclick="setSprechenExam('goethe')">🦁 Goethe B1</button>
+    <button class="pick-btn" id="sprechen-telc-btn" onclick="setSprechenExam('telc')">🇩🇪 telc B1</button>
+  </div>
 
-                <div class="glass-panel" style="padding: 30px; line-height: 2.2; font-size: 16px;">
-                    Hallo Mareike,<br>
-                    ich freue mich, dass du an meinem Land und meiner Sprache interessiert bist. Wie dir 
-                    <select id="sb-opt-21" style="display:inline-block; width:100px; padding:2px; margin:0 4px;" class="custom-select">
-                        <option value="">-- Lücke 21 --</option>
-                        <option value="unser">unser</option>
-                        <option value="uns">uns</option>
-                        <option value="unsere">unsere</option>
-                    </select> 
-                    gemeinsamer Freund Jakob mitgeteilt hat, möchte ich, dass wir uns gegenseitig schreiben, 
-                    <select id="sb-opt-22" style="display:inline-block; width:100px; padding:2px; margin:0 4px;" class="custom-select">
-                        <option value="">-- Lücke 22 --</option>
-                        <option value="weil">weil</option>
-                        <option value="damit">damit</option>
-                        <option value="um">um</option>
-                    </select> 
-                    ich mein Deutsch verbessern kann.<br>
-                    Ich möchte mich erstmal bei dir 
-                    <select id="sb-opt-23" style="display:inline-block; width:120px; padding:2px; margin:0 4px;" class="custom-select">
-                        <option value="">-- Lücke 23 --</option>
-                        <option value="vorstellen">vorstellen</option>
-                        <option value="kennenlernen">kennenlernen</option>
-                        <option value="befreunden">befreunden</option>
-                    </select>
-                    . Mein Name ist Rita und ich wohne in Pomaz. Ich arbeite in 
-                    <select id="sb-opt-24" style="display:inline-block; width:100px; padding:2px; margin:0 4px;" class="custom-select">
-                        <option value="">-- Lücke 24 --</option>
-                        <option value="einem">einem</option>
-                        <option value="einer">einer</option>
-                        <option value="eines">eines</option>
-                    </select> 
-                    Krankenhaus, aber der Job als Krankenschwester macht mir nicht so viel Spaß. Ich würde mich gerne 
-                    <select id="sb-opt-25" style="display:inline-block; width:110px; padding:2px; margin:0 4px;" class="custom-select">
-                        <option value="">-- Lücke 25 --</option>
-                        <option value="fortbilden">fortbilden</option>
-                        <option value="lernen">lernen</option>
-                        <option value="studieren">studieren</option>
-                    </select>
-                    oder umorientieren.
-                </div>
+  <!-- Speaking Parts -->
+  <div id="sprechen-goethe">
+    <div class="card"><div class="card-title">🦁 Goethe-Zertifikat B1 — Speaking Structure</div>
+    <div class="speaking-parts" id="goethe-speaking-parts"></div></div>
+  </div>
+  <div id="sprechen-telc" style="display:none">
+    <div class="card"><div class="card-title">🇩🇪 telc Deutsch B1 — Speaking Structure</div>
+    <div class="speaking-parts" id="telc-speaking-parts"></div></div>
+  </div>
 
-                <div style="display: flex; justify-content: flex-end; margin-top: 24px;">
-                    <button class="btn" onclick="gradeGrammar()">Submit Grammar Section</button>
-                </div>
-            </div>
-        </section>
+  <!-- Bildbeschreibung -->
+  <div class="card" style="margin-top:20px">
+    <div class="gallery-header">
+      <div>
+        <div class="card-title">🖼 Bildbeschreibung — Image Description Practice</div>
+        <div class="gallery-info">80+ real images from your Sprechen worksheets. Click to open full size. Practice Teil A (describe) and Teil B (discuss topic).</div>
+      </div>
+      <div class="gallery-filter">
+        <button class="gf-btn active" onclick="setSpeakFilter('all')">All</button>
+        <button class="gf-btn" onclick="setSpeakFilter('bild1')">Bildbeschreibung 1</button>
+        <button class="gf-btn" onclick="setSpeakFilter('bild2')">Bildbeschreibung 2</button>
+      </div>
+    </div>
+    
+    <!-- Phrases -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px">
+        <div style="font-size:.82rem;font-weight:700;color:var(--purple);margin-bottom:10px">📷 Teil A — Bildbeschreibung Phrases</div>
+        <div class="phrase-chips" id="partA-phrases"></div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px">
+        <div style="font-size:.82rem;font-weight:700;color:var(--purple);margin-bottom:10px">💬 Teil B — Meinung Phrases</div>
+        <div class="phrase-chips" id="partB-phrases"></div>
+      </div>
+    </div>
 
-        <!-- PAGE 4: SCHREIBEN -->
-        <section id="page-schreiben" class="page">
-            <div class="card-container glass-panel">
-                <div class="section-header">
-                    <h2>Schriftlicher Ausdruck (Writing Mock)</h2>
-                    <p>Draft a response letter answering all 4 points.</p>
-                </div>
+    <div class="gallery-grid" id="sprechen-gallery"></div>
+    <button class="load-more-btn" id="sprechen-load-more" onclick="loadMoreSprechen()">Load more images ↓</button>
+  </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <div class="glass-panel" style="padding: 20px; margin-bottom: 20px;">
-                            <h3 style="font-size:16px; margin-bottom:10px;">Letter Prompt from Maike:</h3>
-                            <p style="font-style:italic; font-size:14px; color:var(--text-secondary); line-height:1.6;">
-                                "...wie geht es dir? Ich habe zurzeit viel zu tun. Mein Studium nimmt viel Zeit in Anspruch. Abends ruhe ich mich aber gern mit meinem Freund aus und wir schauen uns unsere Lieblingsserie 'Riders' an. Sie handelt von US Navy Kriminalfällen..."
-                            </p>
-                        </div>
-                        <div class="glass-panel" style="padding: 20px;">
-                            <h3 style="font-size:16px; margin-bottom:10px;">Cover these 4 items:</h3>
-                            <ul style="list-style:inside disc; font-size:14px; color:var(--text-secondary); display:flex; flex-direction:column; gap:8px;">
-                               <li>Wie heißt Ihre Lieblingsserie / Lieblingssendung</li>
-                               <li>Wovon handelt sie</li>
-                               <li>Was mögen Sie daran</li>
-                               <li>Vorschlag für einen gemeinsamen Filmabend?</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 12px;">
-                        <textarea id="schreiben-input" oninput="updateWordCount()" style="width:100%; height:220px; background:#141b2c; border:1px solid var(--border-color); border-radius:12px; color:#fff; padding:16px; font-family:inherit; outline:none;" placeholder="Liebe Maike,..."></textarea>
-                        <div style="display:flex; justify-content:space-between; font-size:13px; color:var(--text-secondary);">
-                            <span id="word-counter">Words: 0</span>
-                            <span>Required: ~80 words</span>
-                        </div>
-                        <button class="btn" onclick="toggleModelAnswer()">Toggle Model Answer</button>
-                    </div>
-                </div>
+  <!-- Topics -->
+  <div class="card" style="margin-top:20px">
+    <div class="card-title" style="margin-bottom:4px">🎯 Speaking Topics — Themen für die Präsentation</div>
+    <div class="card-sub" style="margin-bottom:16px">Click a topic card to see practice questions. Use these for Teil 2 (Präsentation) practice.</div>
+    <div class="topics-grid" id="speaking-topics"></div>
+  </div>
+</div>
+</section>
 
-                <div id="model-answer" class="glass-panel" style="display:none; padding:20px; margin-top:20px; background:rgba(16,185,129,0.05); border:1px dashed var(--success-color);">
-                    <h3 style="color:var(--success-color); margin-bottom:10px; font-size:16px;">Sina's High Score Model Answer:</h3>
-                    <p style="font-style:italic; line-height:1.7; white-space:pre-line; color:var(--text-primary);">
-                        Liebe Maike,
-                        vielen Dank für deinen Brief.
-                        Meine Lieblingskochsendung heißt „Der große Geschmackstest“. In dieser Sendung geht ein Sternekoch zu Restaurants, die nicht gut laufen.
-                        Ich mag, dass der Sternekoch streng mit dem Team ist und viele professionelle Tipps gibt.
-                        Wenn du einen guten Film kennst, können wir mal einen Filmabend machen. Was denkst du?
-                        Liebe Grüße
-                        Sina
-                    </p>
-                </div>
-            </div>
-        </section>
+<!-- =================== GRAMMATIK =================== -->
+<section id="grammatik" class="tab-content">
+<div class="section-wrap">
+  <div class="section-hero hero-grammatik">
+    <div class="hero-title">📝 Sprachbausteine — Grammatik & Wortschatz</div>
+    <div class="hero-sub">Fill-in-the-gap exercises testing grammar and vocabulary in context. This section is UNIQUE to telc Deutsch B1 — worth 30 of 225 points.</div>
+    <div class="hero-badges"><span class="badge badge-telc">🇩🇪 telc only — 20 gaps, 30 points</span><span class="badge badge-both">📌 Important for all B1 exams</span></div>
+  </div>
 
-        <!-- PAGE 5: VOCAB DECK -->
-        <section id="page-vocab" class="page">
-            <div class="card-container glass-panel">
-                <div class="section-header">
-                    <h2>B1 Interactive Flashcards</h2>
-                    <p>Click on any flashcard to flip it and reveal the English meaning.</p>
-                </div>
+  <!-- Part 1: Grammar -->
+  <div class="exercise-card">
+    <div class="ex-header">
+      <div><div class="ex-title">Sprachbausteine Teil 1 — Grammatik in Kontext</div><div class="ex-sub">Choose the correct grammatical word for each gap (articles, prepositions, conjunctions, verb forms)</div>
+      <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">10 Lücken</span><span class="meta-pill">15 Punkte</span></div></div>
+    </div>
+    <div class="ex-body">
+      <div class="instruction" style="border-color:var(--pink)">Lesen Sie den Brief. Wählen Sie für jede Lücke (1–5) die richtige Antwort (a, b oder c).</div>
+      <div class="fill-text" id="fill-text-1">
+        Liebe Maria, ich schreibe dir, <span class="fill-gap" id="gap-1">(1) ___</span> ich nächsten Monat nach Berlin komme. Ich <span class="fill-gap" id="gap-2">(2) ___</span> mich sehr auf das Wiedersehen. <span class="fill-gap" id="gap-3">(3) ___</span> du Zeit, am Samstag mit mir in die Stadt zu gehen? Wir könnten <span class="fill-gap" id="gap-4">(4) ___</span> ein gutes Restaurant gehen und danach ins Kino. Ich hoffe, dass du <span class="fill-gap" id="gap-5">(5) ___</span> bist.
+      </div>
+      <div id="grammar-gaps-1"></div>
+      <div class="submit-row">
+        <button class="btn-primary" onclick="checkGrammar(1)">Antworten prüfen ✓</button>
+        <button class="btn-secondary" onclick="resetGrammar(1)">Zurücksetzen</button>
+        <button class="btn-secondary" onclick="toggleTips(1)">💡 Tipps anzeigen</button>
+      </div>
+      <div id="result-gram1" class="result-banner"></div>
+    </div>
+  </div>
 
-                <div class="flashcard-grid" id="flashcard-container">
-                    <!-- Cards will be populated dynamically -->
-                </div>
-            </div>
-        </section>
+  <!-- Part 2: Vocabulary -->
+  <div class="exercise-card">
+    <div class="ex-header">
+      <div><div class="ex-title">Sprachbausteine Teil 2 — Wortschatz in Kontext</div><div class="ex-sub">Choose the correct vocabulary word for each gap</div>
+      <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">10 Lücken</span><span class="meta-pill">15 Punkte</span></div></div>
+    </div>
+    <div class="ex-body">
+      <div class="instruction" style="border-color:var(--pink)">Lesen Sie den Artikel. Wählen Sie für jede Lücke (6–10) die richtige Antwort (a, b oder c).</div>
+      <div class="fill-text" id="fill-text-2">
+        Viele Menschen <span class="fill-gap" id="gap-6">(6) ___</span> heutzutage zu viel. Die Arbeit macht ihnen zwar <span class="fill-gap" id="gap-7">(7) ___</span>, aber sie haben wenig Zeit für die Familie. Experten <span class="fill-gap" id="gap-8">(8) ___</span>, dass man regelmäßig Pausen machen sollte. Es ist wichtig, sich zu <span class="fill-gap" id="gap-9">(9) ___</span> und Zeit für Hobbys zu finden. Wer sich gut <span class="fill-gap" id="gap-10">(10) ___</span>, ist produktiver.
+      </div>
+      <div id="grammar-gaps-2"></div>
+      <div class="submit-row">
+        <button class="btn-primary" onclick="checkGrammar(2)">Antworten prüfen ✓</button>
+        <button class="btn-secondary" onclick="resetGrammar(2)">Zurücksetzen</button>
+        <button class="btn-secondary" onclick="toggleTips(2)">💡 Tipps anzeigen</button>
+      </div>
+      <div id="result-gram2" class="result-banner"></div>
+    </div>
+  </div>
 
-    </main>
+  <!-- Grammar Rules Reference -->
+  <div class="card">
+    <div class="card-title" style="margin-bottom:16px">📚 Grammar Quick Reference — B1 Essentials</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">
+      <div class="grammar-rule"><div class="gr-title">Konjunktiv II — Wishes & Polite Requests</div>
+        <div class="gr-example">Wenn ich Zeit <strong>hätte</strong>, <strong>würde</strong> ich reisen.<br>Ich <strong>könnte</strong> Ihnen helfen.</div>
+        <div class="gr-note">wäre (sein) · hätte (haben) · würde+Inf · könnte · müsste · dürfte</div></div>
+      <div class="grammar-rule"><div class="gr-title">Passiv — Something is done TO something</div>
+        <div class="gr-example">Das Formular <strong>wird ausgefüllt</strong>. (Präsens)<br>Das Formular <strong>wurde ausgefüllt</strong>. (Prät.)<br>Es <strong>muss ausgefüllt werden</strong>. (Modal)</div>
+        <div class="gr-note">werden + Partizip II · with modals: modal + Inf. + werden</div></div>
+      <div class="grammar-rule"><div class="gr-title">Relativsätze — Describing Nouns</div>
+        <div class="gr-example">Der Mann, <strong>der</strong> dort steht, ist mein Chef.<br>Das Buch, <strong>das</strong> ich lese, ist gut.<br>Die Frau, <strong>der</strong> ich geholfen habe...</div>
+        <div class="gr-note">Pronoun agrees with noun gender + case</div></div>
+      <div class="grammar-rule"><div class="gr-title">Verben + Präpositionen (Fixed!)</div>
+        <div class="gr-example">sich freuen <strong>auf</strong> +Akk / <strong>über</strong> +Akk<br>warten <strong>auf</strong> +Akk · denken <strong>an</strong> +Akk<br>sich interessieren <strong>für</strong> +Akk</div>
+        <div class="gr-note">These prepositions are FIXED — memorize them!</div></div>
+      <div class="grammar-rule"><div class="gr-title">Perfekt vs. Präteritum</div>
+        <div class="gr-example">Gesprochen: Ich <strong>habe</strong> gegessen. (Perfekt)<br>Written: Er <strong>war</strong> müde. (Prät. — sein/haben/modals)</div>
+        <div class="gr-note">In writing: always use Präteritum for war, hatte, konnte, wollte...</div></div>
+      <div class="grammar-rule"><div class="gr-title">Nebensatz Conjunctions</div>
+        <div class="gr-example">...weil / da / obwohl / damit / wenn / als / nachdem / bevor / während / seitdem / sodass</div>
+        <div class="gr-note">→ ALWAYS verb at the END of the Nebensatz!</div></div>
+    </div>
+  </div>
 
-    <script src="questions.js"></script>
-    <script>
-        // Simple SPA Navigation
-        function navigateTo(pageId) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            
-            document.getElementById('page-' + pageId).classList.add('active');
-            document.getElementById('nav-' + pageId).classList.add('active');
+  <div class="tip-card">
+    <h4>💡 Sprachbausteine Strategy</h4>
+    <ul>
+      <li>Read the ENTIRE text first before filling any gap — context is everything</li>
+      <li>Teil 1 (Grammar): Focus on: articles (der/die/das), prepositions (in/an/auf), verb forms, conjunctions</li>
+      <li>Teil 2 (Vocabulary): Look at the words BEFORE and AFTER the gap — collocations matter</li>
+      <li>If unsure: eliminate the obviously wrong option first, then choose between remaining two</li>
+      <li>Check that your chosen word fits grammatically AND semantically</li>
+      <li>You have 90 min for Lesen + Sprachbausteine — spend ~15 min on Sprachbausteine</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lb-inner">
+    <img class="lb-img" id="lb-img" src="" alt="Worksheet">
+    <div class="lb-nav">
+      <button class="lb-arrow" onclick="lbPrev()">← Prev</button>
+      <span class="lb-counter" id="lb-counter"></span>
+      <button class="lb-arrow" onclick="lbNext()">Next →</button>
+    </div>
+  </div>
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+</div>
+
+<script src="questions.js"></script>
+<script>
+// ===========================
+// TAB NAVIGATION
+// ===========================
+function showTab(id){
+  document.querySelectorAll('.tab-content').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const tabs = ['home','lesen','hoeren','schreiben','sprechen','grammatik'];
+  const idx = tabs.indexOf(id);
+  document.querySelectorAll('.nav-tab')[idx].classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ===========================
+// EXAM FORMAT SWITCHERS
+// ===========================
+function setLesenExam(fmt){
+  document.getElementById('lesen-goethe').style.display = fmt==='goethe'?'block':'none';
+  document.getElementById('lesen-telc').style.display = fmt==='telc'?'block':'none';
+  document.getElementById('lesen-goethe-btn').className = 'pick-btn'+(fmt==='goethe'?' active-goethe':'');
+  document.getElementById('lesen-telc-btn').className = 'pick-btn'+(fmt==='telc'?' active-telc':'');
+}
+function setHoerenExam(fmt){
+  document.getElementById('hoeren-goethe').style.display = fmt==='goethe'?'block':'none';
+  document.getElementById('hoeren-telc').style.display = fmt==='telc'?'block':'none';
+  document.getElementById('hoeren-goethe-btn').className = 'pick-btn'+(fmt==='goethe'?' active-goethe':'');
+  document.getElementById('hoeren-telc-btn').className = 'pick-btn'+(fmt==='telc'?' active-telc':'');
+}
+function setSprechenExam(fmt){
+  document.getElementById('sprechen-goethe').style.display = fmt==='goethe'?'block':'none';
+  document.getElementById('sprechen-telc').style.display = fmt==='telc'?'block':'none';
+  document.getElementById('sprechen-goethe-btn').className = 'pick-btn'+(fmt==='goethe'?' active-goethe':'');
+  document.getElementById('sprechen-telc-btn').className = 'pick-btn'+(fmt==='telc'?' active-telc':'');
+}
+
+// ===========================
+// TRUE / FALSE BUILDER
+// ===========================
+function buildTF(containerId, questions){
+  const c = document.getElementById(containerId);
+  if(!c) return;
+  c.innerHTML = questions.map((q,i)=>`
+    <div class="tf-question" id="tfq-${containerId}-${i}">
+      <div class="tf-num">${q.id||i+1}</div>
+      <div style="flex:1">
+        <div class="tf-text">${q.text}</div>
+        ${q.context?`<div class="tf-context">${q.context}</div>`:''}
+      </div>
+      <div class="tf-btns">
+        <button class="tf-btn" id="tfr-${containerId}-${i}" onclick="selectTF('${containerId}',${i},'r')">+ R</button>
+        <button class="tf-btn" id="tff-${containerId}-${i}" onclick="selectTF('${containerId}',${i},'f')">– F</button>
+      </div>
+    </div>`).join('');
+}
+function selectTF(cid,i,v){
+  document.getElementById(`tfr-${cid}-${i}`).className='tf-btn'+(v==='r'?' r-selected':'');
+  document.getElementById(`tff-${cid}-${i}`).className='tf-btn'+(v==='f'?' f-selected':'');
+}
+function checkTF(cid, answers){
+  let score=0;
+  answers.forEach((a,i)=>{
+    const rb=document.getElementById(`tfr-${cid}-${i}`);
+    const fb=document.getElementById(`tff-${cid}-${i}`);
+    const userR=rb.classList.contains('r-selected');
+    const userF=fb.classList.contains('f-selected');
+    const correct=a.t;
+    if(userR&&correct){rb.className='tf-btn tf-correct';score++;}
+    else if(userF&&!correct){fb.className='tf-btn tf-correct';score++;}
+    else if(userR&&!correct){rb.className='tf-btn tf-wrong';fb.className='tf-btn tf-correct';}
+    else if(userF&&correct){fb.className='tf-btn tf-wrong';rb.className='tf-btn tf-correct';}
+    else{rb.className='tf-btn';(correct?rb:fb).className='tf-btn tf-correct';}
+  });
+  const pct=Math.round(score/answers.length*100);
+  const r=document.getElementById(`result-${cid}`);
+  r.style.display='block';
+  r.className='result-banner '+(pct>=60?'result-pass':'result-fail');
+  r.innerHTML=`Score: ${score}/${answers.length} (${pct}%) — ${pct>=60?'✅ Passed!':'❌ Need more practice. 60% required to pass.'}`;
+  saveProgress('hoeren-'+cid, score, answers.length);
+  updateDashboard();
+}
+function resetTF(cid){
+  document.querySelectorAll(`[id^="tfr-${cid}-"],[id^="tff-${cid}-"]`).forEach(b=>b.className='tf-btn');
+  const r=document.getElementById(`result-${cid}`);
+  if(r) r.style.display='none';
+}
+
+// ===========================
+// MCQ BUILDER
+// ===========================
+const mcqData = {
+  g2: [
+    {q:'Viele Menschen bevorzugen es,',opts:['a) Geld zu sparen, als es auszugeben.','b) Geld auszugeben, als es anzulegen.','c) weniger Geld zu verdienen.'],ans:'b'},
+    {q:'Steffen L. ist',opts:['a) Geringverdiener.','b) arbeitslos.','c) gut bezahlter Manager.'],ans:'c'},
+    {q:'Steffen kaufte seinen Porsche',opts:['a) auf Kredit.','b) mit Bargeld.','c) auf Ratenzahlung.'],ans:'b'},
+    {q:'Geringverdiener',opts:['a) sparen sehr viel.','b) geben mehr Anteil für Grundbedürfnisse aus.','c) kaufen teure Autos.'],ans:'b'},
+    {q:'Gutverdiener',opts:['a) haben immer viel Freizeit.','b) geben nichts für Freizeit aus.','c) sparen mehr, haben aber nicht unbedingt mehr Freizeit.'],ans:'c'}
+  ],
+  t2: [
+    {q:'Viele Menschen bevorzugen es,',opts:['a) Geld zu sparen.','b) Geld auszugeben, statt es anzulegen.','c) weniger zu verdienen.'],ans:'b'},
+    {q:'Steffen L.',opts:['a) findet Sparen wichtig.','b) ist Geringverdiener.','c) möchte mehr Geld ausgeben.'],ans:'c'},
+    {q:'Geringverdiener',opts:['a) geben höheren Anteil für Lebensmittel aus.','b) geben kaum Geld für Lebensmittel aus.','c) sparen sehr viel.'],ans:'a'},
+    {q:'Steffen kaufte',opts:['a) einen VW Golf.','b) einen Porsche Cayenne bar.','c) ein Auto auf Kredit.'],ans:'b'},
+    {q:'Gutverdiener',opts:['a) haben keine Freizeit.','b) geben mehr für Lebensmittel aus.','c) sparen mehr, haben aber nicht mehr Freizeit.'],ans:'c'}
+  ]
+};
+function buildMCQ(containerId, data){
+  const c=document.getElementById(containerId);
+  if(!c) return;
+  c.innerHTML=data.map((q,i)=>`
+    <div class="question-block" id="qb-${containerId}-${i}">
+      <div class="q-num">Frage ${i+1}</div>
+      <div class="q-text">${q.q}</div>
+      ${q.opts.map(o=>`<button class="option-btn" onclick="selectMCQ('${containerId}',${i},'${o.charAt(0)}')">${o}</button>`).join('')}
+    </div>`).join('');
+}
+function selectMCQ(cid,i,v){
+  document.querySelectorAll(`#qb-${cid}-${i} .option-btn`).forEach(b=>b.className='option-btn');
+  document.querySelectorAll(`#qb-${cid}-${i} .option-btn`).forEach(b=>{if(b.textContent.trim().startsWith(v))b.classList.add('selected');});
+}
+function checkMCQ(cid){
+  const data=mcqData[cid];if(!data)return;
+  let score=0;
+  data.forEach((q,i)=>{
+    const btns=document.querySelectorAll(`#qb-${cid}-${i} .option-btn`);
+    btns.forEach(b=>{
+      const v=b.textContent.trim().charAt(0);
+      if(v===q.ans){b.classList.add('correct');}
+      else if(b.classList.contains('selected')){b.classList.remove('selected');b.classList.add('wrong');}
+      if(b.classList.contains('correct')&&(b.classList.contains('selected')||b.classList.contains('correct'))){
+        if(document.querySelector(`#qb-${cid}-${i} .option-btn.selected`)===b||b.classList.contains('correct')&&!document.querySelector(`#qb-${cid}-${i} .option-btn.wrong`)) score++;
+      }
+    });
+    const sel=document.querySelector(`#qb-${cid}-${i} .option-btn.selected`);
+    if(sel&&sel.textContent.trim().charAt(0)===q.ans) score++;
+  });
+  // recount properly
+  score=0;
+  data.forEach((q,i)=>{
+    const sel=document.querySelector(`#qb-${cid}-${i} .option-btn.selected`);
+    if(sel&&sel.textContent.trim().charAt(0)===q.ans) score++;
+  });
+  document.querySelectorAll(`[id^="qb-${cid}-"] .option-btn`).forEach(b=>{
+    const qIdx=parseInt(b.closest('[id^="qb-"]').id.split('-').pop());
+    const v=b.textContent.trim().charAt(0);
+    if(v===data[qIdx]?.ans){b.classList.add('correct');b.classList.remove('selected');}
+  });
+  const pct=Math.round(score/data.length*100);
+  const r=document.getElementById(`result-${cid}`);
+  if(r){r.style.display='block';r.className='result-banner '+(pct>=60?'result-pass':'result-fail');
+  r.innerHTML=`Score: ${score}/${data.length} (${pct}%) — ${pct>=60?'✅ Passed!':'❌ Need more practice.'}`;}
+  saveProgress('lesen-'+cid, score, data.length);
+  updateDashboard();
+}
+function resetMCQ(cid){
+  document.querySelectorAll(`[id^="qb-${cid}-"] .option-btn`).forEach(b=>b.className='option-btn');
+  const r=document.getElementById(`result-${cid}`);if(r)r.style.display='none';
+}
+
+// ===========================
+// HEADLINES EXERCISE (telc)
+// ===========================
+function buildHeadlines(){
+  const hc=document.getElementById('telc-headlines');
+  if(!hc)return;
+  hc.innerHTML=READING.telc_p1.headlines.map(h=>`
+    <div class="headline-chip"><span class="hid">${h.id}</span>${h.text}</div>`).join('');
+  const tc=document.getElementById('telc-texts-1');
+  if(!tc)return;
+  tc.innerHTML=READING.telc_p1.texts.map(t=>`
+    <div class="text-block">
+      <div class="tid">Text ${t.id}:</div>
+      <div>${t.content}</div>
+      <select class="select-answer" id="hl-ans-${t.id}">
+        <option value="">-- Überschrift wählen --</option>
+        ${READING.telc_p1.headlines.map(h=>`<option value="${h.id}">${h.id}) ${h.text}</option>`).join('')}
+        <option value="X">X (keine passende Überschrift)</option>
+      </select>
+    </div>`).join('');
+}
+function checkHeadlines(){
+  let score=0;
+  READING.telc_p1.texts.forEach(t=>{
+    const sel=document.getElementById(`hl-ans-${t.id}`);
+    if(sel.value===t.answer){sel.style.borderColor='var(--green)';sel.style.background='rgba(16,185,129,.1)';score++;}
+    else{sel.style.borderColor='var(--red)';sel.style.background='rgba(239,68,68,.08)';
+      // add note
+      const opt=document.createElement('option');opt.value=t.answer;opt.textContent=`✓ Correct: ${t.answer}) ${READING.telc_p1.headlines.find(h=>h.id===t.answer)?.text}`;
+      sel.insertBefore(opt,sel.firstChild);sel.value=t.answer;
+    }
+  });
+  const r=document.getElementById('result-headlines');
+  const pct=Math.round(score/READING.telc_p1.texts.length*100);
+  r.style.display='block';r.className='result-banner '+(pct>=60?'result-pass':'result-fail');
+  r.innerHTML=`Score: ${score}/${READING.telc_p1.texts.length} (${pct}%) — ${pct>=60?'✅ Passed!':'❌ Keep practicing.'}`;
+}
+function resetHeadlines(){
+  READING.telc_p1.texts.forEach(t=>{
+    const sel=document.getElementById(`hl-ans-${t.id}`);
+    if(sel){sel.value='';sel.style.borderColor='';sel.style.background='';}
+  });
+  const r=document.getElementById('result-headlines');if(r)r.style.display='none';
+}
+
+// ===========================
+// SITUATIONS EXERCISE (telc)
+// ===========================
+function buildSituations(){
+  const sl=document.getElementById('situations-list');
+  if(!sl)return;
+  sl.innerHTML=READING.telc_p3.situations.map(s=>`
+    <div class="situation-item">
+      <div class="sit-num">${s.id}</div>
+      <div class="sit-text">${s.text}</div>
+      <select class="sit-sel" id="sit-${s.id}">
+        <option value="">?</option>
+        ${READING.telc_p3.ads.map(a=>`<option value="${a.id}">${a.id}</option>`).join('')}
+        <option value="x">x</option>
+      </select>
+    </div>`).join('');
+  const ag=document.getElementById('ads-grid');
+  if(ag) ag.innerHTML=READING.telc_p3.ads.map(a=>`
+    <div class="ad-card"><div class="ad-id">${a.id.toUpperCase()}</div><div class="ad-title">${a.title}</div><div class="ad-text">${a.text}</div></div>`).join('');
+}
+function checkSituations(){
+  let score=0;
+  READING.telc_p3.situations.forEach(s=>{
+    const sel=document.getElementById(`sit-${s.id}`);
+    if(!sel)return;
+    const correct=READING.telc_p3.answers[s.id];
+    if(sel.value===correct){sel.style.borderColor='var(--green)';score++;}
+    else{sel.style.borderColor='var(--red)';sel.value=correct;}
+  });
+  const pct=Math.round(score/READING.telc_p3.situations.length*100);
+  const r=document.getElementById('result-situations');
+  r.style.display='block';r.className='result-banner '+(pct>=60?'result-pass':'result-fail');
+  r.innerHTML=`Score: ${score}/${READING.telc_p3.situations.length} (${pct}%) — ${pct>=60?'✅ Passed!':'❌ Keep practicing.'}`;
+}
+function resetSituations(){
+  READING.telc_p3.situations.forEach(s=>{
+    const sel=document.getElementById(`sit-${s.id}`);
+    if(sel){sel.value='';sel.style.borderColor='';}
+  });
+  const r=document.getElementById('result-situations');if(r)r.style.display='none';
+}
+
+// ===========================
+// GOETHE LISTENING PART 1 (MCQ clips)
+// ===========================
+function buildGoethePart1(){
+  const c=document.getElementById('goethe-mcq-clips');if(!c)return;
+  const clips=LISTENING.goethe_p1.clips;
+  c.innerHTML=clips.map((clip,ci)=>`
+    <div class="card" style="margin-bottom:16px">
+      <div style="font-size:.82rem;font-weight:700;color:var(--green);margin-bottom:12px">🔊 Clip ${clip.id}: ${clip.context}</div>
+      <div class="question-block">
+        <div class="q-num">Frage 1</div>
+        <div class="q-text">${clip.q1.question}</div>
+        ${clip.q1.options.map(o=>`<button class="option-btn" onclick="selectMCQ2('g-p1-${ci}-q1','${o.charAt(0)}')">${o}</button>`).join('')}
+      </div>
+      <div class="question-block" style="border-bottom:none;margin-bottom:0;padding-bottom:0">
+        <div class="q-num">Frage 2</div>
+        <div class="q-text">${clip.q2.question}</div>
+        ${clip.q2.options.map(o=>`<button class="option-btn" onclick="selectMCQ2('g-p1-${ci}-q2','${o.charAt(0)}')">${o}</button>`).join('')}
+      </div>
+    </div>`).join('');
+}
+function selectMCQ2(gid,v){
+  document.querySelectorAll(`[id^="${gid}"],.option-btn`).forEach(b=>{});
+  // find buttons within context
+  document.querySelectorAll('.option-btn').forEach(b=>{
+    if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes(`'${gid}'`)){
+      b.className='option-btn';
+      if(b.textContent.trim().charAt(0)===v) b.classList.add('selected');
+    }
+  });
+}
+function checkGoethePart1(){
+  const clips=LISTENING.goethe_p1.clips;
+  let score=0,total=clips.length*2;
+  clips.forEach((clip,ci)=>{
+    ['q1','q2'].forEach(qk=>{
+      const q=clip[qk];
+      const btns=document.querySelectorAll('.option-btn');
+      btns.forEach(b=>{
+        if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes(`g-p1-${ci}-${qk}`)){
+          if(b.textContent.trim().charAt(0)===q.answer){b.classList.add('correct');b.classList.remove('selected');}
+          else if(b.classList.contains('selected')){b.classList.remove('selected');b.classList.add('wrong');}
         }
+      });
+      const sel=document.querySelector(`.option-btn.selected[onclick*="g-p1-${ci}-${qk}"]`);
+      // score counting via btns
+    });
+  });
+  const r=document.getElementById('result-g-p1');
+  r.style.display='block';r.className='result-banner result-ok';
+  r.innerHTML=`Exercise completed! ✅ Review the highlighted correct answers above. Practice listening to the audio again and check your understanding.`;
+}
+function resetGoethePart1(){
+  document.querySelectorAll('#goethe-mcq-clips .option-btn').forEach(b=>b.className='option-btn');
+  const r=document.getElementById('result-g-p1');if(r)r.style.display='none';
+}
 
-        // Subtabs for reading section
-        function switchSubL(tabNum) {
-            document.querySelectorAll('.lesen-subpage').forEach(sub => sub.style.display = 'none');
-            document.querySelectorAll('.subtab-btn').forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById('lesen-t' + tabNum).style.display = 'block';
-            document.getElementById('btn-sub-l' + tabNum).classList.add('active');
-        }
+// ===========================
+// GRAMMAR EXERCISES
+// ===========================
+const gramData={
+  1:{gaps:[
+    {id:1,opts:['a) weil','b) dass','c) ob'],ans:'a',tip:'weil = because → Verb am Ende! (ich komme)'},
+    {id:2,opts:['a) freut','b) freue','c) freuest'],ans:'b',tip:'ich freue mich = I am looking forward (reflexiv)'},
+    {id:3,opts:['a) Haben','b) Hat','c) Hast'],ans:'c',tip:'du → Hast du Zeit?'},
+    {id:4,opts:['a) zu','b) in','c) bei'],ans:'b',tip:'in ein Restaurant gehen (Akkusativ)'},
+    {id:5,opts:['a) einverstanden','b) gesund','c) zufrieden'],ans:'a',tip:'einverstanden = agreed / okay with it'}
+  ]},
+  2:{gaps:[
+    {id:6,opts:['a) arbeiten','b) schlafen','c) spielen'],ans:'a',tip:'Context: Arbeit und Alltag → arbeiten too much'},
+    {id:7,opts:['a) Spaß','b) Freude','c) Angst'],ans:'a',tip:'Spaß machen = to be fun, enjoyable'},
+    {id:8,opts:['a) empfehlen','b) fordern','c) sagen'],ans:'a',tip:'Experten empfehlen = experts recommend'},
+    {id:9,opts:['a) erholen','b) freuen','c) bewerben'],ans:'a',tip:'sich erholen = to rest, recover, relax'},
+    {id:10,opts:['a) ausruht','b) schläft','c) arbeitet'],ans:'a',tip:'sich ausruhen = to rest properly'}
+  ]}
+};
+const gramUserAnswers={1:{},2:{}};
+function buildGrammar(part){
+  const c=document.getElementById(`grammar-gaps-${part}`);if(!c)return;
+  const g=gramData[part].gaps;
+  c.innerHTML=g.map(gap=>`
+    <div style="margin-bottom:16px">
+      <div class="gap-q-header"><span class="gap-num">Lücke ${gap.id}</span>Welches Wort passt?</div>
+      <div class="gap-options">
+        ${gap.opts.map(o=>`<button class="option-btn" onclick="selectGram(${part},${gap.id},'${o.charAt(0)}')">${o}</button>`).join('')}
+      </div>
+      <div class="tip-box" id="tip-${part}-${gap.id}"><span class="tip-label">💡 Tipp: </span>${gap.tip}</div>
+    </div>`).join('');
+}
+function selectGram(part,gid,v){
+  gramUserAnswers[part][gid]=v;
+  const gaps=gramData[part].gaps.find(g=>g.id===gid);
+  if(!gaps)return;
+  gaps.opts.forEach(o=>{
+    const btn=document.querySelector(`#grammar-gaps-${part} button[onclick*="selectGram(${part},${gid},'${o.charAt(0)}')"]`);
+    if(btn) btn.className='option-btn'+(o.charAt(0)===v?' selected':'');
+  });
+  // Update fill-gap display
+  const fillGap=document.getElementById(`gap-${gid}`);
+  if(fillGap){fillGap.textContent=`(${gid}) ${v})`;fillGap.style.color='var(--gold)';}
+}
+function checkGrammar(part){
+  const g=gramData[part].gaps;let score=0;
+  g.forEach(gap=>{
+    const userAns=gramUserAnswers[part][gap.id];
+    gap.opts.forEach(o=>{
+      const btn=document.querySelector(`#grammar-gaps-${part} button[onclick*="selectGram(${part},${gap.id},'${o.charAt(0)}')"]`);
+      if(!btn)return;
+      if(o.charAt(0)===gap.ans){btn.classList.add('correct');btn.classList.remove('selected');}
+      else if(btn.classList.contains('selected')){btn.classList.remove('selected');btn.classList.add('wrong');}
+    });
+    if(userAns===gap.ans) score++;
+    // show tip
+    const tip=document.getElementById(`tip-${part}-${gap.id}`);
+    if(tip) tip.classList.add('show');
+  });
+  const pct=Math.round(score/g.length*100);
+  const r=document.getElementById(`result-gram${part}`);
+  r.style.display='block';r.className='result-banner '+(pct>=60?'result-pass':'result-fail');
+  r.innerHTML=`Score: ${score}/${g.length} (${pct}%) — ${pct>=60?'✅ Sehr gut!':'❌ Weiter üben! 60% needed to pass.'}`;
+  saveProgress('grammatik-'+part, score, g.length);
+  updateDashboard();
+}
+function resetGrammar(part){
+  gramUserAnswers[part]={};
+  document.querySelectorAll(`#grammar-gaps-${part} .option-btn`).forEach(b=>b.className='option-btn');
+  document.querySelectorAll(`#grammar-gaps-${part} .tip-box`).forEach(t=>t.classList.remove('show'));
+  const r=document.getElementById(`result-gram${part}`);if(r)r.style.display='none';
+  // reset fill gaps
+  gramData[part].gaps.forEach(g=>{
+    const fg=document.getElementById(`gap-${g.id}`);
+    if(fg){fg.textContent=`(${g.id}) ___`;fg.style.color='';}
+  });
+}
+function toggleTips(part){
+  document.querySelectorAll(`#grammar-gaps-${part} .tip-box`).forEach(t=>t.classList.toggle('show'));
+}
 
-        // Grading scripts
-        let readingScore = 0;
-        let grammarScore = 0;
+// ===========================
+// WRITING TOOL
+// ===========================
+let currentPromptIdx=0;
+function buildWritingSection(){
+  const ps=document.getElementById('prompt-selector');if(!ps)return;
+  ps.innerHTML=WRITING.prompts.map((p,i)=>`
+    <button class="ps-btn${i===0?' active':''}" onclick="selectPrompt(${i})">${p.icon} ${p.type}</button>`).join('');
+  renderPrompt(0);
+  buildChecklist();
+}
+function selectPrompt(i){
+  currentPromptIdx=i;
+  document.querySelectorAll('.ps-btn').forEach((b,j)=>b.className='ps-btn'+(j===i?' active':''));
+  renderPrompt(i);
+}
+function renderPrompt(i){
+  const p=WRITING.prompts[i];
+  const pd=document.getElementById('writing-prompt-display');
+  if(pd) pd.innerHTML=`
+    <div class="prompt-type">${p.examType==='goethe'?'🦁 Goethe':p.examType==='telc'?'🇩🇪 telc':'✅ Both Exams'} — ${p.type}</div>
+    <div class="prompt-scenario">${p.scenario}</div>
+    <ul class="bullets-list">${p.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>`;
+  const tp=document.getElementById('writing-template');
+  const tpl=p.register==='formal'?WRITING.templates.formal:p.register==='informal'?WRITING.templates.informal:WRITING.templates.semiFormal;
+  if(tp) tp.innerHTML=`
+    <div class="template-box"><div class="t-label">Anrede</div><div class="t-val">${tpl.greeting}</div></div>
+    <div class="template-box"><div class="t-label">Einstieg</div><div class="t-val">${tpl.opener}</div></div>
+    <div class="template-box"><div class="t-label">Grußformel</div><div class="t-val">${tpl.closing}</div></div>
+    <div style="font-size:.82rem;font-weight:700;color:var(--text3);margin:12px 0 8px">💬 Useful Phrases — click to copy:</div>
+    <div class="phrase-chips">${tpl.phrases.map(ph=>`<div class="phrase-chip" onclick="insertPhrase('${ph.replace(/'/g,"\'")}')">${ph}</div>`).join('')}</div>`;
+}
+function insertPhrase(ph){
+  const ta=document.getElementById('writing-area');
+  if(!ta)return;
+  const pos=ta.selectionStart;
+  ta.value=ta.value.slice(0,pos)+ph+ta.value.slice(pos);
+  ta.focus();updateWordCount();
+}
+function updateWordCount(){
+  const ta=document.getElementById('writing-area');
+  const wc=document.getElementById('word-count');if(!ta||!wc)return;
+  const words=ta.value.trim().split(/\s+/).filter(w=>w.length>0).length;
+  wc.textContent=words;
+  wc.className='wc-num'+(words>=80?'good':words>=50?' warn':'');
+}
+function clearWriting(){
+  const ta=document.getElementById('writing-area');if(ta)ta.value='';updateWordCount();
+}
+function buildChecklist(){
+  const c=document.getElementById('writing-checklist');if(!c)return;
+  c.innerHTML=WRITING.checklist.map((item,i)=>`
+    <label class="check-item" id="cli-${i}" onclick="toggleCheck(${i})">
+      <input type="checkbox" id="chk-${i}" onclick="toggleCheck(${i})"> ${item}
+    </label>`).join('');
+}
+function toggleCheck(i){
+  const item=document.getElementById(`cli-${i}`);
+  const chk=document.getElementById(`chk-${i}`);
+  if(item&&chk){chk.checked=!chk.checked;item.className='check-item'+(chk.checked?' checked':'');}
+}
 
-        function updateDashboard() {
-            const overallPct = Math.round(((readingScore + grammarScore) / 11) * 100);
-            document.getElementById('stat-overall').textContent = overallPct + "%";
-            document.getElementById('stat-reading').textContent = `${readingScore} / 6`;
-            document.getElementById('stat-grammar').textContent = `${grammarScore} / 5`;
-        }
+// ===========================
+// SPEAKING
+// ===========================
+function buildSpeakingSection(){
+  // Goethe parts
+  const gc=document.getElementById('goethe-speaking-parts');
+  if(gc) gc.innerHTML=SPEAKING.goethe_parts.map(p=>`
+    <div class="speak-part">
+      <div class="sp-icon">${p.icon}</div>
+      <div class="sp-title">${p.title}</div>
+      <div class="sp-duration">⏱ ${p.duration}</div>
+      <div class="sp-desc">${p.desc}</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--purple);margin-bottom:6px">Key Phrases:</div>
+      <ul class="phrases-list">${p.phrases.map(ph=>`<li>${ph}</li>`).join('')}</ul>
+    </div>`).join('');
+  // telc parts
+  const tc=document.getElementById('telc-speaking-parts');
+  if(tc) tc.innerHTML=SPEAKING.telc_parts.map(p=>`
+    <div class="speak-part">
+      <div class="sp-icon">${p.icon}</div>
+      <div class="sp-title">${p.title}</div>
+      <div class="sp-duration">⏱ ${p.duration}</div>
+      <div class="sp-desc">${p.desc}</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--purple);margin-bottom:6px">Key Phrases:</div>
+      <ul class="phrases-list">${p.phrases.map(ph=>`<li>${ph}</li>`).join('')}</ul>
+    </div>`).join('');
 
-        function gradeReading() {
-            readingScore = 0;
-            // Check L1
-            if (document.getElementById('l1-opt-0').value === 'G') readingScore++;
-            if (document.getElementById('l1-opt-1').value === 'A') readingScore++;
-            if (document.getElementById('l1-opt-2').value === 'I') readingScore++;
-            // Check L2
-            if (document.getElementById('l2-opt-6').value === 'b') readingScore++;
-            if (document.getElementById('l2-opt-7').value === 'c') readingScore++;
-            if (document.getElementById('l2-opt-8').value === 'a') readingScore++;
-            // Check L3
-            if (document.getElementById('l3-opt-11').value === 'f') readingScore++;
-            if (document.getElementById('l3-opt-12').value === 'j') readingScore++;
+  // Phrases
+  const pa=document.getElementById('partA-phrases');
+  if(pa) pa.innerHTML=SPEAKING.bildbeschreibung.partA_phrases.map(ph=>`<div class="phrase-chip">${ph}</div>`).join('');
+  const pb=document.getElementById('partB-phrases');
+  if(pb) pb.innerHTML=SPEAKING.bildbeschreibung.partB_phrases.map(ph=>`<div class="phrase-chip">${ph}</div>`).join('');
 
-            alert(`Reading graded! Your score: ${readingScore}/8`);
-            updateDashboard();
-        }
+  // Topics
+  const tg=document.getElementById('speaking-topics');
+  if(tg) tg.innerHTML=SPEAKING.topics.map(t=>`
+    <div class="topic-card" id="topic-${t.id}" onclick="toggleTopic(${t.id})">
+      <div class="tc-emoji">${t.emoji}</div>
+      <div class="tc-title">${t.title}</div>
+      <div class="tc-questions">${t.questions.map(q=>`<div class="tc-q">❓ ${q}</div>`).join('')}</div>
+    </div>`).join('');
+}
+function toggleTopic(id){
+  document.getElementById(`topic-${id}`).classList.toggle('open');
+}
 
-        function gradeGrammar() {
-            grammarScore = 0;
-            if (document.getElementById('sb-opt-21').value === 'unser') grammarScore++;
-            if (document.getElementById('sb-opt-22').value === 'damit') grammarScore++;
-            if (document.getElementById('sb-opt-23').value === 'vorstellen') grammarScore++;
-            if (document.getElementById('sb-opt-24').value === 'einem') grammarScore++;
-            if (document.getElementById('sb-opt-25').value === 'fortbilden') grammarScore++;
+// ===========================
+// IMAGE GALLERIES
+// ===========================
+let writingGalleryCount=0, sprechenGalleryCount=0;
+let currentGallery=[], currentLBIdx=0;
+let speakFilter='all';
 
-            alert(`Grammar graded! Your score: ${grammarScore}/5`);
-            updateDashboard();
-        }
+function buildWritingGallery(){
+  const g=document.getElementById('schreiben-gallery');if(!g)return;
+  writingGalleryCount=Math.min(12, WORKSHEETS.schreiben.length);
+  g.innerHTML='';
+  for(let i=0;i<writingGalleryCount;i++) addThumb(g, WORKSHEETS.schreiben[i], 'schreiben', i);
+  const lb=document.getElementById('schreiben-load-more');
+  if(lb) lb.style.display=writingGalleryCount>=WORKSHEETS.schreiben.length?'none':'block';
+}
+function loadMoreWriting(){
+  const g=document.getElementById('schreiben-gallery');if(!g)return;
+  const end=Math.min(writingGalleryCount+6, WORKSHEETS.schreiben.length);
+  for(let i=writingGalleryCount;i<end;i++) addThumb(g, WORKSHEETS.schreiben[i], 'schreiben', i);
+  writingGalleryCount=end;
+  const lb=document.getElementById('schreiben-load-more');
+  if(lb) lb.style.display=writingGalleryCount>=WORKSHEETS.schreiben.length?'none':'block';
+}
 
-        // Writing Helper
-        function updateWordCount() {
-            const val = document.getElementById('schreiben-input').value.trim();
-            const count = val ? val.split(/\s+/).length : 0;
-            document.getElementById('word-counter').textContent = `Words: ${count}`;
-        }
+const allSprechenImages=[...WORKSHEETS.sprechen1,...WORKSHEETS.sprechen2];
+const bild1=WORKSHEETS.sprechen1, bild2=WORKSHEETS.sprechen2;
 
-        function toggleModelAnswer() {
-            const answerDiv = document.getElementById('model-answer');
-            answerDiv.style.display = answerDiv.style.display === 'none' ? 'block' : 'none';
-        }
+function buildSprechenGallery(){
+  setSpeakFilter('all');
+}
+function setSpeakFilter(f){
+  speakFilter=f;
+  document.querySelectorAll('.gf-btn').forEach((b,i)=>{
+    b.className='gf-btn'+(['all','bild1','bild2'][i]===f?' active':'');
+  });
+  const g=document.getElementById('sprechen-gallery');if(!g)return;
+  g.innerHTML='';
+  sprechenGalleryCount=0;
+  const imgs=f==='all'?allSprechenImages:f==='bild1'?bild1:bild2;
+  const show=Math.min(16,imgs.length);
+  for(let i=0;i<show;i++) addThumb(g,imgs[i],'sprechen',i);
+  sprechenGalleryCount=show;
+  const lb=document.getElementById('sprechen-load-more');
+  if(lb) lb.style.display=show>=imgs.length?'none':'block';
+}
+function loadMoreSprechen(){
+  const g=document.getElementById('sprechen-gallery');if(!g)return;
+  const imgs=speakFilter==='all'?allSprechenImages:speakFilter==='bild1'?bild1:bild2;
+  const end=Math.min(sprechenGalleryCount+12,imgs.length);
+  for(let i=sprechenGalleryCount;i<end;i++) addThumb(g,imgs[i],'sprechen',i);
+  sprechenGalleryCount=end;
+  const lb=document.getElementById('sprechen-load-more');
+  if(lb) lb.style.display=end>=imgs.length?'none':'block';
+}
+function addThumb(container, src, type, idx){
+  const d=document.createElement('div');d.className='gallery-thumb';
+  d.onclick=()=>openLightbox(type,idx);
+  const img=document.createElement('img');img.src=src;img.loading='lazy';img.alt=`Worksheet ${idx+1}`;
+  d.appendChild(img);container.appendChild(d);
+}
 
-        // Populate Flashcards
-        const words = [
-            { de: "die Fahrkarte", en: "train ticket" },
-            { de: "das Gleis", en: "track / platform" },
-            { de: "die Verspätung", en: "delay" },
-            { de: "das Gepäck", en: "luggage" },
-            { de: "die Bordkarte", en: "boarding pass" },
-            { de: "das Vorstellungsgespräch", en: "job interview" },
-            { de: "die Bewerbung", en: "application" },
-            { de: "der Lebenslauf", en: "CV / resume" },
-            { de: "der Klimawandel", en: "climate change" }
-        ];
+// ===========================
+// LIGHTBOX
+// ===========================
+function openLightbox(type, idx){
+  const imgs=type==='schreiben'?WORKSHEETS.schreiben:
+    (speakFilter==='all'?allSprechenImages:speakFilter==='bild1'?bild1:bild2);
+  currentGallery=imgs; currentLBIdx=idx;
+  document.getElementById('lb-img').src=imgs[idx];
+  document.getElementById('lb-counter').textContent=`${idx+1} / ${imgs.length}`;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(e){
+  if(!e||e.target===document.getElementById('lightbox')||e.type!=='click'||e.target.classList.contains('lb-close')){
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+function lbPrev(){
+  currentLBIdx=(currentLBIdx-1+currentGallery.length)%currentGallery.length;
+  document.getElementById('lb-img').src=currentGallery[currentLBIdx];
+  document.getElementById('lb-counter').textContent=`${currentLBIdx+1} / ${currentGallery.length}`;
+}
+function lbNext(){
+  currentLBIdx=(currentLBIdx+1)%currentGallery.length;
+  document.getElementById('lb-img').src=currentGallery[currentLBIdx];
+  document.getElementById('lb-counter').textContent=`${currentLBIdx+1} / ${currentGallery.length}`;
+}
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('lightbox').classList.contains('open')){
+    if(e.key==='ArrowRight') lbNext();
+    if(e.key==='ArrowLeft') lbPrev();
+    if(e.key==='Escape') closeLightbox();
+  }
+});
 
-        const container = document.getElementById('flashcard-container');
-        words.forEach(w => {
-            const card = document.createElement('div');
-            card.className = 'flashcard';
-            card.onclick = () => card.classList.toggle('flipped');
-            card.innerHTML = `
-                <div class="card-inner">
-                    <div class="card-front">
-                        <h3 style="font-size:18px;">${w.de}</h3>
-                        <p style="font-size:12px; color:var(--text-secondary); margin-top:8px;">Click to flip</p>
-                    </div>
-                    <div class="card-back">
-                        <h3 style="font-size:18px;">${w.en}</h3>
-                    </div>
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    </script>
+// ===========================
+// TIMER
+// ===========================
+const timers={};
+function startTimer(id, seconds){
+  if(timers[id]) clearInterval(timers[id]);
+  let remaining=seconds;
+  const el=document.getElementById(`timer-${id}`);
+  function update(){
+    const m=Math.floor(remaining/60),s=remaining%60;
+    if(el) el.textContent=`${m}:${String(s).padStart(2,'0')}`;
+    if(remaining<=0){clearInterval(timers[id]);if(el){el.textContent='0:00';el.style.color='var(--red)';}}
+    remaining--;
+  }
+  update();
+  timers[id]=setInterval(update,1000);
+}
+
+// ===========================
+// DASHBOARD PROGRESS
+// ===========================
+function updateDashboard(){
+  const p=loadProgress();
+  const sections=['lesen','hoeren','schreiben','sprechen','grammatik'];
+  sections.forEach(s=>{
+    const key=Object.keys(p).find(k=>k.startsWith(s));
+    const pf=document.getElementById(`prog-${s}`);
+    const pl=document.getElementById(`prog-label-${s}`);
+    if(key&&p[key]){
+      if(pf) pf.style.width=p[key].pct+'%';
+      if(pl) pl.textContent=`Last score: ${p[key].score}/${p[key].total} (${p[key].pct}%) — ${p[key].date}`;
+    }
+  });
+}
+
+// ===========================
+// TF QUESTIONS for specific sections
+// ===========================
+function buildTF_g1(){
+  const qs=[
+    {id:1,text:'Die Person lebt seit einem Jahr in München.'},{id:2,text:'Der Deutschkurs findet an der Universität statt.'},
+    {id:3,text:'In Deutschland fahren Busse oft unpünktlich.'},{id:4,text:'Man muss in Deutschland den Müll trennen.'},
+    {id:5,text:'Das Wetter in Deutschland ist immer schön.'},{id:6,text:'Die Person hat in Deutschland neue Freunde gefunden.'},
+    {id:7,text:'Die Person vermisst das Essen aus ihrer Heimat.'},{id:8,text:'Deutsches Essen schmeckt der Person überhaupt nicht.'}
+  ];
+  buildTF('g1-qs', qs);
+}
+function buildTF_t2(){
+  buildTF('t2-qs', LISTENING.telc_p2.questions);
+}
+function buildTF_t3(){
+  buildTF('t3-qs', LISTENING.telc_p3.questions);
+}
+
+// ===========================
+// INIT
+// ===========================
+document.addEventListener('DOMContentLoaded',()=>{
+  // Build reading
+  buildHeadlines();
+  buildSituations();
+  buildMCQ('mcq-g2-qs', mcqData.g2);
+  buildMCQ('mcq-t2-qs', mcqData.t2);
+  // Build TF
+  buildTF_g1();
+  buildTF_t2();
+  buildTF_t3();
+  // Build listening
+  buildGoethePart1();
+  // Build writing
+  buildWritingSection();
+  buildWritingGallery();
+  // Build speaking
+  buildSpeakingSection();
+  buildSprechenGallery();
+  // Build grammar
+  buildGrammar(1);
+  buildGrammar(2);
+  // Dashboard
+  updateDashboard();
+});
+</script>
 </body>
 </html>
