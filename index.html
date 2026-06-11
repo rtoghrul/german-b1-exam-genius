@@ -350,6 +350,60 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .lang-btn{padding:5px 10px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.78rem;font-weight:700;cursor:pointer;transition:all var(--transition);font-family:inherit;white-space:nowrap}
 .lang-btn:hover{background:var(--card2);color:var(--text)}
 .lang-btn.active{background:var(--card2);color:var(--gold);border-color:var(--gold)}
+
+.sc-vokabeln::before{background:var(--purple)}
+
+/* ---- FLASHCARDS ---- */
+.flashcards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+.flashcard-wrapper {
+  perspective: 1000px;
+  height: 180px;
+  cursor: pointer;
+}
+.flashcard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.flashcard.flipped {
+  transform: rotateY(180deg);
+}
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card-front {
+  background: var(--card);
+  color: var(--text);
+}
+.card-back {
+  background: var(--card2);
+  color: var(--text);
+  transform: rotateY(180deg);
+  border-color: var(--purple);
+}
+
+/* ---- RECORDER PULSE ---- */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: .4; }
+  100% { transform: scale(1); opacity: 1; }
+}
 </style>
 </head>
 <body>
@@ -364,6 +418,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
     <button class="nav-tab" onclick="showTab('schreiben')"><span class="dot dot-schreiben"></span> ✍️ <span data-i18n="nav_schreiben">Schreiben</span></button>
     <button class="nav-tab" onclick="showTab('sprechen')"><span class="dot dot-sprechen"></span> 🗣 <span data-i18n="nav_sprechen">Sprechen</span></button>
     <button class="nav-tab" onclick="showTab('grammatik')"><span class="dot dot-grammatik"></span> 📝 <span data-i18n="nav_grammatik">Grammatik</span></button>
+    <button class="nav-tab" onclick="showTab('vokabeln')"><span class="dot dot-vokabeln" style="background:var(--purple)"></span> 📇 <span data-i18n="nav_vokabeln">Vokabeln</span></button>
     <div class="lang-switcher">
       <button class="lang-btn active" id="lang-de" onclick="setLang('de')">🇩🇪 DE</button>
       <button class="lang-btn" id="lang-ru" onclick="setLang('ru')">🇷🇺 RU</button>
@@ -460,6 +515,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
       <div class="sc-meta"><span class="sc-pill">telc: 2 parts</span><span class="sc-pill">Part of 90-min block</span></div>
       <div class="progress-bar"><div class="progress-fill" id="prog-grammatik" style="width:0%;background:var(--pink)"></div></div>
       <div class="progress-label" id="prog-label-grammatik">Not started</div>
+    </div>
+    <div class="section-card sc-vokabeln" onclick="showTab('vokabeln')">
+      <div class="sc-icon">📇</div>
+      <div class="sc-title" data-i18n="nav_vokabeln">Vokabeln</div>
+      <div class="sc-desc" data-i18n="desc_vokabeln">Master B1 verbs with fixed prepositions and cases. Learn with interactive flashcards and quizzes.</div>
+      <div class="sc-meta"><span class="sc-pill">15 Verbs</span><span class="sc-pill">Interactive Quiz</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-vokabeln" style="width:0%;background:var(--purple)"></div></div>
+      <div class="progress-label" id="prog-label-vokabeln">Not started</div>
     </div>
   </div>
 
@@ -793,7 +856,10 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
         <span class="wc-num" id="word-count">0</span>
         <span>/ mindestens 80 Wörter</span>
       </div>
-      <button class="btn-primary" style="align-self:flex-start" onclick="clearWriting()">🗑 Löschen / Clear</button>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn-primary" style="align-self:flex-start;background:var(--orange);color:#000" onclick="checkWriting()">🔍 Antwort analysieren / Analyze Answer</button>
+        <button class="btn-secondary" style="align-self:flex-start" onclick="clearWriting()">🗑 Löschen / Clear</button>
+      </div>
       <div style="font-size:.82rem;color:var(--text3);line-height:1.5">💡 Tip: Write shorter, correct sentences. It's better to use correct grammar with simple words than to write complex sentences with many errors.</div>
     </div>
   </div>
@@ -835,6 +901,26 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
   <div id="sprechen-telc" style="display:none">
     <div class="card"><div class="card-title">🇩🇪 telc Deutsch B1 — Speaking Structure</div>
     <div class="speaking-parts" id="telc-speaking-parts"></div></div>
+  </div>
+
+  <!-- Virtual Speech Recorder -->
+  <div class="card" style="margin-top: 20px;">
+    <div class="card-title" data-i18n="sp_recorder_title">🎤 Virtual Speech Recorder & Pronunciation Practice</div>
+    <div class="card-sub" data-i18n="sp_recorder_sub">Record your presentation or picture description, play it back, and listen to check your flow and pronunciation.</div>
+    
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px">
+      <button class="btn-primary" id="rec-btn-start" onclick="toggleRecording()" style="background:var(--purple);color:#fff;display:flex;align-items:center;gap:8px">
+        <span id="rec-dot" style="width:10px;height:10px;border-radius:50%;background:#fff;display:inline-block"></span>
+        <span id="rec-btn-text">Start Recording</span>
+      </button>
+      <div id="rec-timer" style="font-size:1.2rem;font-weight:800;color:var(--text2);font-variant-numeric:tabular-nums;display:none">00:00</div>
+      <div id="rec-status" style="font-size:.82rem;color:var(--text3)">Ready to record. Click button and grant microphone access.</div>
+    </div>
+    
+    <div id="recordings-container" style="display:none;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px">
+      <div style="font-size:.82rem;font-weight:700;color:var(--text2);margin-bottom:8px">🎧 Listen to your recording:</div>
+      <audio id="playback-audio" controls style="width:100%;accent-color:var(--purple)"></audio>
+    </div>
   </div>
 
   <!-- Bildbeschreibung -->
@@ -966,6 +1052,36 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 </div>
 </section>
 
+<!-- =================== VOKABELN =================== -->
+<section id="vokabeln" class="tab-content">
+<div class="section-wrap">
+  <div class="section-hero hero-vokabeln" style="background:linear-gradient(135deg,#3c1a5e,#1a0f3d); border-radius: var(--r); padding: 40px 32px; margin-bottom: 32px; position: relative; overflow: hidden;">
+    <div class="hero-title">📇 Vokabeln & Verben mit Präpositionen</div>
+    <div class="hero-sub" data-i18n="vocab_hero_sub">Master B1 verbs with fixed prepositions and cases. Practice with flashcards and interactive quizzes.</div>
+    <div class="hero-badges"><span class="badge badge-both">15 Key Verbs</span><span class="badge badge-goethe">🦁 Goethe B1</span><span class="badge badge-telc">🇩🇪 telc B1</span></div>
+  </div>
+
+  <!-- Flashcards -->
+  <div class="card">
+    <div class="card-title" data-i18n="vocab_flashcards_title">📇 Interactive Flashcards</div>
+    <div class="card-sub" data-i18n="vocab_flashcards_sub">Click any card to flip and learn the preposition, case, and example.</div>
+    <div class="flashcards-grid" id="flashcards-container"></div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="card" id="vocab-quiz-card" style="margin-top: 24px;">
+    <div class="card-title" data-i18n="vocab_quiz_title">🎯 Preposition Quiz</div>
+    <div class="card-sub" data-i18n="vocab_quiz_sub">Test your knowledge of prepositions and cases. 10 random questions.</div>
+    <div id="vocab-quiz-container"></div>
+    <div class="submit-row" style="margin-top: 20px;">
+      <button class="btn-primary" onclick="checkVocabQuiz()">Cavabları yoxla ✓</button>
+      <button class="btn-secondary" onclick="startVocabQuiz()">Sıfırla</button>
+    </div>
+    <div id="result-vocab-quiz" class="result-banner" style="margin-top: 16px;"></div>
+  </div>
+</div>
+</section>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
   <div class="lb-inner">
@@ -988,7 +1104,7 @@ function showTab(id){
   document.querySelectorAll('.tab-content').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  const tabs = ['home','lesen','hoeren','schreiben','sprechen','grammatik'];
+  const tabs = ['home','lesen','hoeren','schreiben','sprechen','grammatik','vokabeln'];
   const idx = tabs.indexOf(id);
   document.querySelectorAll('.nav-tab')[idx].classList.add('active');
   window.scrollTo(0,0);
@@ -1592,7 +1708,7 @@ function startTimer(id, seconds){
 // ===========================
 function updateDashboard(){
   const p=loadProgress();
-  const sections=['lesen','hoeren','schreiben','sprechen','grammatik'];
+  const sections=['lesen','hoeren','schreiben','sprechen','grammatik','vokabeln'];
   sections.forEach(s=>{
     const key=Object.keys(p).find(k=>k.startsWith(s));
     const pf=document.getElementById(`prog-${s}`);
@@ -1626,6 +1742,325 @@ function buildTF_t3(){
 // ===========================
 // INIT
 // ===========================
+// ===========================
+// WRITING GRADER (AUTOMATED B1 CHECKER)
+// ===========================
+function checkWriting() {
+  const ta = document.getElementById('writing-area');
+  if (!ta) return;
+  const text = ta.value.trim();
+  if (!text) {
+    alert(currentLang === 'az' ? 'Zəhmət olmasa əvvəlcə bir şey yazın!' : currentLang === 'ru' ? 'Пожалуйста, напишите что-нибудь сначала!' : 'Bitte schreiben Sie zuerst etwas!');
+    return;
+  }
+  
+  const words = text.split(/\s+/).filter(w => w.length > 0).length;
+  const p = WRITING.prompts[currentPromptIdx];
+  const isFormal = p.register === 'formal';
+  const isInformal = p.register === 'informal';
+  
+  let score = 100;
+  const feedback = [];
+  const suggestions = [];
+  
+  // 1. Word count check
+  if (words < 40) {
+    score -= 40;
+    feedback.push({ type: 'error', text: currentLang === 'az' ? 'Çox qısa! (40 sözdən az)' : currentLang === 'ru' ? 'Слишком коротко! (менее 40 слов)' : 'Zu kurz! (unter 40 Wörter)' });
+  } else if (words < 80) {
+    score -= 15;
+    feedback.push({ type: 'warning', text: currentLang === 'az' ? `Söz sayı azdır: ${words}/80. B1 imtahanı üçün ən azı 80 söz lazımdır.` : currentLang === 'ru' ? `Мало слов: ${words}/80. Для экзамена B1 требуется не менее 80 слов.` : `Wortzahl gering: ${words}/80. Mindestens 80 Wörter sind für B1 empfohlen.` });
+  } else {
+    feedback.push({ type: 'success', text: currentLang === 'az' ? `Əla söz sayı: ${words} söz.` : currentLang === 'ru' ? `Отличное количество слов: ${words}.` : `Hervorragende Wortanzahl: ${words} Wörter.` });
+  }
+  
+  // 2. Greeting check
+  let greetingOk = false;
+  if (isFormal) {
+    if (text.toLowerCase().includes('sehr geehrte') || text.toLowerCase().includes('sehr geehrter')) {
+      greetingOk = true;
+      feedback.push({ type: 'success', text: currentLang === 'az' ? 'Rəsmi müraciət aşkar edildi ("Sehr geehrte...").' : currentLang === 'ru' ? 'Обнаружено официальное обращение ("Sehr geehrte...").' : 'Formelle Anrede erkannt ("Sehr geehrte...").' });
+    } else {
+      score -= 15;
+      feedback.push({ type: 'error', text: currentLang === 'az' ? 'Rəsmi müraciət tapılmadı! "Sehr geehrte Damen und Herren" və ya "Sehr geehrte/r..." istifadə edin.' : currentLang === 'ru' ? 'Официальное обращение не найдено! Используйте "Sehr geehrte Damen und Herren" или "Sehr geehrte/r...".' : 'Formelle Anrede fehlt! Bitte nutzen Sie "Sehr geehrte Damen und Herren" oder "Sehr geehrte/r...".' });
+    }
+  } else if (isInformal) {
+    if (text.toLowerCase().includes('liebe') || text.toLowerCase().includes('lieber') || text.toLowerCase().includes('hallo')) {
+      greetingOk = true;
+      feedback.push({ type: 'success', text: currentLang === 'az' ? 'Qeyri-rəsmi müraciət aşkar edildi ("Liebe/r..." / "Hallo...").' : currentLang === 'ru' ? 'Обнаружено неформальное обращение ("Liebe/r..." / "Hallo...").' : 'Informelle Anrede erkannt ("Liebe/r..." / "Hallo...").' });
+    } else {
+      score -= 10;
+      feedback.push({ type: 'warning', text: currentLang === 'az' ? 'Qeyri-rəsmi müraciət tapılmadı! Dostlar üçün "Liebe/r..." və ya "Hallo..." istifadə edin.' : currentLang === 'ru' ? 'Неформальное обращение не найдено! Для друзей используйте "Liebe/r..." или "Hallo...".' : 'Informelle Anrede fehlt! Für Freunde nutzen Sie "Liebe/r..." oder "Hallo...".' });
+    }
+  }
+  
+  // 3. Closing check
+  if (isFormal) {
+    if (text.toLowerCase().includes('mit freundlichen grüßen') || text.toLowerCase().includes('freundliche grüße')) {
+      feedback.push({ type: 'success', text: currentLang === 'az' ? 'Rəsmi sağollaşma aşkar edildi ("Mit freundlichen Grüßen").' : currentLang === 'ru' ? 'Обнаружена официальная концовка ("Mit freundlichen Grüßen").' : 'Formelle Grußformel erkannt ("Mit freundlichen Grüßen").' });
+    } else {
+      score -= 15;
+      feedback.push({ type: 'error', text: currentLang === 'az' ? 'Rəsmi sağollaşma tapılmadı! Məktubun sonunda "Mit freundlichen Grüßen" istifadə edin.' : currentLang === 'ru' ? 'Официальная концовка не найдена! Используйте "Mit freundlichen Grüßen" в конце.' : 'Formelle Grußformel fehlt! Bitte nutzen Sie "Mit freundlichen Grüßen" am Ende.' });
+    }
+  } else if (isInformal) {
+    if (text.toLowerCase().includes('viele grüße') || text.toLowerCase().includes('liebe grüße') || text.toLowerCase().includes('bis bald') || text.toLowerCase().includes('dein') || text.toLowerCase().includes('deine')) {
+      feedback.push({ type: 'success', text: currentLang === 'az' ? 'Qeyri-rəsmi sağollaşma aşkar edildi.' : currentLang === 'ru' ? 'Обнаружена неформальная концовка.' : 'Informelle Grußformel erkannt.' });
+    } else {
+      score -= 10;
+      feedback.push({ type: 'warning', text: currentLang === 'az' ? 'Qeyri-rəsmi sağollaşma tapılmadı! "Viele/Liebe Grüße" və ya "Bis bald" istifadə edin.' : currentLang === 'ru' ? 'Неформальная концовка не найдена! Используйте "Viele/Liebe Grüße" или "Bis bald".' : 'Informelle Grußformel fehlt! Nutzen Sie "Viele/Liebe Grüße" oder "Bis bald".' });
+    }
+  }
+  
+  // 4. Nebensatz / Conjunctions check
+  const conjunctions = ['weil', 'dass', 'ob', 'obwohl', 'wenn', 'sodass', 'damit', 'nachdem', 'bevor', 'da'];
+  const foundConjs = conjunctions.filter(c => new RegExp('\\b' + c + '\\b', 'i').test(text));
+  if (foundConjs.length > 0) {
+    feedback.push({ type: 'success', text: currentLang === 'az' ? `B1 bağlayıcıları tapıldı: <strong>${foundConjs.join(', ')}</strong>. Unutmayın ki, bu bağlayıcılardan sonra feil cümlənin SONUNA gəlir!` : currentLang === 'ru' ? `Найдены союзы B1: <strong>${foundConjs.join(', ')}</strong>. Помните, что после них глагол идет в КОНЕЦ предложения!` : `B1-Konjunktionen gefunden: <strong>${foundConjs.join(', ')}</strong>. Denken Sie daran: Das konjugierte Verb steht am ENDE des Nebensatzes!` });
+  } else {
+    score -= 10;
+    feedback.push({ type: 'warning', text: currentLang === 'az' ? 'Cümlələri bağlamaq üçün heç bir B1 bağlayıcısı (weil, dass, wenn, obwohl) tapılmadı.' : currentLang === 'ru' ? 'Не найдено союзов уровня B1 (weil, dass, wenn, obwohl) для связи предложений.' : 'Keine B1-Konjunktionen (weil, dass, wenn, obwohl) zur Satzverbindung gefunden.' });
+  }
+  
+  // 5. Template phrases usage
+  const tpl = p.register === 'formal' ? WRITING.templates.formal : p.register === 'informal' ? WRITING.templates.informal : WRITING.templates.semiFormal;
+  let phraseCount = 0;
+  tpl.phrases.forEach(phrase => {
+    const cleanPhrase = phrase.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").substring(0, 15);
+    if (text.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").includes(cleanPhrase)) {
+      phraseCount++;
+    }
+  });
+  if (phraseCount > 0) {
+    feedback.push({ type: 'success', text: currentLang === 'az' ? `Təklif olunan <strong>${phraseCount} faydalı ifadə</strong> istifadə etdiniz.` : currentLang === 'ru' ? `Вы использовали <strong>${phraseCount} полезных фраз</strong> из шаблона.` : `Sie haben <strong>${phraseCount} nützliche Phrasen</strong> aus der Vorlage verwendet.` });
+  } else {
+    suggestions.push(currentLang === 'az' ? 'Şablondan bəzi faydalı ifadələri cümlələrinizə əlavə edin.' : currentLang === 'ru' ? 'Добавьте полезные фразы из шаблона в свой текст.' : 'Integrieren Sie einige nützliche Phrasen aus der Vorlage in Ihren Text.');
+  }
+
+  score = Math.max(10, score);
+  
+  // Display result
+  let reportDiv = document.getElementById('writing-feedback-report');
+  if (!reportDiv) {
+    reportDiv = document.createElement('div');
+    reportDiv.id = 'writing-feedback-report';
+    reportDiv.style.marginTop = '20px';
+    const parent = document.querySelector('.writing-editor');
+    parent.appendChild(reportDiv);
+  }
+  
+  reportDiv.className = 'card';
+  reportDiv.style.borderColor = score >= 60 ? 'var(--green)' : 'var(--orange)';
+  
+  const feedbackHtml = feedback.map(f => `
+    <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;font-size:.85rem;line-height:1.4">
+      <span>${f.type === 'success' ? '✅' : f.type === 'warning' ? '⚠️' : '❌'}</span>
+      <div>${f.text}</div>
+    </div>
+  `).join('');
+  
+  const suggestionsHtml = suggestions.length > 0 ? `
+    <div style="margin-top:12px;border-top:1px solid var(--border);padding-top:10px">
+      <div style="font-size:.78rem;font-weight:700;color:var(--text2);margin-bottom:6px">💡 Suggestions:</div>
+      <ul style="padding-left:16px;font-size:.8rem;color:var(--text2);line-height:1.5">
+        ${suggestions.map(s => `<li>${s}</li>`).join('')}
+      </ul>
+    </div>
+  ` : '';
+  
+  reportDiv.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:10px">
+      <div style="font-weight:700;font-size:1rem;color:var(--text)">📊 Report & Score</div>
+      <div style="font-size:1.5rem;font-weight:800;color:${score >= 60 ? 'var(--green)' : 'var(--orange)'}">${score}/100</div>
+    </div>
+    <div>${feedbackHtml}</div>
+    ${suggestionsHtml}
+  `;
+}
+
+// ===========================
+// VIRTUAL SPEECH RECORDER
+// ===========================
+let recordedChunks = [];
+let recordingInterval;
+let recordingDuration = 0;
+let isRecording = false;
+
+function toggleRecording() {
+  const btn = document.getElementById('rec-btn-start');
+  const dot = document.getElementById('rec-dot');
+  const txt = document.getElementById('rec-btn-text');
+  const timer = document.getElementById('rec-timer');
+  const status = document.getElementById('rec-status');
+  const container = document.getElementById('recordings-container');
+  const audio = document.getElementById('playback-audio');
+  
+  if (!isRecording) {
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {
+        mediaRecorder = new MediaRecorder(stream);
+        recordedChunks = [];
+        mediaRecorder.ondataavailable = e => {
+          if (e.data.size > 0) recordedChunks.push(e.data);
+        };
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+          const audioURL = URL.createObjectURL(blob);
+          audio.src = audioURL;
+          container.style.display = 'block';
+          stream.getTracks().forEach(track => track.stop());
+        };
+        
+        mediaRecorder.start();
+        isRecording = true;
+        btn.style.background = 'var(--red)';
+        dot.style.animation = 'pulse 1.2s infinite';
+        txt.textContent = currentLang === 'az' ? 'Durdur' : currentLang === 'ru' ? 'Остановить' : 'Stoppen';
+        timer.style.display = 'block';
+        timer.textContent = '00:00';
+        timer.style.color = 'var(--red)';
+        recordingDuration = 0;
+        status.textContent = currentLang === 'az' ? 'Səs yazılır...' : currentLang === 'ru' ? 'Запись звука...' : 'Aufnahme läuft...';
+        
+        recordingInterval = setInterval(() => {
+          recordingDuration++;
+          const mins = String(Math.floor(recordingDuration / 60)).padStart(2, '0');
+          const secs = String(recordingDuration % 60).padStart(2, '0');
+          timer.textContent = `${mins}:${secs}`;
+        }, 1000);
+      })
+      .catch(err => {
+        console.error('Error accessing microphone:', err);
+        alert(currentLang === 'az' ? 'Mikrofona icazə verilmədi!' : currentLang === 'ru' ? 'Доступ к микрофону отклонен!' : 'Mikrofonzugriff verweigert!');
+      });
+  } else {
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+      mediaRecorder.stop();
+    }
+    clearInterval(recordingInterval);
+    isRecording = false;
+    btn.style.background = 'var(--purple)';
+    dot.style.animation = 'none';
+    txt.textContent = currentLang === 'az' ? 'Səsyazmanı başlat' : currentLang === 'ru' ? 'Начать запись' : 'Aufnahme starten';
+    timer.style.color = 'var(--text2)';
+    status.textContent = currentLang === 'az' ? 'Səsyazma saxlanıldı!' : currentLang === 'ru' ? 'Запись сохранена!' : 'Aufnahme gespeichert!';
+  }
+}
+
+// ===========================
+// VOCABULARY TRAINER
+// ===========================
+function buildVocabTrainer() {
+  const fc = document.getElementById('flashcards-container');
+  if (fc) {
+    fc.innerHTML = VOCAB_VERBS.map((v, i) => `
+      <div class="flashcard-wrapper" onclick="toggleFlashcard(this)">
+        <div class="flashcard" id="fc-${i}">
+          <div class="card-face card-front">
+            <div style="font-size: 2.2rem; margin-bottom: 10px;">${v.emoji}</div>
+            <div style="font-size: 1.15rem; font-weight: 700; color: var(--gold); text-align: center;">${v.verb}</div>
+            <div style="font-size: .8rem; color: var(--text3); margin-top: 8px;">Klicken zum Umdrehen</div>
+          </div>
+          <div class="card-face card-back" style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+            <div style="font-size: 1.1rem; font-weight: 800; color: var(--purple); margin-bottom: 6px;">${v.prep} + ${v.case}</div>
+            <div style="font-size: .85rem; font-style: italic; color: var(--text); margin-bottom: 8px; line-height: 1.4;">"${v.text}"</div>
+            <div style="font-size: .78rem; color: var(--text2); line-height: 1.3;">${v.translation[currentLang] || v.translation['de']}</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+  startVocabQuiz();
+}
+
+function toggleFlashcard(el) {
+  const card = el.querySelector('.flashcard');
+  if (card) card.classList.toggle('flipped');
+}
+
+let currentVocabQuestions = [];
+let vocabAnswers = {};
+
+function startVocabQuiz() {
+  const qc = document.getElementById('vocab-quiz-container');
+  if (!qc) return;
+  
+  const shuffled = [...VOCAB_VERBS].sort(() => 0.5 - Math.random());
+  currentVocabQuestions = shuffled.slice(0, 10);
+  vocabAnswers = {};
+  
+  qc.innerHTML = currentVocabQuestions.map((q, i) => {
+    const preps = ['auf', 'über', 'an', 'für', 'von', 'mit', 'zu', 'um'];
+    const distractors = preps.filter(p => p !== q.prep).sort(() => 0.5 - Math.random()).slice(0, 2);
+    const options = [q.prep, ...distractors].sort();
+    const blankSentence = q.text.replace(new RegExp('\\b' + q.prep + '\\b', 'i'), '______');
+    
+    return `
+      <div class="question-block" id="vq-block-${i}" style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border);">
+        <div class="q-num">Frage ${i+1}</div>
+        <div class="q-text" style="font-size: .95rem; margin-bottom: 8px;">
+          Welche Präposition passt zu <strong>${q.verb}</strong>?
+        </div>
+        <div style="font-size: .9rem; font-style: italic; color: var(--text2); margin-bottom: 12px;">
+          "${blankSentence}" (${q.case})
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          ${options.map(opt => `
+            <button class="option-btn" onclick="selectVocabAns(${i}, '${opt}')" style="width: auto; padding: 8px 16px; margin-bottom: 0;">
+              ${opt}
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  const r = document.getElementById('result-vocab-quiz');
+  if (r) r.style.display = 'none';
+}
+
+function selectVocabAns(qIdx, val) {
+  vocabAnswers[qIdx] = val;
+  const block = document.getElementById(`vq-block-${qIdx}`);
+  if (block) {
+    block.querySelectorAll('.option-btn').forEach(btn => {
+      btn.className = 'option-btn';
+      if (btn.textContent.trim() === val) {
+        btn.classList.add('selected');
+      }
+    });
+  }
+}
+
+function checkVocabQuiz() {
+  let score = 0;
+  currentVocabQuestions.forEach((q, i) => {
+    const userAns = vocabAnswers[i];
+    const block = document.getElementById(`vq-block-${i}`);
+    if (block) {
+      block.querySelectorAll('.option-btn').forEach(btn => {
+        const txt = btn.textContent.trim();
+        if (txt === q.prep) {
+          btn.classList.add('correct');
+        } else if (txt === userAns && userAns !== q.prep) {
+          btn.classList.add('wrong');
+        }
+      });
+    }
+    if (userAns === q.prep) score++;
+  });
+  
+  const pct = Math.round(score / 10 * 100);
+  const r = document.getElementById('result-vocab-quiz');
+  if (r) {
+    r.style.display = 'block';
+    r.className = 'result-banner ' + (pct >= 60 ? 'result-pass' : 'result-fail');
+    r.innerHTML = `Score: ${score}/10 (${pct}%) — ${pct >= 60 ? '✅ Passed!' : '❌ Need more practice.'}`;
+  }
+  
+  saveProgress('vokabeln-quiz', score, 10);
+  updateDashboard();
+}
+
 document.addEventListener('DOMContentLoaded',()=>{
   // Build reading
   buildHeadlines();
@@ -1647,6 +2082,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   // Build grammar
   buildGrammar(1);
   buildGrammar(2);
+  // Build vocabulary trainer
+  buildVocabTrainer();
   // Dashboard
   updateDashboard();
   // Apply saved language translations
@@ -1663,6 +2100,15 @@ const TRANSLATIONS = {
     nav_subtitle: 'Deutsch Exam Prep',
     nav_home: 'Home', nav_lesen: 'Lesen', nav_hoeren: 'Hören',
     nav_schreiben: 'Schreiben', nav_sprechen: 'Sprechen', nav_grammatik: 'Grammatik',
+    nav_vokabeln: 'Vokabeln',
+    desc_vokabeln: 'Meistern Sie B1-Verben mit festen Präpositionen. Lernen Sie mit interaktiven Flashcards und Quizzes.',
+    vocab_hero_sub: 'Meistern Sie die B1-Verben mit festen Präpositionen und Fällen. Üben Sie mit Flashcards und interaktiven Quizzes.',
+    vocab_flashcards_title: '📇 Interaktive Flashcards',
+    vocab_flashcards_sub: 'Klicken Sie auf eine Karte, um sie umzudrehen und Präposition, Fall und Beispiel zu lernen.',
+    vocab_quiz_title: '🎯 Präpositionen-Quiz',
+    vocab_quiz_sub: 'Testen Sie Ihr Wissen über Präpositionen und Fälle. 10 zufällige Fragen.',
+    sp_recorder_title: '🎤 Virtueller Sprachrekorder & Aussprachetraining',
+    sp_recorder_sub: 'Nehmen Sie Ihre Präsentation oder Bildbeschreibung auf, spielen Sie sie ab und hören Sie sie an, um Fluss und Aussprache zu prüfen.',
     // Home
     home_hero_p: 'Komplette Vorbereitung für <strong>Goethe-Zertifikat B1</strong> und <strong>telc Deutsch B1</strong> — Lesen, Hören, Schreiben, Sprechen und Grammatik. Mit echten Arbeitsblättern.',
     home_which: '📋 Welche Prüfung machen Sie?',
@@ -1730,6 +2176,15 @@ const TRANSLATIONS = {
     nav_subtitle: 'Подготовка к экзамену',
     nav_home: 'Главная', nav_lesen: 'Чтение', nav_hoeren: 'Аудирование',
     nav_schreiben: 'Письмо', nav_sprechen: 'Говорение', nav_grammatik: 'Грамматика',
+    nav_vokabeln: 'Словарный запас',
+    desc_vokabeln: 'Освойте глаголы B1 с фиксированными предлогами. Учитесь с интерактивными карточками и тестами.',
+    vocab_hero_sub: 'Освойте глаголы B1 с фиксированными предлогами и падежами. Практикуйтесь с карточками и интерактивными тестами.',
+    vocab_flashcards_title: '📇 Интерактивные карточки',
+    vocab_flashcards_sub: 'Нажмите на любую карточку, чтобы перевернуть её и узнать предлог, падеж и пример.',
+    vocab_quiz_title: '🎯 Тест на предлоги',
+    vocab_quiz_sub: 'Проверьте свои знания предлогов и падежей. 10 случайных вопросов.',
+    sp_recorder_title: '🎤 Виртуальный диктофон для говорения',
+    sp_recorder_sub: 'Запишите свою презентацию или описание картинки, воспроизведите и прослушайте её, чтобы проверить беглость и произношение.',
     // Home
     home_hero_p: 'Полная подготовка к <strong>Goethe-Zertifikat B1</strong> и <strong>telc Deutsch B1</strong> — Чтение, Аудирование, Письмо, Говорение и Грамматика. С настоящими рабочими листами.',
     home_which: '📋 Какой экзамен вы сдаёте?',
@@ -1797,6 +2252,15 @@ const TRANSLATIONS = {
     nav_subtitle: 'İmtahan Hazırlığı',
     nav_home: 'Ana Səhifə', nav_lesen: 'Oxu', nav_hoeren: 'Dinləmə',
     nav_schreiben: 'Yazı', nav_sprechen: 'Danışıq', nav_grammatik: 'Qrammatika',
+    nav_vokabeln: 'Sözlük',
+    desc_vokabeln: 'Sabit sözönləri ilə B1 feillərini öyrənin. İnteraktiv fləşkartlar və testlərlə öyrənin.',
+    vocab_hero_sub: 'Sabit sözönləri və hallar ilə B1 feillərini öyrənin. Fləşkartlar və interaktiv testlərlə məşq edin.',
+    vocab_flashcards_title: '📇 İnteraktiv Fləşkartlar',
+    vocab_flashcards_sub: 'Sözönünü, halı və nümunəni öyrənmək üçün hər hansı kartın üzərinə klikləyin.',
+    vocab_quiz_title: '🎯 Sözönü Testi',
+    vocab_quiz_sub: 'Sözönləri və hallar haqqında biliklərinizi yoxlayın. 10 təsadüfi sual.',
+    sp_recorder_title: '🎤 Şifahi İmtahan Səsyazıcısı və Tələffüz Məşqi',
+    sp_recorder_sub: 'Təqdimatınızı və ya şəkil təsvirinizi yazın, yenidən oxudun və axıcılığınızı, tələffüzünüzü yoxlamaq üçün qulaq asın.',
     // Home
     home_hero_p: '<strong>Goethe-Zertifikat B1</strong> və <strong>telc Deutsch B1</strong> üçün tam hazırlıq — Oxu, Dinləmə, Yazı, Danışıq və Qrammatika. Həqiqi iş vərəqləri ilə.',
     home_which: '📋 Hansı imtahana girecəksiniz?',
@@ -1923,9 +2387,9 @@ function updateDynamicText() {
   });
 
   // Progress labels "Not started"
-  ['lesen','hoeren','schreiben','sprechen','grammatik'].forEach(s => {
+  ['lesen','hoeren','schreiben','sprechen','grammatik','vokabeln'].forEach(s => {
     const el = document.getElementById(`prog-label-${s}`);
-    if (el && el.textContent === 'Not started' || el && el.textContent === 'Nicht begonnen' || el && el.textContent === 'Не начато' || el && el.textContent === 'Başlanılmayıb') {
+    if (el && (el.textContent === 'Not started' || el.textContent === 'Nicht begonnen' || el.textContent === 'Не начато' || el.textContent === 'Başlanılmayıb')) {
       el.textContent = t('home_not_started');
     }
   });
@@ -1960,7 +2424,8 @@ function updateDynamicText() {
   // Home section card descriptions
   const descMap = {
     'sc-lesen': 'desc_lesen', 'sc-hoeren': 'desc_hoeren',
-    'sc-schreiben': 'desc_schreiben', 'sc-sprechen': 'desc_sprechen', 'sc-grammatik': 'desc_grammatik'
+    'sc-schreiben': 'desc_schreiben', 'sc-sprechen': 'desc_sprechen', 
+    'sc-grammatik': 'desc_grammatik', 'sc-vokabeln': 'desc_vokabeln'
   };
   Object.entries(descMap).forEach(([cls, key]) => {
     const el = document.querySelector(`.section-card.${cls} .sc-desc`);

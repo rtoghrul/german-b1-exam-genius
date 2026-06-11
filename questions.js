@@ -427,3 +427,24 @@ function saveProgress(section, score, total) {
   localStorage.setItem(PROGRESS_KEY, JSON.stringify(p));
 }
 function clearProgress() { localStorage.removeItem(PROGRESS_KEY); }
+
+// ===========================
+// VOCABULARY VERBS WITH FIXED PREPOSITIONS
+// ===========================
+const VOCAB_VERBS = [
+  { verb: 'warten', prep: 'auf', case: 'Akkusativ', emoji: '⏰', text: 'Ich warte auf den Bus.', translation: { az: 'Mən avtobusu gözləyirəm.', ru: 'Я жду автобус.', de: 'Ich warte auf den Bus.' } },
+  { verb: 'sich freuen (Zukunft)', prep: 'auf', case: 'Akkusativ', emoji: '✈️', text: 'Ich freue mich auf die Reise.', translation: { az: 'Mən səyahəti səbirsizliklə gözləyirəm.', ru: 'Я с нетерпением жду поездки.', de: 'Ich freue mich auf die Reise.' } },
+  { verb: 'sich freuen (Gegenwart)', prep: 'über', case: 'Akkusativ', emoji: '🎁', text: 'Ich freue mich über das Geschenk.', translation: { az: 'Mən hədiyyəyə sevinirəm.', ru: 'Я рад подарку.', de: 'Ich freue mich über das Geschenk.' } },
+  { verb: 'denken', prep: 'an', case: 'Akkusativ', emoji: '💭', text: 'Ich denke an meine Familie.', translation: { az: 'Mən ailəmi düşünürəm.', ru: 'Я думаю о своей семье.', de: 'Ich denke an meine Familie.' } },
+  { verb: 'sich interessieren', prep: 'für', case: 'Akkusativ', emoji: '🎨', text: 'Er interessiert sich für Musik.', translation: { az: 'O, musiqi ilə maraqlanır.', ru: 'Он интересуется музыкой.', de: 'Er interessiert sich für Musik.' } },
+  { verb: 'sich erinnern', prep: 'an', case: 'Akkusativ', emoji: '📸', text: 'Erinnerst du dich an unseren Urlaub?', translation: { az: 'Bizim tətilimizi xatırlayırsan?', ru: 'Ты помнишь наш отпуск?', de: 'Erinnerst du dich an unseren Urlaub?' } },
+  { verb: 'träumen', prep: 'von', case: 'Dativ', emoji: '💤', text: 'Ich träume von einem großen Haus.', translation: { az: 'Mən böyük bir ev haqqında xəyal qururam.', ru: 'Я мечтаю о большом доме.', de: 'Ich träume von einem großen Haus.' } },
+  { verb: 'teilnehmen', prep: 'an', case: 'Dativ', emoji: '👥', text: 'Nimmst du an dem Deutschkurs teil?', translation: { az: 'Alman dili kursunda iştirak edirsən?', ru: 'Ты участвуешь в курсе немецкого?', de: 'Nimmst du an dem Deutschkurs teil?' } },
+  { verb: 'sprechen', prep: 'mit', case: 'Dativ', emoji: '🗣️', text: 'Ich spreche mit dem Lehrer.', translation: { az: 'Mən müəllimlə danışıram.', ru: 'Я говорю с учителем.', de: 'Ich spreche mit dem Lehrer.' } },
+  { verb: 'passen', prep: 'zu', case: 'Dativ', emoji: '👚', text: 'Die Bluse passt gut zu der Hose.', translation: { az: 'Bluz şalvarla yaxşı uyğun gəlir.', ru: 'Блузка хорошо подходит к брюкам.', de: 'Die Bluse passt gut zu der Hose.' } },
+  { verb: 'sich ärgern', prep: 'über', case: 'Akkusativ', emoji: '😠', text: 'Ich ärgere mich über das schlechte Wetter.', translation: { az: 'Mən pis havaya əsəbiləşirəm.', ru: 'Я злюсь из-за плохой погоды.', de: 'Ich ärgere mich über das schlechte Wetter.' } },
+  { verb: 'bitten', prep: 'um', case: 'Akkusativ', emoji: '🙏', text: 'Darf ich Sie um Hilfe bitten?', translation: { az: 'Sizdən kömək istəyə bilərəm?', ru: 'Могу я попросить вас о помощи?', de: 'Darf ich Sie um Hilfe bitten?' } },
+  { verb: 'gehören', prep: 'zu', case: 'Dativ', emoji: '🇩🇪', text: 'Deutschland gehört zu Europa.', translation: { az: 'Almaniya Avropaya aiddir.', ru: 'Германия принадлежит к Европе.', de: 'Deutschland gehört zu Europa.' } },
+  { verb: 'sich kümmern', prep: 'um', case: 'Akkusativ', emoji: '🐱', text: 'Wer kümmert sich um die Katze?', translation: { az: 'Pişiyin qayğısına kim qalır?', ru: 'Кто заботится о кошке?', de: 'Wer kümmert sich um die Katze?' } },
+  { verb: 'telefonieren', prep: 'mit', case: 'Dativ', emoji: '📞', text: 'Ich telefoniere gerade mit meiner Mutter.', translation: { az: 'Mən hazırda anamla telefonda danışıram.', ru: 'Я сейчас говорю по телефону с мамой.', de: 'Ich telefoniere gerade mit meiner Mutter.' } }
+];
