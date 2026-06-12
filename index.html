@@ -528,7 +528,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
       <div class="sc-icon">📇</div>
       <div class="sc-title" data-i18n="nav_vokabeln">Vokabeln</div>
       <div class="sc-desc" data-i18n="desc_vokabeln">Master B1 verbs with fixed prepositions and cases. Learn with interactive flashcards and quizzes.</div>
-      <div class="sc-meta"><span class="sc-pill">15 Verbs</span><span class="sc-pill">Interactive Quiz</span></div>
+      <div class="sc-meta"><span class="sc-pill">50 Verben</span><span class="sc-pill">Interactive Quiz</span></div>
       <div class="progress-bar"><div class="progress-fill" id="prog-vokabeln" style="width:0%;background:var(--purple)"></div></div>
       <div class="progress-label" id="prog-label-vokabeln">Not started</div>
     </div>
@@ -696,6 +696,19 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
         <li>You have 90 min for Lesen + Sprachbausteine combined — spend ~45 min on each</li>
       </ul>
     </div>
+  </div>
+  <!-- ÜBUNGSBANK LESEN -->
+  <div class="card" style="margin-top:24px;border-top:3px solid var(--blue)">
+    <div class="card-title">📚 Übungsbank Lesen — 50 Aufgaben</div>
+    <div class="card-sub">Kurze Lesetexte mit Fragen — eine Aufgabe nach der anderen</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+      <button class="btn-secondary" data-custom-label="1" onclick="bankNav('lesen',-1)">← Zurück</button>
+      <span style="font-weight:700;font-size:.9rem" id="bank-counter-lesen"></span>
+      <button class="btn-secondary" data-custom-label="1" onclick="bankNav('lesen',1)">Weiter →</button>
+      <button class="btn-secondary" data-custom-label="1" onclick="bankRandom('lesen')">🎲 Zufall</button>
+      <span style="margin-left:auto;color:var(--gold);font-weight:700;font-size:.85rem" id="bank-score-lesen"></span>
+    </div>
+    <div id="bank-body-lesen"></div>
   </div>
 </div>
 </section>
@@ -889,6 +902,19 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
       </ul>
     </div>
   </div>
+  <!-- ÜBUNGSBANK HÖREN -->
+  <div class="card" style="margin-top:24px;border-top:3px solid var(--green)">
+    <div class="card-title">📚 Übungsbank Hören — 50 Aufgaben</div>
+    <div class="card-sub">Durchsagen, Nachrichten und Ansagen — der Computer liest den Text vor (Sprachausgabe). Hören Sie zuerst, dann antworten Sie!</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+      <button class="btn-secondary" data-custom-label="1" onclick="bankNav('hoeren',-1)">← Zurück</button>
+      <span style="font-weight:700;font-size:.9rem" id="bank-counter-hoeren"></span>
+      <button class="btn-secondary" data-custom-label="1" onclick="bankNav('hoeren',1)">Weiter →</button>
+      <button class="btn-secondary" data-custom-label="1" onclick="bankRandom('hoeren')">🎲 Zufall</button>
+      <span style="margin-left:auto;color:var(--gold);font-weight:700;font-size:.85rem" id="bank-score-hoeren"></span>
+    </div>
+    <div id="bank-body-hoeren"></div>
+  </div>
 </div>
 </section>
 
@@ -943,6 +969,19 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     </div>
     <div class="gallery-grid" id="schreiben-gallery"></div>
     <button class="load-more-btn" id="schreiben-load-more" onclick="loadMoreWriting()">Load more worksheets ↓</button>
+  </div>
+  <!-- ÜBUNGSBANK SCHREIBEN -->
+  <div class="card" style="margin-top:24px;border-top:3px solid var(--orange)">
+    <div class="card-title">📚 Übungsbank Schreiben — 50 Aufgaben</div>
+    <div class="card-sub">Briefe, E-Mails und Forumsbeiträge mit je 4 Leitpunkten — laden Sie eine Aufgabe in den Editor oben</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+      <button class="btn-secondary" data-custom-label="1" onclick="bankNav('schreiben',-1)">← Zurück</button>
+      <span style="font-weight:700;font-size:.9rem" id="bank-counter-schreiben"></span>
+      <button class="btn-secondary" data-custom-label="1" onclick="bankNav('schreiben',1)">Weiter →</button>
+      <button class="btn-secondary" data-custom-label="1" onclick="bankRandom('schreiben')">🎲 Zufall</button>
+      <span style="margin-left:auto;color:var(--gold);font-weight:700;font-size:.85rem" id="bank-score-schreiben"></span>
+    </div>
+    <div id="bank-body-schreiben"></div>
   </div>
 </div>
 </section>
@@ -1027,6 +1066,19 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     <div class="card-title" style="margin-bottom:4px">🎯 Speaking Topics — Themen für die Präsentation</div>
     <div class="card-sub" style="margin-bottom:16px">Click a topic card to see practice questions. Use these for Teil 2 (Präsentation) practice.</div>
     <div class="topics-grid" id="speaking-topics"></div>
+  </div>
+  <!-- ÜBUNGSBANK SPRECHEN -->
+  <div class="card" style="margin-top:24px;border-top:3px solid var(--purple)">
+    <div class="card-title">📚 Übungsbank Sprechen — 50 Aufgaben</div>
+    <div class="card-sub">Präsentationsthemen, Diskussionsfragen, Planungsaufgaben und Alltagssituationen — sprechen Sie 1–2 Minuten frei</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+      <button class="btn-secondary" data-custom-label="1" onclick="bankNav('sprechen',-1)">← Zurück</button>
+      <span style="font-weight:700;font-size:.9rem" id="bank-counter-sprechen"></span>
+      <button class="btn-secondary" data-custom-label="1" onclick="bankNav('sprechen',1)">Weiter →</button>
+      <button class="btn-secondary" data-custom-label="1" onclick="bankRandom('sprechen')">🎲 Zufall</button>
+      <span style="margin-left:auto;color:var(--gold);font-weight:700;font-size:.85rem" id="bank-score-sprechen"></span>
+    </div>
+    <div id="bank-body-sprechen"></div>
   </div>
 </div>
 </section>
@@ -1118,6 +1170,19 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
       <li>You have 90 min for Lesen + Sprachbausteine — spend ~15 min on Sprachbausteine</li>
     </ul>
   </div>
+  <!-- ÜBUNGSBANK GRAMMATIK -->
+  <div class="card" style="margin-top:24px;border-top:3px solid var(--pink)">
+    <div class="card-title">📚 Übungsbank Grammatik — 50 Aufgaben</div>
+    <div class="card-sub">Sprachbausteine im Schnelldurchlauf: Präpositionen, Konjunktionen, Verbformen, Kasus</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+      <button class="btn-secondary" data-custom-label="1" onclick="bankNav('grammatik',-1)">← Zurück</button>
+      <span style="font-weight:700;font-size:.9rem" id="bank-counter-grammatik"></span>
+      <button class="btn-secondary" data-custom-label="1" onclick="bankNav('grammatik',1)">Weiter →</button>
+      <button class="btn-secondary" data-custom-label="1" onclick="bankRandom('grammatik')">🎲 Zufall</button>
+      <span style="margin-left:auto;color:var(--gold);font-weight:700;font-size:.85rem" id="bank-score-grammatik"></span>
+    </div>
+    <div id="bank-body-grammatik"></div>
+  </div>
 </div>
 </section>
 
@@ -1127,7 +1192,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
   <div class="section-hero hero-vokabeln" style="background:linear-gradient(135deg,#3c1a5e,#1a0f3d); border-radius: var(--r); padding: 40px 32px; margin-bottom: 32px; position: relative; overflow: hidden;">
     <div class="hero-title">📇 Vokabeln & Verben mit Präpositionen</div>
     <div class="hero-sub" data-i18n="vocab_hero_sub">Master B1 verbs with fixed prepositions and cases. Practice with flashcards and interactive quizzes.</div>
-    <div class="hero-badges"><span class="badge badge-both">15 Key Verbs</span><span class="badge badge-goethe">🦁 Goethe B1</span><span class="badge badge-telc">🇩🇪 telc B1</span></div>
+    <div class="hero-badges"><span class="badge badge-both">50 Verben mit Präpositionen</span><span class="badge badge-goethe">🦁 Goethe B1</span><span class="badge badge-telc">🇩🇪 telc B1</span></div>
   </div>
 
   <!-- Flashcards -->
@@ -1165,6 +1230,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 </div>
 
 <script src="questions.js"></script>
+<script src="bank.js"></script>
 <script>
 // ===========================
 // TAB NAVIGATION
@@ -1557,6 +1623,7 @@ function buildWritingSection(){
 }
 function selectPrompt(i){
   currentPromptIdx=i;
+  activeBankPrompt=null;
   document.querySelectorAll('.ps-btn').forEach((b,j)=>b.className='ps-btn'+(j===i?' active':''));
   renderPrompt(i);
 }
@@ -1816,7 +1883,7 @@ function checkWriting() {
   }
   
   const words = text.split(/\s+/).filter(w => w.length > 0).length;
-  const p = WRITING.prompts[currentPromptIdx];
+  const p = activeBankPrompt || WRITING.prompts[currentPromptIdx];
   const isFormal = p.register === 'formal';
   const isInformal = p.register === 'informal';
   
@@ -2051,10 +2118,12 @@ function startVocabQuiz() {
   vocabAnswers = {};
   
   qc.innerHTML = currentVocabQuestions.map((q, i) => {
-    const preps = ['auf', 'über', 'an', 'für', 'von', 'mit', 'zu', 'um'];
+    const preps = ['auf', 'über', 'an', 'für', 'von', 'mit', 'zu', 'um', 'nach', 'in'];
     const distractors = preps.filter(p => p !== q.prep).sort(() => 0.5 - Math.random()).slice(0, 2);
     const options = [q.prep, ...distractors].sort();
-    const blankSentence = q.text.replace(new RegExp('\\b' + q.prep + '\\b', 'i'), '______');
+    const contractions = { zu:'zum|zur|zu', von:'vom|von', an:'ans|am|an', in:'ins|im|in', auf:'aufs|auf', 'über':'übers|über', um:'ums|um', 'für':'fürs|für' };
+    const prepPattern = contractions[q.prep] || q.prep;
+    const blankSentence = q.text.replace(new RegExp('\\b(' + prepPattern + ')\\b', 'i'), '______');
     
     return `
       <div class="question-block" id="vq-block-${i}" style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border);">
@@ -2125,6 +2194,134 @@ function checkVocabQuiz() {
   updateDashboard();
 }
 
+// ===========================
+// ÜBUNGSBANK (50 Aufgaben pro Sektion)
+// ===========================
+const bankState={};
+let activeBankPrompt=null;
+
+function initBanks(){
+  if(typeof BANK==='undefined') return;
+  Object.keys(BANK).forEach(s=>{ bankState[s]={idx:0,correct:0,attempted:0,done:false}; renderBank(s); });
+}
+function bankNav(s,d){ const n=BANK[s].length; bankState[s].idx=(bankState[s].idx+d+n)%n; renderBank(s); }
+function bankRandom(s){ bankState[s].idx=Math.floor(Math.random()*BANK[s].length); renderBank(s); }
+
+function renderBank(s){
+  const c=document.getElementById('bank-body-'+s); if(!c) return;
+  const st=bankState[s], item=BANK[s][st.idx];
+  st.done=false;
+  try{ speechSynthesis.cancel(); }catch(e){}
+  const counter=document.getElementById('bank-counter-'+s);
+  if(counter) counter.textContent=`Aufgabe ${st.idx+1} / ${BANK[s].length}`;
+  const score=document.getElementById('bank-score-'+s);
+  if(score) score.textContent=st.attempted?`Richtig: ${st.correct}/${st.attempted}`:'';
+  let html='';
+  if(s==='lesen'){
+    html+=`<div class="reading-text" style="margin-bottom:14px">${item.t}</div>`+bankQuestionHTML(s,item);
+  } else if(s==='hoeren'){
+    html+=`<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px">
+      <button class="btn-primary" data-custom-label="1" style="background:var(--green)" onclick="bankSpeak('hoeren')">🔊 Anhören</button>
+      <button class="btn-secondary" data-custom-label="1" onclick="bankToggleScript()">📝 Transkript</button>
+      <span style="font-size:.78rem;color:var(--text3)">Tipp: Hören Sie zuerst zweimal, lesen Sie das Transkript erst nach dem Antworten.</span>
+    </div>
+    <div class="reading-text" id="bank-script" style="display:none;margin-bottom:14px">${item.s}</div>`+bankQuestionHTML(s,item);
+  } else if(s==='grammatik'){
+    html+=`<div class="reading-text" style="margin-bottom:14px;font-size:1rem;line-height:1.9">${item.s.replace('___','<span style="color:var(--pink);font-weight:800">______</span>')}</div>`;
+    html+=item.o.map((o,i)=>`<button class="option-btn" onclick="bankAnswer('grammatik',${i})">${String.fromCharCode(97+i)}) ${o}</button>`).join('');
+    html+=`<div class="tip-box" id="bank-tip"><span class="tip-label">💡 Tipp: </span>${item.tip}</div>`;
+    html+=`<div id="bank-feedback-grammatik" style="margin-top:10px;font-weight:700"></div>`;
+  } else if(s==='schreiben'){
+    html+=`<div class="prompt-type" style="margin-bottom:6px">${item.r==='formal'?'📋 Formeller Brief / E-Mail':item.r==='informal'?'💌 Informelle Nachricht':'💬 Forumsbeitrag / Aushang'}</div>
+      <div style="font-weight:700;font-size:1.02rem;margin-bottom:8px">${item.ti}</div>
+      <div class="prompt-scenario">${item.sc}</div>
+      <ul class="bullets-list">${item.b.map(b=>`<li>${b}</li>`).join('')}</ul>
+      <button class="btn-primary" data-custom-label="1" style="background:var(--orange);color:#000;margin-top:14px" onclick="bankLoadWriting()">✍️ Im Editor üben</button>`;
+  } else if(s==='sprechen'){
+    html+=`<div class="prompt-type" style="color:var(--purple);margin-bottom:6px">🗣 ${item.ty}</div>
+      <div style="font-weight:700;font-size:1.05rem;margin-bottom:10px">${item.to}</div>
+      <ul class="bullets-list">${item.p.map(p=>`<li>${p}</li>`).join('')}</ul>
+      <div style="font-size:.82rem;color:var(--text3);margin-top:12px">💡 Sprechen Sie 1–2 Minuten frei. Nutzen Sie den Sprachrekorder oben, um sich aufzunehmen und anzuhören!</div>`;
+  }
+  c.innerHTML=html;
+}
+function bankQuestionHTML(s,item){
+  let h=`<div class="q-text" style="margin-bottom:10px">${item.q}</div>`;
+  if(item.o){
+    h+=item.o.map((o,i)=>`<button class="option-btn" onclick="bankAnswer('${s}',${i})">${String.fromCharCode(97+i)}) ${o}</button>`).join('');
+  } else {
+    h+=`<div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="tf-btn" style="padding:10px 24px" onclick="bankAnswer('${s}',true)">+ Richtig</button>
+      <button class="tf-btn" style="padding:10px 24px" onclick="bankAnswer('${s}',false)">– Falsch</button></div>`;
+  }
+  h+=`<div id="bank-feedback-${s}" style="margin-top:12px;font-weight:700"></div>`;
+  return h;
+}
+function bankAnswer(s,val){
+  const st=bankState[s], item=BANK[s][st.idx];
+  if(st.done) return;
+  st.done=true; st.attempted++;
+  const correct=(val===item.a);
+  if(correct) st.correct++;
+  const body=document.getElementById('bank-body-'+s);
+  if(item.o!==undefined){
+    body.querySelectorAll('.option-btn').forEach((b,i)=>{
+      if(i===item.a) b.classList.add('correct');
+      else if(i===val) b.classList.add('wrong');
+    });
+  } else {
+    body.querySelectorAll('.tf-btn').forEach((b,i)=>{
+      const v=(i===0);
+      if(v===item.a) b.classList.add('tf-correct');
+      else if(v===val) b.classList.add('tf-wrong');
+    });
+  }
+  const fb=document.getElementById('bank-feedback-'+s);
+  if(fb) fb.innerHTML=correct?'<span style="color:var(--green)">✅ Richtig!</span>':'<span style="color:var(--red)">❌ Leider falsch — die richtige Antwort ist markiert.</span>';
+  const tip=document.getElementById('bank-tip'); if(tip) tip.classList.add('show');
+  const score=document.getElementById('bank-score-'+s);
+  if(score) score.textContent=`Richtig: ${st.correct}/${st.attempted}`;
+  saveProgress(s+'-bank', st.correct, st.attempted);
+  updateDashboard();
+}
+function bankSpeak(s){
+  const item=BANK[s][bankState[s].idx];
+  if(!('speechSynthesis' in window)){ alert('Ihr Browser unterstützt keine Sprachausgabe. Bitte lesen Sie das Transkript.'); return; }
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(item.s);
+  u.lang='de-DE'; u.rate=0.92;
+  const voice=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.toLowerCase().startsWith('de'));
+  if(voice) u.voice=voice;
+  speechSynthesis.speak(u);
+}
+function bankToggleScript(){
+  const el=document.getElementById('bank-script');
+  if(el) el.style.display=el.style.display==='none'?'block':'none';
+}
+function bankLoadWriting(){
+  const item=BANK.schreiben[bankState.schreiben.idx];
+  activeBankPrompt={type:item.ti, icon:'📚', examType:'both', scenario:item.sc, bullets:item.b,
+    register:item.r==='semi'?'semi-formal':item.r, minWords:80};
+  const pd=document.getElementById('writing-prompt-display');
+  if(pd) pd.innerHTML=`<div class="prompt-type">📚 Übungsbank — ${item.ti}</div>
+    <div class="prompt-scenario">${item.sc}</div>
+    <ul class="bullets-list">${item.b.map(b=>`<li>${b}</li>`).join('')}</ul>`;
+  const tp=document.getElementById('writing-template');
+  const tpl=item.r==='formal'?WRITING.templates.formal:item.r==='informal'?WRITING.templates.informal:WRITING.templates.semiFormal;
+  if(tp){
+    tp.innerHTML=`
+    <div class="template-box"><div class="t-label">Anrede</div><div class="t-val">${tpl.greeting}</div></div>
+    <div class="template-box"><div class="t-label">Einstieg</div><div class="t-val">${tpl.opener}</div></div>
+    <div class="template-box"><div class="t-label">Grußformel</div><div class="t-val">${tpl.closing}</div></div>
+    <div style="font-size:.82rem;font-weight:700;color:var(--text3);margin:12px 0 8px">💬 Useful Phrases — click to copy:</div>
+    <div class="phrase-chips">${tpl.phrases.map((ph,pi)=>`<div class="phrase-chip" onclick="insertPhrase(${pi})">${ph}</div>`).join('')}</div>`;
+    currentTplPhrases=tpl.phrases;
+  }
+  document.querySelectorAll('.ps-btn').forEach(b=>b.className='ps-btn');
+  const layout=document.querySelector('.writing-layout');
+  if(layout) layout.scrollIntoView({behavior:'smooth'});
+}
+
 document.addEventListener('DOMContentLoaded',()=>{
   // Build reading
   buildHeadlines();
@@ -2148,6 +2345,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   buildGrammar(2);
   // Build vocabulary trainer
   buildVocabTrainer();
+  // Build Übungsbank (50 items per section)
+  initBanks();
   // Dashboard
   updateDashboard();
   // Deep link (#lesen, /vocab, ...)
