@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>B1 Prüfungsgenie — Goethe & telc Deutsch B1 Vorbereitung</title>
 <meta name="description" content="Comprehensive German B1 exam preparation covering both Goethe-Zertifikat B1 and telc Deutsch B1 — Reading, Listening, Writing, Speaking, Grammar with real worksheets.">
+<meta name="theme-color" content="#080F1E">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%2233.4%22 y=%220%22 fill=%22%23000%22/><rect width=%22100%22 height=%2233.3%22 y=%2233.3%22 fill=%22%23DD0000%22/><rect width=%22100%22 height=%2233.4%22 y=%2266.6%22 fill=%22%23FFCE00%22/></svg>">
+<link rel="canonical" href="https://german-b1-exam-genius.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="B1 Prüfungsgenie — Goethe & telc Deutsch B1 Vorbereitung">
+<meta property="og:description" content="Complete German B1 exam preparation: Reading, Listening, Writing, Speaking, Grammar — for Goethe-Zertifikat B1 and telc Deutsch B1.">
+<meta property="og:url" content="https://german-b1-exam-genius.vercel.app/">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -574,7 +582,7 @@ Das Wetter ist allerdings manchmal schwierig für mich. Im Winter ist es sehr ka
 Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gut, aber manchmal träume ich von den Gerichten meiner Mutter.</div>
         <div id="tf-g1-qs"></div>
         <div class="submit-row">
-          <button class="btn-primary" onclick="checkTF('g1', [{t:true},{t:false},{t:false},{t:true},{t:false},{t:true},{t:true},{t:false}])">Antworten prüfen ✓</button>
+          <button class="btn-primary" onclick="checkTF('g1', READING.goethe_p1.questions, 'lesen')">Antworten prüfen ✓</button>
           <button class="btn-secondary" onclick="resetTF('g1')">Zurücksetzen</button>
         </div>
         <div id="result-g1" class="result-banner"></div>
@@ -770,12 +778,12 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
           </audio>
           <div class="audio-note">📌 Real audio recording. Listen carefully. In the real telc exam this conversation is played twice.</div>
         </div>
-        <div id="tf-t2-qs"></div>
+        <div id="tf-t2h-qs"></div>
         <div class="submit-row">
-          <button class="btn-primary" onclick="checkTF('t2', [{t:true},{t:true},{t:true},{t:false},{t:false},{t:false},{t:true},{t:false},{t:true},{t:true}])">Antworten prüfen ✓</button>
-          <button class="btn-secondary" onclick="resetTF('t2')">Zurücksetzen</button>
+          <button class="btn-primary" onclick="checkTF('t2h', LISTENING.telc_p2.questions, 'hoeren')">Antworten prüfen ✓</button>
+          <button class="btn-secondary" onclick="resetTF('t2h')">Zurücksetzen</button>
         </div>
-        <div id="result-t2" class="result-banner"></div>
+        <div id="result-t2h" class="result-banner"></div>
       </div>
     </div>
 
@@ -802,7 +810,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
         </div>
         <div id="tf-t3-qs"></div>
         <div class="submit-row">
-          <button class="btn-primary" onclick="checkTF('t3', [{t:false},{t:false},{t:true},{t:false},{t:false}])">Antworten prüfen ✓</button>
+          <button class="btn-primary" onclick="checkTF('t3', LISTENING.telc_p3.questions, 'hoeren')">Antworten prüfen ✓</button>
           <button class="btn-secondary" onclick="resetTF('t3')">Zurücksetzen</button>
         </div>
         <div id="result-t3" class="result-banner"></div>
@@ -1074,8 +1082,8 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     <div class="card-sub" data-i18n="vocab_quiz_sub">Test your knowledge of prepositions and cases. 10 random questions.</div>
     <div id="vocab-quiz-container"></div>
     <div class="submit-row" style="margin-top: 20px;">
-      <button class="btn-primary" onclick="checkVocabQuiz()">Cavabları yoxla ✓</button>
-      <button class="btn-secondary" onclick="startVocabQuiz()">Sıfırla</button>
+      <button class="btn-primary" onclick="checkVocabQuiz()">Antworten prüfen ✓</button>
+      <button class="btn-secondary" onclick="resetVocabQuiz()">Zurücksetzen</button>
     </div>
     <div id="result-vocab-quiz" class="result-banner" style="margin-top: 16px;"></div>
   </div>
@@ -1100,15 +1108,27 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 // ===========================
 // TAB NAVIGATION
 // ===========================
+const TAB_IDS = ['home','lesen','hoeren','schreiben','sprechen','grammatik','vokabeln'];
 function showTab(id){
+  if(!TAB_IDS.includes(id)) id='home';
   document.querySelectorAll('.tab-content').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  const tabs = ['home','lesen','hoeren','schreiben','sprechen','grammatik','vokabeln'];
-  const idx = tabs.indexOf(id);
-  document.querySelectorAll('.nav-tab')[idx].classList.add('active');
+  document.querySelectorAll('.nav-tab')[TAB_IDS.indexOf(id)].classList.add('active');
+  try{history.replaceState(null,'',id==='home'?location.pathname.replace(/#.*$/,''):'#'+id);}catch(e){}
   window.scrollTo(0,0);
 }
+function initTabFromURL(){
+  const hash=location.hash.replace('#','');
+  const path=location.pathname.replace(/\//g,'');
+  if(TAB_IDS.includes(hash)) showTab(hash);
+  else if(path==='vocab') showTab('vokabeln');
+  else if(path==='dashboard') showTab('home');
+}
+window.addEventListener('hashchange',()=>{
+  const hash=location.hash.replace('#','');
+  if(TAB_IDS.includes(hash)) showTab(hash);
+});
 
 // ===========================
 // EXAM FORMAT SWITCHERS
@@ -1135,19 +1155,19 @@ function setSprechenExam(fmt){
 // ===========================
 // TRUE / FALSE BUILDER
 // ===========================
-function buildTF(containerId, questions){
+function buildTF(containerId, key, questions){
   const c = document.getElementById(containerId);
   if(!c) return;
   c.innerHTML = questions.map((q,i)=>`
-    <div class="tf-question" id="tfq-${containerId}-${i}">
+    <div class="tf-question" id="tfq-${key}-${i}">
       <div class="tf-num">${q.id||i+1}</div>
       <div style="flex:1">
         <div class="tf-text">${q.text}</div>
         ${q.context?`<div class="tf-context">${q.context}</div>`:''}
       </div>
       <div class="tf-btns">
-        <button class="tf-btn" id="tfr-${containerId}-${i}" onclick="selectTF('${containerId}',${i},'r')">+ R</button>
-        <button class="tf-btn" id="tff-${containerId}-${i}" onclick="selectTF('${containerId}',${i},'f')">– F</button>
+        <button class="tf-btn" id="tfr-${key}-${i}" onclick="selectTF('${key}',${i},'r')">+ R</button>
+        <button class="tf-btn" id="tff-${key}-${i}" onclick="selectTF('${key}',${i},'f')">– F</button>
       </div>
     </div>`).join('');
 }
@@ -1155,26 +1175,27 @@ function selectTF(cid,i,v){
   document.getElementById(`tfr-${cid}-${i}`).className='tf-btn'+(v==='r'?' r-selected':'');
   document.getElementById(`tff-${cid}-${i}`).className='tf-btn'+(v==='f'?' f-selected':'');
 }
-function checkTF(cid, answers){
+function checkTF(cid, questions, section){
   let score=0;
-  answers.forEach((a,i)=>{
+  questions.forEach((q,i)=>{
     const rb=document.getElementById(`tfr-${cid}-${i}`);
     const fb=document.getElementById(`tff-${cid}-${i}`);
+    if(!rb||!fb) return;
     const userR=rb.classList.contains('r-selected');
     const userF=fb.classList.contains('f-selected');
-    const correct=a.t;
+    const correct=q.answer;
     if(userR&&correct){rb.className='tf-btn tf-correct';score++;}
     else if(userF&&!correct){fb.className='tf-btn tf-correct';score++;}
     else if(userR&&!correct){rb.className='tf-btn tf-wrong';fb.className='tf-btn tf-correct';}
     else if(userF&&correct){fb.className='tf-btn tf-wrong';rb.className='tf-btn tf-correct';}
     else{rb.className='tf-btn';(correct?rb:fb).className='tf-btn tf-correct';}
   });
-  const pct=Math.round(score/answers.length*100);
+  const pct=Math.round(score/questions.length*100);
   const r=document.getElementById(`result-${cid}`);
   r.style.display='block';
   r.className='result-banner '+(pct>=60?'result-pass':'result-fail');
-  r.innerHTML=`Score: ${score}/${answers.length} (${pct}%) — ${pct>=60?'✅ Passed!':'❌ Need more practice. 60% required to pass.'}`;
-  saveProgress('hoeren-'+cid, score, answers.length);
+  r.innerHTML=`Score: ${score}/${questions.length} (${pct}%) — ${pct>=60?'✅ Passed!':'❌ Need more practice. 60% required to pass.'}`;
+  saveProgress((section||'hoeren')+'-'+cid, score, questions.length);
   updateDashboard();
 }
 function resetTF(cid){
@@ -1220,28 +1241,13 @@ function checkMCQ(cid){
   const data=mcqData[cid];if(!data)return;
   let score=0;
   data.forEach((q,i)=>{
-    const btns=document.querySelectorAll(`#qb-${cid}-${i} .option-btn`);
-    btns.forEach(b=>{
+    const sel=document.querySelector(`#qb-${cid}-${i} .option-btn.selected`);
+    if(sel&&sel.textContent.trim().charAt(0)===q.ans) score++;
+    document.querySelectorAll(`#qb-${cid}-${i} .option-btn`).forEach(b=>{
       const v=b.textContent.trim().charAt(0);
-      if(v===q.ans){b.classList.add('correct');}
+      if(v===q.ans){b.classList.add('correct');b.classList.remove('selected');}
       else if(b.classList.contains('selected')){b.classList.remove('selected');b.classList.add('wrong');}
-      if(b.classList.contains('correct')&&(b.classList.contains('selected')||b.classList.contains('correct'))){
-        if(document.querySelector(`#qb-${cid}-${i} .option-btn.selected`)===b||b.classList.contains('correct')&&!document.querySelector(`#qb-${cid}-${i} .option-btn.wrong`)) score++;
-      }
     });
-    const sel=document.querySelector(`#qb-${cid}-${i} .option-btn.selected`);
-    if(sel&&sel.textContent.trim().charAt(0)===q.ans) score++;
-  });
-  // recount properly
-  score=0;
-  data.forEach((q,i)=>{
-    const sel=document.querySelector(`#qb-${cid}-${i} .option-btn.selected`);
-    if(sel&&sel.textContent.trim().charAt(0)===q.ans) score++;
-  });
-  document.querySelectorAll(`[id^="qb-${cid}-"] .option-btn`).forEach(b=>{
-    const qIdx=parseInt(b.closest('[id^="qb-"]').id.split('-').pop());
-    const v=b.textContent.trim().charAt(0);
-    if(v===data[qIdx]?.ans){b.classList.add('correct');b.classList.remove('selected');}
   });
   const pct=Math.round(score/data.length*100);
   const r=document.getElementById(`result-${cid}`);
@@ -1291,12 +1297,11 @@ function checkHeadlines(){
   const pct=Math.round(score/READING.telc_p1.texts.length*100);
   r.style.display='block';r.className='result-banner '+(pct>=60?'result-pass':'result-fail');
   r.innerHTML=`Score: ${score}/${READING.telc_p1.texts.length} (${pct}%) — ${pct>=60?'✅ Passed!':'❌ Keep practicing.'}`;
+  saveProgress('lesen-headlines', score, READING.telc_p1.texts.length);
+  updateDashboard();
 }
 function resetHeadlines(){
-  READING.telc_p1.texts.forEach(t=>{
-    const sel=document.getElementById(`hl-ans-${t.id}`);
-    if(sel){sel.value='';sel.style.borderColor='';sel.style.background='';}
-  });
+  buildHeadlines();
   const r=document.getElementById('result-headlines');if(r)r.style.display='none';
 }
 
@@ -1333,6 +1338,8 @@ function checkSituations(){
   const r=document.getElementById('result-situations');
   r.style.display='block';r.className='result-banner '+(pct>=60?'result-pass':'result-fail');
   r.innerHTML=`Score: ${score}/${READING.telc_p3.situations.length} (${pct}%) — ${pct>=60?'✅ Passed!':'❌ Keep practicing.'}`;
+  saveProgress('lesen-situations', score, READING.telc_p3.situations.length);
+  updateDashboard();
 }
 function resetSituations(){
   READING.telc_p3.situations.forEach(s=>{
@@ -1364,35 +1371,31 @@ function buildGoethePart1(){
     </div>`).join('');
 }
 function selectMCQ2(gid,v){
-  document.querySelectorAll(`[id^="${gid}"],.option-btn`).forEach(b=>{});
-  // find buttons within context
-  document.querySelectorAll('.option-btn').forEach(b=>{
-    if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes(`'${gid}'`)){
-      b.className='option-btn';
-      if(b.textContent.trim().charAt(0)===v) b.classList.add('selected');
-    }
+  document.querySelectorAll(`.option-btn[onclick*="'${gid}'"]`).forEach(b=>{
+    b.className='option-btn';
+    if(b.textContent.trim().charAt(0)===v) b.classList.add('selected');
   });
 }
 function checkGoethePart1(){
   const clips=LISTENING.goethe_p1.clips;
-  let score=0,total=clips.length*2;
+  let score=0;const total=clips.length*2;
   clips.forEach((clip,ci)=>{
     ['q1','q2'].forEach(qk=>{
       const q=clip[qk];
-      const btns=document.querySelectorAll('.option-btn');
-      btns.forEach(b=>{
-        if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes(`g-p1-${ci}-${qk}`)){
-          if(b.textContent.trim().charAt(0)===q.answer){b.classList.add('correct');b.classList.remove('selected');}
-          else if(b.classList.contains('selected')){b.classList.remove('selected');b.classList.add('wrong');}
-        }
+      const sel=document.querySelector(`.option-btn.selected[onclick*="'g-p1-${ci}-${qk}'"]`);
+      if(sel&&sel.textContent.trim().charAt(0)===q.answer) score++;
+      document.querySelectorAll(`.option-btn[onclick*="'g-p1-${ci}-${qk}'"]`).forEach(b=>{
+        if(b.textContent.trim().charAt(0)===q.answer){b.classList.add('correct');b.classList.remove('selected');}
+        else if(b.classList.contains('selected')){b.classList.remove('selected');b.classList.add('wrong');}
       });
-      const sel=document.querySelector(`.option-btn.selected[onclick*="g-p1-${ci}-${qk}"]`);
-      // score counting via btns
     });
   });
+  const pct=Math.round(score/total*100);
   const r=document.getElementById('result-g-p1');
-  r.style.display='block';r.className='result-banner result-ok';
-  r.innerHTML=`Exercise completed! ✅ Review the highlighted correct answers above. Practice listening to the audio again and check your understanding.`;
+  r.style.display='block';r.className='result-banner '+(pct>=60?'result-pass':'result-fail');
+  r.innerHTML=`Score: ${score}/${total} (${pct}%) — ${pct>=60?'✅ Passed!':'❌ Need more practice. 60% required to pass.'}`;
+  saveProgress('hoeren-gp1', score, total);
+  updateDashboard();
 }
 function resetGoethePart1(){
   document.querySelectorAll('#goethe-mcq-clips .option-btn').forEach(b=>b.className='option-btn');
@@ -1510,11 +1513,14 @@ function renderPrompt(i){
     <div class="template-box"><div class="t-label">Einstieg</div><div class="t-val">${tpl.opener}</div></div>
     <div class="template-box"><div class="t-label">Grußformel</div><div class="t-val">${tpl.closing}</div></div>
     <div style="font-size:.82rem;font-weight:700;color:var(--text3);margin:12px 0 8px">💬 Useful Phrases — click to copy:</div>
-    <div class="phrase-chips">${tpl.phrases.map(ph=>`<div class="phrase-chip" onclick="insertPhrase('${ph.replace(/'/g,"\'")}')">${ph}</div>`).join('')}</div>`;
+    <div class="phrase-chips">${tpl.phrases.map((ph,pi)=>`<div class="phrase-chip" onclick="insertPhrase(${pi})">${ph}</div>`).join('')}</div>`;
+  currentTplPhrases=tpl.phrases;
 }
-function insertPhrase(ph){
+let currentTplPhrases=[];
+function insertPhrase(pi){
   const ta=document.getElementById('writing-area');
-  if(!ta)return;
+  const ph=currentTplPhrases[pi];
+  if(!ta||ph===undefined)return;
   const pos=ta.selectionStart;
   ta.value=ta.value.slice(0,pos)+ph+ta.value.slice(pos);
   ta.focus();updateWordCount();
@@ -1524,7 +1530,7 @@ function updateWordCount(){
   const wc=document.getElementById('word-count');if(!ta||!wc)return;
   const words=ta.value.trim().split(/\s+/).filter(w=>w.length>0).length;
   wc.textContent=words;
-  wc.className='wc-num'+(words>=80?'good':words>=50?' warn':'');
+  wc.className='wc-num'+(words>=80?' good':words>=50?' warn':'');
 }
 function clearWriting(){
   const ta=document.getElementById('writing-area');if(ta)ta.value='';updateWordCount();
@@ -1532,14 +1538,14 @@ function clearWriting(){
 function buildChecklist(){
   const c=document.getElementById('writing-checklist');if(!c)return;
   c.innerHTML=WRITING.checklist.map((item,i)=>`
-    <label class="check-item" id="cli-${i}" onclick="toggleCheck(${i})">
-      <input type="checkbox" id="chk-${i}" onclick="toggleCheck(${i})"> ${item}
+    <label class="check-item" id="cli-${i}">
+      <input type="checkbox" id="chk-${i}" onchange="toggleCheck(${i})"> ${item}
     </label>`).join('');
 }
 function toggleCheck(i){
   const item=document.getElementById(`cli-${i}`);
   const chk=document.getElementById(`chk-${i}`);
-  if(item&&chk){chk.checked=!chk.checked;item.className='check-item'+(chk.checked?' checked':'');}
+  if(item&&chk){item.className='check-item'+(chk.checked?' checked':'');}
 }
 
 // ===========================
@@ -1724,19 +1730,13 @@ function updateDashboard(){
 // TF QUESTIONS for specific sections
 // ===========================
 function buildTF_g1(){
-  const qs=[
-    {id:1,text:'Die Person lebt seit einem Jahr in München.'},{id:2,text:'Der Deutschkurs findet an der Universität statt.'},
-    {id:3,text:'In Deutschland fahren Busse oft unpünktlich.'},{id:4,text:'Man muss in Deutschland den Müll trennen.'},
-    {id:5,text:'Das Wetter in Deutschland ist immer schön.'},{id:6,text:'Die Person hat in Deutschland neue Freunde gefunden.'},
-    {id:7,text:'Die Person vermisst das Essen aus ihrer Heimat.'},{id:8,text:'Deutsches Essen schmeckt der Person überhaupt nicht.'}
-  ];
-  buildTF('g1-qs', qs);
+  buildTF('tf-g1-qs', 'g1', READING.goethe_p1.questions);
 }
 function buildTF_t2(){
-  buildTF('t2-qs', LISTENING.telc_p2.questions);
+  buildTF('tf-t2h-qs', 't2h', LISTENING.telc_p2.questions);
 }
 function buildTF_t3(){
-  buildTF('t3-qs', LISTENING.telc_p3.questions);
+  buildTF('tf-t3-qs', 't3', LISTENING.telc_p3.questions);
 }
 
 // ===========================
@@ -1880,6 +1880,7 @@ function checkWriting() {
 // ===========================
 // VIRTUAL SPEECH RECORDER
 // ===========================
+let mediaRecorder;
 let recordedChunks = [];
 let recordingInterval;
 let recordingDuration = 0;
@@ -2018,6 +2019,8 @@ function startVocabQuiz() {
   if (r) r.style.display = 'none';
 }
 
+function resetVocabQuiz() { startVocabQuiz(); }
+
 function selectVocabAns(qIdx, val) {
   vocabAnswers[qIdx] = val;
   const block = document.getElementById(`vq-block-${qIdx}`);
@@ -2086,6 +2089,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   buildVocabTrainer();
   // Dashboard
   updateDashboard();
+  // Deep link (#lesen, /vocab, ...)
+  initTabFromURL();
   // Apply saved language translations
   setTimeout(() => applyTranslations(), 50);
 });
