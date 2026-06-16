@@ -1,0 +1,47 @@
+{
+  "name": "B1 Prüfungsgenie — Goethe & telc Deutsch B1 Vorbereitung",
+  "short_name": "B1 Prüfungsgenie",
+  "description": "Comprehensive German B1 exam preparation: Reading, Listening, Writing, Speaking, Grammar — for Goethe-Zertifikat B1 and telc Deutsch B1.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080F1E",
+  "theme_color": "#080F1E",
+  "orientation": "any",
+  "lang": "de",
+  "scope": "/",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='170.7' y='0' fill='%23000'/%3E%3Crect width='512' height='170.7' y='170.7' fill='%23DD0000'/%3E%3Crect width='512' height='170.7' y='341.3' fill='%23FFCE00'/%3E%3Ctext x='256' y='320' font-family='Arial' font-size='200' font-weight='bold' text-anchor='middle' fill='%23fff'%3EB1%3C/text%3E%3C/svg%3E",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Lesen üben",
+      "short_name": "Lesen",
+      "url": "/#lesen",
+      "description": "Reading exercises for Goethe & telc B1"
+    },
+    {
+      "name": "Hören üben",
+      "short_name": "Hören",
+      "url": "/#hoeren",
+      "description": "Listening exercises with real audio"
+    },
+    {
+      "name": "Schreiben üben",
+      "short_name": "Schreiben",
+      "url": "/#schreiben",
+      "description": "Writing exercises with templates"
+    },
+    {
+      "name": "Sprechen üben",
+      "short_name": "Sprechen",
+      "url": "/#sprechen",
+      "description": "Speaking practice with recorder"
+    }
+  ]
+}

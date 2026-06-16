@@ -8,11 +8,25 @@
 <meta name="theme-color" content="#080F1E">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%2233.4%22 y=%220%22 fill=%22%23000%22/><rect width=%22100%22 height=%2233.3%22 y=%2233.3%22 fill=%22%23DD0000%22/><rect width=%22100%22 height=%2233.4%22 y=%2266.6%22 fill=%22%23FFCE00%22/></svg>">
 <link rel="canonical" href="https://german-b1-exam-genius.vercel.app/">
+<link rel="manifest" href="/manifest.json">
 <meta property="og:type" content="website">
 <meta property="og:title" content="B1 Prüfungsgenie — Goethe & telc Deutsch B1 Vorbereitung">
 <meta property="og:description" content="Complete German B1 exam preparation: Reading, Listening, Writing, Speaking, Grammar — for Goethe-Zertifikat B1 and telc Deutsch B1.">
 <meta property="og:url" content="https://german-b1-exam-genius.vercel.app/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://german-b1-exam-genius.vercel.app/images/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://german-b1-exam-genius.vercel.app/images/og-cover.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOccupationalProgram",
+  "name": "B1 Prüfungsgenie — Goethe & telc Deutsch B1 Vorbereitung",
+  "description": "Comprehensive German B1 exam preparation covering both Goethe-Zertifikat B1 and telc Deutsch B1.",
+  "provider": {"@type": "Organization", "name": "B1 Prüfungsgenie"},
+  "educationalLevel": "B1",
+  "inLanguage": "de"
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -412,25 +426,113 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   50% { transform: scale(1.3); opacity: .4; }
   100% { transform: scale(1); opacity: 1; }
 }
+
+/* ---- ACCESSIBILITY: FOCUS VISIBLE (WCAG 2.1 SC 2.4.7) ---- */
+*:focus-visible {
+  outline: 2px solid #60A5FA;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+[onclick]:focus:not(:focus-visible) { outline: none; }
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--gold); color: #000;
+  padding: 10px 18px; font-weight: 700;
+  border-radius: 0 0 8px 0; z-index: 9999;
+  text-decoration: none;
+}
+.skip-link:focus { left: 0; }
+
+/* ---- COOKIE BANNER ---- */
+.cookie-banner {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--card); border-top: 1px solid var(--gold);
+  padding: 16px 20px; z-index: 200; display: none;
+  box-shadow: 0 -4px 24px rgba(0,0,0,.4);
+}
+.cookie-banner.show { display: block; }
+.cookie-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.cookie-inner p { flex: 1; min-width: 240px; font-size: .85rem; color: var(--text2); line-height: 1.5; margin: 0; }
+.cookie-inner a { color: var(--gold); }
+.cookie-btns { display: flex; gap: 8px; }
+
+/* ---- FOOTER ---- */
+.site-footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 32px 20px; margin-top: 40px; }
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px; color: var(--text2); font-size: .85rem;
+}
+.footer-col h3 { color: var(--gold); font-size: .95rem; font-weight: 700; margin-bottom: 10px; }
+.footer-col a { display: block; color: var(--text2); text-decoration: none; padding: 3px 0; transition: color .2s; }
+.footer-col a:hover { color: var(--text); }
+.footer-bottom {
+  max-width: 1100px; margin: 24px auto 0; padding-top: 16px;
+  border-top: 1px solid var(--border); text-align: center;
+  font-size: .78rem; color: var(--text3);
+}
+
+/* ---- HERO CTA ---- */
+.hero-cta-row { margin-top: 20px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
+.hero-cta {
+  padding: 12px 28px; border-radius: 999px; border: none;
+  background: var(--gold); color: #000; font-size: 1rem; font-weight: 700;
+  cursor: pointer; text-decoration: none; display: inline-flex;
+  align-items: center; gap: 8px; transition: all var(--transition); font-family: inherit;
+}
+.hero-cta:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,180,0,.3); }
+.hero-cta.secondary { background: transparent; color: var(--text); border: 2px solid var(--border); }
+.hero-cta.secondary:hover { border-color: var(--gold); color: var(--gold); background: rgba(245,180,0,.08); }
+
+/* ---- AUTOSAVE INDICATOR ---- */
+.autosave-indicator { font-size: .75rem; color: var(--text3); margin-left: 8px; opacity: 0; transition: opacity .3s; }
+.autosave-indicator.show { opacity: 1; color: var(--green); }
+
+/* ---- RECORDING DOWNLOAD BUTTON ---- */
+.rec-download-btn {
+  padding: 8px 16px; border-radius: var(--r2);
+  border: 1px solid var(--purple); background: rgba(139,92,246,.1);
+  color: var(--purple); font-size: .82rem; font-weight: 600;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  margin-top: 8px; transition: all var(--transition);
+}
+.rec-download-btn:hover { background: rgba(139,92,246,.2); }
+
+/* ---- LEGAL PAGES ---- */
+.legal-page { max-width: 800px; margin: 0 auto; padding: 40px 20px 80px; line-height: 1.7; }
+.legal-page h1 { color: var(--gold); font-size: 2rem; margin-bottom: 16px; }
+.legal-page h2 { color: var(--text); font-size: 1.3rem; margin: 24px 0 12px; }
+.legal-page p { margin-bottom: 12px; color: var(--text2); }
+.legal-page ul { padding-left: 20px; margin-bottom: 12px; color: var(--text2); }
+.legal-page a { color: var(--gold); }
 </style>
 </head>
 <body>
 
+<!-- SKIP LINK for keyboard users -->
+<a href="#home" class="skip-link">Zum Inhalt springen / Skip to content</a>
+
 <!-- NAVIGATION -->
-<nav class="main-nav">
+<nav class="main-nav" aria-label="Hauptnavigation">
   <div class="nav-inner">
     <div class="nav-logo">B1 Prüfungsgenie <span data-i18n="nav_subtitle">Deutsch Exam Prep</span></div>
-    <button class="nav-tab active" onclick="showTab('home')"><span class="dot dot-home"></span> 🏠 <span data-i18n="nav_home">Home</span></button>
+    <button class="nav-tab active" onclick="showTab('home')" aria-current="page"><span class="dot dot-home"></span> 🏠 <span data-i18n="nav_home">Home</span></button>
     <button class="nav-tab" onclick="showTab('lesen')"><span class="dot dot-lesen"></span> 📖 <span data-i18n="nav_lesen">Lesen</span></button>
     <button class="nav-tab" onclick="showTab('hoeren')"><span class="dot dot-hoeren"></span> 🎧 <span data-i18n="nav_hoeren">Hören</span></button>
     <button class="nav-tab" onclick="showTab('schreiben')"><span class="dot dot-schreiben"></span> ✍️ <span data-i18n="nav_schreiben">Schreiben</span></button>
     <button class="nav-tab" onclick="showTab('sprechen')"><span class="dot dot-sprechen"></span> 🗣 <span data-i18n="nav_sprechen">Sprechen</span></button>
     <button class="nav-tab" onclick="showTab('grammatik')"><span class="dot dot-grammatik"></span> 📝 <span data-i18n="nav_grammatik">Grammatik</span></button>
     <button class="nav-tab" onclick="showTab('vokabeln')"><span class="dot dot-vokabeln" style="background:var(--purple)"></span> 📇 <span data-i18n="nav_vokabeln">Vokabeln</span></button>
-    <div class="lang-switcher">
-      <button class="lang-btn active" id="lang-de" onclick="setLang('de')">🇩🇪 DE</button>
-      <button class="lang-btn" id="lang-ru" onclick="setLang('ru')">🇷🇺 RU</button>
-      <button class="lang-btn" id="lang-az" onclick="setLang('az')">🇦🇿 AZ</button>
+    <div class="lang-switcher" role="group" aria-label="Sprache wählen">
+      <button class="lang-btn active" id="lang-de" onclick="setLang('de')" aria-label="Deutsch">🇩🇪 DE</button>
+      <button class="lang-btn" id="lang-en" onclick="setLang('en')" aria-label="English">🇬🇧 EN</button>
+      <button class="lang-btn" id="lang-ru" onclick="setLang('ru')" aria-label="Русский">🇷🇺 RU</button>
+      <button class="lang-btn" id="lang-az" onclick="setLang('az')" aria-label="Azərbaycan">🇦🇿 AZ</button>
     </div>
   </div>
 </nav>
@@ -446,11 +548,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
       <span class="badge badge-telc">🇩🇪 telc Deutsch B1</span>
       <span class="badge badge-both">✅ 232 Real Worksheets</span>
     </div>
+    <div class="hero-cta-row">
+      <button class="hero-cta" onclick="showTab('lesen')">▶ Kostenlos starten / Start Free</button>
+      <a class="hero-cta secondary" href="#exam-comparison">📋 Prüfung vergleichen / Compare Exams</a>
+    </div>
   </div>
 
   <!-- Exam Format Comparison -->
-  <div class="card" style="margin-bottom:24px">
-    <div class="card-title">📋 Which exam are you taking?</div>
+  <div class="card" style="margin-bottom:24px" id="exam-comparison">
+    <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:4px">📋 Which exam are you taking?</h2>
     <div class="card-sub">Both are valid B1 certificates — choose the right one for your purpose</div>
     <div class="card-row">
       <div class="format-card">
@@ -482,7 +588,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   </div>
 
   <!-- Section Cards -->
-  <div style="font-size:.9rem;font-weight:700;color:var(--text2);margin-bottom:14px;letter-spacing:.04em;text-transform:uppercase">📚 Practice Sections</div>
+  <h2 style="font-size:.9rem;font-weight:700;color:var(--text2);margin-bottom:14px;letter-spacing:.04em;text-transform:uppercase">📚 Practice Sections</h2>
   <div class="section-cards">
     <div class="section-card sc-lesen" onclick="showTab('lesen')">
       <div class="sc-icon">📖</div>
@@ -536,7 +642,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 
   <!-- Key Grammar Rules -->
   <div class="card">
-    <div class="card-title">⚡ Top 5 Grammar Rules You Must Know</div>
+    <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:4px">⚡ Top 5 Grammar Rules You Must Know</h2>
     <div class="card-sub">The most common mistakes at B1 level — learn these first</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:8px">
       <div class="grammar-rule"><div class="gr-title">1. Verb at the END in Nebensätze</div><div class="gr-example">Ich komme nicht, <strong>weil</strong> ich müde <strong>bin</strong>.</div><div class="gr-note">After: weil, dass, ob, wenn, obwohl, damit...</div></div>
@@ -553,7 +659,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 <section id="lesen" class="tab-content">
 <div class="section-wrap">
   <div class="section-hero hero-lesen">
-    <div class="hero-title">📖 Lesen — Leseverstehen</div>
+    <h2 class="hero-title">📖 Lesen — Leseverstehen</h2>
     <div class="hero-sub">Practice all reading task types for both Goethe-Zertifikat B1 (5 parts) and telc Deutsch B1 (3 parts). Select your exam format below.</div>
     <div class="hero-badges"><span class="badge badge-goethe">🦁 Goethe: 65 min · 30 items · 5 parts</span><span class="badge badge-telc">🇩🇪 telc: 90 min (shared) · 25 items · 3 parts</span></div>
   </div>
@@ -717,7 +823,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 <section id="hoeren" class="tab-content">
 <div class="section-wrap">
   <div class="section-hero hero-hoeren">
-    <div class="hero-title">🎧 Hören — Hörverstehen</div>
+    <h2 class="hero-title">🎧 Hören — Hörverstehen</h2>
     <div class="hero-sub">Real listening exercises with True/False questions. Includes your actual audio recordings. Select exam format to see the right task types.</div>
     <div class="hero-badges"><span class="badge badge-goethe">🦁 Goethe: 40 min · 4 parts · 30 items</span><span class="badge badge-telc">🇩🇪 telc: 30 min · 3 parts · 20 items</span></div>
   </div>
@@ -922,7 +1028,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 <section id="schreiben" class="tab-content">
 <div class="section-wrap">
   <div class="section-hero hero-schreiben">
-    <div class="hero-title">✍️ Schreiben — Schriftlicher Ausdruck</div>
+    <h2 class="hero-title">✍️ Schreiben — Schriftlicher Ausdruck</h2>
     <div class="hero-sub">Practice writing formal letters, complaint emails, forum posts. Use the template and word counter. Browse all real worksheet exercises from your PDFs.</div>
     <div class="hero-badges"><span class="badge badge-goethe">🦁 Goethe: 3 tasks (informal + forum + formal)</span><span class="badge badge-telc">🇩🇪 telc: 1 letter/email, 4 bullet points</span></div>
   </div>
@@ -950,6 +1056,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
       <div class="word-counter">
         <span class="wc-num" id="word-count">0</span>
         <span>/ mindestens 80 Wörter</span>
+        <span class="autosave-indicator" id="autosave-indicator"></span>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-primary" style="align-self:flex-start;background:var(--orange);color:#000" onclick="checkWriting()">🔍 Antwort analysieren / Analyze Answer</button>
@@ -990,7 +1097,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 <section id="sprechen" class="tab-content">
 <div class="section-wrap">
   <div class="section-hero hero-sprechen">
-    <div class="hero-title">🗣 Sprechen — Mündliche Prüfung</div>
+    <h2 class="hero-title">🗣 Sprechen — Mündliche Prüfung</h2>
     <div class="hero-sub">Practice all 3 speaking parts for both exam formats. Browse 80+ real Bildbeschreibung exercises from your PDFs. Learn key phrases for each part.</div>
     <div class="hero-badges"><span class="badge badge-goethe">🦁 Goethe: 15 min + 15 min prep</span><span class="badge badge-telc">🇩🇪 telc: 15 min + 20 min prep</span></div>
   </div>
@@ -1087,7 +1194,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 <section id="grammatik" class="tab-content">
 <div class="section-wrap">
   <div class="section-hero hero-grammatik">
-    <div class="hero-title">📝 Sprachbausteine — Grammatik & Wortschatz</div>
+    <h2 class="hero-title">📝 Sprachbausteine — Grammatik & Wortschatz</h2>
     <div class="hero-sub">Fill-in-the-gap exercises testing grammar and vocabulary in context. This section is UNIQUE to telc Deutsch B1 — worth 30 of 225 points.</div>
     <div class="hero-badges"><span class="badge badge-telc">🇩🇪 telc only — 20 gaps, 30 points</span><span class="badge badge-both">📌 Important for all B1 exams</span></div>
   </div>
@@ -1190,7 +1297,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 <section id="vokabeln" class="tab-content">
 <div class="section-wrap">
   <div class="section-hero hero-vokabeln" style="background:linear-gradient(135deg,#3c1a5e,#1a0f3d); border-radius: var(--r); padding: 40px 32px; margin-bottom: 32px; position: relative; overflow: hidden;">
-    <div class="hero-title">📇 Vokabeln & Verben mit Präpositionen</div>
+    <h2 class="hero-title">📇 Vokabeln & Verben mit Präpositionen</h2>
     <div class="hero-sub" data-i18n="vocab_hero_sub">Master B1 verbs with fixed prepositions and cases. Practice with flashcards and interactive quizzes.</div>
     <div class="hero-badges"><span class="badge badge-both">50 Verben mit Präpositionen</span><span class="badge badge-goethe">🦁 Goethe B1</span><span class="badge badge-telc">🇩🇪 telc B1</span></div>
   </div>
@@ -1231,6 +1338,129 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 
 <script src="questions.js"></script>
 <script src="bank.js"></script>
+
+<!-- =================== FOOTER =================== -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h3>🇩🇪 B1 Prüfungsgenie</h3>
+      <p style="margin:0">Komplette Vorbereitung für Goethe-Zertifikat B1 und telc Deutsch B1 — mit echten Arbeitsblättern.</p>
+    </div>
+    <div class="footer-col">
+      <h3>📚 Bereiche</h3>
+      <a href="#" onclick="showTab('lesen');return false">📖 Lesen</a>
+      <a href="#" onclick="showTab('hoeren');return false">🎧 Hören</a>
+      <a href="#" onclick="showTab('schreiben');return false">✍️ Schreiben</a>
+      <a href="#" onclick="showTab('sprechen');return false">🗣 Sprechen</a>
+      <a href="#" onclick="showTab('grammatik');return false">📝 Grammatik</a>
+      <a href="#" onclick="showTab('vokabeln');return false">📇 Vokabeln</a>
+    </div>
+    <div class="footer-col">
+      <h3>📄 Quellen</h3>
+      <a href="https://www.goethe.de/de/spr/prf/ueb/pb1.html" target="_blank" rel="noopener">Goethe-Institut B1</a>
+      <a href="https://www.telc.net/" target="_blank" rel="noopener">telc GmbH</a>
+      <a href="https://learngerman.dw.com/de/nicos-weg/c-36519789" target="_blank" rel="noopener">DW „Nicos Weg"</a>
+    </div>
+    <div class="footer-col">
+      <h3>⚖️ Rechtliches</h3>
+      <a href="#" onclick="showLegal('impressum');return false">Impressum</a>
+      <a href="#" onclick="showLegal('datenschutz');return false">Datenschutzerklärung</a>
+      <a href="#" onclick="showLegal('cookies');return false">Cookie-Richtlinie</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 B1 Prüfungsgenie · Made with ❤️ for German learners ·
+    <a href="#" onclick="showLegal('impressum');return false" style="color:var(--text3)">Impressum</a> ·
+    <a href="#" onclick="showLegal('datenschutz');return false" style="color:var(--text3)">Datenschutz</a>
+  </div>
+</footer>
+
+<!-- =================== COOKIE BANNER =================== -->
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookie-Hinweis">
+  <div class="cookie-inner">
+    <p>🍪 Diese Website verwendet ausschließlich notwendige localStorage zur Speicherung Ihrer Spracheinstellung und Ihres Lernfortschritts. Es werden <strong>keine Tracking-Cookies</strong> verwendet. <a href="#" onclick="showLegal('cookies');return false">Mehr erfahren</a></p>
+    <div class="cookie-btns">
+      <button class="btn-primary" onclick="acceptCookies()">Akzeptieren</button>
+      <button class="btn-secondary" onclick="acceptCookies()">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<!-- =================== LEGAL PAGES =================== -->
+<div id="legal-impressum" class="tab-content">
+  <div class="legal-page">
+    <h1>Impressum</h1>
+    <p>Angaben gemäß § 5 TMG (Telemediengesetz) und § 18 MStV (Medienstaatsvertrag).</p>
+    <h2>Diensteanbieter</h2>
+    <p>
+      [Ihr Name / Your Name]<br>
+      [Straße und Hausnummer / Street and number]<br>
+      [PLZ und Ort / Postal code and city]<br>
+      Deutschland
+    </p>
+    <h2>Kontakt</h2>
+    <p>
+      E-Mail: [your-email@example.com]<br>
+      Telefon: [optional]
+    </p>
+    <h2>Verantwortlich für den Inhalt</h2>
+    <p>[Ihr Name], Anschrift wie oben.</p>
+    <h2>Haftung für Inhalte</h2>
+    <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+    <h2>Haftung für Links</h2>
+    <p>Dieses Angebot enthält Links zu externen Websites Dritter (Goethe-Institut, telc GmbH, Deutsche Welle), auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+    <h2>Urheberrecht</h2>
+    <p>Die durch die Seitenbetreiber erstellten Inhalte auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Übungsblätter und Audio-Dateien stammen aus offiziellen, frei zugänglichen Quellen des Goethe-Instituts und telc GmbH.</p>
+    <p style="margin-top:24px"><button class="btn-primary" onclick="showTab('home')">← Zurück zur Startseite</button></p>
+    <p style="font-size:.78rem;color:var(--text3);margin-top:24px">⚠️ <strong>Wichtig:</strong> Bitte ersetzen Sie die Platzhalter [in eckigen Klammern] durch Ihre echten Kontaktdaten, bevor Sie diese Seite veröffentlichen. Ohne vollständiges Impressum drohen Abmahnungen.</p>
+  </div>
+</div>
+
+<div id="legal-datenschutz" class="tab-content">
+  <div class="legal-page">
+    <h1>Datenschutzerklärung</h1>
+    <p>Der Schutz Ihrer persönlichen Daten ist uns wichtig. Nachfolgend informieren wir Sie über die Erhebung und Verwendung personenbezogener Daten bei der Nutzung dieser Website.</p>
+    <h2>1. Verantwortlicher</h2>
+    <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist der im <a href="#" onclick="showLegal('impressum');return false">Impressum</a> genannte Betreiber.</p>
+    <h2>2. Erhebung und Speicherung von Daten</h2>
+    <p>Diese Website verwendet <strong>keine Tracking-Cookies</strong> und <strong>keine Analyse-Tools</strong> (kein Google Analytics, kein Facebook Pixel, keine Hotjar o.ä.).</p>
+    <p>Wir verwenden ausschließlich den lokalen Speicher Ihres Browsers (localStorage), um folgende Daten auf Ihrem Gerät zu speichern:</p>
+    <ul>
+      <li><strong>b1_lang</strong> — Ihre gewählte Sprache (DE / EN / RU / AZ)</li>
+      <li><strong>b1_genius_progress_v2</strong> — Ihr Lernfortschritt (Bestehensquote pro Übung)</li>
+      <li><strong>b1_writing_autosave</strong> — Automatisch gespeicherter Text Ihres Schreib-Editors</li>
+      <li><strong>b1_cookies_accepted</strong> — Ob Sie den Cookie-Hinweis bestätigt haben</li>
+    </ul>
+    <p>Diese Daten verbleiben ausschließlich auf Ihrem Gerät und werden <strong>nicht an Server übertragen</strong>. Sie können diese Daten jederzeit über die Entwicklertools Ihres Browsers einsehen und löschen.</p>
+    <h2>3. Externe Inhalte</h2>
+    <p>Diese Website verlinkt auf Übungs-materialien des Goethe-Instituts (goethe.de), der telc GmbH (telc.net) und der Deutschen Welle (dw.com). Beim Aufruf dieser externen Inhalte wird eine direkte Verbindung zu den Servern dieser Anbieter hergestellt. Für deren Datenschutzerklärungen sind ausschließlich diese Anbieter verantwortlich.</p>
+    <h2>4. Hosting</h2>
+    <p>Diese Website wird auf der Plattform <strong>Vercel Inc.</strong> gehostet. Beim Aufruf der Website werden technisch notwendige Daten (IP-Adresse, Browser-Typ, aufgerufene URL, Zeitpunkt) in Server-Logfiles von Vercel verarbeitet. Weitere Informationen: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">vercel.com/legal/privacy-policy</a>.</p>
+    <h2>5. Ihre Rechte</h2>
+    <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten (Art. 15–18 DSGVO). Da wir selbst keine personenbezogenen Daten auf unseren Servern speichern, betrifft dies ausschließlich die Daten, die Vercel im Rahmen der Server-Logfiles verarbeitet.</p>
+    <h2>6. Aktualität</h2>
+    <p>Diese Datenschutzerklärung wurde zuletzt am 17.06.2026 aktualisiert.</p>
+    <p style="margin-top:24px"><button class="btn-primary" onclick="showTab('home')">← Zurück zur Startseite</button></p>
+  </div>
+</div>
+
+<div id="legal-cookies" class="tab-content">
+  <div class="legal-page">
+    <h1>Cookie-Richtlinie</h1>
+    <p>Diese Website verwendet <strong>keine Cookies</strong> im klassischen Sinne. Wir nutzen jedoch den lokalen Speicher Ihres Browsers (localStorage / Web Storage API), um Ihre Einstellungen und Ihren Lernfortschritt zu speichern.</p>
+    <h2>Was wird lokal gespeichert?</h2>
+    <ul>
+      <li><strong>Sprachauswahl</strong> — Damit die Website beim nächsten Besuch in Ihrer bevorzugten Sprache erscheint</li>
+      <li><strong>Lernfortschritt</strong> — Bestehensquoten und letzte Ergebnisse pro Übung</li>
+      <li><strong>Schreib-Entwürfe</strong> — Automatisch gespeicherte Texteingaben im Schreib-Editor (Autosave)</li>
+      <li><strong>Cookie-Banner-Status</strong> — Damit das Cookie-Banner nicht erneut angezeigt wird</li>
+    </ul>
+    <h2>Wie lösche ich diese Daten?</h2>
+    <p>In Chrome / Firefox / Safari: Entwicklertools öffnen (F12) → Application / Speicher → Local Storage → Einträge löschen. Alternativ: Browser-Cache komplett löschen.</p>
+    <p style="margin-top:24px"><button class="btn-primary" onclick="showTab('home')">← Zurück zur Startseite</button></p>
+  </div>
+</div>
+
 <script>
 // ===========================
 // TAB NAVIGATION
@@ -2037,6 +2267,13 @@ function toggleRecording() {
           audio.src = audioURL;
           container.style.display = 'block';
           stream.getTracks().forEach(track => track.stop());
+          // Add download button
+          if (typeof addRecordingDownload === 'function') addRecordingDownload(blob);
+          // Save progress for Sprechen section
+          if (typeof saveProgress === 'function') {
+            saveProgress('sprechen-record', 1, 1);
+            if (typeof updateDashboard === 'function') updateDashboard();
+          }
         };
         
         mediaRecorder.start();
@@ -2437,6 +2674,71 @@ const TRANSLATIONS = {
     wc_min: '/ mindestens 80 Wörter',
   },
 
+
+  en: {
+    nav_subtitle: 'German Exam Prep',
+    nav_home: 'Home', nav_lesen: 'Reading', nav_hoeren: 'Listening',
+    nav_schreiben: 'Writing', nav_sprechen: 'Speaking', nav_grammatik: 'Grammar',
+    nav_vokabeln: 'Vocabulary',
+    desc_vokabeln: 'Master B1 verbs with fixed prepositions and cases. Learn with interactive flashcards and quizzes.',
+    vocab_hero_sub: 'Master B1 verbs with fixed prepositions and cases. Practice with flashcards and interactive quizzes.',
+    vocab_flashcards_title: '📇 Interactive Flashcards',
+    vocab_flashcards_sub: 'Click any card to flip it and learn the preposition, case, and example sentence.',
+    vocab_quiz_title: '🎯 Preposition Quiz',
+    vocab_quiz_sub: 'Test your knowledge of prepositions and cases. 10 random questions.',
+    sp_recorder_title: '🎤 Virtual Speech Recorder & Pronunciation Practice',
+    sp_recorder_sub: 'Record your presentation or picture description, play it back, and listen to check your flow and pronunciation.',
+    home_hero_p: 'Complete preparation for <strong>Goethe-Zertifikat B1</strong> and <strong>telc Deutsch B1</strong> — Reading, Listening, Writing, Speaking, and Grammar. With real worksheets.',
+    home_which: '📋 Which exam are you taking?',
+    home_which_sub: 'Both are valid B1 certificates — choose the right one for your purpose',
+    home_goethe_desc: 'International gold standard. Modular — retake only failed sections. Accepted worldwide.',
+    home_telc_desc: 'Most common in Germany. Required for citizenship and integration certificates.',
+    home_goethe_note: '⚠️ Must pass EACH section separately. Modular — retake only failed parts.',
+    home_telc_note: '⚠️ Written ≥135/225 AND Oral ≥45/75 — both separately!',
+    home_practice: '📚 Practice Sections',
+    home_not_started: 'Not started',
+    home_last_score: 'Last score',
+    desc_lesen: '3 exercise types: headline matching, multiple choice, ads matching. Goethe & telc.',
+    desc_hoeren: 'Real audio exercises with True/False questions. Includes your actual MP4 audio files.',
+    desc_schreiben: 'Writing templates, complaint letters, forum posts. 14 real worksheet exercises.',
+    desc_sprechen: '80+ picture descriptions, speaking phrases, and topic cards for all 3 speaking parts.',
+    desc_grammatik: 'Grammar and vocabulary fill-in exercises. Prepositions, verb forms, conjunctions.',
+    btn_check: 'Check answers ✓',
+    btn_reset: 'Reset',
+    btn_tips: '💡 Show tips',
+    btn_load_more: 'Load more worksheets ↓',
+    btn_load_more_img: 'Load more images ↓',
+    btn_clear: '🗑 Clear',
+    btn_start_timer: '▶ Start reading time',
+    res_passed: '✅ Passed!',
+    res_fail: '❌ Need more practice. 60% required.',
+    res_score: 'Result',
+    ex_instruction_lesen_g1: 'Read the text. Are the statements true (T) or false (F)?',
+    ex_instruction_lesen_g1_en: 'Read the text and answer the questions.',
+    ex_instruction_mcq: 'Read the article and answer the questions. Which answer (a, b or c) is correct?',
+    ex_instruction_headlines: 'Read the headlines A–J. Match each text 1–5 to the correct headline.',
+    ex_instruction_situations: 'Read situations 11–20 and ads a–l. Match them.',
+    ex_true: '+ T', ex_false: '– F',
+    ex_reading_time: '⏱ Reading time — read the tasks first!',
+    wr_your_answer: '📝 Your answer:',
+    wr_words: '/ minimum 80 words',
+    wr_checklist: '✅ Checklist — everything included?',
+    wr_template: '📋 Template',
+    wr_phrase_label: '💬 Useful phrases — click to insert:',
+    sp_gallery_title: '🖼 Picture Description — worksheet images',
+    sp_gallery_sub: '80+ real images from your worksheets. Click to enlarge.',
+    sp_topics_title: '🎯 Speaking Topics — for presentation',
+    sp_topics_sub: 'Click a topic card for practice questions. For Part 2 (Presentation).',
+    sp_parta: '📷 Part A — Picture Description Phrases',
+    sp_partb: '💬 Part B — Opinion Phrases',
+    gr_tips: '💡 Sprachbausteine Strategy',
+    audio_note: '📌 Real audio recording. Listen carefully. In the real telc exam, the conversation is played twice.',
+    ads_label: '📌 Ads / Advertisements:',
+    timer_read: '⏱ Reading time (1 min) — read all tasks first!',
+    timer_read2: '⏱ Reading time (30 sec)',
+    wc_min: '/ minimum 80 words',
+  },
+
   ru: {
     nav_subtitle: 'Подготовка к экзамену',
     nav_home: 'Главная', nav_lesen: 'Чтение', nav_hoeren: 'Аудирование',
@@ -2610,7 +2912,7 @@ function applyTranslations() {
   updateDynamicText();
 
   // Update html lang
-  document.getElementById('html-root').lang = currentLang === 'de' ? 'de' : currentLang === 'ru' ? 'ru' : 'az';
+  document.getElementById('html-root').lang = currentLang;
 
   // Save preference
   try { localStorage.setItem('b1_lang', currentLang); } catch(e){}
@@ -2796,7 +3098,7 @@ function updateDynamicText() {
 function setLang(lang) {
   currentLang = lang;
   // Update active button
-  ['de','ru','az'].forEach(l => {
+  ['de','en','ru','az'].forEach(l => {
     const btn = document.getElementById(`lang-${l}`);
     if (btn) btn.className = 'lang-btn' + (l === lang ? ' active' : '');
   });
@@ -2807,15 +3109,111 @@ function setLang(lang) {
 (function() {
   try {
     const saved = localStorage.getItem('b1_lang');
-    if (saved && ['de','ru','az'].includes(saved)) {
+    if (saved && ['de','en','ru','az'].includes(saved)) {
       currentLang = saved;
-      ['de','ru','az'].forEach(l => {
+      ['de','en','ru','az'].forEach(l => {
         const btn = document.getElementById(`lang-${l}`);
         if (btn) btn.className = 'lang-btn' + (l === currentLang ? ' active' : '');
       });
     }
   } catch(e) {}
 })();
+
+// ===========================
+// LEGAL PAGES NAVIGATION
+// ===========================
+const LEGAL_TABS = ['legal-impressum','legal-datenschutz','legal-cookies'];
+function showLegal(page) {
+  document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
+  LEGAL_TABS.forEach(t => { const el = document.getElementById(t); if(el) el.classList.remove('active'); });
+  const el = document.getElementById('legal-' + page);
+  if (el) {
+    el.classList.add('active');
+    document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+    window.scrollTo(0,0);
+  }
+}
+
+// ===========================
+// COOKIE BANNER
+// ===========================
+function initCookieBanner() {
+  try {
+    if (!localStorage.getItem('b1_cookies_accepted')) {
+      const banner = document.getElementById('cookieBanner');
+      if (banner) setTimeout(() => banner.classList.add('show'), 800);
+    }
+  } catch(e) {}
+}
+function acceptCookies() {
+  try { localStorage.setItem('b1_cookies_accepted', '1'); } catch(e) {}
+  const banner = document.getElementById('cookieBanner');
+  if (banner) banner.classList.remove('show');
+}
+
+// ===========================
+// WRITING AUTOSAVE
+// ===========================
+const WRITING_AUTOSAVE_KEY = 'b1_writing_autosave';
+let writingSaveTimer = null;
+function initWritingAutosave() {
+  const ta = document.getElementById('writing-area');
+  if (!ta) return;
+  // Restore previous content
+  try {
+    const saved = localStorage.getItem(WRITING_AUTOSAVE_KEY);
+    if (saved && saved.trim()) {
+      ta.value = saved;
+      if (typeof updateWordCount === 'function') updateWordCount();
+    }
+  } catch(e) {}
+  // Listen for input → debounced save
+  ta.addEventListener('input', () => {
+    if (writingSaveTimer) clearTimeout(writingSaveTimer);
+    const indicator = document.getElementById('autosave-indicator');
+    writingSaveTimer = setTimeout(() => {
+      try {
+        localStorage.setItem(WRITING_AUTOSAVE_KEY, ta.value);
+        if (indicator) {
+          indicator.classList.add('show');
+          indicator.textContent = '✓ Gespeichert';
+          setTimeout(() => indicator.classList.remove('show'), 1500);
+        }
+      } catch(e) {}
+    }, 1200);
+  });
+}
+
+// ===========================
+// RECORDING DOWNLOAD BUTTON
+// ===========================
+function addRecordingDownload(blob) {
+  const container = document.getElementById('recordings-container');
+  if (!container) return;
+  const old = container.querySelector('.rec-download-btn');
+  if (old) old.remove();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'b1-sprechen-aufnahme-' + new Date().toISOString().slice(0,19).replace(/[:T]/g,'-') + '.webm';
+  a.className = 'rec-download-btn';
+  a.textContent = '⬇ Aufnahme herunterladen / Download Recording';
+  container.appendChild(a);
+}
+
+// ===========================
+// INIT: cookie banner, writing autosave, dashboard update
+// ===========================
+document.addEventListener('DOMContentLoaded', () => {
+  initCookieBanner();
+  initWritingAutosave();
+  if (typeof updateDashboard === 'function') updateDashboard();
+});
+if (document.readyState !== 'loading') {
+  initCookieBanner();
+  initWritingAutosave();
+  if (typeof updateDashboard === 'function') updateDashboard();
+}
 </script>
 </body>
 </html>
