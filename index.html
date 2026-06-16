@@ -374,6 +374,87 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .lang-btn:hover{background:var(--card2);color:var(--text)}
 .lang-btn.active{background:var(--card2);color:var(--gold);border-color:var(--gold)}
 
+/* ---- TRANSLATE POPUP ---- */
+#translate-popup{position:fixed;z-index:9999;background:var(--card2);border:1px solid var(--gold);border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,.75);min-width:190px;max-width:300px;display:none}
+#translate-popup.show{display:block;animation:fadeIn .15s ease}
+.tp-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.tp-word{font-size:1.15rem;font-weight:800;color:var(--gold)}
+.tp-close{background:none;border:none;color:var(--text3);cursor:pointer;font-size:1.1rem;padding:0 2px;line-height:1;flex-shrink:0}
+.tp-translation{font-size:.95rem;color:var(--text);margin-bottom:10px;min-height:22px}
+.tp-actions{display:flex;align-items:center;gap:8px}
+.tp-btn{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:var(--text2);cursor:pointer;font-size:.75rem;font-family:inherit;transition:all var(--transition)}
+.tp-btn:hover{border-color:var(--gold);color:var(--gold)}
+.tp-credit{font-size:.68rem;color:var(--text3);margin-left:auto}
+
+/* ---- GRAMMAR LESSONS ---- */
+.lesson-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.ln-btn{padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--text2);font-size:.8rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all var(--transition);white-space:nowrap}
+.ln-btn:hover{border-color:var(--pink);color:var(--text)}
+.ln-btn.active{background:var(--pink);color:#fff;border-color:var(--pink)}
+.lesson-panel{display:none}
+.lesson-panel.active{display:block;animation:fadeIn .25s ease}
+.lesson-rule{background:var(--bg2);border-left:3px solid var(--pink);border-radius:0 var(--r2) var(--r2) 0;padding:16px 20px;margin-bottom:12px}
+.lesson-rule h4{color:var(--text);font-size:.9rem;font-weight:700;margin-bottom:8px}
+.lesson-rule p,.lesson-rule li{color:var(--text2);font-size:.85rem;line-height:1.65}
+.lesson-rule ul{padding-left:18px;margin:6px 0}
+.de-ex{background:var(--card2);border-radius:6px;padding:10px 14px;font-size:.87rem;color:var(--text);margin:6px 0;line-height:1.6}
+.de-ex strong{color:var(--gold)}
+.lrn-table{width:100%;border-collapse:collapse;font-size:.8rem;margin:10px 0}
+.lrn-table th{background:var(--card2);color:var(--text2);padding:7px 10px;text-align:left;border:1px solid var(--border);font-weight:700}
+.lrn-table td{padding:7px 10px;border:1px solid var(--border);color:var(--text);vertical-align:top}
+.hl{color:var(--gold);font-weight:700}
+.hl2{color:var(--blue);font-weight:700}
+.hl3{color:var(--green);font-weight:700}
+.lesson-mini-quiz{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-top:16px}
+.lmq-title{font-size:.78rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
+.lmq-question{font-size:.9rem;font-weight:700;color:var(--text);margin:16px 0 8px}
+.lmq-question:first-of-type{margin-top:0}
+.lmq-options{display:flex;flex-direction:column;gap:6px}
+.lmq-opt{padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;font-size:.85rem;text-align:left;font-family:inherit;transition:all var(--transition)}
+.lmq-opt:hover:not([disabled]){border-color:var(--pink);color:var(--text)}
+.lmq-opt.correct-ans{background:rgba(16,185,129,.15)!important;border-color:var(--correct)!important;color:var(--correct)!important;cursor:default}
+.lmq-opt.wrong-ans{background:rgba(239,68,68,.1)!important;border-color:var(--wrong)!important;color:var(--wrong)!important;cursor:default}
+.lmq-feedback{font-size:.8rem;padding:8px 12px;border-radius:6px;margin-top:6px;display:none}
+.lmq-feedback.show{display:block}
+.lmq-feedback.ok{background:rgba(16,185,129,.1);color:var(--correct)}
+.lmq-feedback.bad{background:rgba(239,68,68,.1);color:var(--wrong)}
+.lmq-score{font-size:.82rem;color:var(--text2);margin-top:14px;font-weight:600}
+
+/* ---- VOCAB THEMATIC ---- */
+.vocab-mode{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.vm-btn{padding:8px 18px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.85rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all var(--transition)}
+.vm-btn:hover{background:var(--card);color:var(--text)}
+.vm-btn.active{background:var(--purple);color:#fff;border-color:var(--purple)}
+.vocab-panel{display:none}
+.vocab-panel.active{display:block;animation:fadeIn .25s ease}
+.topic-pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.topic-pill{padding:5px 12px;border-radius:16px;border:1px solid var(--border);background:var(--card);color:var(--text2);font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all var(--transition)}
+.topic-pill:hover{background:var(--card2);color:var(--text)}
+.topic-pill.active{background:var(--purple);color:#fff;border-color:var(--purple)}
+.known-stats{font-size:.82rem;color:var(--text2);margin-bottom:12px}
+.known-stats span{color:var(--purple);font-weight:700}
+.word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.word-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;cursor:pointer;transition:all var(--transition);position:relative}
+.word-card:hover{border-color:var(--purple);transform:translateY(-1px)}
+.word-card.known{border-color:var(--correct)}
+.wc-top{display:flex;align-items:baseline;gap:6px;margin-bottom:2px}
+.wc-article{font-size:.72rem;font-weight:700;color:var(--blue);text-transform:uppercase}
+.wc-word{font-size:.98rem;font-weight:800;color:var(--text)}
+.wc-plural{font-size:.72rem;color:var(--text3)}
+.wc-hint{font-size:.7rem;color:var(--orange);font-weight:600;margin-bottom:4px}
+.word-flip-hint{font-size:.7rem;color:var(--text3);margin-top:6px}
+.wc-back{display:none}
+.word-card.revealed .wc-back{display:block}
+.word-card.revealed .word-flip-hint{display:none}
+.wc-translation{font-size:.9rem;color:var(--gold);font-weight:700;margin:8px 0 4px}
+.wc-example{font-size:.78rem;color:var(--text2);line-height:1.5;font-style:italic}
+.wc-actions{display:flex;gap:6px;margin-top:10px}
+.wc-known-btn{padding:3px 10px;border-radius:6px;border:1px solid var(--correct);background:transparent;color:var(--correct);font-size:.72rem;cursor:pointer;font-family:inherit;transition:all var(--transition)}
+.wc-known-btn:hover{background:rgba(16,185,129,.1)}
+.word-card.known .wc-known-btn{background:rgba(16,185,129,.15);font-weight:700}
+.wc-speak-btn{padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text3);font-size:.72rem;cursor:pointer;font-family:inherit;transition:all var(--transition)}
+.wc-speak-btn:hover{border-color:var(--purple);color:var(--purple)}
+
 .sc-vokabeln::before{background:var(--purple)}
 
 /* ---- FLASHCARDS ---- */
@@ -1202,6 +1283,14 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     <div class="hero-badges"><span class="badge badge-telc">🇩🇪 telc only — 20 gaps, 30 points</span><span class="badge badge-both">📌 Important for all B1 exams</span></div>
   </div>
 
+  <!-- ===== GRAMMAR LEARN MODE ===== -->
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title" style="margin-bottom:4px">📖 Lernbereich — Grammar Lessons</div>
+    <div class="card-sub" style="margin-bottom:18px">Pick a topic, study the rule with examples, then test yourself with a mini-quiz. Master these before doing the exercises below.</div>
+    <div class="lesson-nav" id="lesson-nav"></div>
+    <div id="lesson-panels"></div>
+  </div>
+
   <!-- Part 1: Grammar -->
   <div class="exercise-card">
     <div class="ex-header">
@@ -1305,15 +1394,36 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     <div class="hero-badges"><span class="badge badge-both">50 Verben mit Präpositionen</span><span class="badge badge-goethe">🦁 Goethe B1</span><span class="badge badge-telc">🇩🇪 telc B1</span></div>
   </div>
 
-  <!-- Flashcards -->
-  <div class="card">
-    <div class="card-title" data-i18n="vocab_flashcards_title">📇 Interactive Flashcards</div>
-    <div class="card-sub" data-i18n="vocab_flashcards_sub">Click any card to flip and learn the preposition, case, and example.</div>
-    <div class="flashcards-grid" id="flashcards-container"></div>
+  <!-- Vocab mode switcher -->
+  <div class="vocab-mode">
+    <button class="vm-btn active" data-mode="thematic" onclick="switchVocabMode('thematic')">🗂 Thematic Words</button>
+    <button class="vm-btn" data-mode="prepositions" onclick="switchVocabMode('prepositions')">📇 Verbs + Präposition</button>
+    <button class="vm-btn" data-mode="quiz" onclick="switchVocabMode('quiz')">🎯 Quiz</button>
   </div>
 
-  <!-- Quiz -->
-  <div class="card" id="vocab-quiz-card" style="margin-top: 24px;">
+  <!-- PANEL: Thematic Vocabulary -->
+  <div class="vocab-panel active" id="vocab-panel-thematic">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:4px">🗂 Thematic Vocabulary — B1 Word Groups</div>
+      <div class="card-sub" style="margin-bottom:14px">Click a word card to reveal its translation and example. Mark words you know to track progress.</div>
+      <div class="topic-pills" id="topic-pills"></div>
+      <div class="known-stats" id="known-stats">Known: <span>0</span> / 0</div>
+      <div class="word-grid" id="thematic-word-grid"></div>
+    </div>
+  </div>
+
+  <!-- PANEL: Flashcards (Verbs + Prepositions) -->
+  <div class="vocab-panel" id="vocab-panel-prepositions">
+    <div class="card">
+      <div class="card-title" data-i18n="vocab_flashcards_title">📇 Interactive Flashcards — Verbs with Fixed Prepositions</div>
+      <div class="card-sub" data-i18n="vocab_flashcards_sub">Click any card to flip and learn the preposition, case, and example.</div>
+      <div class="flashcards-grid" id="flashcards-container"></div>
+    </div>
+  </div>
+
+  <!-- PANEL: Quiz -->
+  <div class="vocab-panel" id="vocab-panel-quiz">
+  <div class="card" id="vocab-quiz-card" style="margin-top:0">
     <div class="card-title" data-i18n="vocab_quiz_title">🎯 Preposition Quiz</div>
     <div class="card-sub" data-i18n="vocab_quiz_sub">Test your knowledge of prepositions and cases. 10 random questions.</div>
     <div id="vocab-quiz-container"></div>
@@ -1323,6 +1433,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     </div>
     <div id="result-vocab-quiz" class="result-banner" style="margin-top: 16px;"></div>
   </div>
+  </div><!-- /vocab-panel-quiz -->
 </div>
 </section>
 
@@ -1337,6 +1448,19 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     </div>
   </div>
   <button class="lb-close" onclick="closeLightbox()">✕</button>
+</div>
+
+<!-- TRANSLATE POPUP -->
+<div id="translate-popup" role="tooltip" aria-live="polite">
+  <div class="tp-header">
+    <div id="tp-word" class="tp-word"></div>
+    <button class="tp-close" onclick="closeTP()" aria-label="Close">✕</button>
+  </div>
+  <div id="tp-translation" class="tp-translation"></div>
+  <div class="tp-actions">
+    <button class="tp-btn" onclick="speakTP()">🔊 Speak</button>
+    <span class="tp-credit">via MyMemory</span>
+  </div>
 </div>
 
 <script src="questions.js"></script>
@@ -3205,16 +3329,573 @@ function addRecordingDownload(blob) {
 }
 
 // ===========================
-// INIT: cookie banner, writing autosave, dashboard update
+// GRAMMAR LESSONS DATA
+// ===========================
+const GRAMMAR_LESSONS = [
+  {
+    id:'kasus', title:'🎭 Cases (Kasus)',
+    rules:[
+      { heading:'The 4 German Cases',
+        text:'Each case shows the role of a noun. The article changes depending on the case.',
+        table:{ headers:['Case','Role','masc.','fem.','neut.','plural'],
+          rows:[['Nominativ','Subject (who/what does)','<span class="hl">der</span>','<span class="hl">die</span>','<span class="hl">das</span>','<span class="hl">die</span>'],
+                ['Akkusativ','Direct object (whom/what)','<span class="hl2">den</span>','<span class="hl">die</span>','<span class="hl">das</span>','<span class="hl">die</span>'],
+                ['Dativ','Indirect object (to whom)','<span class="hl3">dem</span>','<span class="hl3">der</span>','<span class="hl3">dem</span>','<span class="hl3">den+n</span>'],
+                ['Genitiv','Possession (whose)','des+s','der','des+s','der']]}},
+      { heading:'How to identify the right case',
+        examples:['<strong>Der</strong> Mann kauft <strong>den</strong> Hund. → Nom. (subject) + Akk. (direct object)',
+                  'Ich helfe <strong>dem</strong> Mann. → Dativ (helfen always takes Dativ!)',
+                  'Das ist das Auto <strong>des</strong> Mannes. → Genitiv (possession)',
+                  '⚠️ Verbs that always take Dativ: helfen, danken, gehören, gefallen, folgen, glauben'] }
+    ],
+    quiz:[
+      {q:'Ich sehe ___ Mann.',opts:['der','den','dem','des'],ans:1,exp:'sehen = direct object → Akkusativ → masc. Akk = den'},
+      {q:'Ich helfe ___ Frau.',opts:['die','der','den','dem'],ans:1,exp:'helfen always takes Dativ → fem. Dat = der'},
+      {q:'___ Kind schläft.',opts:['Das','Den','Dem','Des'],ans:0,exp:'Subject of sentence → Nominativ → neut. Nom = Das'},
+      {q:'Ich gebe ___ Mann das Buch.',opts:['der','den','dem','des'],ans:2,exp:'Indirect object (to whom) → Dativ → masc. Dat = dem'},
+    ]
+  },
+  {
+    id:'perfekt', title:'⏱ Perfekt',
+    rules:[
+      { heading:'Perfekt = spoken past tense',
+        text:'Use haben or sein + Partizip II. Most verbs use haben. Verbs of movement or change-of-state use sein.',
+        table:{ headers:['Auxiliary','When to use','Key examples'],
+          rows:[['<span class="hl">haben</span>','Most verbs (transitive + many intransitive)','habe gegessen, habe gekauft, habe gemacht'],
+                ['<span class="hl3">sein</span>','Movement: gehen, kommen, fahren, fliegen, laufen<br>Change of state: werden, sterben, aufwachen, einschlafen','bin gegangen, ist gekommen, bin geflogen']]}},
+      { heading:'Partizip II formation',
+        examples:['Regular: machen → ge<strong>mach</strong>t · kaufen → ge<strong>kauf</strong>t · arbeiten → ge<strong>arbeit</strong>et',
+                  'Inseparable (be-, ver-, er-, ent-): besuchen → <strong>besucht</strong> (NO ge-!) · verstehen → <strong>verstanden</strong>',
+                  'Separable: aufmachen → auf<strong>ge</strong>macht · anrufen → an<strong>ge</strong>rufen · einschlafen → ein<strong>ge</strong>schlafen',
+                  'Strong (irregular): schreiben → geschrieben · essen → gegessen · gehen → gegangen · lesen → gelesen']}
+    ],
+    quiz:[
+      {q:'Ich ___ gestern ins Kino gegangen.',opts:['habe','bin','war','hatte'],ans:1,exp:'gehen = movement verb → sein. Ich bin gegangen.'},
+      {q:'Er ___ das Buch gelesen.',opts:['ist','hat','war','sein'],ans:1,exp:'lesen = transitive → haben. Er hat das Buch gelesen.'},
+      {q:'kaufen → Partizip II:',opts:['gekauft','kaufte','kaufen','gekauff'],ans:0,exp:'Regular verb: ge + stem + t = ge-kauf-t'},
+      {q:'besuchen → Partizip II:',opts:['gebesucht','besucht','besuchte','besuchen'],ans:1,exp:'Inseparable verb (be-): NO ge- prefix → einfach: besucht'},
+    ]
+  },
+  {
+    id:'konjunktiv', title:'✨ Konjunktiv II',
+    rules:[
+      { heading:'When to use Konjunktiv II',
+        text:'For wishes, hypotheticals ("if...would"), polite requests, and unreal conditions.',
+        examples:['Wenn ich Zeit <strong>hätte</strong>, <strong>würde</strong> ich reisen. → If I had time, I would travel.',
+                  'Ich <strong>würde</strong> gern Kaffee trinken. → I would like to drink coffee.',
+                  '<strong>Könnten</strong> Sie mir helfen? → Could you help me? (very polite)',
+                  'Das <strong>wäre</strong> wirklich toll! → That would be really great!']},
+      { heading:'Key Konjunktiv II forms to memorize',
+        table:{ headers:['Verb','ich-form','you say...'],
+          rows:[['sein','<span class="hl">wäre</span>','Das wäre schön.'],
+                ['haben','<span class="hl">hätte</span>','Ich hätte gern...'],
+                ['können','<span class="hl">könnte</span>','Könnten Sie...?'],
+                ['müssen','<span class="hl">müsste</span>','Das müsste klappen.'],
+                ['dürfen','<span class="hl">dürfte</span>','Das dürfte stimmen.'],
+                ['sollen','<span class="hl">sollte</span>','Sie sollte lernen.'],
+                ['all others','<span class="hl2">würde</span> + Infinitiv','Ich würde kaufen.']]}}
+    ],
+    quiz:[
+      {q:'Wenn ich Geld hätte, ___ ich ein Auto kaufen.',opts:['werde','würde','wird','worden'],ans:1,exp:'Hypothetical with wenn → würde + Infinitiv'},
+      {q:'___ Sie mir bitte helfen?',opts:['Würden','Werden','Wären','Haben'],ans:0,exp:'Polite request → Würden Sie...? (= Would you please...)'},
+      {q:'Ich ___ gern ins Kino gehen.',opts:['wäre','hätte','würde','könnte'],ans:2,exp:'würde + Infinitiv for general wishes with action verbs'},
+      {q:'Das ___ wirklich toll!',opts:['hätte','würde','wäre','könnte'],ans:2,exp:'sein → wäre in Konjunktiv II (Das wäre toll = That would be great)'},
+    ]
+  },
+  {
+    id:'nebensatz', title:'🔗 Nebensätze',
+    rules:[
+      { heading:'Rule #1: Verb goes to the END',
+        text:'In every Nebensatz (subordinate clause), the conjugated verb moves to the very end. This is the most tested B1 rule!',
+        examples:['Ich lerne Deutsch. + Ich möchte in Deutschland arbeiten. →',
+                  'Ich lerne Deutsch, <strong>weil</strong> ich in Deutschland arbeiten <strong>möchte</strong>.',
+                  '','Ich weiß nicht. + Kommt er heute? →',
+                  'Ich weiß nicht, <strong>ob</strong> er heute <strong>kommt</strong>.',
+                  '','⚠️ With Perfekt in Nebensatz: ...weil er das Buch ge<strong>lesen</strong> <strong>hat</strong>. (haben/sein goes last!)']},
+      { heading:'Key subordinating conjunctions',
+        table:{ headers:['Conjunction','Meaning','Example'],
+          rows:[['weil / da','because','Ich bin müde, <strong>weil</strong> ich nicht geschlafen <strong>habe</strong>.'],
+                ['dass','that','Ich denke, <strong>dass</strong> er Recht <strong>hat</strong>.'],
+                ['ob','whether / if','Ich frage mich, <strong>ob</strong> es morgen <strong>regnet</strong>.'],
+                ['wenn','when / if (repeated)','<strong>Wenn</strong> es regnet, bleibe ich zu Hause.'],
+                ['als','when (single past event)','<strong>Als</strong> ich jung war, spielte ich Fußball.'],
+                ['obwohl','although','Er kommt, <strong>obwohl</strong> er krank <strong>ist</strong>.'],
+                ['damit','so that','Ich lerne, <strong>damit</strong> ich bestehe.'],
+                ['bevor / nachdem','before / after','<strong>Bevor</strong> ich schlafe, lese ich.']]}}
+    ],
+    quiz:[
+      {q:'Ich lerne Deutsch, weil ich in München ___.',opts:['arbeite','arbeiten','arbeitet','gearbeitet'],ans:0,exp:'"weil" → Nebensatz → conjugated verb at end: arbeite (ich-form)'},
+      {q:'Ich weiß nicht, ob er morgen ___.',opts:['kommt','kommen','ist gekommen','komme'],ans:0,exp:'"ob" → Nebensatz → verb to end: kommt (er-form)'},
+      {q:'_____ es kalt ist, trage ich keinen Mantel.',opts:['Weil','Obwohl','Damit','Als'],ans:1,exp:'"Obwohl" = although (contrast). Despite the cold, no coat.'},
+      {q:'Sie rief mich an, ___ sie angekommen war.',opts:['bevor','nachdem','obwohl','damit'],ans:1,exp:'"nachdem" = after. She called me after she had arrived.'},
+    ]
+  },
+  {
+    id:'passiv', title:'🔄 Passiv',
+    rules:[
+      { heading:'Passiv = focus on what is done, not who does it',
+        text:'Use werden + Partizip II. The agent (who does it) is optional: "von + Dativ".',
+        examples:['Aktiv: <strong>Der Arzt</strong> untersucht den Patienten.',
+                  'Passiv: Der Patient <strong>wird untersucht</strong>. (von dem Arzt)',
+                  '']},
+      { heading:'Passiv across tenses',
+        table:{ headers:['Tense','Formula','Example'],
+          rows:[['Präsens','<span class="hl">wird</span> + PP2','Das Formular <strong>wird ausgefüllt</strong>.'],
+                ['Präteritum','<span class="hl">wurde</span> + PP2','Das Formular <strong>wurde ausgefüllt</strong>.'],
+                ['Perfekt','<span class="hl">ist</span> + PP2 + <span class="hl">worden</span>','Das Formular <strong>ist ausgefüllt worden</strong>.'],
+                ['+ Modal','modal + PP2 + <span class="hl">werden</span>','Das Formular <strong>muss ausgefüllt werden</strong>.']]}}
+    ],
+    quiz:[
+      {q:'Das Haus ___ gebaut. (Präsens Passiv)',opts:['hat','wird','ist','hatte'],ans:1,exp:'Präsens Passiv: wird + Partizip II → wird gebaut'},
+      {q:'Der Brief ___ geschrieben. (Präteritum Passiv)',opts:['wird','wurde','war','ist'],ans:1,exp:'Prät. Passiv: wurde + PP2 → wurde geschrieben'},
+      {q:'Die Aufgabe ___ erledigt werden. (Modal Passiv)',opts:['muss','wird','ist','hat'],ans:0,exp:'Passiv + Modal: muss + PP2 + werden = muss erledigt werden'},
+      {q:'Das Fenster ist ___ worden.',opts:['geöffnet','geöffnete','öffnen','öffnet'],ans:0,exp:'Perfekt Passiv: ist + Partizip II + worden = ist geöffnet worden'},
+    ]
+  },
+  {
+    id:'relativsatz', title:'📌 Relativsätze',
+    rules:[
+      { heading:'Relative clauses describe a noun',
+        text:'The relative pronoun matches the GENDER of the noun it describes, and takes the CASE of its role inside the relative clause.',
+        table:{ headers:['','masc.','fem.','neut.','plural'],
+          rows:[['Nominativ','<span class="hl">der</span>','<span class="hl">die</span>','<span class="hl">das</span>','<span class="hl">die</span>'],
+                ['Akkusativ','<span class="hl2">den</span>','<span class="hl">die</span>','<span class="hl">das</span>','<span class="hl">die</span>'],
+                ['Dativ','<span class="hl3">dem</span>','<span class="hl3">der</span>','<span class="hl3">dem</span>','<span class="hl3">denen</span>']]}},
+      { heading:'Examples — step by step',
+        examples:['Der Mann, <strong>der</strong> dort steht, ist mein Bruder. → Mann (masc.) + subject in clause → Nom. → der',
+                  'Die Frau, <strong>der</strong> ich geholfen habe, ist nett. → Frau (fem.) + helfen+Dativ → Dat. → der',
+                  'Das Buch, <strong>das</strong> ich lese, ist toll. → Buch (neut.) + direct object → Akk. → das',
+                  'Die Leute, <strong>denen</strong> ich geholfen habe, sind dankbar. → plural + Dativ → denen',
+                  '⚠️ Verb goes to the END of the relative clause (it is a Nebensatz!)']}
+    ],
+    quiz:[
+      {q:'Der Mann, ___ dort steht, ist mein Vater.',opts:['den','der','dem','das'],ans:1,exp:'Mann (masc.) + subject in clause → Nominativ → der'},
+      {q:'Die Frau, ___ ich kenne, heißt Maria.',opts:['die','der','den','dem'],ans:0,exp:'Frau (fem.) + kennen (direct object) → Akkusativ → die'},
+      {q:'Das Kind, ___ ich geholfen habe, ist glücklich.',opts:['das','dem','den','der'],ans:1,exp:'Kind (neut.) + helfen takes Dativ → Dat. neut. → dem'},
+      {q:'Die Freunde, mit ___ ich gehe, sind nett.',opts:['die','den','denen','derer'],ans:2,exp:'plural + mit takes Dativ → Dat. plural → denen'},
+    ]
+  }
+];
+
+let grammarQuizState = {};
+
+function initGrammarLessons() {
+  const nav = document.getElementById('lesson-nav');
+  const panels = document.getElementById('lesson-panels');
+  if (!nav || !panels) return;
+  GRAMMAR_LESSONS.forEach((lesson, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'ln-btn' + (idx === 0 ? ' active' : '');
+    btn.textContent = lesson.title;
+    btn.onclick = () => showLesson(lesson.id);
+    nav.appendChild(btn);
+    const panel = document.createElement('div');
+    panel.className = 'lesson-panel' + (idx === 0 ? ' active' : '');
+    panel.id = 'lesson-' + lesson.id;
+    panel.innerHTML = buildLessonHTML(lesson);
+    panels.appendChild(panel);
+  });
+}
+
+function buildLessonHTML(lesson) {
+  let html = '';
+  lesson.rules.forEach(rule => {
+    html += '<div class="lesson-rule">';
+    if (rule.heading) html += '<h4>' + rule.heading + '</h4>';
+    if (rule.text) html += '<p>' + rule.text + '</p>';
+    if (rule.table) {
+      html += '<table class="lrn-table"><tr>' + rule.table.headers.map(h => '<th>' + h + '</th>').join('') + '</tr>';
+      rule.table.rows.forEach(row => {
+        html += '<tr>' + row.map((cell, i) => '<td' + (i===0?' style="font-weight:700;white-space:nowrap"':'') + '>' + cell + '</td>').join('') + '</tr>';
+      });
+      html += '</table>';
+    }
+    if (rule.examples) rule.examples.forEach(ex => {
+      html += ex ? '<div class="de-ex">' + ex + '</div>' : '<div style="height:4px"></div>';
+    });
+    html += '</div>';
+  });
+  html += '<div class="lesson-mini-quiz"><div class="lmq-title">🎯 Mini-Quiz — test what you just learned</div>';
+  lesson.quiz.forEach((q, qi) => {
+    const qid = lesson.id + '_' + qi;
+    html += '<div class="lmq-question">' + (qi+1) + '. ' + q.q + '</div>';
+    html += '<div class="lmq-options">';
+    q.opts.forEach((opt, oi) => {
+      html += '<button class="lmq-opt" id="lmq-' + qid + '-' + oi + '" onclick="answerLMQ(\'' + qid + '\',' + oi + ',' + q.ans + ',\'' + q.exp.replace(/'/g,"\\'") + '\')">' + opt + '</button>';
+    });
+    html += '</div><div class="lmq-feedback" id="lmqfb-' + qid + '"></div>';
+  });
+  html += '<div class="lmq-score" id="lmq-score-' + lesson.id + '"></div></div>';
+  return html;
+}
+
+function showLesson(id) {
+  document.querySelectorAll('.lesson-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ln-btn').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('lesson-' + id);
+  if (panel) panel.classList.add('active');
+  const idx = GRAMMAR_LESSONS.findIndex(l => l.id === id);
+  const btns = document.querySelectorAll('.ln-btn');
+  if (btns[idx]) btns[idx].classList.add('active');
+}
+
+function answerLMQ(qid, chosen, correct, exp) {
+  const opts = document.querySelectorAll('[id^="lmq-' + qid + '-"]');
+  opts.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct) btn.classList.add('correct-ans');
+    else if (i === chosen && chosen !== correct) btn.classList.add('wrong-ans');
+  });
+  const fb = document.getElementById('lmqfb-' + qid);
+  if (fb) {
+    fb.textContent = (chosen === correct ? '✓ Correct! ' : '✗ Wrong. ') + exp;
+    fb.className = 'lmq-feedback show ' + (chosen === correct ? 'ok' : 'bad');
+  }
+  const lessonId = qid.split('_')[0];
+  if (!grammarQuizState[lessonId]) grammarQuizState[lessonId] = {c:0,t:0};
+  grammarQuizState[lessonId].t++;
+  if (chosen === correct) grammarQuizState[lessonId].c++;
+  const sc = document.getElementById('lmq-score-' + lessonId);
+  if (sc) sc.textContent = 'Score: ' + grammarQuizState[lessonId].c + ' / ' + grammarQuizState[lessonId].t;
+}
+
+// ===========================
+// THEMATIC VOCABULARY DATA
+// ===========================
+const THEMATIC_VOCAB = {
+  alltag:{label:'🏠 Alltag',words:[
+    {a:'der',w:'Alltag',pl:'',en:'daily life / everyday routine',ex:'Mein Alltag beginnt um 7 Uhr.'},
+    {a:'die',w:'Wäsche',pl:'',en:'laundry',ex:'Ich muss noch die Wäsche waschen.'},
+    {a:'der',w:'Haushalt',pl:'Haushalte',en:'household',ex:'Im Haushalt gibt es immer viel zu tun.'},
+    {a:'die',w:'Einkaufsliste',pl:'-n',en:'shopping list',ex:'Vergiss nicht die Einkaufsliste!'},
+    {a:'der',w:'Termin',pl:'-e',en:'appointment',ex:'Ich habe morgen einen Arzttermin.'},
+    {a:'die',w:'Rechnung',pl:'-en',en:'bill / invoice',ex:'Hast du die Rechnung schon bezahlt?'},
+    {a:'das',w:'Formular',pl:'-e',en:'form (to fill in)',ex:'Bitte füllen Sie das Formular aus.'},
+    {a:'die',w:'Behörde',pl:'-n',en:'government office / authority',ex:'Ich muss morgen zur Behörde.'},
+    {a:'die',w:'Genehmigung',pl:'-en',en:'permission / permit',ex:'Dafür brauche ich eine Genehmigung.'},
+    {a:'',w:'vereinbaren',pl:'',en:'to arrange / to agree on',ex:'Können wir einen Termin vereinbaren?'},
+    {a:'',w:'erledigen',pl:'',en:'to take care of / get done',ex:'Ich muss heute noch viel erledigen.'},
+    {a:'',w:'beantragen',pl:'',en:'to apply for',ex:'Ich möchte einen Reisepass beantragen.'},
+    {a:'die',w:'Gebühr',pl:'-en',en:'fee / charge',ex:'Die Bearbeitungsgebühr beträgt 30 Euro.'},
+    {a:'die',w:'Unterlagen',pl:'(pl.)',en:'documents / papers',ex:'Bitte bringen Sie alle Unterlagen mit.'},
+    {a:'das',w:'Amt',pl:'Ämter',en:'(government) office',ex:'Das Amt öffnet um 8 Uhr.'},
+  ]},
+  arbeit:{label:'💼 Arbeit',words:[
+    {a:'der',w:'Beruf',pl:'-e',en:'profession / job',ex:'Was ist Ihr Beruf?'},
+    {a:'die',w:'Bewerbung',pl:'-en',en:'job application',ex:'Ich habe eine Bewerbung geschrieben.'},
+    {a:'der',w:'Lebenslauf',pl:'Lebensläufe',en:'CV / résumé',ex:'Schicken Sie bitte Ihren Lebenslauf mit.'},
+    {a:'das',w:'Vorstellungsgespräch',pl:'-e',en:'job interview',ex:'Das Vorstellungsgespräch war sehr gut.'},
+    {a:'die',w:'Stelle',pl:'-n',en:'job position',ex:'Ich bewerbe mich um diese Stelle.'},
+    {a:'das',w:'Gehalt',pl:'Gehälter',en:'salary',ex:'Das Gehalt ist leider zu niedrig.'},
+    {a:'die',w:'Überstunden',pl:'(pl.)',en:'overtime (hours)',ex:'Ich mache oft Überstunden.'},
+    {a:'die',w:'Kündigung',pl:'-en',en:'dismissal / resignation notice',ex:'Er hat eine Kündigung erhalten.'},
+    {a:'',w:'kündigen',pl:'',en:'to quit / to dismiss',ex:'Sie hat ihren Job gekündigt.'},
+    {a:'die',w:'Ausbildung',pl:'-en',en:'apprenticeship / vocational training',ex:'Er macht eine Ausbildung als Koch.'},
+    {a:'das',w:'Praktikum',pl:'Praktika',en:'internship',ex:'Ich mache ein Praktikum in Berlin.'},
+    {a:'',w:'befördern',pl:'',en:'to promote (an employee)',ex:'Sie wurde zur Teamleiterin befördert.'},
+    {a:'der',w:'Kollege',pl:'-n',en:'colleague (masc.)',ex:'Meine Kollegen sind alle sehr nett.'},
+    {a:'die',w:'Besprechung',pl:'-en',en:'meeting',ex:'Wir haben um 10 Uhr eine Besprechung.'},
+    {a:'das',w:'Unternehmen',pl:'—',en:'company / enterprise',ex:'Das Unternehmen hat 500 Mitarbeiter.'},
+  ]},
+  gesundheit:{label:'🏥 Gesundheit',words:[
+    {a:'die',w:'Erkältung',pl:'-en',en:'cold (illness)',ex:'Ich habe eine schlimme Erkältung.'},
+    {a:'das',w:'Rezept',pl:'-e',en:'prescription',ex:'Der Arzt hat mir ein Rezept ausgestellt.'},
+    {a:'die',w:'Apotheke',pl:'-n',en:'pharmacy',ex:'Ich hole die Tabletten aus der Apotheke.'},
+    {a:'die',w:'Krankenkasse',pl:'-n',en:'health insurance (statutory)',ex:'Die Krankenkasse übernimmt die Kosten.'},
+    {a:'die',w:'Untersuchung',pl:'-en',en:'medical examination / check-up',ex:'Die Untersuchung war negativ.'},
+    {a:'der',w:'Blutdruck',pl:'',en:'blood pressure',ex:'Mein Blutdruck ist zu hoch.'},
+    {a:'',w:'sich erholen',pl:'',en:'to recover / to relax',ex:'Ich muss mich von der Krankheit erholen.'},
+    {a:'',w:'sich impfen lassen',pl:'',en:'to get vaccinated',ex:'Ich lasse mich jedes Jahr impfen.'},
+    {a:'die',w:'Sprechstunde',pl:'-n',en:"doctor's office hours",ex:'Die Sprechstunde beginnt um 9 Uhr.'},
+    {a:'das',w:'Symptom',pl:'-e',en:'symptom',ex:'Welche Symptome haben Sie?'},
+    {a:'der',w:'Schmerz',pl:'Schmerzen',en:'pain',ex:'Ich habe starke Schmerzen im Rücken.'},
+    {a:'',w:'verschreiben',pl:'',en:'to prescribe',ex:'Der Arzt verschreibt Antibiotika.'},
+    {a:'das',w:'Krankenhaus',pl:'Krankenhäuser',en:'hospital',ex:'Er wurde ins Krankenhaus gebracht.'},
+    {a:'',w:'heilen',pl:'',en:'to heal / to cure',ex:'Die Wunde heilt langsam.'},
+    {a:'die',w:'Tablette',pl:'-n',en:'tablet / pill',ex:'Nehmen Sie dreimal täglich eine Tablette.'},
+  ]},
+  reisen:{label:'✈️ Reisen',words:[
+    {a:'der',w:'Flug',pl:'Flüge',en:'flight',ex:'Der Flug dauert zwei Stunden.'},
+    {a:'das',w:'Gepäck',pl:'',en:'luggage / baggage',ex:'Ich habe nur Handgepäck dabei.'},
+    {a:'die',w:'Unterkunft',pl:'Unterkünfte',en:'accommodation',ex:'Haben Sie eine Unterkunft gebucht?'},
+    {a:'die',w:'Buchung',pl:'-en',en:'booking / reservation',ex:'Ich bestätige hiermit meine Buchung.'},
+    {a:'der',w:'Ausflug',pl:'Ausflüge',en:'excursion / day trip',ex:'Morgen machen wir einen Tagesausflug.'},
+    {a:'der',w:'Reisepass',pl:'Reisepässe',en:'passport',ex:'Vergessen Sie nicht Ihren Reisepass!'},
+    {a:'die',w:'Fahrkarte',pl:'-n',en:'train / bus ticket',ex:'Ich kaufe eine Fahrkarte am Schalter.'},
+    {a:'',w:'umsteigen',pl:'',en:'to change (train/bus/tram)',ex:'In Frankfurt müssen Sie umsteigen.'},
+    {a:'',w:'verpassen',pl:'',en:'to miss (a train/bus)',ex:'Ich habe leider den Zug verpasst.'},
+    {a:'die',w:'Verspätung',pl:'-en',en:'delay',ex:'Der Zug hat 20 Minuten Verspätung.'},
+    {a:'der',w:'Anschluss',pl:'Anschlüsse',en:'connection (transport)',ex:'Ich verpasse meinen Anschluss.'},
+    {a:'',w:'übernachten',pl:'',en:'to stay overnight',ex:'Wir übernachten in einem kleinen Hotel.'},
+    {a:'die',w:'Sehenswürdigkeit',pl:'-en',en:'tourist attraction / sight',ex:'Wir besichtigen alle Sehenswürdigkeiten.'},
+    {a:'der',w:'Zoll',pl:'Zölle',en:'customs',ex:'Am Zoll wurden unsere Taschen kontrolliert.'},
+    {a:'',w:'sich verirren',pl:'',en:'to get lost',ex:'Wir haben uns in der Stadt verirrt.'},
+  ]},
+  wohnen:{label:'🏠 Wohnen',words:[
+    {a:'die',w:'Miete',pl:'-n',en:'rent',ex:'Die Miete beträgt 850 Euro im Monat.'},
+    {a:'der',w:'Mieter',pl:'—',en:'tenant',ex:'Der Mieter hat die Wohnung gut gepflegt.'},
+    {a:'der',w:'Vermieter',pl:'—',en:'landlord',ex:'Der Vermieter repariert die Heizung.'},
+    {a:'der',w:'Mietvertrag',pl:'Mietverträge',en:'rental contract / lease',ex:'Ich habe den Mietvertrag unterschrieben.'},
+    {a:'die',w:'Kaution',pl:'-en',en:'security deposit',ex:'Die Kaution entspricht drei Monatsmieten.'},
+    {a:'die',w:'Nebenkosten',pl:'(pl.)',en:'additional costs / utilities',ex:'Strom und Wasser sind Nebenkosten.'},
+    {a:'',w:'einziehen',pl:'',en:'to move in',ex:'Wir ziehen nächste Woche ein.'},
+    {a:'',w:'ausziehen',pl:'',en:'to move out',ex:'Er ist letzten Monat ausgezogen.'},
+    {a:'der',w:'Nachbar',pl:'-n',en:'neighbour (masc.)',ex:'Mein Nachbar ist manchmal sehr laut.'},
+    {a:'die',w:'Heizung',pl:'-en',en:'heating system',ex:'Die Heizung im Schlafzimmer ist kaputt.'},
+    {a:'der',w:'Aufzug',pl:'Aufzüge',en:'elevator / lift',ex:'Der Aufzug funktioniert leider nicht.'},
+    {a:'',w:'renovieren',pl:'',en:'to renovate / to redecorate',ex:'Die Wohnung wurde gerade renoviert.'},
+    {a:'die',w:'Quadratmeter',pl:'—',en:'square metre (m²)',ex:'Die Wohnung hat 68 Quadratmeter.'},
+    {a:'das',w:'Erdgeschoss',pl:'-e',en:'ground floor',ex:'Meine Wohnung liegt im Erdgeschoss.'},
+    {a:'die',w:'Hausverwaltung',pl:'-en',en:'property management',ex:'Ich ruf die Hausverwaltung an.'},
+  ]},
+  umwelt:{label:'🌱 Umwelt',words:[
+    {a:'der',w:'Klimawandel',pl:'',en:'climate change',ex:'Der Klimawandel ist ein globales Problem.'},
+    {a:'die',w:'Umweltverschmutzung',pl:'',en:'environmental pollution',ex:'Die Umweltverschmutzung nimmt weiter zu.'},
+    {a:'der',w:'Müll',pl:'',en:'trash / garbage / waste',ex:'Bitte werfen Sie den Müll in die richtige Tonne.'},
+    {a:'',w:'recyceln',pl:'',en:'to recycle',ex:'Wir recyceln Papier, Glas und Plastik.'},
+    {a:'die',w:'Nachhaltigkeit',pl:'',en:'sustainability',ex:'Nachhaltigkeit ist sehr wichtig für die Zukunft.'},
+    {a:'der',w:'Strom',pl:'',en:'electricity',ex:'Ich nutze nur Ökostrom zu Hause.'},
+    {a:'',w:'sparen',pl:'',en:'to save (energy / money)',ex:'Man sollte Energie und Wasser sparen.'},
+    {a:'das',w:'Treibhausgas',pl:'-e',en:'greenhouse gas',ex:'CO₂ ist das wichtigste Treibhausgas.'},
+    {a:'',w:'schützen',pl:'',en:'to protect',ex:'Wir müssen die Natur unbedingt schützen.'},
+    {a:'',w:'verbrauchen',pl:'',en:'to consume / to use up',ex:'Wir verbrauchen viel zu viel Energie.'},
+    {a:'die',w:'Lösung',pl:'-en',en:'solution',ex:'Wir brauchen dringend eine Lösung.'},
+    {a:'',w:'vermeiden',pl:'',en:'to avoid',ex:'Wir sollten Einwegplastik vermeiden.'},
+    {a:'der',w:'Fußabdruck',pl:'Fußabdrücke',en:'(carbon) footprint',ex:'Ich möchte meinen CO₂-Fußabdruck reduzieren.'},
+    {a:'erneuerbar',w:'(Adj.)',pl:'',en:'renewable (energy)',ex:'Wir setzen auf erneuerbare Energien.'},
+    {a:'die',w:'Mülltrennung',pl:'',en:'waste separation / recycling sorting',ex:'In Deutschland ist Mülltrennung Pflicht.'},
+  ]},
+  bildung:{label:'📚 Bildung',words:[
+    {a:'die',w:'Prüfung',pl:'-en',en:'exam / test',ex:'Ich bereite mich intensiv auf die Prüfung vor.'},
+    {a:'der',w:'Abschluss',pl:'Abschlüsse',en:'qualification / degree',ex:'Sie hat einen sehr guten Abschluss.'},
+    {a:'das',w:'Zeugnis',pl:'-se',en:'school report / certificate',ex:'Er hat ein hervorragendes Zeugnis.'},
+    {a:'die',w:'Fähigkeit',pl:'-en',en:'ability / skill / capability',ex:'Das ist eine sehr wichtige Fähigkeit.'},
+    {a:'die',w:'Kenntnisse',pl:'(pl.)',en:'knowledge / expertise / skills',ex:'Er hat sehr gute Sprachkenntnisse.'},
+    {a:'die',w:'Fortbildung',pl:'-en',en:'further training / professional development',ex:'Ich mache eine berufliche Fortbildung.'},
+    {a:'',w:'bestehen',pl:'',en:'to pass (an exam)',ex:'Ich habe die Prüfung bestanden! 🎉'},
+    {a:'',w:'durchfallen',pl:'',en:'to fail (an exam)',ex:'Er ist leider durch die Prüfung gefallen.'},
+    {a:'',w:'sich anmelden',pl:'',en:'to register / to sign up',ex:'Ich melde mich für den Kurs an.'},
+    {a:'die',w:'Hausaufgabe',pl:'-n',en:'homework',ex:'Die Hausaufgaben sind für Freitag.'},
+    {a:'das',w:'Lehrbuch',pl:'Lehrbücher',en:'textbook',ex:'Das Lehrbuch kostet 28 Euro.'},
+    {a:'der',w:'Unterricht',pl:'',en:'lesson / class (school)',ex:'Der Unterricht beginnt pünktlich um 8 Uhr.'},
+    {a:'',w:'wiederholen',pl:'',en:'to revise / to repeat / to review',ex:'Ich muss das Kapitel nochmal wiederholen.'},
+    {a:'die',w:'Note',pl:'-n',en:'grade / mark',ex:'Meine Note in Deutsch ist sehr gut.'},
+    {a:'das',w:'Studium',pl:'Studien',en:'university studies / degree programme',ex:'Das Studium dauert drei Jahre.'},
+  ]},
+  emotionen:{label:'😊 Emotionen',words:[
+    {a:'die',w:'Freude',pl:'-n',en:'joy / happiness',ex:'Die gute Nachricht hat mir große Freude gemacht.'},
+    {a:'die',w:'Enttäuschung',pl:'-en',en:'disappointment',ex:'Das Ergebnis war eine große Enttäuschung.'},
+    {a:'die',w:'Sorge',pl:'-n',en:'worry / concern',ex:'Ich mache mir Sorgen um ihn.'},
+    {a:'die',w:'Angst',pl:'Ängste',en:'fear / anxiety',ex:'Ich habe Angst vor der Prüfung.'},
+    {a:'die',w:'Erleichterung',pl:'',en:'relief',ex:'Was für eine Erleichterung!'},
+    {a:'der',w:'Stolz',pl:'',en:'pride',ex:'Ich bin sehr stolz auf meinen Sohn.'},
+    {a:'',w:'sich schämen',pl:'',en:'to be ashamed / to feel embarrassed',ex:'Er schämt sich für sein Verhalten.'},
+    {a:'',w:'vermissen',pl:'',en:'to miss (a person or thing)',ex:'Ich vermisse meine Familie sehr.'},
+    {a:'',w:'sich aufregen',pl:'',en:'to get upset / to get worked up',ex:'Reg dich bitte nicht so auf!'},
+    {a:'',w:'trösten',pl:'',en:'to comfort / to console',ex:'Sie hat ihn nach dem Misserfolg getröstet.'},
+    {a:'',w:'enttäuschen',pl:'',en:'to disappoint',ex:'Er hat mich sehr enttäuscht.'},
+    {a:'',w:'überraschen',pl:'',en:'to surprise',ex:'Die Nachricht hat mich total überrascht.'},
+    {a:'',w:'sich entspannen',pl:'',en:'to relax / to unwind',ex:'Ich entspanne mich nach der Arbeit.'},
+    {a:'das',w:'Vertrauen',pl:'',en:'trust / confidence',ex:'Ich habe volles Vertrauen in dich.'},
+    {a:'die',w:'Geduld',pl:'',en:'patience',ex:'Du brauchst dabei viel Geduld.'},
+  ]}
+};
+
+let vocabKnown = {};
+try { vocabKnown = JSON.parse(localStorage.getItem('b1_vocab_known') || '{}'); } catch(e) {}
+let currentVocabTopic = 'alltag';
+
+function initThematicVocab() {
+  renderTopicPills();
+  renderWordGrid(currentVocabTopic);
+}
+
+function renderTopicPills() {
+  const c = document.getElementById('topic-pills');
+  if (!c) return;
+  c.innerHTML = '';
+  Object.entries(THEMATIC_VOCAB).forEach(([key, topic]) => {
+    const btn = document.createElement('button');
+    btn.className = 'topic-pill' + (key === currentVocabTopic ? ' active' : '');
+    btn.textContent = topic.label;
+    btn.onclick = () => {
+      currentVocabTopic = key;
+      document.querySelectorAll('.topic-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderWordGrid(key);
+    };
+    c.appendChild(btn);
+  });
+}
+
+function renderWordGrid(topicKey) {
+  const c = document.getElementById('thematic-word-grid');
+  if (!c) return;
+  const topic = THEMATIC_VOCAB[topicKey];
+  if (!topic) return;
+  const knownCount = topic.words.filter(w => vocabKnown[topicKey + '_' + w.w]).length;
+  const stats = document.getElementById('known-stats');
+  if (stats) stats.innerHTML = 'Known: <span>' + knownCount + '</span> / ' + topic.words.length;
+  c.innerHTML = '';
+  topic.words.forEach(word => {
+    const key = topicKey + '_' + word.w;
+    const isKnown = !!vocabKnown[key];
+    const isVerb = word.a === '';
+    const card = document.createElement('div');
+    card.className = 'word-card' + (isKnown ? ' known' : '');
+    const speakWord = ((word.a && word.a.length <= 4 ? word.a + ' ' : '') + word.w).trim();
+    card.innerHTML =
+      '<div class="wc-top">' +
+        (word.a && word.a.length <= 4 ? '<span class="wc-article">' + word.a + '</span>' : '') +
+        '<span class="wc-word">' + word.w + '</span>' +
+        (word.pl && word.pl !== '(pl.)' && word.pl !== '(Adj.)' ? '<span class="wc-plural">(' + word.pl + ')</span>' : '') +
+      '</div>' +
+      (isVerb ? '<div class="wc-hint">verb (infinitive)</div>' : '') +
+      '<div class="word-flip-hint">👆 tap to reveal</div>' +
+      '<div class="wc-back">' +
+        '<div class="wc-translation">' + word.en + '</div>' +
+        '<div class="wc-example">"' + word.ex + '"</div>' +
+        '<div class="wc-actions">' +
+          '<button class="wc-known-btn" onclick="event.stopPropagation();toggleKnown(\'' + topicKey + '\',\'' + word.w.replace(/'/g,"\\'") + '\',this)">' + (isKnown ? '✓ Known' : '+ Mark known') + '</button>' +
+          '<button class="wc-speak-btn" onclick="event.stopPropagation();speakDE(\'' + speakWord.replace(/'/g,"\\'") + '\')">🔊</button>' +
+        '</div>' +
+      '</div>';
+    card.addEventListener('click', () => card.classList.toggle('revealed'));
+    c.appendChild(card);
+  });
+}
+
+function toggleKnown(topicKey, word, btn) {
+  const key = topicKey + '_' + word;
+  vocabKnown[key] = !vocabKnown[key];
+  try { localStorage.setItem('b1_vocab_known', JSON.stringify(vocabKnown)); } catch(e) {}
+  const card = btn.closest('.word-card');
+  if (vocabKnown[key]) { card.classList.add('known'); btn.textContent = '✓ Known'; }
+  else { card.classList.remove('known'); btn.textContent = '+ Mark known'; }
+  const topic = THEMATIC_VOCAB[topicKey];
+  const kc = topic.words.filter(w => vocabKnown[topicKey + '_' + w.w]).length;
+  const stats = document.getElementById('known-stats');
+  if (stats) stats.innerHTML = 'Known: <span>' + kc + '</span> / ' + topic.words.length;
+}
+
+function switchVocabMode(mode) {
+  document.querySelectorAll('.vocab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.vm-btn').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('vocab-panel-' + mode);
+  if (panel) panel.classList.add('active');
+  document.querySelectorAll('.vm-btn').forEach(b => {
+    if (b.getAttribute('data-mode') === mode) b.classList.add('active');
+  });
+}
+
+function speakDE(text) {
+  if (!window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'de-DE'; u.rate = 0.88;
+  const voice = speechSynthesis.getVoices().find(v => v.lang && v.lang.startsWith('de'));
+  if (voice) u.voice = voice;
+  speechSynthesis.speak(u);
+}
+
+// ===========================
+// CLICK-TO-TRANSLATE
+// ===========================
+const tpCache = {};
+let tpOpen = false;
+
+function getWordAt(e) {
+  let node, offset;
+  if (document.caretPositionFromPoint) {
+    const pos = document.caretPositionFromPoint(e.clientX, e.clientY);
+    if (!pos) return '';
+    node = pos.offsetNode; offset = pos.offset;
+  } else if (document.caretRangeFromPoint) {
+    const r = document.caretRangeFromPoint(e.clientX, e.clientY);
+    if (!r) return '';
+    node = r.startContainer; offset = r.startOffset;
+  } else return '';
+  if (!node || node.nodeType !== 3) return '';
+  const t = node.textContent;
+  let s = offset, end = offset;
+  while (s > 0 && /[\wäöüÄÖÜß\-]/.test(t[s-1])) s--;
+  while (end < t.length && /[\wäöüÄÖÜß\-]/.test(t[end])) end++;
+  return t.slice(s, end).replace(/[^a-zA-ZäöüÄÖÜßß\-]/g,'').trim();
+}
+
+function positionTP(popup, x, y) {
+  popup.style.display = 'block';
+  const pw = popup.offsetWidth || 220, ph = popup.offsetHeight || 90;
+  let left = x + 14, top = y - 10;
+  if (left + pw > window.innerWidth - 8) left = x - pw - 14;
+  if (top + ph > window.innerHeight - 8) top = y - ph - 10;
+  if (top < 8) top = 8; if (left < 8) left = 8;
+  popup.style.left = left + 'px'; popup.style.top = top + 'px';
+}
+
+document.addEventListener('mouseup', async function(e) {
+  if (e.target.closest('#translate-popup,button,input,textarea,select,a,.lang-btn,.nav-tab,.lmq-opt,.no-translate')) return;
+  let word = '';
+  const sel = window.getSelection()?.toString().trim();
+  if (sel && !sel.includes(' ') && sel.length >= 2 && /[a-zA-ZäöüÄÖÜß]/.test(sel)) {
+    word = sel.replace(/[^a-zA-ZäöüÄÖÜß\-]/g,'');
+  } else if (!sel) {
+    word = getWordAt(e);
+  }
+  if (!word || word.length < 2) { closeTP(); return; }
+  const popup = document.getElementById('translate-popup');
+  if (!popup) return;
+  document.getElementById('tp-word').textContent = word;
+  document.getElementById('tp-translation').innerHTML = '<em style="color:var(--text3);font-size:.82rem">translating…</em>';
+  positionTP(popup, e.clientX, e.clientY);
+  popup.classList.add('show');
+  tpOpen = true;
+  try {
+    const cached = tpCache[word.toLowerCase()];
+    if (cached) { document.getElementById('tp-translation').textContent = cached; return; }
+    const res = await fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(word) + '&langpair=de|en');
+    const data = await res.json();
+    const t = data?.responseData?.translatedText || '';
+    const clean = t.replace(/PLEASE DO NOT.*$/i,'').trim();
+    if (clean && clean.toLowerCase() !== word.toLowerCase()) {
+      tpCache[word.toLowerCase()] = clean;
+      document.getElementById('tp-translation').textContent = clean;
+    } else {
+      document.getElementById('tp-translation').textContent = '(no translation found)';
+    }
+  } catch { document.getElementById('tp-translation').textContent = '(unavailable offline)'; }
+});
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('#translate-popup') && tpOpen) closeTP();
+});
+
+function closeTP() {
+  const p = document.getElementById('translate-popup');
+  if (p) { p.classList.remove('show'); p.style.display = 'none'; }
+  tpOpen = false;
+}
+function speakTP() {
+  const w = document.getElementById('tp-word')?.textContent;
+  if (w) speakDE(w);
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTP(); });
+
+// ===========================
+// INIT: cookie banner, writing autosave, grammar lessons, thematic vocab, dashboard
 // ===========================
 document.addEventListener('DOMContentLoaded', () => {
   initCookieBanner();
   initWritingAutosave();
+  initGrammarLessons();
+  initThematicVocab();
   if (typeof updateDashboard === 'function') updateDashboard();
 });
 if (document.readyState !== 'loading') {
   initCookieBanner();
   initWritingAutosave();
+  initGrammarLessons();
+  initThematicVocab();
   if (typeof updateDashboard === 'function') updateDashboard();
 }
 </script>
