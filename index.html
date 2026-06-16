@@ -60,9 +60,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 
 /* ---- NAV ---- */
 .main-nav{position:sticky;top:0;z-index:100;background:rgba(8,15,30,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 16px}
-.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:4px;overflow-x:auto;height:60px;scrollbar-width:none}
-.nav-inner::-webkit-scrollbar{display:none}
-.nav-logo{font-weight:800;font-size:1.1rem;color:var(--gold);white-space:nowrap;margin-right:16px;letter-spacing:-.02em}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:60px;gap:0}
+.nav-tabs-scroll{display:flex;align-items:center;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none;height:100%}
+.nav-tabs-scroll::-webkit-scrollbar{display:none}
+.nav-logo{font-weight:800;font-size:1.1rem;color:var(--gold);white-space:nowrap;margin-right:16px;letter-spacing:-.02em;flex-shrink:0}
 .nav-logo span{color:var(--text2);font-weight:400;font-size:.85rem}
 .nav-tab{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:none;background:transparent;color:var(--text2);font-size:.85rem;font-weight:500;cursor:pointer;transition:all var(--transition);white-space:nowrap;font-family:inherit}
 .nav-tab:hover{background:var(--card);color:var(--text)}
@@ -368,7 +369,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .tooltip-wrap:hover .tooltip-text{visibility:visible}
 
 /* Language switcher */
-.lang-switcher{display:flex;align-items:center;gap:4px;margin-left:auto;padding-left:16px;border-left:1px solid var(--border)}
+.lang-switcher{display:flex;align-items:center;gap:4px;flex-shrink:0;padding-left:12px;border-left:1px solid var(--border)}
 .lang-btn{padding:5px 10px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.78rem;font-weight:700;cursor:pointer;transition:all var(--transition);font-family:inherit;white-space:nowrap}
 .lang-btn:hover{background:var(--card2);color:var(--text)}
 .lang-btn.active{background:var(--card2);color:var(--gold);border-color:var(--gold)}
@@ -521,13 +522,15 @@ a:focus:not(:focus-visible),
 <nav class="main-nav" aria-label="Hauptnavigation">
   <div class="nav-inner">
     <div class="nav-logo">B1 Prüfungsgenie <span data-i18n="nav_subtitle">Deutsch Exam Prep</span></div>
-    <button class="nav-tab active" onclick="showTab('home')" aria-current="page"><span class="dot dot-home"></span> 🏠 <span data-i18n="nav_home">Home</span></button>
-    <button class="nav-tab" onclick="showTab('lesen')"><span class="dot dot-lesen"></span> 📖 <span data-i18n="nav_lesen">Lesen</span></button>
-    <button class="nav-tab" onclick="showTab('hoeren')"><span class="dot dot-hoeren"></span> 🎧 <span data-i18n="nav_hoeren">Hören</span></button>
-    <button class="nav-tab" onclick="showTab('schreiben')"><span class="dot dot-schreiben"></span> ✍️ <span data-i18n="nav_schreiben">Schreiben</span></button>
-    <button class="nav-tab" onclick="showTab('sprechen')"><span class="dot dot-sprechen"></span> 🗣 <span data-i18n="nav_sprechen">Sprechen</span></button>
-    <button class="nav-tab" onclick="showTab('grammatik')"><span class="dot dot-grammatik"></span> 📝 <span data-i18n="nav_grammatik">Grammatik</span></button>
-    <button class="nav-tab" onclick="showTab('vokabeln')"><span class="dot dot-vokabeln" style="background:var(--purple)"></span> 📇 <span data-i18n="nav_vokabeln">Vokabeln</span></button>
+    <div class="nav-tabs-scroll">
+      <button class="nav-tab active" onclick="showTab('home')" aria-current="page"><span class="dot dot-home"></span> 🏠 <span data-i18n="nav_home">Home</span></button>
+      <button class="nav-tab" onclick="showTab('lesen')"><span class="dot dot-lesen"></span> 📖 <span data-i18n="nav_lesen">Lesen</span></button>
+      <button class="nav-tab" onclick="showTab('hoeren')"><span class="dot dot-hoeren"></span> 🎧 <span data-i18n="nav_hoeren">Hören</span></button>
+      <button class="nav-tab" onclick="showTab('schreiben')"><span class="dot dot-schreiben"></span> ✍️ <span data-i18n="nav_schreiben">Schreiben</span></button>
+      <button class="nav-tab" onclick="showTab('sprechen')"><span class="dot dot-sprechen"></span> 🗣 <span data-i18n="nav_sprechen">Sprechen</span></button>
+      <button class="nav-tab" onclick="showTab('grammatik')"><span class="dot dot-grammatik"></span> 📝 <span data-i18n="nav_grammatik">Grammatik</span></button>
+      <button class="nav-tab" onclick="showTab('vokabeln')"><span class="dot dot-vokabeln" style="background:var(--purple)"></span> 📇 <span data-i18n="nav_vokabeln">Vokabeln</span></button>
+    </div>
     <div class="lang-switcher" role="group" aria-label="Sprache wählen">
       <button class="lang-btn active" id="lang-de" onclick="setLang('de')" aria-label="Deutsch">🇩🇪 DE</button>
       <button class="lang-btn" id="lang-en" onclick="setLang('en')" aria-label="English">🇬🇧 EN</button>
