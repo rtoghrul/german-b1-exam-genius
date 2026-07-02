@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 // ===========================
 // WORKSHEET IMAGE PATHS
@@ -264,6 +264,83 @@ const LISTENING = {
       { id:58, text:'Auf der A3 gibt es eine Baustelle.', answer: true, context:'🚗 Verkehr' },
       { id:59, text:'Am Samstag scheint im Osten die Sonne.', answer: false, context:'🌤 Wetter' },
       { id:60, text:'Die Herrenabteilung ist im zweiten Stock.', answer: false, context:'🛍 Kaufhaus' }
+    ]
+  },
+
+  // --- GOETHE: Teil 2 (Vortrag/Führung, MCQ) ---
+  goethe_p2: {
+    examType: 'goethe', part: 2,
+    title: 'Hören — Teil 2 (Goethe)', subtitle: 'Vortrag/Führung -- 5 Multiple-Choice-Fragen',
+    instruction: 'Sie hören einen Vortrag oder eine Führung. Sie hören den Text einmal. wählen Sie die richtige Antwort (a, b oder c).',
+    note: 'Im Goethe B1 hören Sie Teil 2 nur einmal -- konzentrieren Sie sich auf die Hauptinformationen.',
+    readingTime: 60,
+    audioFile: 'https://bfu.goethe.de/medien/b1_m/audio6.mp4',
+    questions: [
+      { id:61, question:'Worum geht es in dem Vortrag?', options:['a) Um die Geschichte eines Museums','b) Um eine StadtFührung','c) Um einen Kochkurs'], answer:'b', context:'Vortrag: StadtFührung durch Heidelberg' },
+      { id:62, question:'Wann findet die Führung statt?', options:['a) Jeden Samstag um 10 Uhr','b) Jeden Sonntag um 11 Uhr','c) Jeden Freitag um 14 Uhr'], answer:'b', context:'Zeitangabe' },
+      { id:63, question:'Wo treffen sich die Teilnehmer?', options:['a) Am Hauptbahnhof','b) Vor dem Rathaus','c) Am Marktplatz vor der Kirche'], answer:'c', context:'Treffpunkt' },
+      { id:64, question:'Was kostet die Führung fur Studenten?', options:['a) 5 Euro','b) 8 Euro','c) Nichts -- sie ist kostenlos'], answer:'a', context:'Preis' },
+      { id:65, question:'Was sollten die Teilnehmer mitbringen?', options:['a) Einen Stadtplan','b) Etwas zu trinken','c) Festes Schuhwerk'], answer:'c', context:'Empfehlung' }
+    ]
+  },
+
+  // --- GOETHE: Teil 3 (Gespräch/Interview, T/F) ---
+  goethe_p3: {
+    examType: 'goethe', part: 3,
+    title: 'hören -- Teil 3 (Goethe)', subtitle: 'Gespräch/Interview -- 7 Richtig/Falsch-Aussagen',
+    instruction: 'Sie hören ein Gespräch oder Interview. Sie hören den Text einmal. Sind die Aussagen richtig (+) oder falsch (-)?',
+    note: 'Im Goethe B1 hören Sie Teil 3 nur einmal. Achten Sie genau auf die Details!',
+    readingTime: 45,
+    audioFile: 'https://bfu.goethe.de/medien/b1_m/audio7.mp4',
+    questions: [
+      { id:66, text:'Die Frau arbeitet seit fünf Jahren als Lehrerin.', answer: false, context:'Interview: Beruf' },
+      { id:67, text:'Sie hat Früher in einer anderen Stadt gelebt.', answer: true, context:'Umzug' },
+      { id:68, text:'Ihr Arbeitstag beginnt immer um 8 Uhr.', answer: false, context:'Arbeitszeiten' },
+      { id:69, text:'Sie findet ihren Beruf sehr stressig.', answer: false, context:'Meinung' },
+      { id:70, text:'Die Frau macht regelmäßig Sport.', answer: true, context:'Freizeit' },
+      { id:71, text:'Sie mochte nächstes Jahr den Job wechseln.', answer: false, context:'Zukunftspläne' },
+      { id:72, text:'Am Wochenende trifft sie oft Freunde.', answer: true, context:'Wochenende' }
+    ]
+  },
+
+  // --- GOETHE: Teil 4 (Radiodiskussion, T/F mit Zuordnung) ---
+  goethe_p4: {
+    examType: 'goethe', part: 4,
+    title: 'hören -- Teil 4 (Goethe)', subtitle: 'Radiodiskussion -- 8 Richtig/Falsch-Aussagen mit Sprecher-Zuordnung',
+    instruction: 'Sie hören eine Diskussion im Radio. Sie hören den Text zweimal. Sind die Aussagen richtig (+) oder falsch (-)? Wer sagt was?',
+    note: 'Im Goethe B1 Teil 4 mussen Sie auch zuordnen, wer was sagt: M = Moderatorin, F = Frau Dr. Meier (Lehrerin), H = Herr Schmidt (Vater). Teil 4 wird zweimal gespielt.',
+    readingTime: 60,
+    audioFile: 'https://bfu.goethe.de/medien/b1_m/audio8.mp4',
+    questions: [
+      { id:73, text:'Das Thema der Diskussion ist Handyverbot an Schulen.', answer: true, context:'Thema', speaker:'M' },
+      { id:74, text:'Frau Dr. Meier ist fur ein komplettes Handyverbot.', answer: true, context:'Position Lehrerin', speaker:'F' },
+      { id:75, text:'Herr Schmidt findet Handys im Unterricht generell störend.', answer: false, context:'Position Vater', speaker:'H' },
+      { id:76, text:'Laut Frau Meier nutzen 80% der Schuler das Handy wahrend des Unterrichts.', answer: true, context:'Statistik', speaker:'F' },
+      { id:77, text:'Herr Schmidt meint, Handys seien auch fur Recherchen nützlich.', answer: true, context:'Argument Pro', speaker:'H' },
+      { id:78, text:'Die Moderatorin schlagt einen Kompromiss vor.', answer: true, context:'Moderation', speaker:'M' },
+      { id:79, text:'Frau Meier sagt, Handys helfen bei der Konzentration.', answer: false, context:'Argument Lehrerin', speaker:'F' },
+      { id:80, text:'Am Ende sind sich alle einig.', answer: false, context:'Fazit', speaker:'M' }
+    ]
+  },
+
+
+  // --- QUICK DRILL: Gemischte Hörübungen ---
+  quick_drill: {
+    examType: 'both', part: 0,
+    title: 'Schnelltest: Gemischte Hörübungen', subtitle: '10 kurze Aussagen — Richtig oder Falsch?',
+    instruction: '10 kurze Szenarien aus dem Alltag. Schnell entscheiden: Richtig (+) oder Falsch (–)? Perfekt für 5 Minuten zwischendurch!',
+    readingTime: 30,
+    questions: [
+      { id:81, text:'Auf einer Party sagt jemand: Ich bin seit drei Jahren Vegetarier.', answer: true, context:'Party' },
+      { id:82, text:'Im Radio: Morgen bleibt es im Norden trocken und sonnig.', answer: true, context:'Wetterbericht' },
+      { id:83, text:'Durchsage im Zug: Der ICE nach München fällt heute aus.', answer: false, context:'Bahnhof' },
+      { id:84, text:'In der Firma: Die Kantine schließt wegen Renovierung.', answer: true, context:'Arbeit' },
+      { id:85, text:'Anrufbeantworter: Die Arztpraxis ist am Mittwoch geschlossen.', answer: true, context:'Arzt' },
+      { id:86, text:'Nachricht von einem Freund: Komme heute leider doch nicht zum Abendessen.', answer: false, context:'Freunde' },
+      { id:87, text:'Ansage im Supermarkt: In 5 Minuten schließt der Laden.', answer: true, context:'Einkaufen' },
+      { id:88, text:'Durchsage am Flughafen: Flug LH 404 startet planmäßig um 14:30.', answer: true, context:'Flughafen' },
+      { id:89, text:'Im Kurs: Die Prüfung findet am 15. Juli statt.', answer: false, context:'Schule' },
+      { id:90, text:'Per Mail: Das Meeting wurde auf nächsten Dienstag verschoben.', answer: true, context:'Büro' }
     ]
   }
 };
