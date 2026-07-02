@@ -893,6 +893,16 @@ a:focus:not(:focus-visible),
     <div style="margin-top:10px;font-size:.8rem;color:var(--text3)">💡 Ein Tag zählt als erledigt, wenn alle Aufgaben des Tages abgehakt sind. / A day counts as done when all its tasks are ticked.</div>
   </div>
 
+  <!-- PROGRESS DASHBOARD -->
+  <div class="card" style="margin-bottom:24px;border-top:3px solid var(--green)" id="progress-dashboard-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:4px">
+      <div class="card-title" style="margin:0">📈 Mein Fortschritt — erledigt & offen</div>
+      <button class="btn-secondary" data-custom-label="1" style="padding:5px 12px;font-size:.76rem" onclick="if(confirm('Wirklich den gesamten Übungs-Fortschritt zurücksetzen?')){clearProgress();try{localStorage.removeItem('b1_lesson_quiz');localStorage.removeItem('b1_vocab_known')}catch(e){};location.reload()}">🗑 Zurücksetzen</button>
+    </div>
+    <div class="card-sub" style="margin-bottom:14px">✅ = gemacht · ⭕ = noch offen. Alles wird automatisch gespeichert, sobald du eine Übung mit „Antworten prüfen" abschließt.</div>
+    <div id="progress-dashboard"></div>
+  </div>
+
   <div id="plan-weeks"></div>
 
   <div class="tip-card" style="margin-top:24px">
@@ -1760,6 +1770,8 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
       <a class="pdf-link" href="https://deutsch.vhs-lernportal.de/" target="_blank" rel="noopener"><span class="pl-icon">🏫</span><span><span class="pl-title">VHS-Lernportal (A1–B2)</span><br><span class="pl-sub">Offizielles kostenloses Portal der Volkshochschulen — mit echtem Tutor, der deine Texte korrigiert! Auch DTZ-Vorbereitung.</span></span></a>
       <a class="pdf-link" href="https://learngerman.dw.com/de/deutschtrainer/c-60636826" target="_blank" rel="noopener"><span class="pl-icon">🎯</span><span><span class="pl-title">DW Deutschtrainer</span><br><span class="pl-sub">100 kurze Video-Lektionen für den Alltagswortschatz — ideal für 10 Minuten zwischendurch.</span></span></a>
       <a class="pdf-link" href="https://www.goethe.de/prj/dfd/de/home.cfm" target="_blank" rel="noopener"><span class="pl-icon">🦁</span><span><span class="pl-title">Goethe „Deutsch für dich"</span><br><span class="pl-sub">Kostenlose Übungs-Community vom Goethe-Institut mit Materialien nach Niveau sortiert.</span></span></a>
+      <a class="pdf-link" href="https://www.deutschakademie.de/online-deutschkurs/" target="_blank" rel="noopener"><span class="pl-icon">🖥</span><span><span class="pl-title">DeutschAkademie Online-Kurs</span><br><span class="pl-sub">Kostenloser Online-Deutschkurs mit über 50.000 Grammatikübungen, nach Niveau und Thema sortiert.</span></span></a>
+      <a class="pdf-link" href="https://vhs-lernportal.de/deutsch" target="_blank" rel="noopener"><span class="pl-icon">📱</span><span><span class="pl-title">VHS-Lernportal Apps</span><br><span class="pl-sub">Die kostenlosen Apps zum VHS-Lernportal — B1-Kurs komplett offline auf dem Handy lernen.</span></span></a>
     </div>
   </div>
 
@@ -1774,6 +1786,8 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
       <a class="pdf-link" href="https://www.youtube.com/@hallodeutschschule" target="_blank" rel="noopener"><span class="pl-icon">🇨🇭</span><span><span class="pl-title">Hallo Deutschschule</span><br><span class="pl-sub">Komplette Unterrichtsstunden einer echten Sprachschule — auch B1-Prüfungsvorbereitung.</span></span></a>
       <a class="pdf-link" href="https://www.youtube.com/watch?v=1DDDZQwybnQ&list=PLnDrqm6hsn1QYSk5g0V4pfLnUyQBH0i7d" target="_blank" rel="noopener"><span class="pl-icon">🎬</span><span><span class="pl-title">Extra auf Deutsch (Lernserie)</span><br><span class="pl-sub">Sitcom für Deutschlerner — einfaches Deutsch, viel Humor. Alle Folgen kostenlos auf YouTube.</span></span></a>
       <a class="pdf-link" href="https://www.youtube.com/@DeutschmitBenjamin" target="_blank" rel="noopener"><span class="pl-icon">🎓</span><span><span class="pl-title">Deutsch mit Benjamin</span><br><span class="pl-sub">Prüfungsorientiert: B1/B2-Briefe, Sprechen-Simulationen, typische Prüfungsfehler.</span></span></a>
+      <a class="pdf-link" href="https://www.youtube.com/results?search_query=deutsch+lernen+durch+h%C3%B6ren+b1" target="_blank" rel="noopener"><span class="pl-icon">👂</span><span><span class="pl-title">Deutsch lernen durch Hören</span><br><span class="pl-sub">Alltagsdialoge und Geschichten auf B1-Niveau zum Mitlesen — perfekt vor dem Einschlafen.</span></span></a>
+      <a class="pdf-link" href="https://www.youtube.com/@24hDeutsch" target="_blank" rel="noopener"><span class="pl-icon">⏰</span><span><span class="pl-title">24h Deutsch (mit Ida)</span><br><span class="pl-sub">Junge, moderne Lernvideos über echtes Alltagsdeutsch — vom Goethe-Institut gefördert.</span></span></a>
     </div>
   </div>
 
@@ -1786,6 +1800,8 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
       <a class="pdf-link" href="https://www.dw.com/de/langsam-gesprochene-nachrichten/s-8030" target="_blank" rel="noopener"><span class="pl-icon">📰</span><span><span class="pl-title">DW Langsam gesprochene Nachrichten</span><br><span class="pl-sub">Tagesnachrichten in langsamem Deutsch + Text — jeden Tag 10 Minuten Hörtraining.</span></span></a>
       <a class="pdf-link" href="https://www.easygerman.org/podcast" target="_blank" rel="noopener"><span class="pl-icon">💬</span><span><span class="pl-title">Easy German Podcast</span><br><span class="pl-sub">Lockere Gespräche über Alltagsthemen — ab B1 gut zu verstehen, mit Transkript-Option.</span></span></a>
       <a class="pdf-link" href="https://coffeebreaklanguages.com/coffeebreakgerman/" target="_blank" rel="noopener"><span class="pl-icon">☕</span><span><span class="pl-title">Coffee Break German</span><br><span class="pl-sub">15-Minuten-Lektionen mit englischen Erklärungen — gut für den Weg zur Arbeit.</span></span></a>
+      <a class="pdf-link" href="https://14minuten.de/" target="_blank" rel="noopener"><span class="pl-icon">🎯</span><span><span class="pl-title">14 Minuten — Deutsch Podcast</span><br><span class="pl-sub">Zwei Lehrer sprechen 14 Minuten über Alltagsthemen — langsam, deutlich, mit Transkript. Ideal B1.</span></span></a>
+      <a class="pdf-link" href="https://deutsch-podcast.com/" target="_blank" rel="noopener"><span class="pl-icon">🎓</span><span><span class="pl-title">Deutsch-Podcast</span><br><span class="pl-sub">Wortschatz, Grammatik und Prüfungstipps als Podcast — viele Folgen speziell für B1.</span></span></a>
     </div>
   </div>
 
@@ -1796,10 +1812,13 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     <div class="pdf-links">
       <a class="pdf-link" href="https://www.imdb.com/title/tt0301357/" target="_blank" rel="noopener"><span class="pl-icon">🍿</span><span><span class="pl-title">Good Bye, Lenin! (2003)</span><br><span class="pl-sub">DER deutsche Klassiker — Komödie über die Wende. Klares Deutsch, tolle Geschichte.</span></span></a>
       <a class="pdf-link" href="https://www.imdb.com/title/tt0405094/" target="_blank" rel="noopener"><span class="pl-icon">🎭</span><span><span class="pl-title">Das Leben der Anderen (2006)</span><br><span class="pl-sub">Oscar-Gewinner über die DDR — langsames, deutliches Deutsch, packende Story.</span></span></a>
-      <a class="pdf-link" href="https://www.imdb.com/title/tt0816692/" target="_blank" rel="noopener"><span class="pl-icon">🏃‍♀️</span><span><span class="pl-title">Lola rennt (1998)</span><br><span class="pl-sub">Kult-Thriller, nur 80 Minuten — wenig Dialog, viel Tempo. Gut für den Einstieg.</span></span></a>
-      <a class="pdf-link" href="https://www.imdb.com/title/tt0801425/" target="_blank" rel="noopener"><span class="pl-icon">😂</span><span><span class="pl-title">Türkisch für Anfänger (Serie)</span><br><span class="pl-sub">Comedy-Serie über eine deutsch-türkische Patchwork-Familie — Alltagsdeutsch pur.</span></span></a>
+      <a class="pdf-link" href="https://www.imdb.com/title/tt0130827/" target="_blank" rel="noopener"><span class="pl-icon">🏃‍♀️</span><span><span class="pl-title">Lola rennt (1998)</span><br><span class="pl-sub">Kult-Thriller, nur 80 Minuten — wenig Dialog, viel Tempo. Gut für den Einstieg.</span></span></a>
+      <a class="pdf-link" href="https://de.wikipedia.org/wiki/T%C3%BCrkisch_f%C3%BCr_Anf%C3%A4nger" target="_blank" rel="noopener"><span class="pl-icon">😂</span><span><span class="pl-title">Türkisch für Anfänger (Serie)</span><br><span class="pl-sub">Comedy-Serie über eine deutsch-türkische Patchwork-Familie — Alltagsdeutsch pur.</span></span></a>
       <a class="pdf-link" href="https://www.imdb.com/title/tt5753856/" target="_blank" rel="noopener"><span class="pl-icon">🌀</span><span><span class="pl-title">Dark (Netflix-Serie)</span><br><span class="pl-sub">Deutscher Netflix-Welthit — Mystery-Thriller. Anspruchsvoller, aber sehr motivierend.</span></span></a>
       <a class="pdf-link" href="https://www.zdf.de/" target="_blank" rel="noopener"><span class="pl-icon">📺</span><span><span class="pl-title">ZDF & ARD Mediathek (gratis)</span><br><span class="pl-sub">Tausende deutsche Sendungen, Serien & Dokus kostenlos — mit deutschen Untertiteln!</span></span></a>
+      <a class="pdf-link" href="https://de.wikipedia.org/wiki/Almanya_%E2%80%93_Willkommen_in_Deutschland" target="_blank" rel="noopener"><span class="pl-icon">🧳</span><span><span class="pl-title">Almanya — Willkommen in Deutschland</span><br><span class="pl-sub">Warmherzige Komödie über eine Einwandererfamilie — DAS Thema vieler B1-Prüfungsaufgaben!</span></span></a>
+      <a class="pdf-link" href="https://de.wikipedia.org/wiki/Fack_ju_G%C3%B6hte" target="_blank" rel="noopener"><span class="pl-icon">🏫</span><span><span class="pl-title">Fack ju Göhte (Trilogie)</span><br><span class="pl-sub">Die erfolgreichste deutsche Komödie — echtes, modernes Umgangsdeutsch aus der Schule.</span></span></a>
+      <a class="pdf-link" href="https://de.wikipedia.org/wiki/Tschick_(Film)" target="_blank" rel="noopener"><span class="pl-icon">🚗</span><span><span class="pl-title">Tschick (2016)</span><br><span class="pl-sub">Roadmovie nach dem berühmten Jugendroman — einfache Dialoge, tolle Geschichte.</span></span></a>
     </div>
   </div>
 
@@ -1812,10 +1831,23 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
       <a class="pdf-link" href="https://www.hueber.de/lektuere-fuer-erwachsene" target="_blank" rel="noopener"><span class="pl-icon">🔍</span><span><span class="pl-title">Hueber Lektüren (nach Niveau)</span><br><span class="pl-sub">Krimis und Geschichten speziell für B1 geschrieben — teils mit Gratis-Audio.</span></span></a>
       <a class="pdf-link" href="https://www.projekt-gutenberg.org/" target="_blank" rel="noopener"><span class="pl-icon">📖</span><span><span class="pl-title">Projekt Gutenberg (gratis)</span><br><span class="pl-sub">Tausende deutsche Bücher kostenlos online — Tipp für B1: „Emil und die Detektive" (Kästner).</span></span></a>
       <a class="pdf-link" href="https://www.nachrichtenleicht.de/" target="_blank" rel="noopener"><span class="pl-icon">📰</span><span><span class="pl-title">nachrichtenleicht.de (gratis)</span><br><span class="pl-sub">Wochennachrichten in einfacher Sprache — ideales tägliches Lesetraining auf B1-Niveau.</span></span></a>
+      <a class="pdf-link" href="https://einfachebuecher.de/" target="_blank" rel="noopener"><span class="pl-icon">📕</span><span><span class="pl-title">Einfache Bücher (Spaß am Lesen Verlag)</span><br><span class="pl-sub">Bekannte Romane in einfacher Sprache neu erzählt — echtes Lesevergnügen auf A2/B1.</span></span></a>
+      <a class="pdf-link" href="https://www.klett-sprachen.de/lektueren/c-1258" target="_blank" rel="noopener"><span class="pl-icon">📚</span><span><span class="pl-title">Klett Lektüren nach Niveau</span><br><span class="pl-sub">Große Auswahl an B1-Lektüren mit Übungen und Audio — für systematisches Lesetraining.</span></span></a>
     </div>
   </div>
 
   <!-- Tools -->
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title" style="margin-bottom:4px">🌐 Übungs-Websites — Grammatik & mehr</div>
+    <div class="card-sub">Tausende kostenlose interaktive Übungen, sortiert nach Niveau und Thema</div>
+    <div class="pdf-links">
+      <a class="pdf-link" href="https://www.schubert-verlag.de/aufgaben/" target="_blank" rel="noopener"><span class="pl-icon">🧩</span><span><span class="pl-title">Schubert-Verlag Online-Aufgaben</span><br><span class="pl-sub">Hunderte kostenlose Grammatik-Übungsblätter A1–C2 — der Geheimtipp unter Deutschlehrern.</span></span></a>
+      <a class="pdf-link" href="https://mein-deutschbuch.de/" target="_blank" rel="noopener"><span class="pl-icon">📓</span><span><span class="pl-title">Mein-Deutschbuch.de</span><br><span class="pl-sub">Komplette Grammatik einfach erklärt + Übungen mit Lösungen — perfektes Nachschlagewerk.</span></span></a>
+      <a class="pdf-link" href="https://deutschlernerblog.de/" target="_blank" rel="noopener"><span class="pl-icon">✍️</span><span><span class="pl-title">Deutschlernerblog</span><br><span class="pl-sub">Riesige Sammlung: B1-Wortschatzlisten, Redemittel, Hörübungen, Prüfungsvorbereitung.</span></span></a>
+      <a class="pdf-link" href="https://www.grammatikdeutsch.de/" target="_blank" rel="noopener"><span class="pl-icon">🔧</span><span><span class="pl-title">Grammatikdeutsch.de</span><br><span class="pl-sub">Interaktive Grammatikübungen mit sofortiger Auswertung — gut für schnelle 10-Minuten-Sessions.</span></span></a>
+    </div>
+  </div>
+
   <div class="card" style="margin-bottom:24px">
     <div class="card-title" style="margin-bottom:4px" data-i18n="res_tools">🛠 Kostenlose Tools & Apps</div>
     <div class="card-sub">Die Werkzeugkiste für jeden Tag</div>
@@ -1828,6 +1860,10 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
       <a class="pdf-link" href="https://forvo.com/languages/de/" target="_blank" rel="noopener"><span class="pl-icon">🗣</span><span><span class="pl-title">Forvo</span><br><span class="pl-sub">Jedes Wort von echten Muttersprachlern ausgesprochen — bei Ausspracheunsicherheit hier nachhören.</span></span></a>
       <a class="pdf-link" href="https://www.dwds.de/" target="_blank" rel="noopener"><span class="pl-icon">📘</span><span><span class="pl-title">DWDS</span><br><span class="pl-sub">Das große digitale Wörterbuch der deutschen Sprache — zeigt auch, welche Wörter oft zusammen stehen.</span></span></a>
       <a class="pdf-link" href="https://www.tandem.net/" target="_blank" rel="noopener"><span class="pl-icon">🤝</span><span><span class="pl-title">Tandem & HelloTalk</span><br><span class="pl-sub">Sprich mit echten Deutschen, die deine Sprache lernen — kostenloser Sprachaustausch per App.</span></span></a>
+      <a class="pdf-link" href="https://languagetool.org/de" target="_blank" rel="noopener"><span class="pl-icon">✅</span><span><span class="pl-title">LanguageTool</span><br><span class="pl-sub">Kostenlose Rechtschreib- und Grammatikprüfung für Deutsch — prüfe damit jeden Übungsbrief!</span></span></a>
+      <a class="pdf-link" href="https://www.languagereactor.com/" target="_blank" rel="noopener"><span class="pl-icon">🎞</span><span><span class="pl-title">Language Reactor</span><br><span class="pl-sub">Browser-Erweiterung: zwei Untertitel gleichzeitig bei Netflix & YouTube + Klick-Wörterbuch. Genial!</span></span></a>
+      <a class="pdf-link" href="https://www.clozemaster.com/" target="_blank" rel="noopener"><span class="pl-icon">🕹</span><span><span class="pl-title">Clozemaster</span><br><span class="pl-sub">Wortschatz im Kontext als Spiel — tausende deutsche Lückensätze, kostenlos spielbar.</span></span></a>
+      <a class="pdf-link" href="https://seedlang.com/" target="_blank" rel="noopener"><span class="pl-icon">🌱</span><span><span class="pl-title">Seedlang</span><br><span class="pl-sub">Deutsch lernen mit kurzen Videos von Muttersprachlern — Wortschatz & Sätze mit Spaced Repetition.</span></span></a>
     </div>
   </div>
 
@@ -2009,6 +2045,7 @@ function showTab(id){
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('.nav-tab')[TAB_IDS.indexOf(id)].classList.add('active');
   try{history.replaceState(null,'',id==='home'?location.pathname.replace(/#.*$/,''):'#'+id);}catch(e){}
+  if(id==='plan' && typeof renderProgressDashboard==='function') renderProgressDashboard();
   window.scrollTo(0,0);
 }
 function initTabFromURL(){
@@ -3465,10 +3502,93 @@ function renderStudyPlan(){
   if(fill) fill.style.width = Math.round(doneDays/30*100)+'%';
   if(label) label.textContent = doneDays+' / 30 Tage';
 }
+// ===========================
+// PROGRESS DASHBOARD (what's done / what's left)
+// ===========================
+const EXERCISE_CATALOG = {
+  lesen: { label:'📖 Lesen', color:'var(--blue)', items:[
+    ['lesen-g1','Teil 1 — Blog richtig/falsch (Goethe)'],
+    ['lesen-g2','Teil 2 — Zeitungsartikel MC (Goethe)'],
+    ['lesen-headlines','Überschriften zuordnen (telc T1)'],
+    ['lesen-t2','Multiple-Choice-Text (telc T2)'],
+    ['lesen-situations','Anzeigen zuordnen (telc T3)'],
+    ['lesen-bank','Übungsbank Lesen (50 Aufgaben)'] ]},
+  hoeren: { label:'🎧 Hören', color:'var(--green)', items:[
+    ['hoeren-gp1','Teil 1 — Kurze Monologe (Goethe)'],
+    ['hoeren-t2h','Gespräch „Au Pair" (telc T2)'],
+    ['hoeren-t3','Fünf Kurztexte (telc T3)'],
+    ['hoeren-bank','Übungsbank Hören (50 Aufgaben)'] ]},
+  schreiben: { label:'✍️ Schreiben', color:'var(--orange)', items:[
+    ['schreiben-bank','Übungsbank Schreiben (50 Aufgaben)'] ]},
+  sprechen: { label:'🗣 Sprechen', color:'var(--purple)', items:[
+    ['sprechen-record','Erste eigene Aufnahme gemacht'],
+    ['sprechen-bank','Übungsbank Sprechen (50 Aufgaben)'] ]},
+  grammatik: { label:'📝 Grammatik', color:'var(--pink)', items:[
+    ['grammatik-1','Sprachbausteine Teil 1'],
+    ['grammatik-2','Sprachbausteine Teil 2'],
+    ['grammatik-bank','Übungsbank Grammatik (50 Aufgaben)'] ]},
+  vokabeln: { label:'📇 Vokabeln', color:'var(--purple)', items:[
+    ['vokabeln-quiz','Präpositionen-Quiz'] ]},
+};
+function progressBarRow(label, done, total, color){
+  const pct = total ? Math.round(done/total*100) : 0;
+  return `<div style="margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px">
+      <span style="font-weight:600">${label}</span>
+      <span style="color:var(--text3)">${done} / ${total} (${pct}%)</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${color}"></div></div>
+  </div>`;
+}
+function renderProgressDashboard(){
+  const c = document.getElementById('progress-dashboard');
+  if(!c) return;
+  const p = loadProgress();
+  // top-level bars
+  const planDone = (() => { const s = planState(); let n = 0;
+    STUDY_PLAN.forEach(w => w.days.forEach(d => { if(d.tasks.every((_,i)=>s.tasks['d'+d.d+'_'+i])) n++; })); return n; })();
+  const lessonsDone = GRAMMAR_LESSONS.filter(l => grammarQuizState[l.id] && grammarQuizState[l.id].t >= l.quiz.length).length;
+  const vocabTotal = Object.values(THEMATIC_VOCAB).reduce((a,t)=>a+t.words.length,0);
+  const vocabDone = Object.keys(vocabKnown).filter(k => vocabKnown[k]).length;
+  let html = '<div style="margin-bottom:18px">'
+    + progressBarRow('📅 30-Tage-Plan', planDone, 30, 'var(--gold)')
+    + progressBarRow('📖 Grammatik-Lektionen (Quiz gemacht)', lessonsDone, GRAMMAR_LESSONS.length, 'var(--pink)')
+    + progressBarRow('📇 Wortschatz (als „gewusst" markiert)', vocabDone, vocabTotal, 'var(--purple)')
+    + '</div>';
+  // per-section exercise checklists
+  html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px">';
+  Object.values(EXERCISE_CATALOG).forEach(sec => {
+    const done = sec.items.filter(([k]) => p[k]).length;
+    html += `<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px 16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-weight:800;font-size:.88rem">${sec.label}</span>
+        <span style="font-size:.76rem;font-weight:700;color:${done===sec.items.length?'var(--green)':'var(--text3)'}">${done}/${sec.items.length}</span>
+      </div>
+      ${sec.items.map(([key,label]) => {
+        const e = p[key];
+        if(e){
+          const col = e.pct >= 60 ? 'var(--green)' : 'var(--orange)';
+          return `<div style="display:flex;justify-content:space-between;gap:8px;padding:4px 0;font-size:.8rem">
+            <span style="color:var(--text2)">✅ ${label}</span>
+            <span style="white-space:nowrap;font-weight:700;color:${col}">${e.pct}% <span style="color:var(--text3);font-weight:400">· ${e.date}</span></span>
+          </div>`;
+        }
+        return `<div style="display:flex;justify-content:space-between;gap:8px;padding:4px 0;font-size:.8rem">
+          <span style="color:var(--text3)">⭕ ${label}</span>
+          <span style="color:var(--text3);font-size:.72rem">offen</span>
+        </div>`;
+      }).join('')}
+    </div>`;
+  });
+  html += '</div>';
+  c.innerHTML = html;
+}
+
 function initStudyPlan(){
   renderStudyPlan();
   initDateSelects();
   renderCountdown();
+  renderProgressDashboard();
 }
 
 // ===========================
@@ -4475,6 +4595,7 @@ const GRAMMAR_LESSONS = [
 ];
 
 let grammarQuizState = {};
+try { grammarQuizState = JSON.parse(localStorage.getItem('b1_lesson_quiz') || '{}'); } catch(e) {}
 
 function initGrammarLessons() {
   const nav = document.getElementById('lesson-nav');
@@ -4552,6 +4673,7 @@ function answerLMQ(qid, chosen, correct, exp) {
   if (!grammarQuizState[lessonId]) grammarQuizState[lessonId] = {c:0,t:0};
   grammarQuizState[lessonId].t++;
   if (chosen === correct) grammarQuizState[lessonId].c++;
+  try { localStorage.setItem('b1_lesson_quiz', JSON.stringify(grammarQuizState)); } catch(e) {}
   const sc = document.getElementById('lmq-score-' + lessonId);
   if (sc) sc.textContent = 'Score: ' + grammarQuizState[lessonId].c + ' / ' + grammarQuizState[lessonId].t;
 }
