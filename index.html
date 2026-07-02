@@ -602,6 +602,8 @@ a:focus:not(:focus-visible),
 .plan-task.checked { color:var(--text3); text-decoration:line-through; }
 .plan-task a { color:var(--gold); text-decoration:none; font-weight:600; }
 .plan-task a:hover { text-decoration:underline; }
+.pt-go { display:inline-block; margin-left:6px; padding:1px 9px; border-radius:12px; background:rgba(245,180,0,.12); border:1px solid rgba(245,180,0,.35); font-size:.72rem; white-space:nowrap; }
+.plan-task.checked .pt-go { opacity:.5; }
 
 /* ---- START HERE GUIDE ---- */
 .start-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; margin-top:14px; }
@@ -643,6 +645,7 @@ a:focus:not(:focus-visible),
       <button class="nav-tab" onclick="showTab('sprechen')"><span class="dot dot-sprechen"></span> 🗣 <span data-i18n="nav_sprechen">Sprechen</span></button>
       <button class="nav-tab" onclick="showTab('grammatik')"><span class="dot dot-grammatik"></span> 📝 <span data-i18n="nav_grammatik">Grammatik</span></button>
       <button class="nav-tab" onclick="showTab('vokabeln')"><span class="dot dot-vokabeln" style="background:var(--purple)"></span> 📇 <span data-i18n="nav_vokabeln">Vokabeln</span></button>
+      <button class="nav-tab" onclick="showTab('ressourcen')"><span class="dot" style="background:var(--green)"></span> 🧰 <span data-i18n="nav_ressourcen">Ressourcen</span></button>
     </div>
     <div class="lang-switcher" role="group" aria-label="Sprache wählen">
       <button class="lang-btn active" id="lang-de" onclick="setLang('de')" aria-label="Deutsch">🇩🇪 DE</button>
@@ -671,7 +674,7 @@ a:focus:not(:focus-visible),
   </div>
 
   <!-- START HERE — First-timer guide -->
-  <div class="card" style="margin-bottom:24px;border-top:3px solid var(--gold)">
+  <div class="card" id="start-here" style="margin-bottom:24px;border-top:3px solid var(--gold)">
     <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:4px">🚀 Zum ersten Mal B1? Start hier! / First time taking B1? Start here!</h2>
     <div class="card-sub">Alles, was du wissen musst — in 4 einfachen Schritten / Everything you need to know in 4 simple steps</div>
     <div class="start-steps">
@@ -809,7 +812,7 @@ a:focus:not(:focus-visible),
   </div>
 
   <!-- Key Grammar Rules -->
-  <div class="card">
+  <div class="card" id="top5-rules">
     <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:4px">⚡ Top 5 Grammar Rules You Must Know</h2>
     <div class="card-sub">The most common mistakes at B1 level — learn these first</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:8px">
@@ -835,7 +838,7 @@ a:focus:not(:focus-visible),
     </div>
     <div style="margin-top:18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
       <label for="exam-date" style="font-size:.85rem;color:var(--text2);font-weight:600">🗓 Mein Prüfungstermin:</label>
-      <input type="date" id="exam-date" onchange="setExamDate(this.value)" style="padding:8px 12px;border-radius:var(--r2);border:1px solid var(--border);background:var(--bg2);color:var(--text);font-family:inherit">
+      <input type="date" id="exam-date" onclick="try{this.showPicker()}catch(e){}" onchange="setExamDate(this.value)" style="padding:10px 14px;border-radius:var(--r2);border:2px solid var(--gold);background:var(--bg2);color:var(--text);font-family:inherit;font-size:1rem;cursor:pointer;color-scheme:dark">
     </div>
   </div>
 
@@ -876,6 +879,27 @@ a:focus:not(:focus-visible),
     <div style="font-size:.85rem;font-weight:600;color:var(--text2);align-self:center;margin-right:4px">Exam:</div>
     <button class="pick-btn active-goethe" id="lesen-goethe-btn" onclick="setLesenExam('goethe')">🦁 Goethe B1</button>
     <button class="pick-btn" id="lesen-telc-btn" onclick="setLesenExam('telc')">🇩🇪 telc B1</button>
+  </div>
+
+  <!-- READING STRATEGY -->
+  <div class="card" style="margin-bottom:24px;border-top:3px solid var(--blue)">
+    <div class="card-title" style="margin-bottom:4px">🧭 Lesen-Strategie — So gehst du vor</div>
+    <div class="card-sub" style="margin-bottom:14px">Die richtige Technik bringt mehr Punkte als perfektes Vokabelwissen. Lerne diese 3 Techniken:</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px">
+      <div class="grammar-rule"><div class="gr-title">1️⃣ Zuerst die Fragen lesen!</div>
+        <div class="gr-example">Lies IMMER zuerst die Aufgaben, dann den Text. So weißt du, wonach du suchst.</div>
+        <div class="gr-note">Spart 30–50% der Zeit. Unterstreiche Schlüsselwörter in den Fragen.</div></div>
+      <div class="grammar-rule"><div class="gr-title">2️⃣ Nicht jedes Wort verstehen</div>
+        <div class="gr-example">Du musst NICHT alles verstehen. Suche nur die Information, die die Frage braucht (= selektives Lesen).</div>
+        <div class="gr-note">Unbekanntes Wort? Weiterlesen! Der Kontext erklärt es meistens.</div></div>
+      <div class="grammar-rule"><div class="gr-title">3️⃣ Vorsicht vor Fallen</div>
+        <div class="gr-example">Falsche Antworten benutzen oft WÖRTER aus dem Text — aber mit anderer Bedeutung. Richtig ist meist eine Umschreibung (Synonym).</div>
+        <div class="gr-note">„steht im Text" ≠ „ist richtig"! Prüfe die Bedeutung, nicht die Wörter.</div></div>
+    </div>
+    <div style="margin-top:14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:12px 16px;font-size:.84rem;color:var(--text2)">
+      ⏱ <strong>Zeitplan Goethe (65 Min):</strong> Teil 1 → 10 Min · Teil 2 → 15 Min · Teil 3 → 10 Min · Teil 4 → 15 Min · Teil 5 → 10 Min · Übertragen auf Antwortbogen → 5 Min.
+      <strong>telc:</strong> max. 45 Min für Lesen, damit 45 Min für Sprachbausteine + Übertragen bleiben.
+    </div>
   </div>
 
   <!-- GOETHE READING -->
@@ -941,7 +965,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
   <!-- TELC READING -->
   <div id="lesen-telc" style="display:none">
     <!-- Teil 1: Headlines -->
-    <div class="exercise-card">
+    <div class="exercise-card" id="ex-lesen-t1">
       <div class="ex-header">
         <div><div class="ex-title">Leseverstehen Teil 1 — Globalverstehen</div><div class="ex-sub">Match 5 short texts to headlines A–J (5 extra distractors!)</div>
         <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">⏱ ~10 min</span><span class="meta-pill">5 items</span></div></div>
@@ -959,7 +983,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     </div>
 
     <!-- Teil 2: MCQ -->
-    <div class="exercise-card">
+    <div class="exercise-card" id="ex-lesen-t2">
       <div class="ex-header">
         <div><div class="ex-title">Leseverstehen Teil 2 — Detailverstehen</div><div class="ex-sub">Read a long article, answer 5 multiple-choice questions</div>
         <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">⏱ ~15 min</span><span class="meta-pill">5 items</span></div></div>
@@ -982,7 +1006,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     </div>
 
     <!-- Teil 3: Situations to Ads -->
-    <div class="exercise-card">
+    <div class="exercise-card" id="ex-lesen-t3">
       <div class="ex-header">
         <div><div class="ex-title">Leseverstehen Teil 3 — Selektives Verstehen</div><div class="ex-sub">Match 10 situations to the right advertisement (a–l). No match = x</div>
         <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">⏱ ~15 min</span><span class="meta-pill">10 items</span></div></div>
@@ -1012,7 +1036,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     </div>
   </div>
   <!-- ÜBUNGSBANK LESEN -->
-  <div class="card" style="margin-top:24px;border-top:3px solid var(--blue)">
+  <div class="card" id="bank-card-lesen" style="margin-top:24px;border-top:3px solid var(--blue)">
     <div class="card-title">📚 Übungsbank Lesen — 50 Aufgaben</div>
     <div class="card-sub">Kurze Lesetexte mit Fragen — eine Aufgabe nach der anderen</div>
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px">
@@ -1042,9 +1066,29 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     <button class="pick-btn" id="hoeren-telc-btn" onclick="setHoerenExam('telc')">🇩🇪 telc B1</button>
   </div>
 
+  <!-- LISTENING STRATEGY -->
+  <div class="card" style="margin-bottom:24px;border-top:3px solid var(--green)">
+    <div class="card-title" style="margin-bottom:4px">🧭 Hören-Strategie — Signalwörter & Fallen</div>
+    <div class="card-sub" style="margin-bottom:14px">Im Hören entscheiden Sekunden. Diese Wörter musst du sofort erkennen:</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px">
+      <div class="grammar-rule"><div class="gr-title">⚠️ Verneinungen = Fallen!</div>
+        <div class="gr-example"><strong>nicht, kein, nie, kaum, leider, ohne</strong><br>„Das Konzert findet <strong>nicht</strong> statt" — ein kleines Wort ändert ALLES.</div>
+        <div class="gr-note">Höre besonders auf das Satzende — dort steht oft die Verneinung.</div></div>
+      <div class="grammar-rule"><div class="gr-title">🔄 „aber"-Falle</div>
+        <div class="gr-example">„Eigentlich wollte ich kommen, <strong>aber</strong>..." — was NACH aber/jedoch/leider/trotzdem kommt, ist die richtige Information!</div>
+        <div class="gr-note">Der erste Teil des Satzes ist oft die falsche Fährte.</div></div>
+      <div class="grammar-rule"><div class="gr-title">🔢 Zahlen, Zeiten, Orte</div>
+        <div class="gr-example">Gleis, Uhr(zeit), Preis, Datum, Stock/Etage, Raum — notiere sie SOFORT beim Hören.</div>
+        <div class="gr-note">Oft werden 2 Zahlen genannt („nicht um 8, sondern um 9") — die letzte gilt meist.</div></div>
+      <div class="grammar-rule"><div class="gr-title">📝 Vor dem Hören</div>
+        <div class="gr-example">Nutze JEDE Lesezeit: Fragen lesen, Schlüsselwörter markieren, überlegen: Wer spricht? Worum geht es wohl?</div>
+        <div class="gr-note">Verpasst? Sofort loslassen und zur nächsten Frage — nicht hängenbleiben!</div></div>
+    </div>
+  </div>
+
   <!-- GOETHE LISTENING -->
   <div id="hoeren-goethe">
-    <div class="exercise-card">
+    <div class="exercise-card" id="ex-hoeren-g1">
       <div class="ex-header">
         <div><div class="ex-title">Hören Teil 1 (Goethe) — Kurze Monologe</div><div class="ex-sub">5 short audio clips, 2 questions each (T/F + MCQ)</div>
         <div class="ex-meta"><span class="meta-pill">🦁 Goethe</span><span class="meta-pill">Played TWICE each</span><span class="meta-pill">10 items</span><span class="meta-pill">Part 1 of 4</span></div></div>
@@ -1125,7 +1169,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
   <!-- TELC LISTENING -->
   <div id="hoeren-telc" style="display:none">
     <!-- Teil 2: Au Pair T/F -->
-    <div class="exercise-card">
+    <div class="exercise-card" id="ex-hoeren-t2">
       <div class="ex-header">
         <div><div class="ex-title">Hörverstehen Teil 2 — Detailverstehen</div><div class="ex-sub">Listen to a conversation about Au Pair, answer 10 True/False questions</div>
         <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">Played ONCE</span><span class="meta-pill">10 items</span></div></div>
@@ -1158,7 +1202,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     </div>
 
     <!-- Teil 3: 5 short clips -->
-    <div class="exercise-card">
+    <div class="exercise-card" id="ex-hoeren-t3">
       <div class="ex-header">
         <div><div class="ex-title">Hörverstehen Teil 3 — Selektives Verstehen</div><div class="ex-sub">5 short audio clips, True/False for each</div>
         <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">Played TWICE each</span><span class="meta-pill">5 items</span></div></div>
@@ -1217,7 +1261,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     </div>
   </div>
   <!-- ÜBUNGSBANK HÖREN -->
-  <div class="card" style="margin-top:24px;border-top:3px solid var(--green)">
+  <div class="card" id="bank-card-hoeren" style="margin-top:24px;border-top:3px solid var(--green)">
     <div class="card-title">📚 Übungsbank Hören — 50 Aufgaben</div>
     <div class="card-sub">Durchsagen, Nachrichten und Ansagen — der Computer liest den Text vor (Sprachausgabe). Hören Sie zuerst, dann antworten Sie!</div>
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px">
@@ -1246,7 +1290,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     <div class="prompt-selector" id="prompt-selector"></div>
   </div>
 
-  <div class="writing-layout">
+  <div class="writing-layout" id="writing-workspace">
     <div>
       <div class="writing-prompt-card" id="writing-prompt-display"></div>
       <div class="card" style="margin-top:16px">
@@ -1274,6 +1318,64 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     </div>
   </div>
 
+  <!-- MUSTERBRIEFE -->
+  <div class="card" style="margin-top:32px;border-top:3px solid var(--orange)" id="musterbriefe">
+    <div class="card-title" style="margin-bottom:4px">📮 Musterbriefe — Lerne den perfekten Aufbau</div>
+    <div class="card-sub" style="margin-bottom:16px">3 komplette Beispielbriefe mit farbigem Aufbau. Lerne die Struktur auswendig — sie ist in JEDEM Brief gleich: <span style="color:var(--gold);font-weight:700">Anrede</span> → <span style="color:var(--blue);font-weight:700">Einleitung</span> → <span style="color:var(--text);font-weight:700">Hauptteil (alle Leitpunkte!)</span> → <span style="color:var(--green);font-weight:700">Schluss + Gruß</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:18px;font-size:.86rem;line-height:1.7">
+        <div style="font-weight:800;margin-bottom:10px;color:var(--orange)">1. Beschwerdebrief (formell) — häufigste telc-Aufgabe</div>
+        <div style="color:var(--gold)">Sehr geehrte Damen und Herren,</div><br>
+        <div style="color:var(--blue)">vor zwei Wochen habe ich bei Ihnen einen Laptop bestellt (Rechnungsnummer 4711).</div><br>
+        <div>Leider musste ich feststellen, dass das Gerät nicht funktioniert: Der Bildschirm bleibt schwarz. Außerdem fehlte das Ladekabel, obwohl es auf der Rechnung steht. Ich habe bereits zweimal bei Ihrer Hotline angerufen, aber niemand konnte mir helfen.</div><br>
+        <div>Ich bitte Sie deshalb, mir so schnell wie möglich ein neues Gerät zu schicken oder mir das Geld zurückzuerstatten. Falls ich bis zum 15. des Monats nichts von Ihnen höre, werde ich den Kaufvertrag widerrufen.</div><br>
+        <div style="color:var(--green)">Mit freundlichen Grüßen<br>Anna Schmidt</div>
+        <div style="margin-top:12px;font-size:.76rem;color:var(--text3)">💡 Merkmale: <strong>Sie-Form</strong>, sachlicher Ton, klare Forderung + Frist. Konjunktiv II für Höflichkeit („könnten Sie...").</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:18px;font-size:.86rem;line-height:1.7">
+        <div style="font-weight:800;margin-bottom:10px;color:var(--orange)">2. Informelle E-Mail (Einladung / Absage)</div>
+        <div style="color:var(--gold)">Liebe Maria,</div><br>
+        <div style="color:var(--blue)">vielen Dank für deine Einladung zu deiner Geburtstagsparty! Ich habe mich sehr darüber gefreut.</div><br>
+        <div>Leider kann ich am Samstag nicht kommen, weil ich am Sonntag früh eine wichtige Prüfung habe. Das tut mir wirklich leid! Ich schlage vor, dass wir uns nächste Woche treffen — dann lade ich dich zum Essen ein. Hättest du am Mittwoch Zeit?</div><br>
+        <div style="color:var(--green)">Ich wünsche dir eine tolle Party!<br>Viele Grüße / Liebe Grüße<br>deine Elena</div>
+        <div style="margin-top:12px;font-size:.76rem;color:var(--text3)">💡 Merkmale: <strong>du-Form (klein geschrieben ok, „Du" auch ok)</strong>, persönlicher Ton, Dank + Grund + Alternative anbieten.</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:18px;font-size:.86rem;line-height:1.7">
+        <div style="font-weight:800;margin-bottom:10px;color:var(--orange)">3. Forumsbeitrag / Meinung (Goethe Teil 2)</div>
+        <div style="color:var(--gold)">Hallo zusammen,</div><br>
+        <div style="color:var(--blue)">das Thema „Sollen Kinder ein Handy haben?" finde ich sehr interessant, weil ich selbst zwei Kinder habe.</div><br>
+        <div>Meiner Meinung nach sind Handys für Kinder unter 10 Jahren nicht notwendig. Einerseits können Eltern ihre Kinder schneller erreichen, andererseits verbringen Kinder dann zu viel Zeit mit Spielen. In meinem Heimatland ist das ein großes Problem. Ich finde, ein einfaches Telefon ohne Internet ist ein guter Kompromiss.</div><br>
+        <div style="color:var(--green)">Was denkt ihr darüber?<br>Viele Grüße, Karim</div>
+        <div style="margin-top:12px;font-size:.76rem;color:var(--text3)">💡 Merkmale: Meinung + Begründung (weil!), <strong>einerseits/andererseits</strong>, eigenes Beispiel, Frage am Ende.</div>
+      </div>
+    </div>
+    <div style="margin-top:18px">
+      <div style="font-weight:700;font-size:.9rem;margin-bottom:10px">🧱 Redemittel-Baukasten — formell vs. informell</div>
+      <div style="overflow-x:auto">
+      <table class="format-table" style="width:100%">
+        <tr><th></th><th>Formell (Sie)</th><th>Informell (du)</th></tr>
+        <tr><td><strong>Anrede</strong></td><td>Sehr geehrte Damen und Herren, / Sehr geehrte Frau Müller,</td><td>Liebe Anna, / Lieber Tom, / Hallo Maria,</td></tr>
+        <tr><td><strong>Einleitung</strong></td><td>ich schreibe Ihnen, weil... / vielen Dank für Ihre E-Mail vom...</td><td>vielen Dank für deine Nachricht! / wie geht es dir?</td></tr>
+        <tr><td><strong>Bitte</strong></td><td>Könnten Sie mir bitte...? / Ich wäre Ihnen dankbar, wenn...</td><td>Kannst du mir...? / Es wäre super, wenn du...</td></tr>
+        <tr><td><strong>Beschwerde</strong></td><td>Leider musste ich feststellen, dass... / Ich bin damit nicht einverstanden.</td><td>Leider klappt das nicht... / Ich finde das nicht so gut.</td></tr>
+        <tr><td><strong>Vorschlag</strong></td><td>Ich schlage vor, dass... / Wäre es möglich, ...?</td><td>Wie wäre es mit...? / Wollen wir...?</td></tr>
+        <tr><td><strong>Schluss</strong></td><td>Ich freue mich auf Ihre Antwort. / Vielen Dank im Voraus.</td><td>Ich freue mich auf dich! / Melde dich bald!</td></tr>
+        <tr><td><strong>Gruß</strong></td><td>Mit freundlichen Grüßen</td><td>Viele Grüße / Liebe Grüße / Bis bald</td></tr>
+      </table>
+      </div>
+    </div>
+    <div class="tip-card" style="margin-top:16px">
+      <h4>⚠️ Die 5 häufigsten Punktabzüge im Schreiben</h4>
+      <ul>
+        <li><strong>Leitpunkt vergessen</strong> — ALLE 3–4 Punkte der Aufgabe müssen im Brief vorkommen! Hake sie beim Schreiben ab.</li>
+        <li><strong>Falsche Anrede-Form</strong> — Aufgabe sagt „Freund" → du-Form. Aufgabe sagt „Firma/Vermieter" → Sie-Form. Nie mischen!</li>
+        <li><strong>Nach der Anrede GROSS weiter?</strong> Nein — nach dem Komma geht es klein weiter: „Liebe Anna, <em>vielen</em> Dank..."</li>
+        <li><strong>Kein Datum/Gruß</strong> — Gruß + Name am Ende nicht vergessen (ohne Komma nach „Mit freundlichen Grüßen").</li>
+        <li><strong>Zu wenig Wörter</strong> — unter 40 Wörtern (Goethe T3) / deutlich unter 80 gibt es hohe Abzüge. Lieber 90–100 schreiben.</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- Worksheet Gallery -->
   <div class="card" style="margin-top:32px">
     <div class="gallery-header">
@@ -1286,7 +1388,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     <button class="load-more-btn" id="schreiben-load-more" onclick="loadMoreWriting()">Load more worksheets ↓</button>
   </div>
   <!-- ÜBUNGSBANK SCHREIBEN -->
-  <div class="card" style="margin-top:24px;border-top:3px solid var(--orange)">
+  <div class="card" id="bank-card-schreiben" style="margin-top:24px;border-top:3px solid var(--orange)">
     <div class="card-title">📚 Übungsbank Schreiben — 50 Aufgaben</div>
     <div class="card-sub">Briefe, E-Mails und Forumsbeiträge mit je 4 Leitpunkten — laden Sie eine Aufgabe in den Editor oben</div>
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px">
@@ -1326,8 +1428,45 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     <div class="speaking-parts" id="telc-speaking-parts"></div></div>
   </div>
 
+  <!-- MUSTER-PRÄSENTATION -->
+  <div class="card" style="margin-top:20px;border-top:3px solid var(--purple)" id="muster-praesentation">
+    <div class="card-title" style="margin-bottom:4px">🎤 Muster-Präsentation (Teil 2) — komplett zum Nachsprechen</div>
+    <div class="card-sub" style="margin-bottom:16px">Eine vollständige 2-Minuten-Präsentation zum Thema „Fast Food". Diese 5-Schritte-Struktur funktioniert für JEDES Thema — lerne sie auswendig! Klicke 🔊, um jeden Teil zu hören.</div>
+    <div style="display:flex;flex-direction:column;gap:12px" id="muster-praes-steps"></div>
+    <div class="tip-card" style="margin-top:16px">
+      <h4>💡 So bereitest du JEDES Thema in 5 Minuten vor</h4>
+      <ul>
+        <li>Schreibe zu jedem der 5 Schritte nur <strong>Stichwörter</strong> (keine Sätze!) auf deinen Notizzettel</li>
+        <li>Persönliche Erfahrung: eine kleine Geschichte aus deinem Leben — echt oder erfunden, das prüft niemand!</li>
+        <li>Heimatland: „In meinem Heimatland ist das ähnlich/ganz anders, weil..."</li>
+        <li>Vor- und Nachteile: je 2 reichen völlig — mit „einerseits... andererseits..."</li>
+        <li>Sprich langsam! 2 Minuten sind kürzer als du denkst — Qualität schlägt Tempo.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MUSTERDIALOG TEIL 3 -->
+  <div class="card" style="margin-top:20px;border-top:3px solid var(--purple)" id="muster-dialog">
+    <div class="card-title" style="margin-bottom:4px">💬 Musterdialog (Teil 3) — Gemeinsam etwas planen</div>
+    <div class="card-sub" style="margin-bottom:16px">Aufgabe: „Planen Sie zusammen eine Abschiedsparty für einen Kollegen." So klingt ein sehr gutes B1-Gespräch — die markierten Redemittel kannst du in JEDER Planung benutzen:</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:18px;font-size:.88rem;line-height:1.9">
+      <div><strong style="color:var(--purple)">A:</strong> <span class="hl-phrase" style="color:var(--gold);font-weight:600">Wollen wir zuerst über den Termin sprechen?</span> Ich schlage vor, wir machen die Party am Freitagabend.</div>
+      <div><strong style="color:var(--blue)">B:</strong> <span style="color:var(--gold);font-weight:600">Das ist eine gute Idee, aber</span> am Freitag können viele Kollegen nicht. <span style="color:var(--gold);font-weight:600">Wie wäre es mit</span> Samstag?</div>
+      <div><strong style="color:var(--purple)">A:</strong> <span style="color:var(--gold);font-weight:600">Einverstanden!</span> Und wo feiern wir? <span style="color:var(--gold);font-weight:600">Was hältst du von</span> einem Restaurant?</div>
+      <div><strong style="color:var(--blue)">B:</strong> Hmm, <span style="color:var(--gold);font-weight:600">ich bin nicht sicher.</span> Ein Restaurant ist teuer. <span style="color:var(--gold);font-weight:600">Ich finde, es wäre besser,</span> wenn wir im Büro feiern und alle etwas zu essen mitbringen.</div>
+      <div><strong style="color:var(--purple)">A:</strong> <span style="color:var(--gold);font-weight:600">Da hast du recht.</span> Dann kümmere ich mich um die Getränke. <span style="color:var(--gold);font-weight:600">Könntest du</span> die Einladungen schreiben?</div>
+      <div><strong style="color:var(--blue)">B:</strong> <span style="color:var(--gold);font-weight:600">Ja, das mache ich gern.</span> Und was schenken wir ihm? <span style="color:var(--gold);font-weight:600">Hast du eine Idee?</span></div>
+      <div><strong style="color:var(--purple)">A:</strong> <span style="color:var(--gold);font-weight:600">Vielleicht könnten wir</span> alle zusammen Geld sammeln und einen Gutschein kaufen?</div>
+      <div><strong style="color:var(--blue)">B:</strong> <span style="color:var(--gold);font-weight:600">Perfekt, dann machen wir es so!</span> Also: Samstag, im Büro, du bringst Getränke, ich schreibe die Einladungen.</div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+      <button class="btn-secondary" onclick="speakDE(document.getElementById('muster-dialog').innerText.replace(/A:|B:/g,''))">🔊 Dialog anhören</button>
+    </div>
+    <div style="margin-top:12px;font-size:.82rem;color:var(--text2)">✅ <strong>Das erwarten die Prüfer:</strong> Vorschläge machen · auf den Partner reagieren (nicht nur „ja") · höflich widersprechen · nachfragen · am Ende zusammenfassen. Es geht NICHT darum, wer recht hat!</div>
+  </div>
+
   <!-- Virtual Speech Recorder -->
-  <div class="card" style="margin-top: 20px;">
+  <div class="card" style="margin-top: 20px;" id="sp-recorder">
     <div class="card-title" data-i18n="sp_recorder_title">🎤 Virtual Speech Recorder & Pronunciation Practice</div>
     <div class="card-sub" data-i18n="sp_recorder_sub">Record your presentation or picture description, play it back, and listen to check your flow and pronunciation.</div>
     
@@ -1347,7 +1486,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
   </div>
 
   <!-- Bildbeschreibung -->
-  <div class="card" style="margin-top:20px">
+  <div class="card" id="sp-bildbeschreibung" style="margin-top:20px">
     <div class="gallery-header">
       <div>
         <div class="card-title">🖼 Bildbeschreibung — Image Description Practice</div>
@@ -1377,13 +1516,13 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
   </div>
 
   <!-- Topics -->
-  <div class="card" style="margin-top:20px">
+  <div class="card" id="sp-topics-card" style="margin-top:20px">
     <div class="card-title" style="margin-bottom:4px">🎯 Speaking Topics — Themen für die Präsentation</div>
     <div class="card-sub" style="margin-bottom:16px">Click a topic card to see practice questions. Use these for Teil 2 (Präsentation) practice.</div>
     <div class="topics-grid" id="speaking-topics"></div>
   </div>
   <!-- ÜBUNGSBANK SPRECHEN -->
-  <div class="card" style="margin-top:24px;border-top:3px solid var(--purple)">
+  <div class="card" id="bank-card-sprechen" style="margin-top:24px;border-top:3px solid var(--purple)">
     <div class="card-title">📚 Übungsbank Sprechen — 50 Aufgaben</div>
     <div class="card-sub">Präsentationsthemen, Diskussionsfragen, Planungsaufgaben und Alltagssituationen — sprechen Sie 1–2 Minuten frei</div>
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px">
@@ -1408,7 +1547,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
   </div>
 
   <!-- ===== GRAMMAR LEARN MODE ===== -->
-  <div class="card" style="margin-bottom:24px">
+  <div class="card" id="grammar-lessons-card" style="margin-bottom:24px">
     <div class="card-title" style="margin-bottom:4px">📖 Lernbereich — Grammar Lessons</div>
     <div class="card-sub" style="margin-bottom:18px">Pick a topic, study the rule with examples, then test yourself with a mini-quiz. Master these before doing the exercises below.</div>
     <div class="lesson-nav" id="lesson-nav"></div>
@@ -1416,7 +1555,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
   </div>
 
   <!-- Part 1: Grammar -->
-  <div class="exercise-card">
+  <div class="exercise-card" id="ex-gram-1">
     <div class="ex-header">
       <div><div class="ex-title">Sprachbausteine Teil 1 — Grammatik in Kontext</div><div class="ex-sub">Choose the correct grammatical word for each gap (articles, prepositions, conjunctions, verb forms)</div>
       <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">10 Lücken</span><span class="meta-pill">15 Punkte</span></div></div>
@@ -1437,7 +1576,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
   </div>
 
   <!-- Part 2: Vocabulary -->
-  <div class="exercise-card">
+  <div class="exercise-card" id="ex-gram-2">
     <div class="ex-header">
       <div><div class="ex-title">Sprachbausteine Teil 2 — Wortschatz in Kontext</div><div class="ex-sub">Choose the correct vocabulary word for each gap</div>
       <div class="ex-meta"><span class="meta-pill">🇩🇪 telc</span><span class="meta-pill">10 Lücken</span><span class="meta-pill">15 Punkte</span></div></div>
@@ -1494,7 +1633,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     </ul>
   </div>
   <!-- ÜBUNGSBANK GRAMMATIK -->
-  <div class="card" style="margin-top:24px;border-top:3px solid var(--pink)">
+  <div class="card" id="bank-card-grammatik" style="margin-top:24px;border-top:3px solid var(--pink)">
     <div class="card-title">📚 Übungsbank Grammatik — 50 Aufgaben</div>
     <div class="card-sub">Sprachbausteine im Schnelldurchlauf: Präpositionen, Konjunktionen, Verbformen, Kasus</div>
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px">
@@ -1561,6 +1700,108 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 </div>
 </section>
 
+<!-- =================== RESSOURCEN =================== -->
+<section id="ressourcen" class="tab-content">
+<div class="section-wrap">
+  <div class="section-hero" style="background:linear-gradient(135deg,#0b3d2e,#06251c);border-radius:var(--r);padding:40px 32px;margin-bottom:24px">
+    <h2 class="hero-title">🧰 Ressourcen — Alles Gute & Kostenlose fürs Deutschlernen</h2>
+    <div class="hero-sub">Handverlesene kostenlose Kurse, YouTube-Kanäle, Podcasts, Filme, Bücher und Tools. Deutsch lernst du am schnellsten, wenn es Spaß macht — bau 2–3 davon in deinen Alltag ein!</div>
+    <div class="hero-badges"><span class="badge badge-both">✅ 100% kostenlos oder mit Gratis-Version</span></div>
+  </div>
+
+  <!-- Kurse -->
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title" style="margin-bottom:4px">🎓 Kostenlose Online-Kurse</div>
+    <div class="card-sub">Komplette strukturierte Kurse — perfekt parallel zum 30-Tage-Plan</div>
+    <div class="pdf-links">
+      <a class="pdf-link" href="https://learngerman.dw.com/de/nicos-weg/c-36519789" target="_blank" rel="noopener"><span class="pl-icon">📺</span><span><span class="pl-title">DW „Nicos Weg" (A1–B1)</span><br><span class="pl-sub">DER kostenlose Kurs: Videoserie mit Übungen zu jeder Lektion. Der B1-Teil passt genau zu deiner Prüfung.</span></span></a>
+      <a class="pdf-link" href="https://deutsch.vhs-lernportal.de/" target="_blank" rel="noopener"><span class="pl-icon">🏫</span><span><span class="pl-title">VHS-Lernportal (A1–B2)</span><br><span class="pl-sub">Offizielles kostenloses Portal der Volkshochschulen — mit echtem Tutor, der deine Texte korrigiert! Auch DTZ-Vorbereitung.</span></span></a>
+      <a class="pdf-link" href="https://learngerman.dw.com/de/deutschtrainer/c-60636826" target="_blank" rel="noopener"><span class="pl-icon">🎯</span><span><span class="pl-title">DW Deutschtrainer</span><br><span class="pl-sub">100 kurze Video-Lektionen für den Alltagswortschatz — ideal für 10 Minuten zwischendurch.</span></span></a>
+      <a class="pdf-link" href="https://www.goethe.de/prj/dfd/de/home.cfm" target="_blank" rel="noopener"><span class="pl-icon">🦁</span><span><span class="pl-title">Goethe „Deutsch für dich"</span><br><span class="pl-sub">Kostenlose Übungs-Community vom Goethe-Institut mit Materialien nach Niveau sortiert.</span></span></a>
+    </div>
+  </div>
+
+  <!-- YouTube -->
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title" style="margin-bottom:4px">▶️ YouTube-Kanäle</div>
+    <div class="card-sub">Täglich 1 Video = kostenloses Hörtraining mit Spaß</div>
+    <div class="pdf-links">
+      <a class="pdf-link" href="https://www.youtube.com/@EasyGerman" target="_blank" rel="noopener"><span class="pl-icon">🎙</span><span><span class="pl-title">Easy German</span><br><span class="pl-sub">Straßeninterviews mit echten Deutschen + Untertitel DE/EN. Perfekt für echtes, natürliches Deutsch.</span></span></a>
+      <a class="pdf-link" href="https://www.youtube.com/@LearnGermanwithAnja" target="_blank" rel="noopener"><span class="pl-icon">😄</span><span><span class="pl-title">Learn German with Anja</span><br><span class="pl-sub">Grammatik mit viel Energie und Humor erklärt — Adjektivendungen waren nie lustiger.</span></span></a>
+      <a class="pdf-link" href="https://www.youtube.com/@lingoni" target="_blank" rel="noopener"><span class="pl-icon">📚</span><span><span class="pl-title">lingoni GERMAN</span><br><span class="pl-sub">Strukturierte Lektionen nach Niveau (A1–B2) sortiert — such nach den B1-Playlists.</span></span></a>
+      <a class="pdf-link" href="https://www.youtube.com/@hallodeutschschule" target="_blank" rel="noopener"><span class="pl-icon">🇨🇭</span><span><span class="pl-title">Hallo Deutschschule</span><br><span class="pl-sub">Komplette Unterrichtsstunden einer echten Sprachschule — auch B1-Prüfungsvorbereitung.</span></span></a>
+      <a class="pdf-link" href="https://www.youtube.com/watch?v=1DDDZQwybnQ&list=PLnDrqm6hsn1QYSk5g0V4pfLnUyQBH0i7d" target="_blank" rel="noopener"><span class="pl-icon">🎬</span><span><span class="pl-title">Extra auf Deutsch (Lernserie)</span><br><span class="pl-sub">Sitcom für Deutschlerner — einfaches Deutsch, viel Humor. Alle Folgen kostenlos auf YouTube.</span></span></a>
+      <a class="pdf-link" href="https://www.youtube.com/@DeutschmitBenjamin" target="_blank" rel="noopener"><span class="pl-icon">🎓</span><span><span class="pl-title">Deutsch mit Benjamin</span><br><span class="pl-sub">Prüfungsorientiert: B1/B2-Briefe, Sprechen-Simulationen, typische Prüfungsfehler.</span></span></a>
+    </div>
+  </div>
+
+  <!-- Podcasts -->
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title" style="margin-bottom:4px">🎧 Podcasts — Hörtraining unterwegs</div>
+    <div class="card-sub">Beim Kochen, in der Bahn, beim Spazieren — jede Minute zählt fürs Hörverstehen</div>
+    <div class="pdf-links">
+      <a class="pdf-link" href="https://slowgerman.com/" target="_blank" rel="noopener"><span class="pl-icon">🐢</span><span><span class="pl-title">Slow German (Annik Rubens)</span><br><span class="pl-sub">Langsam gesprochenes Deutsch über Alltag & Kultur — mit Transkript zum Mitlesen. Ideal für B1.</span></span></a>
+      <a class="pdf-link" href="https://www.dw.com/de/langsam-gesprochene-nachrichten/s-8030" target="_blank" rel="noopener"><span class="pl-icon">📰</span><span><span class="pl-title">DW Langsam gesprochene Nachrichten</span><br><span class="pl-sub">Tagesnachrichten in langsamem Deutsch + Text — jeden Tag 10 Minuten Hörtraining.</span></span></a>
+      <a class="pdf-link" href="https://www.easygerman.org/podcast" target="_blank" rel="noopener"><span class="pl-icon">💬</span><span><span class="pl-title">Easy German Podcast</span><br><span class="pl-sub">Lockere Gespräche über Alltagsthemen — ab B1 gut zu verstehen, mit Transkript-Option.</span></span></a>
+      <a class="pdf-link" href="https://coffeebreaklanguages.com/coffeebreakgerman/" target="_blank" rel="noopener"><span class="pl-icon">☕</span><span><span class="pl-title">Coffee Break German</span><br><span class="pl-sub">15-Minuten-Lektionen mit englischen Erklärungen — gut für den Weg zur Arbeit.</span></span></a>
+    </div>
+  </div>
+
+  <!-- Filme & Serien -->
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title" style="margin-bottom:4px">🎬 Filme & Serien</div>
+    <div class="card-sub">Regel: Deutsche Tonspur + deutsche Untertitel = maximaler Lerneffekt</div>
+    <div class="pdf-links">
+      <a class="pdf-link" href="https://www.imdb.com/title/tt0301357/" target="_blank" rel="noopener"><span class="pl-icon">🍿</span><span><span class="pl-title">Good Bye, Lenin! (2003)</span><br><span class="pl-sub">DER deutsche Klassiker — Komödie über die Wende. Klares Deutsch, tolle Geschichte.</span></span></a>
+      <a class="pdf-link" href="https://www.imdb.com/title/tt0405094/" target="_blank" rel="noopener"><span class="pl-icon">🎭</span><span><span class="pl-title">Das Leben der Anderen (2006)</span><br><span class="pl-sub">Oscar-Gewinner über die DDR — langsames, deutliches Deutsch, packende Story.</span></span></a>
+      <a class="pdf-link" href="https://www.imdb.com/title/tt0816692/" target="_blank" rel="noopener"><span class="pl-icon">🏃‍♀️</span><span><span class="pl-title">Lola rennt (1998)</span><br><span class="pl-sub">Kult-Thriller, nur 80 Minuten — wenig Dialog, viel Tempo. Gut für den Einstieg.</span></span></a>
+      <a class="pdf-link" href="https://www.imdb.com/title/tt0801425/" target="_blank" rel="noopener"><span class="pl-icon">😂</span><span><span class="pl-title">Türkisch für Anfänger (Serie)</span><br><span class="pl-sub">Comedy-Serie über eine deutsch-türkische Patchwork-Familie — Alltagsdeutsch pur.</span></span></a>
+      <a class="pdf-link" href="https://www.imdb.com/title/tt5753856/" target="_blank" rel="noopener"><span class="pl-icon">🌀</span><span><span class="pl-title">Dark (Netflix-Serie)</span><br><span class="pl-sub">Deutscher Netflix-Welthit — Mystery-Thriller. Anspruchsvoller, aber sehr motivierend.</span></span></a>
+      <a class="pdf-link" href="https://www.zdf.de/" target="_blank" rel="noopener"><span class="pl-icon">📺</span><span><span class="pl-title">ZDF & ARD Mediathek (gratis)</span><br><span class="pl-sub">Tausende deutsche Sendungen, Serien & Dokus kostenlos — mit deutschen Untertiteln!</span></span></a>
+    </div>
+  </div>
+
+  <!-- Bücher -->
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title" style="margin-bottom:4px">📚 Bücher & Lektüren für B1</div>
+    <div class="card-sub">Einfache Lektüren bauen Wortschatz auf, ohne zu frustrieren</div>
+    <div class="pdf-links">
+      <a class="pdf-link" href="https://learnoutlive.com/dino-lernt-deutsch/" target="_blank" rel="noopener"><span class="pl-icon">🦖</span><span><span class="pl-title">„Dino lernt Deutsch" (Café in Berlin...)</span><br><span class="pl-sub">Beliebteste Lernkrimi-Serie: kurze Geschichten in einfachem Deutsch mit Vokabelliste — perfekt für A2–B1.</span></span></a>
+      <a class="pdf-link" href="https://www.hueber.de/lektuere-fuer-erwachsene" target="_blank" rel="noopener"><span class="pl-icon">🔍</span><span><span class="pl-title">Hueber Lektüren (nach Niveau)</span><br><span class="pl-sub">Krimis und Geschichten speziell für B1 geschrieben — teils mit Gratis-Audio.</span></span></a>
+      <a class="pdf-link" href="https://www.projekt-gutenberg.org/" target="_blank" rel="noopener"><span class="pl-icon">📖</span><span><span class="pl-title">Projekt Gutenberg (gratis)</span><br><span class="pl-sub">Tausende deutsche Bücher kostenlos online — Tipp für B1: „Emil und die Detektive" (Kästner).</span></span></a>
+      <a class="pdf-link" href="https://www.nachrichtenleicht.de/" target="_blank" rel="noopener"><span class="pl-icon">📰</span><span><span class="pl-title">nachrichtenleicht.de (gratis)</span><br><span class="pl-sub">Wochennachrichten in einfacher Sprache — ideales tägliches Lesetraining auf B1-Niveau.</span></span></a>
+    </div>
+  </div>
+
+  <!-- Tools -->
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title" style="margin-bottom:4px">🛠 Kostenlose Tools & Apps</div>
+    <div class="card-sub">Die Werkzeugkiste für jeden Tag</div>
+    <div class="pdf-links">
+      <a class="pdf-link" href="https://www.deepl.com/translator" target="_blank" rel="noopener"><span class="pl-icon">🔤</span><span><span class="pl-title">DeepL</span><br><span class="pl-sub">Der beste Übersetzer für Deutsch. Tipp: Schreib deinen Brief auf Deutsch und vergleiche mit der Übersetzung deiner Muttersprache.</span></span></a>
+      <a class="pdf-link" href="https://www.verbformen.de/" target="_blank" rel="noopener"><span class="pl-icon">⚙️</span><span><span class="pl-title">Verbformen.de</span><br><span class="pl-sub">JEDES deutsche Verb in allen Formen (Perfekt, Präteritum, Konjunktiv...) — mit Beispielen und Audio.</span></span></a>
+      <a class="pdf-link" href="https://dict.leo.org/" target="_blank" rel="noopener"><span class="pl-icon">📗</span><span><span class="pl-title">LEO & dict.cc</span><br><span class="pl-sub">Die zwei besten kostenlosen Wörterbücher — mit Aussprache, Beispielen und Forum.</span></span></a>
+      <a class="pdf-link" href="https://context.reverso.net/" target="_blank" rel="noopener"><span class="pl-icon">💡</span><span><span class="pl-title">Reverso Context</span><br><span class="pl-sub">Zeigt Wörter in echten Beispielsätzen — perfekt um zu sehen, WIE man ein Wort wirklich benutzt.</span></span></a>
+      <a class="pdf-link" href="https://apps.ankiweb.net/" target="_blank" rel="noopener"><span class="pl-icon">🃏</span><span><span class="pl-title">Anki (Karteikarten-App)</span><br><span class="pl-sub">Wissenschaftliches Wiederholungssystem — such nach fertigen „German B1"-Decks (kostenlos am PC & Android).</span></span></a>
+      <a class="pdf-link" href="https://forvo.com/languages/de/" target="_blank" rel="noopener"><span class="pl-icon">🗣</span><span><span class="pl-title">Forvo</span><br><span class="pl-sub">Jedes Wort von echten Muttersprachlern ausgesprochen — bei Ausspracheunsicherheit hier nachhören.</span></span></a>
+      <a class="pdf-link" href="https://www.dwds.de/" target="_blank" rel="noopener"><span class="pl-icon">📘</span><span><span class="pl-title">DWDS</span><br><span class="pl-sub">Das große digitale Wörterbuch der deutschen Sprache — zeigt auch, welche Wörter oft zusammen stehen.</span></span></a>
+      <a class="pdf-link" href="https://www.tandem.net/" target="_blank" rel="noopener"><span class="pl-icon">🤝</span><span><span class="pl-title">Tandem & HelloTalk</span><br><span class="pl-sub">Sprich mit echten Deutschen, die deine Sprache lernen — kostenloser Sprachaustausch per App.</span></span></a>
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <h4>💡 Die perfekte tägliche Lernroutine (neben dem 30-Tage-Plan)</h4>
+    <ul>
+      <li><strong>Morgens (10 Min):</strong> DW Langsam gesprochene Nachrichten beim Frühstück</li>
+      <li><strong>Unterwegs (15 Min):</strong> Slow German Podcast oder Easy German Video</li>
+      <li><strong>Abends (30–60 Min):</strong> Dein Tagesprogramm aus dem 30-Tage-Plan hier in der App</li>
+      <li><strong>Vor dem Schlafen (15 Min):</strong> Eine Folge „Extra auf Deutsch" oder ein Kapitel Dino</li>
+      <li><strong>Goldene Regel:</strong> Lieber jeden Tag 1 Stunde als einmal pro Woche 7 Stunden!</li>
+    </ul>
+  </div>
+</div>
+</section>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
   <div class="lb-inner">
@@ -1606,6 +1847,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
       <a href="#" onclick="showTab('sprechen');return false">🗣 Sprechen</a>
       <a href="#" onclick="showTab('grammatik');return false">📝 Grammatik</a>
       <a href="#" onclick="showTab('vokabeln');return false">📇 Vokabeln</a>
+      <a href="#" onclick="showTab('ressourcen');return false">🧰 Ressourcen</a>
     </div>
     <div class="footer-col">
       <h3>📄 Quellen</h3>
@@ -1717,7 +1959,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 // ===========================
 // TAB NAVIGATION
 // ===========================
-const TAB_IDS = ['home','plan','lesen','hoeren','schreiben','sprechen','grammatik','vokabeln'];
+const TAB_IDS = ['home','plan','lesen','hoeren','schreiben','sprechen','grammatik','vokabeln','ressourcen'];
 function showTab(id){
   if(!TAB_IDS.includes(id)) id='home';
   document.querySelectorAll('.tab-content').forEach(s=>s.classList.remove('active'));
@@ -2840,6 +3082,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   updateDashboard();
   // 30-day study plan
   initStudyPlan();
+  // Model presentation (Sprechen)
+  initMusterPraes();
   // Deep link (#lesen, /vocab, ...)
   initTabFromURL();
   // Apply saved language translations
@@ -2853,133 +3097,214 @@ const PLAN_KEY = 'b1_plan_v1';
 const STUDY_PLAN = [
   { week:1, title:'Woche 1 — Grundlagen: Grammatik & Wortschatz', goal:'Die wichtigsten B1-Regeln verstehen und die ersten 100 Wörter lernen', days:[
     { d:1, focus:'Orientierung', tasks:[
-      {t:'Den Start-Guide auf der Home-Seite lesen (Was ist die B1-Prüfung?)', tab:'home'},
-      {t:'Prüfung wählen: Goethe oder telc? (Vergleich auf Home)', tab:'home'},
+      {t:'Den Start-Guide auf der Home-Seite lesen (Was ist die B1-Prüfung?)', go:'el:home:start-here'},
+      {t:'Prüfung wählen: Goethe oder telc? (Vergleich auf Home)', go:'el:home:exam-comparison'},
       {t:'Prüfungstermin oben auf dieser Seite eintragen 🗓'}]},
     { d:2, focus:'Grammatik + Vokabeln', tasks:[
-      {t:'Lektion „Kasus" lernen + Mini-Quiz machen', tab:'grammatik'},
-      {t:'15 Wörter zum Thema „Alltag" lernen', tab:'vokabeln'},
-      {t:'10 Verben-Flashcards ansehen', tab:'vokabeln'}]},
+      {t:'Lektion „Kasus" lernen + Mini-Quiz machen', go:'lesson:kasus'},
+      {t:'15 Wörter zum Thema „Alltag" lernen', go:'vocab:alltag'},
+      {t:'10 Verben-Flashcards ansehen', go:'flash'}]},
     { d:3, focus:'Grammatik + Vokabeln', tasks:[
-      {t:'Lektion „Perfekt" lernen + Mini-Quiz', tab:'grammatik'},
-      {t:'15 Wörter zum Thema „Arbeit" lernen', tab:'vokabeln'},
-      {t:'10 Aufgaben in der Übungsbank Grammatik lösen', tab:'grammatik'}]},
+      {t:'Lektion „Perfekt" lernen + Mini-Quiz', go:'lesson:perfekt'},
+      {t:'15 Wörter zum Thema „Arbeit" lernen', go:'vocab:arbeit'},
+      {t:'10 Aufgaben in der Übungsbank Grammatik lösen', go:'bank:grammatik'}]},
     { d:4, focus:'Grammatik + Vokabeln', tasks:[
-      {t:'Lektion „Nebensätze" lernen + Mini-Quiz (wichtigste B1-Regel!)', tab:'grammatik'},
-      {t:'15 Wörter zum Thema „Gesundheit" lernen', tab:'vokabeln'},
-      {t:'10 Verben-Flashcards wiederholen', tab:'vokabeln'}]},
+      {t:'Lektion „Nebensätze" lernen + Mini-Quiz (wichtigste B1-Regel!)', go:'lesson:nebensatz'},
+      {t:'15 Wörter zum Thema „Gesundheit" lernen', go:'vocab:gesundheit'},
+      {t:'10 Verben-Flashcards wiederholen', go:'flash'}]},
     { d:5, focus:'Grammatik + Vokabeln', tasks:[
-      {t:'Lektion „Konjunktiv II" lernen + Mini-Quiz', tab:'grammatik'},
-      {t:'15 Wörter zum Thema „Reisen" lernen', tab:'vokabeln'},
-      {t:'10 Aufgaben Übungsbank Grammatik', tab:'grammatik'}]},
+      {t:'Lektion „Konjunktiv II" lernen + Mini-Quiz', go:'lesson:konjunktiv'},
+      {t:'15 Wörter zum Thema „Reisen" lernen', go:'vocab:reisen'},
+      {t:'10 Aufgaben Übungsbank Grammatik', go:'bank:grammatik'}]},
     { d:6, focus:'Grammatik + Vokabeln', tasks:[
-      {t:'Lektion „Adjektivendungen" lernen + Mini-Quiz', tab:'grammatik'},
-      {t:'15 Wörter zum Thema „Wohnen" lernen', tab:'vokabeln'},
-      {t:'Vokabel-Quiz machen (10 Fragen)', tab:'vokabeln'}]},
+      {t:'Lektion „Adjektivendungen" lernen + Mini-Quiz', go:'lesson:adjektiv'},
+      {t:'15 Wörter zum Thema „Wohnen" lernen', go:'vocab:wohnen'},
+      {t:'Vokabel-Quiz machen (10 Fragen)', go:'vquiz'}]},
     { d:7, focus:'Wiederholung', tasks:[
-      {t:'Alle Mini-Quiz der Woche noch einmal machen', tab:'grammatik'},
-      {t:'Sprachbausteine Teil 1 + Teil 2 lösen', tab:'grammatik'},
-      {t:'Alle Wörter der Woche kurz wiederholen', tab:'vokabeln'}]},
+      {t:'Alle Mini-Quiz der Woche noch einmal machen', go:'el:grammatik:grammar-lessons-card'},
+      {t:'Sprachbausteine Teil 1 + Teil 2 lösen', go:'el:grammatik:ex-gram-1'},
+      {t:'Alle Wörter der Woche kurz wiederholen', go:'vocab:alltag'}]},
   ]},
   { week:2, title:'Woche 2 — Lesen & Hören', goal:'Alle Aufgabentypen kennen und erste Übungen unter Zeit lösen', days:[
     { d:8, focus:'Lesen', tasks:[
-      {t:'Lesen Teil 1: Blog richtig/falsch lösen', tab:'lesen'},
-      {t:'Lektion „Passiv" lernen + Mini-Quiz', tab:'grammatik'},
-      {t:'15 Wörter zum Thema „Umwelt" lernen', tab:'vokabeln'}]},
+      {t:'Lesen Teil 1: Blog richtig/falsch lösen', go:'el:lesen:ex-lesen-g1'},
+      {t:'Lektion „Passiv" lernen + Mini-Quiz', go:'lesson:passiv'},
+      {t:'15 Wörter zum Thema „Umwelt" lernen', go:'vocab:umwelt'}]},
     { d:9, focus:'Lesen', tasks:[
-      {t:'Überschriften-Zuordnung lösen', tab:'lesen'},
-      {t:'10 Aufgaben Übungsbank Lesen', tab:'lesen'},
-      {t:'10 Verben-Flashcards wiederholen', tab:'vokabeln'}]},
+      {t:'Überschriften-Zuordnung lösen (telc Teil 1)', go:'el:lesen:ex-lesen-t1'},
+      {t:'10 Aufgaben Übungsbank Lesen', go:'bank:lesen'},
+      {t:'10 Verben-Flashcards wiederholen', go:'flash'}]},
     { d:10, focus:'Hören', tasks:[
-      {t:'Hörübung Teil 1 mit Audio machen', tab:'hoeren'},
-      {t:'Lektion „Relativsätze" lernen + Mini-Quiz', tab:'grammatik'},
-      {t:'15 Wörter zum Thema „Bildung" lernen', tab:'vokabeln'}]},
+      {t:'Hörübung Teil 1 mit Audio machen', go:'el:hoeren:ex-hoeren-g1'},
+      {t:'Lektion „Relativsätze" lernen + Mini-Quiz', go:'lesson:relativsatz'},
+      {t:'15 Wörter zum Thema „Bildung" lernen', go:'vocab:bildung'}]},
     { d:11, focus:'Lesen', tasks:[
-      {t:'Anzeigen-Zuordnung lösen', tab:'lesen'},
-      {t:'10 Aufgaben Übungsbank Hören', tab:'hoeren'},
-      {t:'Wörter von Tag 8–10 wiederholen', tab:'vokabeln'}]},
+      {t:'Anzeigen-Zuordnung lösen (telc Teil 3)', go:'el:lesen:ex-lesen-t3'},
+      {t:'10 Aufgaben Übungsbank Hören', go:'bank:hoeren'},
+      {t:'Wörter von Tag 8–10 wiederholen', go:'vocab:umwelt'}]},
     { d:12, focus:'Hören', tasks:[
-      {t:'Zweite Hörübung mit Audio machen', tab:'hoeren'},
-      {t:'Lektion „Wechselpräpositionen" lernen + Mini-Quiz', tab:'grammatik'},
-      {t:'15 Wörter zum Thema „Familie & Freunde" lernen', tab:'vokabeln'}]},
+      {t:'Hörverstehen „Au Pair" (telc Teil 2) mit Audio machen', go:'el:hoeren:ex-hoeren-t2'},
+      {t:'Lektion „Wechselpräpositionen" lernen + Mini-Quiz', go:'lesson:wechselpraep'},
+      {t:'15 Wörter zum Thema „Familie & Freunde" lernen', go:'vocab:familie'}]},
     { d:13, focus:'Lesen', tasks:[
-      {t:'Multiple-Choice-Text (telc Teil 2) lösen', tab:'lesen'},
-      {t:'10 Aufgaben Übungsbank Grammatik', tab:'grammatik'},
-      {t:'Vokabel-Quiz machen', tab:'vokabeln'}]},
+      {t:'Multiple-Choice-Text (telc Teil 2) lösen', go:'el:lesen:ex-lesen-t2'},
+      {t:'10 Aufgaben Übungsbank Grammatik', go:'bank:grammatik'},
+      {t:'Vokabel-Quiz machen', go:'vquiz'}]},
     { d:14, focus:'Wochentest', tasks:[
-      {t:'Kompletter Lesen-Durchlauf MIT Timer (65 Min, alle Übungen nacheinander)', tab:'lesen'},
+      {t:'Kompletter Lesen-Durchlauf MIT Timer (65 Min, alle Übungen nacheinander)', go:'tab:lesen'},
       {t:'Fehler ansehen: Warum war die Antwort falsch?'},
-      {t:'Schwierige Wörter aus den Texten in Vokabel-Liste nachschlagen', tab:'vokabeln'}]},
+      {t:'Schwierige Wörter aus den Texten in Vokabel-Liste nachschlagen', go:'tab:vokabeln'}]},
   ]},
   { week:3, title:'Woche 3 — Schreiben & Sprechen', goal:'Briefe sicher schreiben und frei sprechen — die aktiven Teile meistern', days:[
     { d:15, focus:'Schreiben', tasks:[
-      {t:'Brief-Vorlagen ansehen: Aufbau verstehen (Anrede, Einleitung, Schluss)', tab:'schreiben'},
-      {t:'Ersten Übungsbrief schreiben (mind. 80 Wörter)', tab:'schreiben'},
-      {t:'Lektion „Präteritum" lernen + Mini-Quiz', tab:'grammatik'}]},
+      {t:'Musterbriefe ansehen: Aufbau verstehen (Anrede, Einleitung, Schluss)', go:'el:schreiben:musterbriefe'},
+      {t:'Ersten Übungsbrief schreiben (mind. 80 Wörter)', go:'el:schreiben:writing-workspace'},
+      {t:'Lektion „Präteritum" lernen + Mini-Quiz', go:'lesson:praeteritum'}]},
     { d:16, focus:'Sprechen', tasks:[
-      {t:'Teil 1 üben: Sich vorstellen — mit dem Sprachrekorder aufnehmen', tab:'sprechen'},
-      {t:'Aufnahme anhören: Was kann besser werden?', tab:'sprechen'},
-      {t:'15 Wörter zum Thema „Essen & Einkaufen" lernen', tab:'vokabeln'}]},
+      {t:'Teil 1 üben: Sich vorstellen — mit dem Sprachrekorder aufnehmen', go:'el:sprechen:sp-recorder'},
+      {t:'Aufnahme anhören: Was kann besser werden?', go:'el:sprechen:sp-recorder'},
+      {t:'15 Wörter zum Thema „Essen & Einkaufen" lernen', go:'vocab:essen'}]},
     { d:17, focus:'Schreiben', tasks:[
-      {t:'Beschwerdebrief schreiben (häufigste telc-Aufgabe!)', tab:'schreiben'},
-      {t:'Mit der Checkliste kontrollieren: Anrede? Alle Punkte? Gruß?', tab:'schreiben'},
-      {t:'10 Verben-Flashcards wiederholen', tab:'vokabeln'}]},
+      {t:'Beschwerdebrief schreiben (häufigste telc-Aufgabe!)', go:'el:schreiben:writing-workspace'},
+      {t:'Mit der Checkliste kontrollieren: Anrede? Alle Punkte? Gruß?', go:'el:schreiben:writing-workspace'},
+      {t:'10 Verben-Flashcards wiederholen', go:'flash'}]},
     { d:18, focus:'Sprechen', tasks:[
-      {t:'Teil 2: Zwei Bildbeschreibungen mit Rekorder üben', tab:'sprechen'},
-      {t:'Redemittel für Bildbeschreibung auswendig lernen', tab:'sprechen'},
-      {t:'Lektion „Komparativ & Superlativ" + Mini-Quiz', tab:'grammatik'}]},
+      {t:'Teil 2: Zwei Bildbeschreibungen mit Rekorder üben', go:'el:sprechen:sp-bildbeschreibung'},
+      {t:'Redemittel für Bildbeschreibung auswendig lernen', go:'el:sprechen:sp-bildbeschreibung'},
+      {t:'Lektion „Komparativ & Superlativ" + Mini-Quiz', go:'lesson:komparativ'}]},
     { d:19, focus:'Schreiben', tasks:[
-      {t:'Forumsbeitrag / Meinungstext schreiben (80 Wörter)', tab:'schreiben'},
-      {t:'15 Wörter zum Thema „Meinung & Diskussion" lernen', tab:'vokabeln'},
-      {t:'10 Aufgaben Übungsbank Schreiben', tab:'schreiben'}]},
+      {t:'Forumsbeitrag / Meinungstext schreiben (80 Wörter)', go:'el:schreiben:writing-workspace'},
+      {t:'15 Wörter zum Thema „Meinung & Diskussion" lernen', go:'vocab:meinung'},
+      {t:'10 Aufgaben Übungsbank Schreiben', go:'bank:schreiben'}]},
     { d:20, focus:'Sprechen', tasks:[
-      {t:'Teil 3 üben: Etwas gemeinsam planen — Redemittel lernen', tab:'sprechen'},
-      {t:'Lektion „zu + Infinitiv" + Mini-Quiz', tab:'grammatik'},
-      {t:'Vokabel-Quiz machen', tab:'vokabeln'}]},
+      {t:'Teil 3 üben: Etwas gemeinsam planen — Musterdialog lesen', go:'el:sprechen:muster-dialog'},
+      {t:'Lektion „zu + Infinitiv" + Mini-Quiz', go:'lesson:zuinfinitiv'},
+      {t:'Vokabel-Quiz machen', go:'vquiz'}]},
     { d:21, focus:'Wochentest', tasks:[
-      {t:'Einen Brief in 30 Minuten OHNE Hilfe schreiben (echte Prüfungsbedingung)', tab:'schreiben'},
-      {t:'Eine komplette Präsentation (2 Min) aufnehmen und anhören', tab:'sprechen'},
-      {t:'Alle Redemittel noch einmal durchlesen', tab:'sprechen'}]},
+      {t:'Einen Brief in 30 Minuten OHNE Hilfe schreiben (echte Prüfungsbedingung)', go:'el:schreiben:writing-workspace'},
+      {t:'Eine komplette Präsentation (2 Min) aufnehmen und anhören', go:'el:sprechen:sp-recorder'},
+      {t:'Muster-Präsentation lesen und anhören', go:'el:sprechen:muster-praesentation'}]},
   ]},
   { week:4, title:'Woche 4 — Modelltests & Endspurt', goal:'Unter echten Bedingungen üben — Timer an, Wörterbuch weg!', days:[
     { d:22, focus:'Modelltest', tasks:[
-      {t:'Offiziellen Modelltest herunterladen (Home → Offizielle Modelltests)', tab:'home'},
+      {t:'Offiziellen Modelltest herunterladen (Home → Offizielle Modelltests)', go:'el:home:downloads'},
       {t:'Lesen-Teil unter echter Zeit lösen (65/90 Min)'},
       {t:'Ergebnis auswerten: Bestanden? (60% nötig)'}]},
     { d:23, focus:'Modelltest', tasks:[
-      {t:'Hören-Teil des Modelltests unter echter Zeit'},
+      {t:'Hören-Teil des Modelltests unter echter Zeit (Original-Audio im Hören-Bereich!)', go:'el:hoeren:ex-hoeren-g1'},
       {t:'Fehler notieren: Welcher Aufgabentyp ist schwer?'},
-      {t:'10 Aufgaben Übungsbank Hören', tab:'hoeren'}]},
+      {t:'10 Aufgaben Übungsbank Hören', go:'bank:hoeren'}]},
     { d:24, focus:'Modelltest', tasks:[
       {t:'Schreiben-Teil des Modelltests unter echter Zeit'},
       {t:'Mit der Musterlösung im PDF vergleichen'},
-      {t:'Brief-Redemittel wiederholen', tab:'schreiben'}]},
+      {t:'Musterbriefe noch einmal ansehen', go:'el:schreiben:musterbriefe'}]},
     { d:25, focus:'Modelltest', tasks:[
-      {t:'Sprechen komplett simulieren: alle 3 Teile mit Rekorder (15 Min)', tab:'sprechen'},
-      {t:'Aufnahme anhören und mit den Redemitteln vergleichen', tab:'sprechen'},
-      {t:'Vokabel-Quiz machen', tab:'vokabeln'}]},
+      {t:'Sprechen komplett simulieren: alle 3 Teile mit Rekorder (15 Min)', go:'el:sprechen:sp-recorder'},
+      {t:'Aufnahme anhören und mit der Muster-Präsentation vergleichen', go:'el:sprechen:muster-praesentation'},
+      {t:'Vokabel-Quiz machen', go:'vquiz'}]},
     { d:26, focus:'Schwächen', tasks:[
       {t:'Deinen schwächsten Bereich wählen und 20 Aufgaben aus der Übungsbank lösen'},
-      {t:'Lektion „Reflexive Verben" + Mini-Quiz', tab:'grammatik'},
-      {t:'15 Wörter „Medien & Technik" lernen', tab:'vokabeln'}]},
+      {t:'Lektion „Reflexive Verben" + Mini-Quiz', go:'lesson:reflexiv'},
+      {t:'15 Wörter „Medien & Technik" lernen', go:'vocab:medien'}]},
     { d:27, focus:'Modelltest 2', tasks:[
       {t:'Zweiten Modelltest: Lesen + Sprachbausteine unter Zeit'},
-      {t:'Lektion „Wortstellung (TeKaMoLo)" + Mini-Quiz', tab:'grammatik'},
-      {t:'Wörter der Woche wiederholen', tab:'vokabeln'}]},
+      {t:'Lektion „Wortstellung (TeKaMoLo)" + Mini-Quiz', go:'lesson:wortstellung'},
+      {t:'Wörter der Woche wiederholen', go:'tab:vokabeln'}]},
     { d:28, focus:'Modelltest 2', tasks:[
       {t:'Zweiten Modelltest: Hören + Schreiben unter Zeit'},
       {t:'Alle Fehler der beiden Modelltests noch einmal ansehen'},
-      {t:'15 Wörter „Verkehr & Stadt" lernen', tab:'vokabeln'}]},
+      {t:'15 Wörter „Verkehr & Stadt" lernen', go:'vocab:verkehr'}]},
     { d:29, focus:'Leichte Wiederholung', tasks:[
-      {t:'Top-5-Grammatikregeln auf Home noch einmal lesen', tab:'home'},
-      {t:'Sprechen-Redemittel laut vorlesen', tab:'sprechen'},
-      {t:'Brief-Vorlage noch einmal ansehen', tab:'schreiben'}]},
+      {t:'Top-5-Grammatikregeln auf Home noch einmal lesen', go:'el:home:top5-rules'},
+      {t:'Sprechen-Redemittel laut vorlesen', go:'el:sprechen:sp-bildbeschreibung'},
+      {t:'Musterbriefe noch einmal ansehen', go:'el:schreiben:musterbriefe'}]},
     { d:30, focus:'Ruhetag 🍀', tasks:[
-      {t:'Nur 10 Minuten: Lieblings-Wörter wiederholen — MEHR NICHT!', tab:'vokabeln'},
+      {t:'Nur 10 Minuten: Lieblings-Wörter wiederholen — MEHR NICHT!', go:'vocab:freizeit'},
       {t:'Tasche packen: Ausweis/Pass, Einladung zur Prüfung, Wasser, Snack, Uhr'},
       {t:'Früh schlafen gehen. Du bist vorbereitet — viel Erfolg! 💪'}]},
   ]},
 ];
+
+// ===========================
+// MUSTER-PRÄSENTATION (Sprechen Teil 2)
+// ===========================
+const MUSTER_PRAES = [
+  { step:'1. Einleitung & Thema nennen', color:'var(--gold)',
+    text:'Ich möchte heute über das Thema „Fast Food" sprechen. Zuerst erzähle ich von meinen persönlichen Erfahrungen, dann berichte ich über die Situation in meinem Heimatland, und zum Schluss nenne ich Vor- und Nachteile.' },
+  { step:'2. Persönliche Erfahrungen', color:'var(--blue)',
+    text:'Ich persönlich esse ungefähr einmal pro Woche Fast Food, meistens wenn ich wenig Zeit habe. Früher habe ich viel öfter Burger und Pommes gegessen, aber seit zwei Jahren koche ich lieber selbst, weil das gesünder ist.' },
+  { step:'3. Situation im Heimatland', color:'var(--purple)',
+    text:'In meinem Heimatland ist Fast Food besonders bei jungen Leuten sehr beliebt. An jeder Ecke gibt es Imbisse und amerikanische Ketten. Traditionelles Essen kochen oft nur noch die Großeltern — das finde ich ein bisschen schade.' },
+  { step:'4. Vor- und Nachteile', color:'var(--orange)',
+    text:'Fast Food hat Vor- und Nachteile. Einerseits ist es schnell, billig und schmeckt vielen Menschen gut. Andererseits ist es sehr ungesund, weil es viel Fett und Zucker enthält. Wer oft Fast Food isst, kann Gesundheitsprobleme bekommen.' },
+  { step:'5. Meinung & Schluss', color:'var(--green)',
+    text:'Meiner Meinung nach ist Fast Food ab und zu in Ordnung, aber man sollte nicht jeden Tag so essen. Ich denke, eine gesunde Ernährung ist auf Dauer wichtiger als Bequemlichkeit. Vielen Dank für Ihre Aufmerksamkeit! Haben Sie noch Fragen?' },
+];
+function initMusterPraes(){
+  const c = document.getElementById('muster-praes-steps');
+  if(!c) return;
+  c.innerHTML = MUSTER_PRAES.map((p,i) => `
+    <div style="background:var(--bg2);border:1px solid var(--border);border-left:4px solid ${p.color};border-radius:var(--r2);padding:14px 16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+        <div style="font-weight:800;font-size:.85rem;color:${p.color}">${p.step}</div>
+        <button class="btn-secondary" style="padding:4px 12px;font-size:.78rem" onclick="speakDE(MUSTER_PRAES[${i}].text)">🔊 Anhören</button>
+      </div>
+      <div style="font-size:.88rem;line-height:1.7;color:var(--text2)">${p.text}</div>
+    </div>`).join('');
+}
+
+// Deep-link navigation from plan tasks straight to the right exercise
+function planGo(spec){
+  const parts = spec.split(':');
+  const kind = parts[0];
+  const scrollTo = (id) => setTimeout(() => {
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 150);
+  switch(kind){
+    case 'tab': showTab(parts[1]); break;
+    case 'el': {
+      const tab = parts[1], id = parts[2];
+      showTab(tab);
+      // switch exam format if the target lives inside a hidden goethe/telc panel
+      if(/^ex-lesen-t/.test(id)) setLesenExam('telc');
+      else if(/^ex-lesen-g/.test(id)) setLesenExam('goethe');
+      if(/^ex-hoeren-t/.test(id)) setHoerenExam('telc');
+      else if(/^ex-hoeren-g/.test(id)) setHoerenExam('goethe');
+      scrollTo(id);
+      break;
+    }
+    case 'lesson':
+      showTab('grammatik');
+      showLesson(parts[1]);
+      scrollTo('grammar-lessons-card');
+      break;
+    case 'vocab':
+      showTab('vokabeln');
+      switchVocabMode('thematic');
+      if(THEMATIC_VOCAB[parts[1]]){
+        currentVocabTopic = parts[1];
+        renderTopicPills();
+        renderWordGrid(parts[1]);
+      }
+      scrollTo('vocab-panel-thematic');
+      break;
+    case 'flash':
+      showTab('vokabeln');
+      switchVocabMode('prepositions');
+      scrollTo('flashcards-container');
+      break;
+    case 'vquiz':
+      showTab('vokabeln');
+      switchVocabMode('quiz');
+      scrollTo('vocab-quiz-card');
+      break;
+    case 'bank':
+      showTab(parts[1]);
+      scrollTo('bank-card-'+parts[1]);
+      break;
+  }
+}
 
 function planState(){
   try { return JSON.parse(localStorage.getItem(PLAN_KEY)) || {tasks:{},examDate:''}; }
@@ -3041,7 +3366,7 @@ function renderStudyPlan(){
               const checked = !!s.tasks['d'+day.d+'_'+i];
               return `<div class="plan-task${checked?' checked':''}" onclick="togglePlanTask(${day.d},${i})">
                 <input type="checkbox" ${checked?'checked':''} style="pointer-events:none" tabindex="-1" aria-label="Aufgabe ${i+1} Tag ${day.d}">
-                <span>${task.t}${task.tab?` <a onclick="event.stopPropagation();showTab('${task.tab}')" href="#${task.tab}">↗</a>`:''}</span>
+                <span>${task.t}${task.go?` <a class="pt-go" onclick="event.stopPropagation();event.preventDefault();planGo('${task.go}')" href="#">→ Öffnen</a>`:''}</span>
               </div>`;
             }).join('')}
           </div>`;
@@ -3070,6 +3395,7 @@ const TRANSLATIONS = {
     nav_schreiben: 'Schreiben', nav_sprechen: 'Sprechen', nav_grammatik: 'Grammatik',
     nav_vokabeln: 'Vokabeln',
     nav_plan: '30-Tage-Plan',
+    nav_ressourcen: 'Ressourcen',
     desc_vokabeln: 'Meistern Sie B1-Verben mit festen Präpositionen. Lernen Sie mit interaktiven Flashcards und Quizzes.',
     vocab_hero_sub: 'Meistern Sie die B1-Verben mit festen Präpositionen und Fällen. Üben Sie mit Flashcards und interaktiven Quizzes.',
     vocab_flashcards_title: '📇 Interaktive Flashcards',
@@ -3148,6 +3474,7 @@ const TRANSLATIONS = {
     nav_schreiben: 'Writing', nav_sprechen: 'Speaking', nav_grammatik: 'Grammar',
     nav_vokabeln: 'Vocabulary',
     nav_plan: '30-Day Plan',
+    nav_ressourcen: 'Resources',
     desc_vokabeln: 'Master B1 verbs with fixed prepositions and cases. Learn with interactive flashcards and quizzes.',
     vocab_hero_sub: 'Master B1 verbs with fixed prepositions and cases. Practice with flashcards and interactive quizzes.',
     vocab_flashcards_title: '📇 Interactive Flashcards',
@@ -3213,6 +3540,7 @@ const TRANSLATIONS = {
     nav_schreiben: 'Письмо', nav_sprechen: 'Говорение', nav_grammatik: 'Грамматика',
     nav_vokabeln: 'Словарный запас',
     nav_plan: 'План на 30 дней',
+    nav_ressourcen: 'Ресурсы',
     desc_vokabeln: 'Освойте глаголы B1 с фиксированными предлогами. Учитесь с интерактивными карточками и тестами.',
     vocab_hero_sub: 'Освойте глаголы B1 с фиксированными предлогами и падежами. Практикуйтесь с карточками и интерактивными тестами.',
     vocab_flashcards_title: '📇 Интерактивные карточки',
@@ -3290,6 +3618,7 @@ const TRANSLATIONS = {
     nav_schreiben: 'Yazı', nav_sprechen: 'Danışıq', nav_grammatik: 'Qrammatika',
     nav_vokabeln: 'Sözlük',
     nav_plan: '30 günlük plan',
+    nav_ressourcen: 'Resurslar',
     desc_vokabeln: 'Sabit sözönləri ilə B1 feillərini öyrənin. İnteraktiv fləşkartlar və testlərlə öyrənin.',
     vocab_hero_sub: 'Sabit sözönləri və hallar ilə B1 feillərini öyrənin. Fləşkartlar və interaktiv testlərlə məşq edin.',
     vocab_flashcards_title: '📇 İnteraktiv Fləşkartlar',
