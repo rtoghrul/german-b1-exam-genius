@@ -1149,9 +1149,10 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
         <div class="instruction green">Sie hören fünf kurze Texte. Jeder Text wird zweimal gespielt. Beantworten Sie zu jedem Text zwei Fragen.</div>
         <div class="audio-section">
           <h4>🎵 Übungs-Audio — Hörverstehen</h4>
-          <audio controls preload="none" id="audio-g1">
+          <audio controls preload="metadata" id="audio-g1">
             <source src="audio/hoerverstehen_teil1.mp4" type="audio/mp4">
-            Your browser does not support audio.
+            <source src="audio/hoerverstehen_teil1.mp4" type="video/mp4">
+            <p>Audio wird geladen… Falls kein Ton zu hören ist, <a href="audio/hoerverstehen_teil1.mp4" download>lade die Audiodatei herunter</a>.</p>
           </audio>
           <div class="audio-note">📌 This audio contains real listening practice. Listen carefully and answer the questions below. In the real Goethe exam, each short clip is played twice.</div>
         </div>
@@ -1239,8 +1240,10 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 
         <div class="audio-section">
           <h4>🎵 Hörverstehen — Gespräch: Au Pair</h4>
-          <audio controls preload="none" id="audio-t2">
+          <audio controls preload="metadata" id="audio-t2">
             <source src="audio/hoerverstehen_teil1.mp4" type="audio/mp4">
+            <source src="audio/hoerverstehen_teil1.mp4" type="video/mp4">
+            <p>Audio wird geladen… Falls kein Ton zu hören ist, <a href="audio/hoerverstehen_teil1.mp4" download>lade die Audiodatei herunter</a>.</p>
           </audio>
           <div class="audio-note">📌 Real audio recording. Listen carefully. In the real telc exam this conversation is played twice.</div>
         </div>
@@ -1270,8 +1273,10 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
         </div>
         <div class="audio-section">
           <h4>🎵 Hörverstehen — 5 kurze Texte</h4>
-          <audio controls preload="none" id="audio-t3">
+          <audio controls preload="metadata" id="audio-t3">
             <source src="audio/hoerverstehen_teil2.mp4" type="audio/mp4">
+            <source src="audio/hoerverstehen_teil2.mp4" type="video/mp4">
+            <p>Audio wird geladen… Falls kein Ton zu hören ist, <a href="audio/hoerverstehen_teil2.mp4" download>lade die Audiodatei herunter</a>.</p>
           </audio>
         </div>
         <div id="tf-t3-qs"></div>
@@ -5119,6 +5124,10 @@ if (document.readyState !== 'loading') {
   initThematicVocab();
   if (typeof updateDashboard === 'function') updateDashboard();
 }
+  // Register service worker for offline support
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  }
 </script>
 </body>
 </html>

@@ -1,7 +1,14 @@
 {
   "rewrites": [
     { "source": "/dashboard", "destination": "/index.html" },
-    { "source": "/vocab", "destination": "/index.html" }
+    { "source": "/vocab", "destination": "/index.html" },
+    { "source": "/lesen", "destination": "/index.html" },
+    { "source": "/hoeren", "destination": "/index.html" },
+    { "source": "/schreiben", "destination": "/index.html" },
+    { "source": "/sprechen", "destination": "/index.html" },
+    { "source": "/grammatik", "destination": "/index.html" },
+    { "source": "/ressourcen", "destination": "/index.html" },
+    { "source": "/impressum", "destination": "/index.html" }
   ],
   "headers": [
     {
