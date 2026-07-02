@@ -5259,14 +5259,14 @@ if (document.readyState !== 'loading') {
   initThematicVocab();
   if (typeof updateDashboard === 'function') updateDashboard();
 }
-  // Register service worker for offline support
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
-  }
 
-  // Render new Goethe listening exercises
-  renderListeningExercises();
+// Register service worker for offline support
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(() => {});
 }
+
+// Render new Goethe listening exercises
+renderListeningExercises();
 
 // ===========================
 // LISTENING EXERCISE RENDERERS
