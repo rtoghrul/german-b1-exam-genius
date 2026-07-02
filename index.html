@@ -53,22 +53,54 @@
   --r2: 8px;
   --shadow: 0 4px 24px rgba(0,0,0,0.4);
   --transition: 0.25s cubic-bezier(.4,0,.2,1);
+  --nav-bg: rgba(8,15,30,0.95);
 }
+html[data-theme="light"]{
+  --bg: #F2F5FA;
+  --bg2: #FFFFFF;
+  --card: #FFFFFF;
+  --card2: #E9EEF7;
+  --border: #CBD6E8;
+  --gold: #C88F00;
+  --gold2: #A87800;
+  --text: #16202F;
+  --text2: #3D4C63;
+  --text3: #64748B;
+  --shadow: 0 4px 24px rgba(30,50,90,0.12);
+  --nav-bg: rgba(255,255,255,0.94);
+}
+html[data-theme="light"] .section-hero,
+html[data-theme="light"] .dash-hero{color:#E2E8F0}
+html[data-theme="light"] .section-hero .hero-sub,
+html[data-theme="light"] .dash-hero p{color:#C7D2E4}
+html[data-theme="light"] .nav-tab.active{background:var(--gold);color:#fff}
+html[data-theme="light"] .hero-cta{color:#fff}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 
 /* ---- NAV ---- */
-.main-nav{position:sticky;top:0;z-index:100;background:rgba(8,15,30,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 16px}
-.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:60px;gap:0}
-.nav-tabs-scroll{display:flex;align-items:center;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none;height:100%}
-.nav-tabs-scroll::-webkit-scrollbar{display:none}
-.nav-logo{font-weight:800;font-size:1.1rem;color:var(--gold);white-space:nowrap;margin-right:16px;letter-spacing:-.02em;flex-shrink:0}
+.main-nav{position:sticky;top:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 16px}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;padding:10px 0 10px;gap:8px}
+.nav-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.nav-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.nav-tabs-scroll{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.nav-logo{font-weight:800;font-size:1.1rem;color:var(--gold);white-space:nowrap;letter-spacing:-.02em}
 .nav-logo span{color:var(--text2);font-weight:400;font-size:.85rem}
-.nav-tab{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:none;background:transparent;color:var(--text2);font-size:.85rem;font-weight:500;cursor:pointer;transition:all var(--transition);white-space:nowrap;font-family:inherit}
-.nav-tab:hover{background:var(--card);color:var(--text)}
-.nav-tab.active{background:var(--card2);color:var(--text);font-weight:600}
+.nav-tab{display:flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;border:1px solid transparent;background:var(--card);color:var(--text2);font-size:.84rem;font-weight:600;cursor:pointer;transition:all var(--transition);white-space:nowrap;font-family:inherit}
+.nav-tab:hover{background:var(--card2);color:var(--text);border-color:var(--border)}
+.nav-tab.active{background:var(--gold);color:#000;font-weight:700}
+.nav-tab.active .dot{background:#000!important}
 .nav-tab .dot{width:8px;height:8px;border-radius:50%}
+.theme-btn{width:36px;height:32px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:1rem;cursor:pointer;transition:all var(--transition);display:flex;align-items:center;justify-content:center}
+.theme-btn:hover{background:var(--card2);border-color:var(--gold)}
+@media(max-width:640px){
+  .main-nav{position:static}
+  .nav-logo{font-size:.95rem}
+  .nav-logo span{display:none}
+  .nav-tab{padding:6px 10px;font-size:.78rem}
+  .nav-tab .dot{display:none}
+}
 .dot-home{background:var(--gold)}
 .dot-lesen{background:var(--blue)}
 .dot-hoeren{background:var(--green)}
@@ -369,7 +401,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .tooltip-wrap:hover .tooltip-text{visibility:visible}
 
 /* Language switcher */
-.lang-switcher{display:flex;align-items:center;gap:4px;flex-shrink:0;padding-left:12px;border-left:1px solid var(--border)}
+.lang-switcher{display:flex;align-items:center;gap:4px;flex-shrink:0}
 .lang-btn{padding:5px 10px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.78rem;font-weight:700;cursor:pointer;transition:all var(--transition);font-family:inherit;white-space:nowrap}
 .lang-btn:hover{background:var(--card2);color:var(--text)}
 .lang-btn.active{background:var(--card2);color:var(--gold);border-color:var(--gold)}
@@ -604,6 +636,8 @@ a:focus:not(:focus-visible),
 .plan-task a:hover { text-decoration:underline; }
 .pt-go { display:inline-block; margin-left:6px; padding:1px 9px; border-radius:12px; background:rgba(245,180,0,.12); border:1px solid rgba(245,180,0,.35); font-size:.72rem; white-space:nowrap; }
 .plan-task.checked .pt-go { opacity:.5; }
+.date-select { padding:9px 10px; border-radius:var(--r2); border:2px solid var(--gold); background:var(--bg2); color:var(--text); font-family:inherit; font-size:.92rem; font-weight:600; cursor:pointer; }
+.date-select:focus { outline:2px solid var(--gold2); }
 
 /* ---- START HERE GUIDE ---- */
 .start-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; margin-top:14px; }
@@ -635,7 +669,18 @@ a:focus:not(:focus-visible),
 <!-- NAVIGATION -->
 <nav class="main-nav" aria-label="Hauptnavigation">
   <div class="nav-inner">
-    <div class="nav-logo">B1 Prüfungsgenie <span data-i18n="nav_subtitle">Deutsch Exam Prep</span></div>
+    <div class="nav-top">
+      <div class="nav-logo">B1 Prüfungsgenie <span data-i18n="nav_subtitle">Deutsch Exam Prep</span></div>
+      <div class="nav-controls">
+        <div class="lang-switcher" role="group" aria-label="Sprache wählen">
+          <button class="lang-btn active" id="lang-de" onclick="setLang('de')" aria-label="Deutsch">🇩🇪 DE</button>
+          <button class="lang-btn" id="lang-en" onclick="setLang('en')" aria-label="English">🇬🇧 EN</button>
+          <button class="lang-btn" id="lang-ru" onclick="setLang('ru')" aria-label="Русский">🇷🇺 RU</button>
+          <button class="lang-btn" id="lang-az" onclick="setLang('az')" aria-label="Azərbaycan">🇦🇿 AZ</button>
+        </div>
+        <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Farbschema wechseln / Toggle color theme" title="Hell/Dunkel">☀️</button>
+      </div>
+    </div>
     <div class="nav-tabs-scroll">
       <button class="nav-tab active" onclick="showTab('home')" aria-current="page"><span class="dot dot-home"></span> 🏠 <span data-i18n="nav_home">Home</span></button>
       <button class="nav-tab" onclick="showTab('plan')"><span class="dot" style="background:var(--gold)"></span> 📅 <span data-i18n="nav_plan">30-Tage-Plan</span></button>
@@ -646,12 +691,6 @@ a:focus:not(:focus-visible),
       <button class="nav-tab" onclick="showTab('grammatik')"><span class="dot dot-grammatik"></span> 📝 <span data-i18n="nav_grammatik">Grammatik</span></button>
       <button class="nav-tab" onclick="showTab('vokabeln')"><span class="dot dot-vokabeln" style="background:var(--purple)"></span> 📇 <span data-i18n="nav_vokabeln">Vokabeln</span></button>
       <button class="nav-tab" onclick="showTab('ressourcen')"><span class="dot" style="background:var(--green)"></span> 🧰 <span data-i18n="nav_ressourcen">Ressourcen</span></button>
-    </div>
-    <div class="lang-switcher" role="group" aria-label="Sprache wählen">
-      <button class="lang-btn active" id="lang-de" onclick="setLang('de')" aria-label="Deutsch">🇩🇪 DE</button>
-      <button class="lang-btn" id="lang-en" onclick="setLang('en')" aria-label="English">🇬🇧 EN</button>
-      <button class="lang-btn" id="lang-ru" onclick="setLang('ru')" aria-label="Русский">🇷🇺 RU</button>
-      <button class="lang-btn" id="lang-az" onclick="setLang('az')" aria-label="Azərbaycan">🇦🇿 AZ</button>
     </div>
   </div>
 </nav>
@@ -675,7 +714,7 @@ a:focus:not(:focus-visible),
 
   <!-- START HERE — First-timer guide -->
   <div class="card" id="start-here" style="margin-bottom:24px;border-top:3px solid var(--gold)">
-    <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:4px">🚀 Zum ersten Mal B1? Start hier! / First time taking B1? Start here!</h2>
+    <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:4px" data-i18n="start_title">🚀 Zum ersten Mal B1? Start hier!</h2>
     <div class="card-sub">Alles, was du wissen musst — in 4 einfachen Schritten / Everything you need to know in 4 simple steps</div>
     <div class="start-steps">
       <div class="start-step"><div class="ss-num">1</div>
@@ -727,12 +766,12 @@ a:focus:not(:focus-visible),
 
   <!-- Exam Format Comparison -->
   <div class="card" style="margin-bottom:24px" id="exam-comparison">
-    <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:4px">📋 Which exam are you taking?</h2>
-    <div class="card-sub">Both are valid B1 certificates — choose the right one for your purpose</div>
+    <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:4px" data-i18n="home_which">📋 Which exam are you taking?</h2>
+    <div class="card-sub" data-i18n="home_which_sub">Both are valid B1 certificates — choose the right one for your purpose</div>
     <div class="card-row">
       <div class="format-card">
         <h3>🦁 Goethe-Zertifikat B1</h3>
-        <p>International gold standard. Modular — retake only failed sections. Accepted worldwide for study and immigration.</p>
+        <p data-i18n="home_goethe_desc">International gold standard. Modular — retake only failed sections. Accepted worldwide for study and immigration.</p>
         <table class="format-table">
           <tr><th>Section</th><th>Time</th><th>Pass Mark</th></tr>
           <tr><td>Lesen</td><td>65 min</td><td class="pass">60/100</td></tr>
@@ -744,7 +783,7 @@ a:focus:not(:focus-visible),
       </div>
       <div class="format-card">
         <h3>🇩🇪 telc Deutsch B1</h3>
-        <p>Most common in Germany. Required for citizenship & integration certificates. Written + Oral graded separately.</p>
+        <p data-i18n="home_telc_desc">Most common in Germany. Required for citizenship & integration certificates. Written + Oral graded separately.</p>
         <table class="format-table">
           <tr><th>Section</th><th>Time</th><th>Pass Mark</th></tr>
           <tr><td>Leseverstehen</td><td>90 min*</td><td class="pass">45/75</td></tr>
@@ -764,7 +803,7 @@ a:focus:not(:focus-visible),
     <div class="section-card sc-lesen" onclick="showTab('lesen')">
       <div class="sc-icon">📖</div>
       <div class="sc-title">Lesen / Leseverstehen</div>
-      <div class="sc-desc">3 exercise types: headline matching, multiple choice, ads matching. Both Goethe & telc formats.</div>
+      <div class="sc-desc" data-i18n="desc_lesen">3 exercise types: headline matching, multiple choice, ads matching. Both Goethe & telc formats.</div>
       <div class="sc-meta"><span class="sc-pill">Goethe: 5 parts</span><span class="sc-pill">telc: 3 parts</span><span class="sc-pill">65 min</span></div>
       <div class="progress-bar"><div class="progress-fill" id="prog-lesen" style="width:0%;background:var(--blue)"></div></div>
       <div class="progress-label" id="prog-label-lesen">Not started</div>
@@ -772,7 +811,7 @@ a:focus:not(:focus-visible),
     <div class="section-card sc-hoeren" onclick="showTab('hoeren')">
       <div class="sc-icon">🎧</div>
       <div class="sc-title">Hören / Hörverstehen</div>
-      <div class="sc-desc">Real audio exercises with True/False questions. Includes your actual MP4 audio files.</div>
+      <div class="sc-desc" data-i18n="desc_hoeren">Real audio exercises with True/False questions. Includes your actual MP4 audio files.</div>
       <div class="sc-meta"><span class="sc-pill">Goethe: 4 parts</span><span class="sc-pill">telc: 3 parts</span><span class="sc-pill">30-40 min</span></div>
       <div class="progress-bar"><div class="progress-fill" id="prog-hoeren" style="width:0%;background:var(--green)"></div></div>
       <div class="progress-label" id="prog-label-hoeren">Not started</div>
@@ -780,7 +819,7 @@ a:focus:not(:focus-visible),
     <div class="section-card sc-schreiben" onclick="showTab('schreiben')">
       <div class="sc-icon">✍️</div>
       <div class="sc-title">Schreiben / Schriftl. Ausdruck</div>
-      <div class="sc-desc">Writing templates, complaint letters, forum posts. Browse 14 real worksheet exercises.</div>
+      <div class="sc-desc" data-i18n="desc_schreiben">Writing templates, complaint letters, forum posts. Browse 14 real worksheet exercises.</div>
       <div class="sc-meta"><span class="sc-pill">Goethe: 3 tasks</span><span class="sc-pill">telc: 1 letter</span><span class="sc-pill">30-60 min</span></div>
       <div class="progress-bar"><div class="progress-fill" id="prog-schreiben" style="width:0%;background:var(--orange)"></div></div>
       <div class="progress-label" id="prog-label-schreiben">Not started</div>
@@ -788,7 +827,7 @@ a:focus:not(:focus-visible),
     <div class="section-card sc-sprechen" onclick="showTab('sprechen')">
       <div class="sc-icon">🗣</div>
       <div class="sc-title">Sprechen / Mündliche Prüfung</div>
-      <div class="sc-desc">80+ Bildbeschreibung image exercises, speaking phrases, topic cards for all 3 speaking parts.</div>
+      <div class="sc-desc" data-i18n="desc_sprechen">80+ Bildbeschreibung image exercises, speaking phrases, topic cards for all 3 speaking parts.</div>
       <div class="sc-meta"><span class="sc-pill">Goethe & telc: 3 parts</span><span class="sc-pill">15 min</span></div>
       <div class="progress-bar"><div class="progress-fill" id="prog-sprechen" style="width:0%;background:var(--purple)"></div></div>
       <div class="progress-label" id="prog-label-sprechen">Not started</div>
@@ -796,7 +835,7 @@ a:focus:not(:focus-visible),
     <div class="section-card sc-grammatik" onclick="showTab('grammatik')">
       <div class="sc-icon">📝</div>
       <div class="sc-title">Sprachbausteine (telc only)</div>
-      <div class="sc-desc">Grammar & vocabulary fill-in exercises. Prepositions, verb forms, conjunctions, word choice.</div>
+      <div class="sc-desc" data-i18n="desc_grammatik">Grammar & vocabulary fill-in exercises. Prepositions, verb forms, conjunctions, word choice.</div>
       <div class="sc-meta"><span class="sc-pill">telc: 2 parts</span><span class="sc-pill">Part of 90-min block</span></div>
       <div class="progress-bar"><div class="progress-fill" id="prog-grammatik" style="width:0%;background:var(--pink)"></div></div>
       <div class="progress-label" id="prog-label-grammatik">Not started</div>
@@ -830,21 +869,24 @@ a:focus:not(:focus-visible),
 <section id="plan" class="tab-content">
 <div class="section-wrap">
   <div class="section-hero" style="background:linear-gradient(135deg,#4a3200,#1a1200);border-radius:var(--r);padding:40px 32px;margin-bottom:24px">
-    <h2 class="hero-title">📅 Dein 30-Tage-Plan zur B1-Prüfung</h2>
-    <div class="hero-sub">Ein Monat, ein Plan. Jeden Tag 1–2 Stunden, klare Aufgaben, alles hier in der App. Hake ab, was du geschafft hast — dein Fortschritt wird gespeichert.<br><em>One month, one plan. 1–2 hours per day with clear tasks — everything inside this app. Tick off what you finish; progress is saved automatically.</em></div>
+    <h2 class="hero-title" data-i18n="plan_hero_title">📅 Dein 30-Tage-Plan zur B1-Prüfung</h2>
+    <div class="hero-sub" data-i18n="plan_hero_sub">Ein Monat, ein Plan. Jeden Tag 1–2 Stunden, klare Aufgaben, alles hier in der App. Hake ab, was du geschafft hast — dein Fortschritt wird gespeichert.</div>
     <div class="hero-badges">
       <span class="badge badge-both">✅ 30 Tage · 4 Wochen · 1 Ziel</span>
       <span class="badge badge-goethe" id="plan-countdown-badge" style="display:none"></span>
     </div>
-    <div style="margin-top:18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      <label for="exam-date" style="font-size:.85rem;color:var(--text2);font-weight:600">🗓 Mein Prüfungstermin:</label>
-      <input type="date" id="exam-date" onclick="try{this.showPicker()}catch(e){}" onchange="setExamDate(this.value)" style="padding:10px 14px;border-radius:var(--r2);border:2px solid var(--gold);background:var(--bg2);color:var(--text);font-family:inherit;font-size:1rem;cursor:pointer;color-scheme:dark">
+    <div style="margin-top:18px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <span style="font-size:.85rem;font-weight:600" data-i18n="plan_date_label">🗓 Mein Prüfungstermin:</span>
+      <select id="exam-day" class="date-select" onchange="setExamDateFromSelects()" aria-label="Tag"></select>
+      <select id="exam-month" class="date-select" onchange="setExamDateFromSelects()" aria-label="Monat"></select>
+      <select id="exam-year" class="date-select" onchange="setExamDateFromSelects()" aria-label="Jahr"></select>
+      <button class="btn-secondary" data-custom-label="1" style="padding:8px 12px;font-size:.8rem" onclick="clearExamDate()" id="exam-date-clear" title="Datum löschen">✕</button>
     </div>
   </div>
 
   <div class="card" style="margin-bottom:24px">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-      <div class="card-title" style="margin:0">📊 Gesamtfortschritt</div>
+      <div class="card-title" style="margin:0" data-i18n="plan_progress_title">📊 Gesamtfortschritt</div>
       <div style="font-weight:700;color:var(--gold)" id="plan-progress-label">0 / 30 Tage</div>
     </div>
     <div class="progress-bar" style="margin-top:12px;height:12px"><div class="progress-fill" id="plan-progress-fill" style="width:0%;background:var(--gold)"></div></div>
@@ -871,7 +913,7 @@ a:focus:not(:focus-visible),
 <div class="section-wrap">
   <div class="section-hero hero-lesen">
     <h2 class="hero-title">📖 Lesen — Leseverstehen</h2>
-    <div class="hero-sub">Practice all reading task types for both Goethe-Zertifikat B1 (5 parts) and telc Deutsch B1 (3 parts). Select your exam format below.</div>
+    <div class="hero-sub" data-i18n="hero_sub_lesen">Practice all reading task types for both Goethe-Zertifikat B1 (5 parts) and telc Deutsch B1 (3 parts). Select your exam format below.</div>
     <div class="hero-badges"><span class="badge badge-goethe">🦁 Goethe: 65 min · 30 items · 5 parts</span><span class="badge badge-telc">🇩🇪 telc: 90 min (shared) · 25 items · 3 parts</span></div>
   </div>
 
@@ -1056,7 +1098,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 <div class="section-wrap">
   <div class="section-hero hero-hoeren">
     <h2 class="hero-title">🎧 Hören — Hörverstehen</h2>
-    <div class="hero-sub">Real listening exercises with True/False questions. Includes your actual audio recordings. Select exam format to see the right task types.</div>
+    <div class="hero-sub" data-i18n="hero_sub_hoeren">Real listening exercises with True/False questions. Includes your actual audio recordings. Select exam format to see the right task types.</div>
     <div class="hero-badges"><span class="badge badge-goethe">🦁 Goethe: 40 min · 4 parts · 30 items</span><span class="badge badge-telc">🇩🇪 telc: 30 min · 3 parts · 20 items</span></div>
   </div>
 
@@ -1150,7 +1192,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
           <a class="btn-secondary" style="text-decoration:none;display:inline-block" href="https://www.goethe.de/pro/relaunch/prf/materialien/B1/B1_Uebungssatz_Erwachsene.pdf" target="_blank" rel="noopener">📄 Übungssatz 2 (PDF)</a>
           <a class="btn-secondary" style="text-decoration:none;display:inline-block" href="https://goethemp4s.akamaized.net/resources/files/mp468/pruefungstraining_2_hoeren_b1_erwachsene.mp4" target="_blank" rel="noopener">🎵 Übungssatz 2 — Audio</a>
         </div>
-        <div class="audio-note" style="margin-top:12px">© Goethe-Institut — offizielles, kostenloses Prüfungstraining. Audio wird direkt von goethe.de gestreamt (Quelle: <a href="https://www.goethe.de/de/spr/prf/ueb/pb1.html" target="_blank" rel="noopener" style="color:var(--green)">goethe.de Prüfungstraining B1</a>).</div>
+        <div class="audio-note" data-keep="1" style="margin-top:12px">© Goethe-Institut — offizielles, kostenloses Prüfungstraining. Audio wird direkt von goethe.de gestreamt (Quelle: <a href="https://www.goethe.de/de/spr/prf/ueb/pb1.html" target="_blank" rel="noopener" style="color:var(--green)">goethe.de Prüfungstraining B1</a>).</div>
       </div>
     </div>
 
@@ -1245,7 +1287,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
           <a class="btn-secondary" style="text-decoration:none;display:inline-block" href="https://www.telc.net/en/language-examinations/certificate-exams/german/certificate-german-telc-german-b1/" target="_blank" rel="noopener">🌐 telc Deutsch B1 — offizielle Seite</a>
           <a class="btn-secondary" style="text-decoration:none;display:inline-block" href="https://learngerman.dw.com/de/nicos-weg/c-36519789" target="_blank" rel="noopener">🆓 DW „Nicos Weg" B1 — Hörtraining</a>
         </div>
-        <div class="audio-note" style="margin-top:12px">© telc gGmbH / Deutsche Welle — offizielle, kostenlose Übungsmaterialien (externe Links).</div>
+        <div class="audio-note" data-keep="1" style="margin-top:12px">© telc gGmbH / Deutsche Welle — offizielle, kostenlose Übungsmaterialien (externe Links).</div>
       </div>
     </div>
 
@@ -1281,7 +1323,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 <div class="section-wrap">
   <div class="section-hero hero-schreiben">
     <h2 class="hero-title">✍️ Schreiben — Schriftlicher Ausdruck</h2>
-    <div class="hero-sub">Practice writing formal letters, complaint emails, forum posts. Use the template and word counter. Browse all real worksheet exercises from your PDFs.</div>
+    <div class="hero-sub" data-i18n="hero_sub_schreiben">Practice writing formal letters, complaint emails, forum posts. Use the template and word counter. Browse all real worksheet exercises from your PDFs.</div>
     <div class="hero-badges"><span class="badge badge-goethe">🦁 Goethe: 3 tasks (informal + forum + formal)</span><span class="badge badge-telc">🇩🇪 telc: 1 letter/email, 4 bullet points</span></div>
   </div>
 
@@ -1408,7 +1450,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 <div class="section-wrap">
   <div class="section-hero hero-sprechen">
     <h2 class="hero-title">🗣 Sprechen — Mündliche Prüfung</h2>
-    <div class="hero-sub">Practice all 3 speaking parts for both exam formats. Browse 80+ real Bildbeschreibung exercises from your PDFs. Learn key phrases for each part.</div>
+    <div class="hero-sub" data-i18n="hero_sub_sprechen">Practice all 3 speaking parts for both exam formats. Browse 80+ real Bildbeschreibung exercises from your PDFs. Learn key phrases for each part.</div>
     <div class="hero-badges"><span class="badge badge-goethe">🦁 Goethe: 15 min + 15 min prep</span><span class="badge badge-telc">🇩🇪 telc: 15 min + 20 min prep</span></div>
   </div>
 
@@ -1542,7 +1584,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 <div class="section-wrap">
   <div class="section-hero hero-grammatik">
     <h2 class="hero-title">📝 Sprachbausteine — Grammatik & Wortschatz</h2>
-    <div class="hero-sub">Fill-in-the-gap exercises testing grammar and vocabulary in context. This section is UNIQUE to telc Deutsch B1 — worth 30 of 225 points.</div>
+    <div class="hero-sub" data-i18n="hero_sub_grammatik">Fill-in-the-gap exercises testing grammar and vocabulary in context. This section is UNIQUE to telc Deutsch B1 — worth 30 of 225 points.</div>
     <div class="hero-badges"><span class="badge badge-telc">🇩🇪 telc only — 20 gaps, 30 points</span><span class="badge badge-both">📌 Important for all B1 exams</span></div>
   </div>
 
@@ -1704,14 +1746,14 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 <section id="ressourcen" class="tab-content">
 <div class="section-wrap">
   <div class="section-hero" style="background:linear-gradient(135deg,#0b3d2e,#06251c);border-radius:var(--r);padding:40px 32px;margin-bottom:24px">
-    <h2 class="hero-title">🧰 Ressourcen — Alles Gute & Kostenlose fürs Deutschlernen</h2>
-    <div class="hero-sub">Handverlesene kostenlose Kurse, YouTube-Kanäle, Podcasts, Filme, Bücher und Tools. Deutsch lernst du am schnellsten, wenn es Spaß macht — bau 2–3 davon in deinen Alltag ein!</div>
+    <h2 class="hero-title" data-i18n="res_hero_title">🧰 Ressourcen — Alles Gute & Kostenlose fürs Deutschlernen</h2>
+    <div class="hero-sub" data-i18n="res_hero_sub">Handverlesene kostenlose Kurse, YouTube-Kanäle, Podcasts, Filme, Bücher und Tools. Deutsch lernst du am schnellsten, wenn es Spaß macht — bau 2–3 davon in deinen Alltag ein!</div>
     <div class="hero-badges"><span class="badge badge-both">✅ 100% kostenlos oder mit Gratis-Version</span></div>
   </div>
 
   <!-- Kurse -->
   <div class="card" style="margin-bottom:24px">
-    <div class="card-title" style="margin-bottom:4px">🎓 Kostenlose Online-Kurse</div>
+    <div class="card-title" style="margin-bottom:4px" data-i18n="res_courses">🎓 Kostenlose Online-Kurse</div>
     <div class="card-sub">Komplette strukturierte Kurse — perfekt parallel zum 30-Tage-Plan</div>
     <div class="pdf-links">
       <a class="pdf-link" href="https://learngerman.dw.com/de/nicos-weg/c-36519789" target="_blank" rel="noopener"><span class="pl-icon">📺</span><span><span class="pl-title">DW „Nicos Weg" (A1–B1)</span><br><span class="pl-sub">DER kostenlose Kurs: Videoserie mit Übungen zu jeder Lektion. Der B1-Teil passt genau zu deiner Prüfung.</span></span></a>
@@ -1723,7 +1765,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 
   <!-- YouTube -->
   <div class="card" style="margin-bottom:24px">
-    <div class="card-title" style="margin-bottom:4px">▶️ YouTube-Kanäle</div>
+    <div class="card-title" style="margin-bottom:4px" data-i18n="res_youtube">▶️ YouTube-Kanäle</div>
     <div class="card-sub">Täglich 1 Video = kostenloses Hörtraining mit Spaß</div>
     <div class="pdf-links">
       <a class="pdf-link" href="https://www.youtube.com/@EasyGerman" target="_blank" rel="noopener"><span class="pl-icon">🎙</span><span><span class="pl-title">Easy German</span><br><span class="pl-sub">Straßeninterviews mit echten Deutschen + Untertitel DE/EN. Perfekt für echtes, natürliches Deutsch.</span></span></a>
@@ -1737,7 +1779,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 
   <!-- Podcasts -->
   <div class="card" style="margin-bottom:24px">
-    <div class="card-title" style="margin-bottom:4px">🎧 Podcasts — Hörtraining unterwegs</div>
+    <div class="card-title" style="margin-bottom:4px" data-i18n="res_podcasts">🎧 Podcasts — Hörtraining unterwegs</div>
     <div class="card-sub">Beim Kochen, in der Bahn, beim Spazieren — jede Minute zählt fürs Hörverstehen</div>
     <div class="pdf-links">
       <a class="pdf-link" href="https://slowgerman.com/" target="_blank" rel="noopener"><span class="pl-icon">🐢</span><span><span class="pl-title">Slow German (Annik Rubens)</span><br><span class="pl-sub">Langsam gesprochenes Deutsch über Alltag & Kultur — mit Transkript zum Mitlesen. Ideal für B1.</span></span></a>
@@ -1749,7 +1791,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 
   <!-- Filme & Serien -->
   <div class="card" style="margin-bottom:24px">
-    <div class="card-title" style="margin-bottom:4px">🎬 Filme & Serien</div>
+    <div class="card-title" style="margin-bottom:4px" data-i18n="res_films">🎬 Filme & Serien</div>
     <div class="card-sub">Regel: Deutsche Tonspur + deutsche Untertitel = maximaler Lerneffekt</div>
     <div class="pdf-links">
       <a class="pdf-link" href="https://www.imdb.com/title/tt0301357/" target="_blank" rel="noopener"><span class="pl-icon">🍿</span><span><span class="pl-title">Good Bye, Lenin! (2003)</span><br><span class="pl-sub">DER deutsche Klassiker — Komödie über die Wende. Klares Deutsch, tolle Geschichte.</span></span></a>
@@ -1763,7 +1805,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 
   <!-- Bücher -->
   <div class="card" style="margin-bottom:24px">
-    <div class="card-title" style="margin-bottom:4px">📚 Bücher & Lektüren für B1</div>
+    <div class="card-title" style="margin-bottom:4px" data-i18n="res_books">📚 Bücher & Lektüren für B1</div>
     <div class="card-sub">Einfache Lektüren bauen Wortschatz auf, ohne zu frustrieren</div>
     <div class="pdf-links">
       <a class="pdf-link" href="https://learnoutlive.com/dino-lernt-deutsch/" target="_blank" rel="noopener"><span class="pl-icon">🦖</span><span><span class="pl-title">„Dino lernt Deutsch" (Café in Berlin...)</span><br><span class="pl-sub">Beliebteste Lernkrimi-Serie: kurze Geschichten in einfachem Deutsch mit Vokabelliste — perfekt für A2–B1.</span></span></a>
@@ -1775,7 +1817,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 
   <!-- Tools -->
   <div class="card" style="margin-bottom:24px">
-    <div class="card-title" style="margin-bottom:4px">🛠 Kostenlose Tools & Apps</div>
+    <div class="card-title" style="margin-bottom:4px" data-i18n="res_tools">🛠 Kostenlose Tools & Apps</div>
     <div class="card-sub">Die Werkzeugkiste für jeden Tag</div>
     <div class="pdf-links">
       <a class="pdf-link" href="https://www.deepl.com/translator" target="_blank" rel="noopener"><span class="pl-icon">🔤</span><span><span class="pl-title">DeepL</span><br><span class="pl-sub">Der beste Übersetzer für Deutsch. Tipp: Schreib deinen Brief auf Deutsch und vergleiche mit der Übersetzung deiner Muttersprache.</span></span></a>
@@ -3226,6 +3268,28 @@ const STUDY_PLAN = [
 ];
 
 // ===========================
+// COLOR THEME (dark / light)
+// ===========================
+function setTheme(mode){
+  document.documentElement.setAttribute('data-theme', mode);
+  try { localStorage.setItem('b1_theme', mode); } catch(e){}
+  const btn = document.getElementById('theme-btn');
+  if(btn) btn.textContent = mode === 'light' ? '🌙' : '☀️';
+}
+function toggleTheme(){
+  setTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+}
+(function(){
+  let saved = 'dark';
+  try { saved = localStorage.getItem('b1_theme') || 'dark'; } catch(e){}
+  document.documentElement.setAttribute('data-theme', saved);
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('theme-btn');
+    if(btn) btn.textContent = saved === 'light' ? '🌙' : '☀️';
+  });
+})();
+
+// ===========================
 // MUSTER-PRÄSENTATION (Sprechen Teil 2)
 // ===========================
 const MUSTER_PRAES = [
@@ -3319,19 +3383,42 @@ function togglePlanTask(dayNum, taskIdx){
   savePlanState(s);
   renderStudyPlan();
 }
-function setExamDate(val){
+const MONTH_NAMES = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+function initDateSelects(){
+  const d = document.getElementById('exam-day'), m = document.getElementById('exam-month'), y = document.getElementById('exam-year');
+  if(!d || !m || !y) return;
+  const thisYear = new Date().getFullYear();
+  d.innerHTML = '<option value="">Tag</option>' + Array.from({length:31},(_,i)=>`<option value="${i+1}">${i+1}</option>`).join('');
+  m.innerHTML = '<option value="">Monat</option>' + MONTH_NAMES.map((n,i)=>`<option value="${i+1}">${n}</option>`).join('');
+  y.innerHTML = '<option value="">Jahr</option>' + [thisYear, thisYear+1].map(v=>`<option value="${v}">${v}</option>`).join('');
   const s = planState();
-  s.examDate = val;
+  if(s.examDate){
+    const [yy,mm,dd] = s.examDate.split('-').map(Number);
+    d.value = dd; m.value = mm; y.value = yy;
+  }
+}
+function setExamDateFromSelects(){
+  const dd = document.getElementById('exam-day').value;
+  const mm = document.getElementById('exam-month').value;
+  const yy = document.getElementById('exam-year').value;
+  if(!dd || !mm || !yy) return; // wait until all three chosen
+  const s = planState();
+  s.examDate = `${yy}-${String(mm).padStart(2,'0')}-${String(dd).padStart(2,'0')}`;
   savePlanState(s);
+  renderCountdown();
+}
+function clearExamDate(){
+  const s = planState();
+  s.examDate = '';
+  savePlanState(s);
+  ['exam-day','exam-month','exam-year'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
   renderCountdown();
 }
 function renderCountdown(){
   const s = planState();
   const badge = document.getElementById('plan-countdown-badge');
-  const input = document.getElementById('exam-date');
-  if(!badge || !input) return;
+  if(!badge) return;
   if(s.examDate){
-    input.value = s.examDate;
     const days = Math.ceil((new Date(s.examDate) - new Date().setHours(0,0,0,0)) / 86400000);
     badge.style.display = 'inline-flex';
     badge.textContent = days > 1 ? `⏳ Noch ${days} Tage bis zur Prüfung` :
@@ -3380,6 +3467,7 @@ function renderStudyPlan(){
 }
 function initStudyPlan(){
   renderStudyPlan();
+  initDateSelects();
   renderCountdown();
 }
 
@@ -3396,6 +3484,24 @@ const TRANSLATIONS = {
     nav_vokabeln: 'Vokabeln',
     nav_plan: '30-Tage-Plan',
     nav_ressourcen: 'Ressourcen',
+    plan_hero_title: '📅 Dein 30-Tage-Plan zur B1-Prüfung',
+    plan_hero_sub: 'Ein Monat, ein Plan. Jeden Tag 1–2 Stunden, klare Aufgaben, alles hier in der App. Hake ab, was du geschafft hast — dein Fortschritt wird gespeichert.',
+    plan_progress_title: '📊 Gesamtfortschritt',
+    plan_date_label: '🗓 Mein Prüfungstermin:',
+    start_title: '🚀 Zum ersten Mal B1? Start hier!',
+    res_hero_title: '🧰 Ressourcen — Alles Gute & Kostenlose fürs Deutschlernen',
+    res_hero_sub: 'Handverlesene kostenlose Kurse, YouTube-Kanäle, Podcasts, Filme, Bücher und Tools. Deutsch lernst du am schnellsten, wenn es Spaß macht!',
+    res_courses: '🎓 Kostenlose Online-Kurse',
+    res_youtube: '▶️ YouTube-Kanäle',
+    res_podcasts: '🎧 Podcasts — Hörtraining unterwegs',
+    res_films: '🎬 Filme & Serien',
+    res_books: '📚 Bücher & Lektüren für B1',
+    res_tools: '🛠 Kostenlose Tools & Apps',
+    hero_sub_lesen: 'Üben Sie alle Lese-Aufgabentypen für Goethe-Zertifikat B1 (5 Teile) und telc Deutsch B1 (3 Teile). Wählen Sie unten Ihr Prüfungsformat.',
+    hero_sub_hoeren: 'Echte Hörübungen mit Richtig/Falsch-Fragen — inklusive Original-Prüfungsaudios. Wählen Sie unten das Prüfungsformat.',
+    hero_sub_schreiben: 'Formelle Briefe, Beschwerde-E-Mails und Forumsbeiträge üben — mit Vorlagen, Musterbriefen und Wortzähler.',
+    hero_sub_sprechen: 'Alle 3 Sprechteile üben — mit Sprachrekorder, Muster-Präsentation, Musterdialog und 80+ Bildern.',
+    hero_sub_grammatik: 'Lückentexte zu Grammatik und Wortschatz. Nur in telc (30 von 225 Punkten) — aber wichtig für alle B1-Prüfungen.',
     desc_vokabeln: 'Meistern Sie B1-Verben mit festen Präpositionen. Lernen Sie mit interaktiven Flashcards und Quizzes.',
     vocab_hero_sub: 'Meistern Sie die B1-Verben mit festen Präpositionen und Fällen. Üben Sie mit Flashcards und interaktiven Quizzes.',
     vocab_flashcards_title: '📇 Interaktive Flashcards',
@@ -3475,6 +3581,24 @@ const TRANSLATIONS = {
     nav_vokabeln: 'Vocabulary',
     nav_plan: '30-Day Plan',
     nav_ressourcen: 'Resources',
+    plan_hero_title: '📅 Your 30-Day Plan to the B1 Exam',
+    plan_hero_sub: 'One month, one plan. 1–2 hours per day with clear tasks — everything inside this app. Tick off what you finish; progress is saved automatically.',
+    plan_progress_title: '📊 Overall Progress',
+    plan_date_label: '🗓 My exam date:',
+    start_title: '🚀 First time taking B1? Start here!',
+    res_hero_title: '🧰 Resources — All the Best Free German-Learning Material',
+    res_hero_sub: 'Hand-picked free courses, YouTube channels, podcasts, films, books and tools. You learn German fastest when it is fun!',
+    res_courses: '🎓 Free Online Courses',
+    res_youtube: '▶️ YouTube Channels',
+    res_podcasts: '🎧 Podcasts — listening practice on the go',
+    res_films: '🎬 Films & Series',
+    res_books: '📚 Books & Easy Readers for B1',
+    res_tools: '🛠 Free Tools & Apps',
+    hero_sub_lesen: 'Practice all reading task types for Goethe-Zertifikat B1 (5 parts) and telc Deutsch B1 (3 parts). Select your exam format below.',
+    hero_sub_hoeren: 'Real listening exercises with True/False questions — including official exam audio. Select your exam format below.',
+    hero_sub_schreiben: 'Practice formal letters, complaint emails and forum posts — with templates, model letters and a word counter.',
+    hero_sub_sprechen: 'Practice all 3 speaking parts — with voice recorder, model presentation, model dialogue and 80+ images.',
+    hero_sub_grammatik: 'Gap-fill exercises for grammar and vocabulary. telc-only (30 of 225 points) — but important for every B1 exam.',
     desc_vokabeln: 'Master B1 verbs with fixed prepositions and cases. Learn with interactive flashcards and quizzes.',
     vocab_hero_sub: 'Master B1 verbs with fixed prepositions and cases. Practice with flashcards and interactive quizzes.',
     vocab_flashcards_title: '📇 Interactive Flashcards',
@@ -3541,6 +3665,24 @@ const TRANSLATIONS = {
     nav_vokabeln: 'Словарный запас',
     nav_plan: 'План на 30 дней',
     nav_ressourcen: 'Ресурсы',
+    plan_hero_title: '📅 Твой 30-дневный план подготовки к B1',
+    plan_hero_sub: 'Один месяц — один план. Каждый день 1–2 часа, понятные задания, всё внутри приложения. Отмечай выполненное — прогресс сохраняется автоматически.',
+    plan_progress_title: '📊 Общий прогресс',
+    plan_date_label: '🗓 Дата моего экзамена:',
+    start_title: '🚀 Впервые сдаёшь B1? Начни здесь!',
+    res_hero_title: '🧰 Ресурсы — всё лучшее и бесплатное для изучения немецкого',
+    res_hero_sub: 'Отобранные бесплатные курсы, YouTube-каналы, подкасты, фильмы, книги и инструменты. Немецкий учится быстрее, когда это интересно!',
+    res_courses: '🎓 Бесплатные онлайн-курсы',
+    res_youtube: '▶️ YouTube-каналы',
+    res_podcasts: '🎧 Подкасты — аудирование в дороге',
+    res_films: '🎬 Фильмы и сериалы',
+    res_books: '📚 Книги и адаптированное чтение для B1',
+    res_tools: '🛠 Бесплатные инструменты и приложения',
+    hero_sub_lesen: 'Отработай все типы заданий по чтению для Goethe-Zertifikat B1 (5 частей) и telc Deutsch B1 (3 части). Выбери формат экзамена ниже.',
+    hero_sub_hoeren: 'Настоящие упражнения на аудирование с вопросами «верно/неверно» — включая официальные аудио экзамена. Выбери формат ниже.',
+    hero_sub_schreiben: 'Официальные письма, жалобы и посты на форуме — с шаблонами, образцами писем и счётчиком слов.',
+    hero_sub_sprechen: 'Все 3 части устного экзамена — с диктофоном, образцом презентации, образцом диалога и 80+ картинками.',
+    hero_sub_grammatik: 'Задания с пропусками на грамматику и лексику. Только в telc (30 из 225 баллов), но полезно для всех экзаменов B1.',
     desc_vokabeln: 'Освойте глаголы B1 с фиксированными предлогами. Учитесь с интерактивными карточками и тестами.',
     vocab_hero_sub: 'Освойте глаголы B1 с фиксированными предлогами и падежами. Практикуйтесь с карточками и интерактивными тестами.',
     vocab_flashcards_title: '📇 Интерактивные карточки',
@@ -3619,6 +3761,24 @@ const TRANSLATIONS = {
     nav_vokabeln: 'Sözlük',
     nav_plan: '30 günlük plan',
     nav_ressourcen: 'Resurslar',
+    plan_hero_title: '📅 B1 imtahanına 30 günlük planın',
+    plan_hero_sub: 'Bir ay, bir plan. Hər gün 1–2 saat, aydın tapşırıqlar — hamısı bu tətbiqdə. Bitirdiklərini işarələ — irəliləyiş avtomatik yadda saxlanılır.',
+    plan_progress_title: '📊 Ümumi irəliləyiş',
+    plan_date_label: '🗓 İmtahan tarixim:',
+    start_title: '🚀 B1-i ilk dəfə verirsən? Buradan başla!',
+    res_hero_title: '🧰 Resurslar — alman dili öyrənmək üçün ən yaxşı pulsuz materiallar',
+    res_hero_sub: 'Seçilmiş pulsuz kurslar, YouTube kanalları, podkastlar, filmlər, kitablar və alətlər. Alman dili maraqlı olanda daha sürətli öyrənilir!',
+    res_courses: '🎓 Pulsuz onlayn kurslar',
+    res_youtube: '▶️ YouTube kanalları',
+    res_podcasts: '🎧 Podkastlar — yolda dinləmə məşqi',
+    res_films: '🎬 Filmlər və seriallar',
+    res_books: '📚 B1 üçün kitablar və asan mətnlər',
+    res_tools: '🛠 Pulsuz alətlər və tətbiqlər',
+    hero_sub_lesen: 'Goethe-Zertifikat B1 (5 hissə) və telc Deutsch B1 (3 hissə) üçün bütün oxu tapşırıq növlərini məşq et. Aşağıda imtahan formatını seç.',
+    hero_sub_hoeren: 'Doğru/yanlış sualları ilə həqiqi dinləmə tapşırıqları — rəsmi imtahan audioları daxil. Aşağıda formatı seç.',
+    hero_sub_schreiben: 'Rəsmi məktublar, şikayət e-poçtları və forum yazıları — şablonlar, nümunə məktublar və söz sayğacı ilə.',
+    hero_sub_sprechen: 'Danışıq imtahanının hər 3 hissəsi — səs yazıcısı, nümunə təqdimat, nümunə dialoq və 80+ şəkil ilə.',
+    hero_sub_grammatik: 'Qrammatika və lüğət üçün boşluq doldurma tapşırıqları. Yalnız telc-də (225 baldan 30-u), amma bütün B1 imtahanları üçün vacibdir.',
     desc_vokabeln: 'Sabit sözönləri ilə B1 feillərini öyrənin. İnteraktiv fləşkartlar və testlərlə öyrənin.',
     vocab_hero_sub: 'Sabit sözönləri və hallar ilə B1 feillərini öyrənin. Fləşkartlar və interaktiv testlərlə məşq edin.',
     vocab_flashcards_title: '📇 İnteraktiv Fləşkartlar',
@@ -3776,7 +3936,7 @@ function updateDynamicText() {
   });
 
   // Audio notes
-  document.querySelectorAll('.audio-note').forEach(el => {
+  document.querySelectorAll('.audio-note:not([data-keep])').forEach(el => {
     el.textContent = t('audio_note');
   });
 
