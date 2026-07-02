@@ -585,6 +585,37 @@ a:focus:not(:focus-visible),
 }
 .rec-download-btn:hover { background: rgba(139,92,246,.2); }
 
+/* ---- 30-DAY PLAN ---- */
+.plan-week { margin-bottom: 28px; }
+.plan-week-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.plan-week-title { font-size:1.05rem; font-weight:800; }
+.plan-week-goal { font-size:.8rem; color:var(--text3); }
+.plan-days { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px; }
+.plan-day { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r2); padding:14px 16px; transition:all var(--transition); }
+.plan-day.done { border-color:var(--green); background:rgba(34,197,94,.06); }
+.plan-day-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.plan-day-num { font-weight:800; font-size:.9rem; color:var(--gold); }
+.plan-day.done .plan-day-num { color:var(--green); }
+.plan-day-focus { font-size:.72rem; color:var(--text3); text-transform:uppercase; letter-spacing:.04em; font-weight:700; }
+.plan-task { display:flex; align-items:flex-start; gap:9px; padding:5px 0; cursor:pointer; font-size:.84rem; color:var(--text2); line-height:1.45; }
+.plan-task input { margin-top:3px; accent-color:var(--gold); cursor:pointer; flex-shrink:0; }
+.plan-task.checked { color:var(--text3); text-decoration:line-through; }
+.plan-task a { color:var(--gold); text-decoration:none; font-weight:600; }
+.plan-task a:hover { text-decoration:underline; }
+
+/* ---- START HERE GUIDE ---- */
+.start-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; margin-top:14px; }
+.start-step { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r2); padding:18px; position:relative; }
+.start-step .ss-num { position:absolute; top:-12px; left:16px; background:var(--gold); color:#000; font-weight:800; font-size:.8rem; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+.start-step h4 { font-size:.95rem; margin:6px 0 8px; }
+.start-step p { font-size:.82rem; color:var(--text2); line-height:1.55; margin:0; }
+.pdf-links { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; margin-top:12px; }
+.pdf-link { display:flex; gap:12px; align-items:flex-start; background:var(--bg2); border:1px solid var(--border); border-radius:var(--r2); padding:14px 16px; text-decoration:none; color:var(--text); transition:all var(--transition); }
+.pdf-link:hover { border-color:var(--gold); transform:translateY(-2px); }
+.pdf-link .pl-icon { font-size:1.4rem; }
+.pdf-link .pl-title { font-weight:700; font-size:.88rem; margin-bottom:3px; }
+.pdf-link .pl-sub { font-size:.76rem; color:var(--text3); line-height:1.4; }
+
 /* ---- LEGAL PAGES ---- */
 .legal-page { max-width: 800px; margin: 0 auto; padding: 40px 20px 80px; line-height: 1.7; }
 .legal-page h1 { color: var(--gold); font-size: 2rem; margin-bottom: 16px; }
@@ -605,6 +636,7 @@ a:focus:not(:focus-visible),
     <div class="nav-logo">B1 Prüfungsgenie <span data-i18n="nav_subtitle">Deutsch Exam Prep</span></div>
     <div class="nav-tabs-scroll">
       <button class="nav-tab active" onclick="showTab('home')" aria-current="page"><span class="dot dot-home"></span> 🏠 <span data-i18n="nav_home">Home</span></button>
+      <button class="nav-tab" onclick="showTab('plan')"><span class="dot" style="background:var(--gold)"></span> 📅 <span data-i18n="nav_plan">30-Tage-Plan</span></button>
       <button class="nav-tab" onclick="showTab('lesen')"><span class="dot dot-lesen"></span> 📖 <span data-i18n="nav_lesen">Lesen</span></button>
       <button class="nav-tab" onclick="showTab('hoeren')"><span class="dot dot-hoeren"></span> 🎧 <span data-i18n="nav_hoeren">Hören</span></button>
       <button class="nav-tab" onclick="showTab('schreiben')"><span class="dot dot-schreiben"></span> ✍️ <span data-i18n="nav_schreiben">Schreiben</span></button>
@@ -630,11 +662,63 @@ a:focus:not(:focus-visible),
     <div class="hero-badges">
       <span class="badge badge-goethe">🦁 Goethe-Zertifikat B1</span>
       <span class="badge badge-telc">🇩🇪 telc Deutsch B1</span>
-      <span class="badge badge-both">✅ 232 Real Worksheets</span>
+      <span class="badge badge-both">✅ 250+ Übungen & echte Arbeitsblätter</span>
     </div>
     <div class="hero-cta-row">
-      <button class="hero-cta" onclick="showTab('lesen')">▶ Kostenlos starten / Start Free</button>
+      <button class="hero-cta" onclick="showTab('plan')">📅 30-Tage-Plan starten / Start 30-Day Plan</button>
       <a class="hero-cta secondary" href="#exam-comparison">📋 Prüfung vergleichen / Compare Exams</a>
+    </div>
+  </div>
+
+  <!-- START HERE — First-timer guide -->
+  <div class="card" style="margin-bottom:24px;border-top:3px solid var(--gold)">
+    <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:4px">🚀 Zum ersten Mal B1? Start hier! / First time taking B1? Start here!</h2>
+    <div class="card-sub">Alles, was du wissen musst — in 4 einfachen Schritten / Everything you need to know in 4 simple steps</div>
+    <div class="start-steps">
+      <div class="start-step"><div class="ss-num">1</div>
+        <h4>📋 Prüfung wählen</h4>
+        <p><strong>telc B1</strong> = für Einbürgerung & Aufenthalt in Deutschland (am häufigsten, oft an der VHS).<br><strong>Goethe B1</strong> = weltweit anerkannt, modular (Teile einzeln wiederholbar).<br><em>Unsicher? Frag die Behörde, die dein Zertifikat verlangt!</em></p>
+      </div>
+      <div class="start-step"><div class="ss-num">2</div>
+        <h4>🗓 Anmelden (früh!)</h4>
+        <p>Anmeldung bei der <strong>VHS</strong>, einem <strong>telc-Prüfungszentrum</strong> oder dem <strong>Goethe-Institut</strong> — oft 4–8 Wochen im Voraus nötig. Kosten: ca. 140–230 €. Du brauchst nur deinen Ausweis/Pass.</p>
+      </div>
+      <div class="start-step"><div class="ss-num">3</div>
+        <h4>📅 30 Tage lernen</h4>
+        <p>Folge unserem <a href="#plan" onclick="showTab('plan');return false" style="color:var(--gold);font-weight:700">30-Tage-Plan</a>: Woche 1 Grammatik & Wörter, Woche 2 Lesen & Hören, Woche 3 Schreiben & Sprechen, Woche 4 Modelltests. 1–2 Stunden pro Tag reichen.</p>
+      </div>
+      <div class="start-step"><div class="ss-num">4</div>
+        <h4>🎯 Prüfungstag</h4>
+        <p>Mitbringen: <strong>Ausweis + Einladung</strong>. Kein Wörterbuch, kein Handy! Schriftliche Prüfung morgens (ca. 3 Std.), Sprechen oft am selben Tag oder separat. Zum Bestehen brauchst du <strong>60%</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- OFFICIAL MODEL TESTS -->
+  <div class="card" style="margin-bottom:24px" id="downloads">
+    <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:4px">📥 Offizielle Modelltests — kostenlos herunterladen</h2>
+    <div class="card-sub">Echte Prüfungssätze direkt von Goethe & telc (PDF + Audio). Pflicht für Woche 4 des Plans! / Official free practice tests — required for week 4 of the plan.</div>
+    <div class="pdf-links">
+      <a class="pdf-link" href="https://www.goethe.de/de/spr/prf/ueb/pb1.html" target="_blank" rel="noopener">
+        <span class="pl-icon">🦁</span>
+        <span><span class="pl-title">Goethe B1 — Übungs- & Modellsatz</span><br>
+        <span class="pl-sub">Kompletter Prüfungssatz mit Audio, Lösungen & Bewertungsbögen — goethe.de</span></span>
+      </a>
+      <a class="pdf-link" href="https://www.telc.net/pruefungsteilnehmende/sprachpruefungen/pruefungen/detail/telc-deutsch-b1.html" target="_blank" rel="noopener">
+        <span class="pl-icon">🇩🇪</span>
+        <span><span class="pl-title">telc Deutsch B1 — Übungstest 1</span><br>
+        <span class="pl-sub">Originaler telc-Übungstest mit MP3-Audio und Lösungsschlüssel — telc.net</span></span>
+      </a>
+      <a class="pdf-link" href="https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/Integrationskurse/Abschlusspruefung/abschlusspruefung-node.html" target="_blank" rel="noopener">
+        <span class="pl-icon">🏛️</span>
+        <span><span class="pl-title">DTZ (A2–B1) — Modelltest</span><br>
+        <span class="pl-sub">Deutsch-Test für Zuwanderer: der Test am Ende des Integrationskurses — bamf.de</span></span>
+      </a>
+      <a class="pdf-link" href="https://learngerman.dw.com/de/nicos-weg/c-36519789" target="_blank" rel="noopener">
+        <span class="pl-icon">📺</span>
+        <span><span class="pl-title">DW „Nicos Weg" B1 — Videokurs</span><br>
+        <span class="pl-sub">Kostenloser kompletter B1-Kurs mit Videos — perfekt als Ergänzung — dw.com</span></span>
+      </a>
     </div>
   </div>
 
@@ -735,6 +819,46 @@ a:focus:not(:focus-visible),
       <div class="grammar-rule"><div class="gr-title">4. Relativsätze — Describing nouns</div><div class="gr-example">Das Buch, <strong>das</strong> ich lese, ist interessant.</div><div class="gr-note">der/die/das agree with noun's gender & case</div></div>
       <div class="grammar-rule"><div class="gr-title">5. weil vs. denn</div><div class="gr-example">...weil ich krank <strong>bin</strong>. / denn ich <strong>bin</strong> krank.</div><div class="gr-note">weil → verb last. denn → verb normal (main clause).</div></div>
     </div>
+  </div>
+</div>
+</section>
+
+<!-- =================== 30-TAGE-PLAN =================== -->
+<section id="plan" class="tab-content">
+<div class="section-wrap">
+  <div class="section-hero" style="background:linear-gradient(135deg,#4a3200,#1a1200);border-radius:var(--r);padding:40px 32px;margin-bottom:24px">
+    <h2 class="hero-title">📅 Dein 30-Tage-Plan zur B1-Prüfung</h2>
+    <div class="hero-sub">Ein Monat, ein Plan. Jeden Tag 1–2 Stunden, klare Aufgaben, alles hier in der App. Hake ab, was du geschafft hast — dein Fortschritt wird gespeichert.<br><em>One month, one plan. 1–2 hours per day with clear tasks — everything inside this app. Tick off what you finish; progress is saved automatically.</em></div>
+    <div class="hero-badges">
+      <span class="badge badge-both">✅ 30 Tage · 4 Wochen · 1 Ziel</span>
+      <span class="badge badge-goethe" id="plan-countdown-badge" style="display:none"></span>
+    </div>
+    <div style="margin-top:18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <label for="exam-date" style="font-size:.85rem;color:var(--text2);font-weight:600">🗓 Mein Prüfungstermin:</label>
+      <input type="date" id="exam-date" onchange="setExamDate(this.value)" style="padding:8px 12px;border-radius:var(--r2);border:1px solid var(--border);background:var(--bg2);color:var(--text);font-family:inherit">
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:24px">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <div class="card-title" style="margin:0">📊 Gesamtfortschritt</div>
+      <div style="font-weight:700;color:var(--gold)" id="plan-progress-label">0 / 30 Tage</div>
+    </div>
+    <div class="progress-bar" style="margin-top:12px;height:12px"><div class="progress-fill" id="plan-progress-fill" style="width:0%;background:var(--gold)"></div></div>
+    <div style="margin-top:10px;font-size:.8rem;color:var(--text3)">💡 Ein Tag zählt als erledigt, wenn alle Aufgaben des Tages abgehakt sind. / A day counts as done when all its tasks are ticked.</div>
+  </div>
+
+  <div id="plan-weeks"></div>
+
+  <div class="tip-card" style="margin-top:24px">
+    <h4>💡 So nutzt du den Plan richtig / How to use this plan</h4>
+    <ul>
+      <li><strong>Verpasster Tag?</strong> Kein Problem — einfach am nächsten Tag weitermachen, nichts überspringen.</li>
+      <li><strong>Zu leicht?</strong> Mach zusätzlich 10 Aufgaben aus der Übungsbank des jeweiligen Bereichs.</li>
+      <li><strong>Woche 4 ist heilig:</strong> Die Modelltests unter echten Bedingungen (Timer! kein Wörterbuch!) sind der wichtigste Teil.</li>
+      <li><strong>Sprechen üben ohne Partner:</strong> Nutze den Sprachrekorder im Sprechen-Bereich und höre dich selbst an.</li>
+      <li><strong>Jeden Tag Wortschatz:</strong> 10–15 neue Wörter aus dem Vokabeln-Bereich, alte Wörter kurz wiederholen.</li>
+    </ul>
   </div>
 </div>
 </section>
@@ -1475,6 +1599,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     </div>
     <div class="footer-col">
       <h3>📚 Bereiche</h3>
+      <a href="#" onclick="showTab('plan');return false">📅 30-Tage-Plan</a>
       <a href="#" onclick="showTab('lesen');return false">📖 Lesen</a>
       <a href="#" onclick="showTab('hoeren');return false">🎧 Hören</a>
       <a href="#" onclick="showTab('schreiben');return false">✍️ Schreiben</a>
@@ -1592,7 +1717,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
 // ===========================
 // TAB NAVIGATION
 // ===========================
-const TAB_IDS = ['home','lesen','hoeren','schreiben','sprechen','grammatik','vokabeln'];
+const TAB_IDS = ['home','plan','lesen','hoeren','schreiben','sprechen','grammatik','vokabeln'];
 function showTab(id){
   if(!TAB_IDS.includes(id)) id='home';
   document.querySelectorAll('.tab-content').forEach(s=>s.classList.remove('active'));
@@ -2713,11 +2838,225 @@ document.addEventListener('DOMContentLoaded',()=>{
   initBanks();
   // Dashboard
   updateDashboard();
+  // 30-day study plan
+  initStudyPlan();
   // Deep link (#lesen, /vocab, ...)
   initTabFromURL();
   // Apply saved language translations
   setTimeout(() => applyTranslations(), 50);
 });
+
+// ===========================
+// 30-DAY STUDY PLAN
+// ===========================
+const PLAN_KEY = 'b1_plan_v1';
+const STUDY_PLAN = [
+  { week:1, title:'Woche 1 — Grundlagen: Grammatik & Wortschatz', goal:'Die wichtigsten B1-Regeln verstehen und die ersten 100 Wörter lernen', days:[
+    { d:1, focus:'Orientierung', tasks:[
+      {t:'Den Start-Guide auf der Home-Seite lesen (Was ist die B1-Prüfung?)', tab:'home'},
+      {t:'Prüfung wählen: Goethe oder telc? (Vergleich auf Home)', tab:'home'},
+      {t:'Prüfungstermin oben auf dieser Seite eintragen 🗓'}]},
+    { d:2, focus:'Grammatik + Vokabeln', tasks:[
+      {t:'Lektion „Kasus" lernen + Mini-Quiz machen', tab:'grammatik'},
+      {t:'15 Wörter zum Thema „Alltag" lernen', tab:'vokabeln'},
+      {t:'10 Verben-Flashcards ansehen', tab:'vokabeln'}]},
+    { d:3, focus:'Grammatik + Vokabeln', tasks:[
+      {t:'Lektion „Perfekt" lernen + Mini-Quiz', tab:'grammatik'},
+      {t:'15 Wörter zum Thema „Arbeit" lernen', tab:'vokabeln'},
+      {t:'10 Aufgaben in der Übungsbank Grammatik lösen', tab:'grammatik'}]},
+    { d:4, focus:'Grammatik + Vokabeln', tasks:[
+      {t:'Lektion „Nebensätze" lernen + Mini-Quiz (wichtigste B1-Regel!)', tab:'grammatik'},
+      {t:'15 Wörter zum Thema „Gesundheit" lernen', tab:'vokabeln'},
+      {t:'10 Verben-Flashcards wiederholen', tab:'vokabeln'}]},
+    { d:5, focus:'Grammatik + Vokabeln', tasks:[
+      {t:'Lektion „Konjunktiv II" lernen + Mini-Quiz', tab:'grammatik'},
+      {t:'15 Wörter zum Thema „Reisen" lernen', tab:'vokabeln'},
+      {t:'10 Aufgaben Übungsbank Grammatik', tab:'grammatik'}]},
+    { d:6, focus:'Grammatik + Vokabeln', tasks:[
+      {t:'Lektion „Adjektivendungen" lernen + Mini-Quiz', tab:'grammatik'},
+      {t:'15 Wörter zum Thema „Wohnen" lernen', tab:'vokabeln'},
+      {t:'Vokabel-Quiz machen (10 Fragen)', tab:'vokabeln'}]},
+    { d:7, focus:'Wiederholung', tasks:[
+      {t:'Alle Mini-Quiz der Woche noch einmal machen', tab:'grammatik'},
+      {t:'Sprachbausteine Teil 1 + Teil 2 lösen', tab:'grammatik'},
+      {t:'Alle Wörter der Woche kurz wiederholen', tab:'vokabeln'}]},
+  ]},
+  { week:2, title:'Woche 2 — Lesen & Hören', goal:'Alle Aufgabentypen kennen und erste Übungen unter Zeit lösen', days:[
+    { d:8, focus:'Lesen', tasks:[
+      {t:'Lesen Teil 1: Blog richtig/falsch lösen', tab:'lesen'},
+      {t:'Lektion „Passiv" lernen + Mini-Quiz', tab:'grammatik'},
+      {t:'15 Wörter zum Thema „Umwelt" lernen', tab:'vokabeln'}]},
+    { d:9, focus:'Lesen', tasks:[
+      {t:'Überschriften-Zuordnung lösen', tab:'lesen'},
+      {t:'10 Aufgaben Übungsbank Lesen', tab:'lesen'},
+      {t:'10 Verben-Flashcards wiederholen', tab:'vokabeln'}]},
+    { d:10, focus:'Hören', tasks:[
+      {t:'Hörübung Teil 1 mit Audio machen', tab:'hoeren'},
+      {t:'Lektion „Relativsätze" lernen + Mini-Quiz', tab:'grammatik'},
+      {t:'15 Wörter zum Thema „Bildung" lernen', tab:'vokabeln'}]},
+    { d:11, focus:'Lesen', tasks:[
+      {t:'Anzeigen-Zuordnung lösen', tab:'lesen'},
+      {t:'10 Aufgaben Übungsbank Hören', tab:'hoeren'},
+      {t:'Wörter von Tag 8–10 wiederholen', tab:'vokabeln'}]},
+    { d:12, focus:'Hören', tasks:[
+      {t:'Zweite Hörübung mit Audio machen', tab:'hoeren'},
+      {t:'Lektion „Wechselpräpositionen" lernen + Mini-Quiz', tab:'grammatik'},
+      {t:'15 Wörter zum Thema „Familie & Freunde" lernen', tab:'vokabeln'}]},
+    { d:13, focus:'Lesen', tasks:[
+      {t:'Multiple-Choice-Text (telc Teil 2) lösen', tab:'lesen'},
+      {t:'10 Aufgaben Übungsbank Grammatik', tab:'grammatik'},
+      {t:'Vokabel-Quiz machen', tab:'vokabeln'}]},
+    { d:14, focus:'Wochentest', tasks:[
+      {t:'Kompletter Lesen-Durchlauf MIT Timer (65 Min, alle Übungen nacheinander)', tab:'lesen'},
+      {t:'Fehler ansehen: Warum war die Antwort falsch?'},
+      {t:'Schwierige Wörter aus den Texten in Vokabel-Liste nachschlagen', tab:'vokabeln'}]},
+  ]},
+  { week:3, title:'Woche 3 — Schreiben & Sprechen', goal:'Briefe sicher schreiben und frei sprechen — die aktiven Teile meistern', days:[
+    { d:15, focus:'Schreiben', tasks:[
+      {t:'Brief-Vorlagen ansehen: Aufbau verstehen (Anrede, Einleitung, Schluss)', tab:'schreiben'},
+      {t:'Ersten Übungsbrief schreiben (mind. 80 Wörter)', tab:'schreiben'},
+      {t:'Lektion „Präteritum" lernen + Mini-Quiz', tab:'grammatik'}]},
+    { d:16, focus:'Sprechen', tasks:[
+      {t:'Teil 1 üben: Sich vorstellen — mit dem Sprachrekorder aufnehmen', tab:'sprechen'},
+      {t:'Aufnahme anhören: Was kann besser werden?', tab:'sprechen'},
+      {t:'15 Wörter zum Thema „Essen & Einkaufen" lernen', tab:'vokabeln'}]},
+    { d:17, focus:'Schreiben', tasks:[
+      {t:'Beschwerdebrief schreiben (häufigste telc-Aufgabe!)', tab:'schreiben'},
+      {t:'Mit der Checkliste kontrollieren: Anrede? Alle Punkte? Gruß?', tab:'schreiben'},
+      {t:'10 Verben-Flashcards wiederholen', tab:'vokabeln'}]},
+    { d:18, focus:'Sprechen', tasks:[
+      {t:'Teil 2: Zwei Bildbeschreibungen mit Rekorder üben', tab:'sprechen'},
+      {t:'Redemittel für Bildbeschreibung auswendig lernen', tab:'sprechen'},
+      {t:'Lektion „Komparativ & Superlativ" + Mini-Quiz', tab:'grammatik'}]},
+    { d:19, focus:'Schreiben', tasks:[
+      {t:'Forumsbeitrag / Meinungstext schreiben (80 Wörter)', tab:'schreiben'},
+      {t:'15 Wörter zum Thema „Meinung & Diskussion" lernen', tab:'vokabeln'},
+      {t:'10 Aufgaben Übungsbank Schreiben', tab:'schreiben'}]},
+    { d:20, focus:'Sprechen', tasks:[
+      {t:'Teil 3 üben: Etwas gemeinsam planen — Redemittel lernen', tab:'sprechen'},
+      {t:'Lektion „zu + Infinitiv" + Mini-Quiz', tab:'grammatik'},
+      {t:'Vokabel-Quiz machen', tab:'vokabeln'}]},
+    { d:21, focus:'Wochentest', tasks:[
+      {t:'Einen Brief in 30 Minuten OHNE Hilfe schreiben (echte Prüfungsbedingung)', tab:'schreiben'},
+      {t:'Eine komplette Präsentation (2 Min) aufnehmen und anhören', tab:'sprechen'},
+      {t:'Alle Redemittel noch einmal durchlesen', tab:'sprechen'}]},
+  ]},
+  { week:4, title:'Woche 4 — Modelltests & Endspurt', goal:'Unter echten Bedingungen üben — Timer an, Wörterbuch weg!', days:[
+    { d:22, focus:'Modelltest', tasks:[
+      {t:'Offiziellen Modelltest herunterladen (Home → Offizielle Modelltests)', tab:'home'},
+      {t:'Lesen-Teil unter echter Zeit lösen (65/90 Min)'},
+      {t:'Ergebnis auswerten: Bestanden? (60% nötig)'}]},
+    { d:23, focus:'Modelltest', tasks:[
+      {t:'Hören-Teil des Modelltests unter echter Zeit'},
+      {t:'Fehler notieren: Welcher Aufgabentyp ist schwer?'},
+      {t:'10 Aufgaben Übungsbank Hören', tab:'hoeren'}]},
+    { d:24, focus:'Modelltest', tasks:[
+      {t:'Schreiben-Teil des Modelltests unter echter Zeit'},
+      {t:'Mit der Musterlösung im PDF vergleichen'},
+      {t:'Brief-Redemittel wiederholen', tab:'schreiben'}]},
+    { d:25, focus:'Modelltest', tasks:[
+      {t:'Sprechen komplett simulieren: alle 3 Teile mit Rekorder (15 Min)', tab:'sprechen'},
+      {t:'Aufnahme anhören und mit den Redemitteln vergleichen', tab:'sprechen'},
+      {t:'Vokabel-Quiz machen', tab:'vokabeln'}]},
+    { d:26, focus:'Schwächen', tasks:[
+      {t:'Deinen schwächsten Bereich wählen und 20 Aufgaben aus der Übungsbank lösen'},
+      {t:'Lektion „Reflexive Verben" + Mini-Quiz', tab:'grammatik'},
+      {t:'15 Wörter „Medien & Technik" lernen', tab:'vokabeln'}]},
+    { d:27, focus:'Modelltest 2', tasks:[
+      {t:'Zweiten Modelltest: Lesen + Sprachbausteine unter Zeit'},
+      {t:'Lektion „Wortstellung (TeKaMoLo)" + Mini-Quiz', tab:'grammatik'},
+      {t:'Wörter der Woche wiederholen', tab:'vokabeln'}]},
+    { d:28, focus:'Modelltest 2', tasks:[
+      {t:'Zweiten Modelltest: Hören + Schreiben unter Zeit'},
+      {t:'Alle Fehler der beiden Modelltests noch einmal ansehen'},
+      {t:'15 Wörter „Verkehr & Stadt" lernen', tab:'vokabeln'}]},
+    { d:29, focus:'Leichte Wiederholung', tasks:[
+      {t:'Top-5-Grammatikregeln auf Home noch einmal lesen', tab:'home'},
+      {t:'Sprechen-Redemittel laut vorlesen', tab:'sprechen'},
+      {t:'Brief-Vorlage noch einmal ansehen', tab:'schreiben'}]},
+    { d:30, focus:'Ruhetag 🍀', tasks:[
+      {t:'Nur 10 Minuten: Lieblings-Wörter wiederholen — MEHR NICHT!', tab:'vokabeln'},
+      {t:'Tasche packen: Ausweis/Pass, Einladung zur Prüfung, Wasser, Snack, Uhr'},
+      {t:'Früh schlafen gehen. Du bist vorbereitet — viel Erfolg! 💪'}]},
+  ]},
+];
+
+function planState(){
+  try { return JSON.parse(localStorage.getItem(PLAN_KEY)) || {tasks:{},examDate:''}; }
+  catch(e){ return {tasks:{},examDate:''}; }
+}
+function savePlanState(s){ try{ localStorage.setItem(PLAN_KEY, JSON.stringify(s)); }catch(e){} }
+
+function togglePlanTask(dayNum, taskIdx){
+  const s = planState();
+  const key = 'd'+dayNum+'_'+taskIdx;
+  if(s.tasks[key]) delete s.tasks[key]; else s.tasks[key] = true;
+  savePlanState(s);
+  renderStudyPlan();
+}
+function setExamDate(val){
+  const s = planState();
+  s.examDate = val;
+  savePlanState(s);
+  renderCountdown();
+}
+function renderCountdown(){
+  const s = planState();
+  const badge = document.getElementById('plan-countdown-badge');
+  const input = document.getElementById('exam-date');
+  if(!badge || !input) return;
+  if(s.examDate){
+    input.value = s.examDate;
+    const days = Math.ceil((new Date(s.examDate) - new Date().setHours(0,0,0,0)) / 86400000);
+    badge.style.display = 'inline-flex';
+    badge.textContent = days > 1 ? `⏳ Noch ${days} Tage bis zur Prüfung` :
+                        days === 1 ? '⏳ Morgen ist die Prüfung!' :
+                        days === 0 ? '🎯 HEUTE ist die Prüfung — viel Erfolg!' :
+                        '✅ Prüfung vorbei — Daumen gedrückt!';
+  } else badge.style.display = 'none';
+}
+function renderStudyPlan(){
+  const wrap = document.getElementById('plan-weeks');
+  if(!wrap) return;
+  const s = planState();
+  let doneDays = 0;
+  wrap.innerHTML = STUDY_PLAN.map(week => `
+    <div class="plan-week">
+      <div class="plan-week-head">
+        <div>
+          <div class="plan-week-title">${week.title}</div>
+          <div class="plan-week-goal">🎯 ${week.goal}</div>
+        </div>
+      </div>
+      <div class="plan-days">
+        ${week.days.map(day => {
+          const allDone = day.tasks.every((_,i)=>s.tasks['d'+day.d+'_'+i]);
+          if(allDone) doneDays++;
+          return `<div class="plan-day${allDone?' done':''}">
+            <div class="plan-day-head">
+              <span class="plan-day-num">${allDone?'✅':'📌'} Tag ${day.d}</span>
+              <span class="plan-day-focus">${day.focus}</span>
+            </div>
+            ${day.tasks.map((task,i) => {
+              const checked = !!s.tasks['d'+day.d+'_'+i];
+              return `<div class="plan-task${checked?' checked':''}" onclick="togglePlanTask(${day.d},${i})">
+                <input type="checkbox" ${checked?'checked':''} style="pointer-events:none" tabindex="-1" aria-label="Aufgabe ${i+1} Tag ${day.d}">
+                <span>${task.t}${task.tab?` <a onclick="event.stopPropagation();showTab('${task.tab}')" href="#${task.tab}">↗</a>`:''}</span>
+              </div>`;
+            }).join('')}
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`).join('');
+  const fill = document.getElementById('plan-progress-fill');
+  const label = document.getElementById('plan-progress-label');
+  if(fill) fill.style.width = Math.round(doneDays/30*100)+'%';
+  if(label) label.textContent = doneDays+' / 30 Tage';
+}
+function initStudyPlan(){
+  renderStudyPlan();
+  renderCountdown();
+}
 
 // ===========================
 // I18N — TRANSLATIONS
@@ -2730,6 +3069,7 @@ const TRANSLATIONS = {
     nav_home: 'Home', nav_lesen: 'Lesen', nav_hoeren: 'Hören',
     nav_schreiben: 'Schreiben', nav_sprechen: 'Sprechen', nav_grammatik: 'Grammatik',
     nav_vokabeln: 'Vokabeln',
+    nav_plan: '30-Tage-Plan',
     desc_vokabeln: 'Meistern Sie B1-Verben mit festen Präpositionen. Lernen Sie mit interaktiven Flashcards und Quizzes.',
     vocab_hero_sub: 'Meistern Sie die B1-Verben mit festen Präpositionen und Fällen. Üben Sie mit Flashcards und interaktiven Quizzes.',
     vocab_flashcards_title: '📇 Interaktive Flashcards',
@@ -2807,6 +3147,7 @@ const TRANSLATIONS = {
     nav_home: 'Home', nav_lesen: 'Reading', nav_hoeren: 'Listening',
     nav_schreiben: 'Writing', nav_sprechen: 'Speaking', nav_grammatik: 'Grammar',
     nav_vokabeln: 'Vocabulary',
+    nav_plan: '30-Day Plan',
     desc_vokabeln: 'Master B1 verbs with fixed prepositions and cases. Learn with interactive flashcards and quizzes.',
     vocab_hero_sub: 'Master B1 verbs with fixed prepositions and cases. Practice with flashcards and interactive quizzes.',
     vocab_flashcards_title: '📇 Interactive Flashcards',
@@ -2871,6 +3212,7 @@ const TRANSLATIONS = {
     nav_home: 'Главная', nav_lesen: 'Чтение', nav_hoeren: 'Аудирование',
     nav_schreiben: 'Письмо', nav_sprechen: 'Говорение', nav_grammatik: 'Грамматика',
     nav_vokabeln: 'Словарный запас',
+    nav_plan: 'План на 30 дней',
     desc_vokabeln: 'Освойте глаголы B1 с фиксированными предлогами. Учитесь с интерактивными карточками и тестами.',
     vocab_hero_sub: 'Освойте глаголы B1 с фиксированными предлогами и падежами. Практикуйтесь с карточками и интерактивными тестами.',
     vocab_flashcards_title: '📇 Интерактивные карточки',
@@ -2947,6 +3289,7 @@ const TRANSLATIONS = {
     nav_home: 'Ana Səhifə', nav_lesen: 'Oxu', nav_hoeren: 'Dinləmə',
     nav_schreiben: 'Yazı', nav_sprechen: 'Danışıq', nav_grammatik: 'Qrammatika',
     nav_vokabeln: 'Sözlük',
+    nav_plan: '30 günlük plan',
     desc_vokabeln: 'Sabit sözönləri ilə B1 feillərini öyrənin. İnteraktiv fləşkartlar və testlərlə öyrənin.',
     vocab_hero_sub: 'Sabit sözönləri və hallar ilə B1 feillərini öyrənin. Fləşkartlar və interaktiv testlərlə məşq edin.',
     vocab_flashcards_title: '📇 İnteraktiv Fləşkartlar',
@@ -3474,6 +3817,171 @@ const GRAMMAR_LESSONS = [
       {q:'Das Kind, ___ ich geholfen habe, ist glücklich.',opts:['das','dem','den','der'],ans:1,exp:'Kind (neut.) + helfen takes Dativ → Dat. neut. → dem'},
       {q:'Die Freunde, mit ___ ich gehe, sind nett.',opts:['die','den','denen','derer'],ans:2,exp:'plural + mit takes Dativ → Dat. plural → denen'},
     ]
+  },
+  {
+    id:'adjektiv', title:'🎨 Adjektivendungen',
+    rules:[
+      { heading:'The simple 3-question method',
+        text:'Ask: 1) Which article is before the adjective? 2) Which case? 3) Then pick the ending from the table. After der/die/das most endings are just -e or -en!',
+        table:{ headers:['After...','Nom.','Akk.','Dativ','Rule of thumb'],
+          rows:[['der/die/das (definite)','<span class="hl">-e</span>','-e / <span class="hl2">-en</span> (masc.)','<span class="hl3">-en</span>','mostly -e or -en'],
+                ['ein/eine (indefinite)','-er/-e/-es','-en/-e/-es','<span class="hl3">-en</span>','shows gender: der→-er, das→-es'],
+                ['no article','-er/-e/-es','-en/-e/-es','-em/-er/-em','adjective takes the article ending']]}},
+      { heading:'Examples',
+        examples:['<strong>der</strong> gut<strong>e</strong> Mann · <strong>ein</strong> gut<strong>er</strong> Mann → without "der", adjective shows masc. (-er)',
+                  'Ich sehe <strong>den</strong> gut<strong>en</strong> Mann. → Akkusativ masc. → immer -en',
+                  'mit <strong>dem</strong> neu<strong>en</strong> Auto → Dativ → IMMER -en (easiest rule!)',
+                  'Ich trinke kalt<strong>es</strong> Wasser. → no article, neut. → -es',
+                  '💡 TRICK: Dativ + plural with article = always -en. When unsure, -en is the most common ending!']}
+    ],
+    quiz:[
+      {q:'Der ___ Mann wohnt hier.',opts:['alte','alter','alten','altes'],ans:0,exp:'After "der" in Nominativ → -e: der alte Mann'},
+      {q:'Ich habe einen ___ Hund.',opts:['kleine','kleiner','kleinen','kleines'],ans:2,exp:'Akkusativ masc. → -en: einen kleinen Hund'},
+      {q:'Sie fährt mit dem ___ Auto.',opts:['neue','neuen','neuer','neues'],ans:1,exp:'Dativ → ALWAYS -en: mit dem neuen Auto'},
+      {q:'Das ist ein ___ Buch.',opts:['gutes','gute','guten','guter'],ans:0,exp:'After "ein" + neut. Nom. → adjective shows gender: -es (das → gutes)'},
+    ]
+  },
+  {
+    id:'wechselpraep', title:'📍 Wechselpräpositionen',
+    rules:[
+      { heading:'9 prepositions — Akkusativ OR Dativ?',
+        text:'in, an, auf, über, unter, vor, hinter, neben, zwischen. Ask: WOHIN? (movement to a place → Akkusativ) or WO? (position, no movement → Dativ).',
+        table:{ headers:['Question','Case','Example'],
+          rows:[['<span class="hl2">Wohin?</span> (direction)','Akkusativ','Ich gehe <strong>in die</strong> Schule. · Ich hänge das Bild <strong>an die</strong> Wand.'],
+                ['<span class="hl3">Wo?</span> (position)','Dativ','Ich bin <strong>in der</strong> Schule. · Das Bild hängt <strong>an der</strong> Wand.']]}},
+      { heading:'Always the same case (memorize!)',
+        table:{ headers:['Always Akkusativ','Always Dativ'],
+          rows:[['<span class="hl2">für, ohne, gegen, um, durch, bis</span>','<span class="hl3">mit, nach, aus, zu, von, bei, seit, gegenüber</span>']]},
+        examples:['Ich fahre <strong>mit dem</strong> Bus. (mit → always Dativ)',
+                  'Das Geschenk ist <strong>für den</strong> Lehrer. (für → always Akkusativ)',
+                  '💡 Merksatz Dativ: "<strong>mit-nach-aus-zu-von-bei-seit</strong>" — sing it like a song!']}
+    ],
+    quiz:[
+      {q:'Ich gehe ___ Kino. (in + das)',opts:['im','ins','in dem','in der'],ans:1,exp:'Wohin? → movement → Akkusativ → in das = ins Kino'},
+      {q:'Ich bin jetzt ___ Kino. (in + das)',opts:['ins','im','in den','in die'],ans:1,exp:'Wo? → position → Dativ → in dem = im Kino'},
+      {q:'Er fährt ___ dem Fahrrad zur Arbeit.',opts:['für','mit','gegen','durch'],ans:1,exp:'mit + Dativ = by bike. mit is ALWAYS Dativ.'},
+      {q:'Die Lampe hängt ___ dem Tisch.',opts:['über','auf','an','in'],ans:0,exp:'über + Dativ (Wo? position) = hangs above the table'},
+    ]
+  },
+  {
+    id:'praeteritum', title:'📜 Präteritum',
+    rules:[
+      { heading:'When do you NEED Präteritum at B1?',
+        text:'In writing (and often in speech) you must use Präteritum for: sein, haben, and all modal verbs. For other verbs, Perfekt is fine in letters and speaking.',
+        table:{ headers:['Verb','ich/er','du','wir/sie'],
+          rows:[['sein','<span class="hl">war</span>','warst','waren'],
+                ['haben','<span class="hl">hatte</span>','hattest','hatten'],
+                ['können','<span class="hl">konnte</span>','konntest','konnten'],
+                ['müssen','<span class="hl">musste</span>','musstest','mussten'],
+                ['wollen','<span class="hl">wollte</span>','wolltest','wollten'],
+                ['dürfen','<span class="hl">durfte</span>','durftest','durften'],
+                ['es gibt','<span class="hl">es gab</span>','—','—']]}},
+      { heading:'Examples in a letter',
+        examples:['Letzte Woche <strong>war</strong> ich krank. (NOT: bin krank gewesen — sounds strange)',
+                  'Ich <strong>hatte</strong> keine Zeit. · Ich <strong>konnte</strong> nicht kommen.',
+                  'Als Kind <strong>wollte</strong> ich Pilot werden.',
+                  '💡 In der schriftlichen Prüfung: war, hatte, konnte, musste, wollte — diese 5 Formen brauchst du in fast jedem Brief!']}
+    ],
+    quiz:[
+      {q:'Gestern ___ ich krank. (sein)',opts:['war','bin','wäre','hatte'],ans:0,exp:'sein → Präteritum: war. "Ich war krank" ist Standard.'},
+      {q:'Ich ___ leider keine Zeit. (haben)',opts:['habte','hatte','hätte','war'],ans:1,exp:'haben → hatte (Achtung: nicht "habte"!)'},
+      {q:'Er ___ nicht kommen. (können)',opts:['kannte','konnte','könnte','kann'],ans:1,exp:'können → konnte. (kannte = knew, könnte = could/would)'},
+      {q:'Früher ___ es hier einen Park.',opts:['gibt','gab','gegeben','gebt'],ans:1,exp:'es gibt → es gab (Präteritum)'},
+    ]
+  },
+  {
+    id:'komparativ', title:'📈 Komparativ & Superlativ',
+    rules:[
+      { heading:'Formation: -er / am -sten',
+        text:'Comparative: adjective + er (+ als). Superlative: am + adjective + sten. Short adjectives with a/o/u get an umlaut.',
+        table:{ headers:['Grundform','Komparativ','Superlativ'],
+          rows:[['schnell','schnell<span class="hl">er</span>','am schnell<span class="hl">sten</span>'],
+                ['alt','<span class="hl2">ä</span>lter','am <span class="hl2">ä</span>ltesten'],
+                ['groß','größer','am größten'],
+                ['gut ⚠️','<span class="hl">besser</span>','am <span class="hl">besten</span>'],
+                ['viel ⚠️','<span class="hl">mehr</span>','am <span class="hl">meisten</span>'],
+                ['gern ⚠️','<span class="hl">lieber</span>','am <span class="hl">liebsten</span>']]}},
+      { heading:'Comparing things',
+        examples:['Berlin ist größer <strong>als</strong> München. (comparison → als, never "wie"!)',
+                  'München ist genauso schön <strong>wie</strong> Hamburg. (equality → wie)',
+                  'Ich trinke <strong>lieber</strong> Tee <strong>als</strong> Kaffee. → I prefer tea.',
+                  '<strong>Am liebsten</strong> trinke ich Wasser. → Most of all I like...',
+                  '💡 Sprechen-Prüfung: "Ich finde X besser als Y, weil..." — perfekter Satz für Teil 3!']}
+    ],
+    quiz:[
+      {q:'Mein Bruder ist ___ als ich.',opts:['alt','älter','am ältesten','ältere'],ans:1,exp:'Comparison with "als" → Komparativ: älter'},
+      {q:'Deutsch finde ich ___ als Englisch.',opts:['schwerer','schwieriger wie','mehr schwer','schwer'],ans:0,exp:'schwer → schwerer als. NO "mehr schwer" (that\'s English thinking!)'},
+      {q:'Ich trinke ___ Tee als Kaffee.',opts:['gerner','lieber','mehr gern','am liebsten'],ans:1,exp:'gern → lieber (irregular!). Ich trinke lieber Tee.'},
+      {q:'Anna läuft ___ von allen.',opts:['schneller','am schnellsten','schnellste','sehr schnell'],ans:1,exp:'Superlative → am schnellsten (fastest of all)'},
+    ]
+  },
+  {
+    id:'zuinfinitiv', title:'🎯 zu + Infinitiv',
+    rules:[
+      { heading:'When to use zu + Infinitiv',
+        text:'After certain verbs, adjectives and nouns, the second verb goes to the end with "zu". With separable verbs, zu goes INSIDE: aufzustehen.',
+        table:{ headers:['After...','Example'],
+          rows:[['versuchen, vergessen, anfangen, aufhören, vorhaben','Ich versuche, Deutsch <strong>zu lernen</strong>.'],
+                ['Es ist wichtig/schwer/leicht...','Es ist wichtig, pünktlich <strong>zu sein</strong>.'],
+                ['keine Zeit/Lust haben','Ich habe keine Lust <strong>zu kochen</strong>.'],
+                ['Separable verbs ⚠️','Ich vergesse oft, ihn <strong>anzurufen</strong>. (an-zu-rufen)']]}},
+      { heading:'NO zu after these!',
+        examples:['Modal verbs: Ich muss lernen. (NOT: muss zu lernen ❌)',
+                  'gehen/fahren: Ich gehe einkaufen. · möchten: Ich möchte schlafen.',
+                  'sehen/hören: Ich höre ihn singen.',
+                  '💡 um...zu = in order to: Ich lerne Deutsch, <strong>um</strong> in Deutschland <strong>zu arbeiten</strong>.']}
+    ],
+    quiz:[
+      {q:'Ich versuche, jeden Tag Deutsch ___.',opts:['lernen','zu lernen','lerne','gelernt'],ans:1,exp:'versuchen + zu + Infinitiv → zu lernen'},
+      {q:'Ich muss heute ___.',opts:['zu arbeiten','arbeiten','arbeite','gearbeitet'],ans:1,exp:'Modal verb (muss) → NO zu! Ich muss arbeiten.'},
+      {q:'Vergiss nicht, mich ___! (anrufen)',opts:['zu anrufen','anzurufen','anrufen zu','rufst an'],ans:1,exp:'Separable verb: zu goes inside → an-zu-rufen'},
+      {q:'Ich lerne Deutsch, ___ in Deutschland zu arbeiten.',opts:['für','um','damit','weil'],ans:1,exp:'um...zu = in order to (same subject in both parts)'},
+    ]
+  },
+  {
+    id:'reflexiv', title:'🪞 Reflexive Verben',
+    rules:[
+      { heading:'Verbs with sich',
+        text:'Many everyday verbs need a reflexive pronoun. Usually Akkusativ (mich/dich/sich/uns/euch/sich). Dativ only when there is another object.',
+        table:{ headers:['Person','Akkusativ','Dativ','Example'],
+          rows:[['ich','<span class="hl">mich</span>','<span class="hl3">mir</span>','Ich wasche mich. / Ich wasche mir die Hände.'],
+                ['du','<span class="hl">dich</span>','<span class="hl3">dir</span>','Du freust dich.'],
+                ['er/sie/es','<span class="hl">sich</span>','<span class="hl3">sich</span>','Er ärgert sich.'],
+                ['wir','<span class="hl">uns</span>','<span class="hl3">uns</span>','Wir treffen uns morgen.'],
+                ['ihr','<span class="hl">euch</span>','<span class="hl3">euch</span>','Ihr beeilt euch.']]}},
+      { heading:'Top B1 reflexive verbs',
+        examples:['sich freuen auf/über · sich interessieren für · sich ärgern über',
+                  'sich erinnern an · sich kümmern um · sich bewerben um',
+                  'sich treffen mit · sich beeilen · sich erholen · sich anmelden',
+                  '💡 Ich wasche <strong>mich</strong>. ABER: Ich wasche <strong>mir</strong> die Hände. (die Hände = Akkusativ-Objekt → sich wird Dativ)']}
+    ],
+    quiz:[
+      {q:'Ich freue ___ auf das Wochenende.',opts:['mir','mich','sich','ich'],ans:1,exp:'sich freuen + Akkusativ-Reflexiv → ich freue mich'},
+      {q:'Wir treffen ___ um 8 Uhr.',opts:['sich','euch','uns','wir'],ans:2,exp:'wir → uns: Wir treffen uns.'},
+      {q:'Ich putze ___ die Zähne.',opts:['mich','mir','sich','mein'],ans:1,exp:'die Zähne is the Akk. object → reflexive becomes Dativ: mir'},
+      {q:'Er interessiert ___ für Musik.',opts:['ihm','ihn','sich','er'],ans:2,exp:'er/sie/es → sich: Er interessiert sich für...'},
+    ]
+  },
+  {
+    id:'wortstellung', title:'🧩 Wortstellung (TeKaMoLo)',
+    rules:[
+      { heading:'Position 2 rule — the golden rule',
+        text:'In a main clause, the conjugated verb is ALWAYS in position 2. Position 1 can be the subject OR time OR anything else — then the subject comes right after the verb.',
+        examples:['<strong>Ich</strong> <u>gehe</u> heute ins Kino. (subject first)',
+                  '<strong>Heute</strong> <u>gehe</u> ich ins Kino. (time first → subject after verb!)',
+                  '❌ Heute ich gehe... ← most common B1 mistake!']},
+      { heading:'TeKaMoLo — order of information',
+        text:'Temporal (wann?) → Kausal (warum?) → Modal (wie?) → Lokal (wo/wohin?)',
+        table:{ headers:['Te (wann)','Ka (warum)','Mo (wie)','Lo (wohin)'],
+          rows:[['Ich fahre <span class="hl">morgen</span>','<span class="hl2">wegen der Prüfung</span>','<span class="hl3">mit dem Zug</span>','<span class="hl">nach Berlin</span>.']]},
+        examples:['💡 Simplified: TIME before PLACE — "Ich gehe <strong>heute</strong> <strong>ins Kino</strong>" (never the other way!)']}
+    ],
+    quiz:[
+      {q:'Welcher Satz ist richtig?',opts:['Heute ich lerne Deutsch.','Heute lerne ich Deutsch.','Heute ich Deutsch lerne.','Ich heute lerne Deutsch.'],ans:1,exp:'Verb in position 2! Heute (1) lerne (2) ich (3)...'},
+      {q:'Ich fahre ___ nach Berlin.',opts:['mit dem Zug morgen','morgen mit dem Zug','nach morgen dem Zug','dem Zug mit morgen'],ans:1,exp:'TeKaMoLo: Temporal (morgen) before Modal (mit dem Zug) before Lokal'},
+      {q:'Welcher Satz ist richtig?',opts:['Ich gehe ins Kino heute.','Ich gehe heute ins Kino.','Ich heute gehe ins Kino.','Ins Kino ich gehe heute.'],ans:1,exp:'Time before place: heute ins Kino'},
+      {q:'Am Montag ___ zur Arbeit.',opts:['ich fahre','fahre ich','ich fährt','fährt'],ans:1,exp:'"Am Montag" fills position 1 → verb position 2 → subject after: fahre ich'},
+    ]
   }
 ];
 
@@ -3698,6 +4206,108 @@ const THEMATIC_VOCAB = {
     {a:'',w:'sich entspannen',pl:'',en:'to relax / to unwind',ex:'Ich entspanne mich nach der Arbeit.'},
     {a:'das',w:'Vertrauen',pl:'',en:'trust / confidence',ex:'Ich habe volles Vertrauen in dich.'},
     {a:'die',w:'Geduld',pl:'',en:'patience',ex:'Du brauchst dabei viel Geduld.'},
+  ]},
+  familie:{label:'👨‍👩‍👧 Familie & Freunde',words:[
+    {a:'die',w:'Beziehung',pl:'-en',en:'relationship',ex:'Sie haben eine gute Beziehung.'},
+    {a:'die',w:'Hochzeit',pl:'-en',en:'wedding',ex:'Wir sind zur Hochzeit eingeladen.'},
+    {a:'die',w:'Ehe',pl:'-n',en:'marriage',ex:'Sie führen eine glückliche Ehe.'},
+    {a:'die',w:'Scheidung',pl:'-en',en:'divorce',ex:'Nach der Scheidung zog er nach Berlin.'},
+    {a:'die',w:'Erziehung',pl:'',en:'upbringing / education (of children)',ex:'Die Erziehung der Kinder ist nicht leicht.'},
+    {a:'die',w:'Verwandten',pl:'(pl.)',en:'relatives',ex:'Am Wochenende besuchen wir unsere Verwandten.'},
+    {a:'der',w:'Nachbar',pl:'-n',en:'neighbour',ex:'Mein Nachbar ist sehr freundlich.'},
+    {a:'die',w:'Freundschaft',pl:'-en',en:'friendship',ex:'Unsere Freundschaft ist mir sehr wichtig.'},
+    {a:'der',w:'Streit',pl:'',en:'argument / quarrel',ex:'Wir hatten gestern einen kleinen Streit.'},
+    {a:'',w:'sich streiten',pl:'',en:'to argue / to quarrel',ex:'Die Kinder streiten sich um das Spielzeug.'},
+    {a:'',w:'sich versöhnen',pl:'',en:'to make up / reconcile',ex:'Nach dem Streit haben wir uns versöhnt.'},
+    {a:'',w:'sich verlassen auf',pl:'',en:'to rely on',ex:'Ich kann mich immer auf dich verlassen.'},
+    {a:'',w:'aufwachsen',pl:'',en:'to grow up',ex:'Ich bin auf dem Land aufgewachsen.'},
+    {a:'',w:'sich kümmern um',pl:'',en:'to take care of',ex:'Sie kümmert sich um ihre alten Eltern.'},
+    {a:'das',w:'Vorbild',pl:'-er',en:'role model',ex:'Mein Vater ist mein großes Vorbild.'},
+  ]},
+  essen:{label:'🍽 Essen & Einkaufen',words:[
+    {a:'das',w:'Lebensmittel',pl:'—',en:'food / groceries',ex:'Ich kaufe die Lebensmittel im Supermarkt.'},
+    {a:'die',w:'Ernährung',pl:'',en:'nutrition / diet',ex:'Gesunde Ernährung ist wichtig.'},
+    {a:'das',w:'Gericht',pl:'-e',en:'dish (food)',ex:'Mein Lieblingsgericht ist Lasagne.'},
+    {a:'die',w:'Speisekarte',pl:'-n',en:'menu',ex:'Können wir bitte die Speisekarte haben?'},
+    {a:'die',w:'Bestellung',pl:'-en',en:'order',ex:'Ihre Bestellung kommt sofort.'},
+    {a:'',w:'bestellen',pl:'',en:'to order',ex:'Ich möchte eine Pizza bestellen.'},
+    {a:'die',w:'Rechnung',pl:'-en',en:'bill / check',ex:'Die Rechnung, bitte!'},
+    {a:'das',w:'Trinkgeld',pl:'-er',en:'tip',ex:'In Deutschland gibt man 5–10% Trinkgeld.'},
+    {a:'das',w:'Angebot',pl:'-e',en:'offer / special deal',ex:'Diese Woche ist Käse im Angebot.'},
+    {a:'der',w:'Rabatt',pl:'-e',en:'discount',ex:'Es gibt 20% Rabatt auf alles.'},
+    {a:'',w:'umtauschen',pl:'',en:'to exchange (a purchase)',ex:'Kann ich das Hemd umtauschen?'},
+    {a:'der',w:'Kassenbon',pl:'-s',en:'receipt',ex:'Ohne Kassenbon kein Umtausch.'},
+    {a:'',w:'schmecken',pl:'',en:'to taste (good)',ex:'Das Essen schmeckt mir sehr gut.'},
+    {a:'',w:'verzichten auf',pl:'',en:'to do without / give up',ex:'Ich verzichte auf Zucker.'},
+    {a:'die',w:'Verpackung',pl:'-en',en:'packaging',ex:'Zu viel Plastik-Verpackung ist schlecht für die Umwelt.'},
+  ]},
+  meinung:{label:'💬 Meinung & Diskussion',words:[
+    {a:'die',w:'Meinung',pl:'-en',en:'opinion',ex:'Meiner Meinung nach ist das richtig.'},
+    {a:'der',w:'Vorteil',pl:'-e',en:'advantage',ex:'Ein großer Vorteil ist der Preis.'},
+    {a:'der',w:'Nachteil',pl:'-e',en:'disadvantage',ex:'Der Nachteil ist die lange Wartezeit.'},
+    {a:'der',w:'Grund',pl:'Gründe',en:'reason',ex:'Es gibt viele Gründe dafür.'},
+    {a:'',w:'zustimmen',pl:'',en:'to agree',ex:'Ich stimme dir völlig zu.'},
+    {a:'',w:'widersprechen',pl:'',en:'to disagree / contradict',ex:'Da muss ich Ihnen widersprechen.'},
+    {a:'',w:'überzeugen',pl:'',en:'to convince',ex:'Du hast mich überzeugt!'},
+    {a:'',w:'vorschlagen',pl:'',en:'to suggest',ex:'Ich schlage vor, dass wir früher anfangen.'},
+    {a:'der',w:'Vorschlag',pl:'Vorschläge',en:'suggestion',ex:'Das ist ein guter Vorschlag.'},
+    {a:'',w:'empfehlen',pl:'',en:'to recommend',ex:'Ich kann dir dieses Buch empfehlen.'},
+    {a:'die',w:'Erfahrung',pl:'-en',en:'experience',ex:'Aus eigener Erfahrung weiß ich, dass...'},
+    {a:'',w:'begründen',pl:'',en:'to give reasons / justify',ex:'Bitte begründen Sie Ihre Meinung.'},
+    {a:'einerseits /',w:'andererseits',pl:'',en:'on one hand / on the other hand',ex:'Einerseits ist es teuer, andererseits sehr praktisch.'},
+    {a:'',w:'es kommt darauf an',pl:'',en:'it depends',ex:'Es kommt darauf an, wie viel Zeit du hast.'},
+    {a:'',w:'ich bin dafür/dagegen',pl:'',en:'I am for it / against it',ex:'Ich bin dafür, dass wir zusammen lernen.'},
+  ]},
+  medien:{label:'📱 Medien & Technik',words:[
+    {a:'die',w:'Nachrichten',pl:'(pl.)',en:'news',ex:'Ich sehe jeden Abend die Nachrichten.'},
+    {a:'die',w:'Sendung',pl:'-en',en:'TV/radio programme',ex:'Diese Sendung kommt jeden Montag.'},
+    {a:'der',w:'Bildschirm',pl:'-e',en:'screen',ex:'Kinder verbringen zu viel Zeit vor dem Bildschirm.'},
+    {a:'die',w:'Werbung',pl:'',en:'advertising',ex:'Im Fernsehen gibt es zu viel Werbung.'},
+    {a:'',w:'herunterladen',pl:'',en:'to download',ex:'Ich habe die App heruntergeladen.'},
+    {a:'',w:'hochladen',pl:'',en:'to upload',ex:'Er hat das Foto hochgeladen.'},
+    {a:'das',w:'Passwort',pl:'Passwörter',en:'password',ex:'Ich habe mein Passwort vergessen.'},
+    {a:'die',w:'Datei',pl:'-en',en:'file',ex:'Schicken Sie mir bitte die Datei per E-Mail.'},
+    {a:'der',w:'Anhang',pl:'Anhänge',en:'attachment',ex:'Die Dokumente finden Sie im Anhang.'},
+    {a:'',w:'speichern',pl:'',en:'to save (data)',ex:'Vergiss nicht, das Dokument zu speichern!'},
+    {a:'',w:'ausdrucken',pl:'',en:'to print out',ex:'Ich muss das Formular ausdrucken.'},
+    {a:'die',w:'Verbindung',pl:'-en',en:'connection',ex:'Die Internetverbindung ist heute langsam.'},
+    {a:'',w:'funktionieren',pl:'',en:'to work / function',ex:'Mein Handy funktioniert nicht mehr.'},
+    {a:'',w:'sich anmelden',pl:'',en:'to register / log in',ex:'Sie müssen sich zuerst anmelden.'},
+    {a:'der',w:'Vertrag',pl:'Verträge',en:'contract',ex:'Ich möchte meinen Handyvertrag kündigen.'},
+  ]},
+  verkehr:{label:'🚆 Verkehr & Stadt',words:[
+    {a:'das',w:'Verkehrsmittel',pl:'—',en:'means of transport',ex:'Öffentliche Verkehrsmittel sind umweltfreundlich.'},
+    {a:'die',w:'Haltestelle',pl:'-n',en:'(bus/tram) stop',ex:'Die Haltestelle ist gleich um die Ecke.'},
+    {a:'der',w:'Fahrplan',pl:'Fahrpläne',en:'timetable',ex:'Schau mal auf den Fahrplan!'},
+    {a:'die',w:'Verspätung',pl:'-en',en:'delay',ex:'Der Zug hat 20 Minuten Verspätung.'},
+    {a:'der',w:'Anschluss',pl:'Anschlüsse',en:'connection (train)',ex:'Ich habe meinen Anschluss verpasst.'},
+    {a:'',w:'umsteigen',pl:'',en:'to change (trains/buses)',ex:'Sie müssen am Hauptbahnhof umsteigen.'},
+    {a:'',w:'verpassen',pl:'',en:'to miss (a train, event)',ex:'Ich habe den Bus verpasst.'},
+    {a:'die',w:'Fahrkarte',pl:'-n',en:'ticket',ex:'Eine Fahrkarte nach Köln, bitte.'},
+    {a:'der',w:'Stau',pl:'-s',en:'traffic jam',ex:'Auf der Autobahn ist ein langer Stau.'},
+    {a:'der',w:'Führerschein',pl:'-e',en:'driving licence',ex:'Er macht gerade den Führerschein.'},
+    {a:'der',w:'Fußgänger',pl:'—',en:'pedestrian',ex:'Fußgänger müssen an der Ampel warten.'},
+    {a:'die',w:'Kreuzung',pl:'-en',en:'crossroads / intersection',ex:'An der Kreuzung fahren Sie links.'},
+    {a:'',w:'abbiegen',pl:'',en:'to turn (left/right)',ex:'Biegen Sie an der Ampel rechts ab.'},
+    {a:'die',w:'Umleitung',pl:'-en',en:'detour / diversion',ex:'Wegen der Baustelle gibt es eine Umleitung.'},
+    {a:'das',w:'Gleis',pl:'-e',en:'platform / track',ex:'Der Zug fährt von Gleis 7 ab.'},
+  ]},
+  freizeit:{label:'🎭 Freizeit & Kultur',words:[
+    {a:'die',w:'Veranstaltung',pl:'-en',en:'event',ex:'Die Veranstaltung findet im Park statt.'},
+    {a:'die',w:'Ausstellung',pl:'-en',en:'exhibition',ex:'Die Ausstellung im Museum ist sehenswert.'},
+    {a:'die',w:'Eintrittskarte',pl:'-n',en:'admission ticket',ex:'Die Eintrittskarten sind schon ausverkauft.'},
+    {a:'der',w:'Verein',pl:'-e',en:'club / association',ex:'Ich bin Mitglied in einem Sportverein.'},
+    {a:'das',w:'Mitglied',pl:'-er',en:'member',ex:'Unser Verein hat 200 Mitglieder.'},
+    {a:'',w:'stattfinden',pl:'',en:'to take place',ex:'Das Konzert findet am Samstag statt.'},
+    {a:'',w:'teilnehmen an',pl:'',en:'to participate in',ex:'Ich nehme an einem Fotokurs teil.'},
+    {a:'',w:'sich anmelden für',pl:'',en:'to sign up for',ex:'Ich habe mich für den Kurs angemeldet.'},
+    {a:'die',w:'Freizeitbeschäftigung',pl:'-en',en:'leisure activity',ex:'Lesen ist meine liebste Freizeitbeschäftigung.'},
+    {a:'',w:'unternehmen',pl:'',en:'to do (an activity)',ex:'Was wollen wir am Wochenende unternehmen?'},
+    {a:'der',w:'Ausflug',pl:'Ausflüge',en:'trip / excursion',ex:'Wir machen einen Ausflug an den See.'},
+    {a:'',w:'verabreden',pl:'',en:'to arrange to meet',ex:'Wir haben uns für Freitag verabredet.'},
+    {a:'',w:'ausverkauft',pl:'',en:'sold out',ex:'Das Konzert ist leider ausverkauft.'},
+    {a:'die',w:'Bühne',pl:'-n',en:'stage',ex:'Die Band steht schon auf der Bühne.'},
+    {a:'',w:'empfehlenswert',pl:'',en:'recommendable / worth it',ex:'Dieser Film ist wirklich empfehlenswert.'},
   ]}
 };
 
