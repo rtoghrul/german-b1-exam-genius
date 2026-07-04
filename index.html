@@ -984,6 +984,91 @@ a:focus:not(:focus-visible),
 .legal-page p { margin-bottom: 12px; color: var(--text2); }
 .legal-page ul { padding-left: 20px; margin-bottom: 12px; color: var(--text2); }
 .legal-page a { color: var(--gold); }
+
+/* Beginner navigation groupings */
+.nav-tabs-scroll {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.nav-group-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.nav-group-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--text3);
+  letter-spacing: 0.05em;
+  border-right: 1px solid var(--border);
+  padding-right: 8px;
+  margin-right: 4px;
+}
+
+/* Learning Journey Map */
+.journey-container {
+  margin-bottom: 24px;
+  border-top: 1px dashed var(--border);
+  padding-top: 24px;
+}
+.journey-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+.journey-card {
+  background: linear-gradient(135deg, var(--card) 0%, var(--card2) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.journey-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+  box-shadow: 0 8px 24px rgba(245, 180, 0, 0.08);
+}
+.journey-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+.journey-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.journey-desc {
+  font-size: 0.8rem;
+  color: var(--text2);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.journey-action {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+}
 </style>
 </head>
 <body>
@@ -1007,15 +1092,29 @@ a:focus:not(:focus-visible),
       </div>
     </div>
     <div class="nav-tabs-scroll">
-      <button class="nav-tab active" onclick="showTab('home')" aria-current="page"><span class="dot dot-home"></span> 🏠 <span data-i18n="nav_home">Home</span></button>
-      <button class="nav-tab" onclick="showTab('plan')"><span class="dot" style="background:var(--gold)"></span> 📅 <span data-i18n="nav_plan">30-Tage-Plan</span></button>
-      <button class="nav-tab" onclick="showTab('lesen')"><span class="dot dot-lesen"></span> 📖 <span data-i18n="nav_lesen">Lesen</span></button>
-      <button class="nav-tab" onclick="showTab('hoeren')"><span class="dot dot-hoeren"></span> 🎧 <span data-i18n="nav_hoeren">Hören</span></button>
-      <button class="nav-tab" onclick="showTab('schreiben')"><span class="dot dot-schreiben"></span> ✍️ <span data-i18n="nav_schreiben">Schreiben</span></button>
-      <button class="nav-tab" onclick="showTab('sprechen')"><span class="dot dot-sprechen"></span> 🗣 <span data-i18n="nav_sprechen">Sprechen</span></button>
-      <button class="nav-tab" onclick="showTab('grammatik')"><span class="dot dot-grammatik"></span> 📝 <span data-i18n="nav_grammatik">Grammatik</span></button>
-      <button class="nav-tab" onclick="showTab('vokabeln')"><span class="dot dot-vokabeln" style="background:var(--purple)"></span> 📇 <span data-i18n="nav_vokabeln">Vokabeln</span></button>
-      <button class="nav-tab" onclick="showTab('ressourcen')"><span class="dot" style="background:var(--green)"></span> 🧰 <span data-i18n="nav_ressourcen">Ressourcen</span></button>
+      <!-- Group 1: Basics -->
+      <div class="nav-group-wrapper">
+        <span class="nav-group-label">Start</span>
+        <button class="nav-tab active" onclick="showTab('home')" aria-current="page"><span class="dot dot-home"></span> 🏠 <span data-i18n="nav_home">Home</span></button>
+        <button class="nav-tab" onclick="showTab('plan')"><span class="dot" style="background:var(--gold)"></span> 📅 <span data-i18n="nav_plan">30-Tage-Plan</span></button>
+      </div>
+      
+      <!-- Group 2: Skills -->
+      <div class="nav-group-wrapper">
+        <span class="nav-group-label">Skills</span>
+        <button class="nav-tab" onclick="showTab('lesen')"><span class="dot dot-lesen"></span> 📖 <span data-i18n="nav_lesen">Lesen</span></button>
+        <button class="nav-tab" onclick="showTab('hoeren')"><span class="dot dot-hoeren"></span> 🎧 <span data-i18n="nav_hoeren">Hören</span></button>
+        <button class="nav-tab" onclick="showTab('schreiben')"><span class="dot dot-schreiben"></span> ✍️ <span data-i18n="nav_schreiben">Schreiben</span></button>
+        <button class="nav-tab" onclick="showTab('sprechen')"><span class="dot dot-sprechen"></span> 🗣 <span data-i18n="nav_sprechen">Sprechen</span></button>
+      </div>
+      
+      <!-- Group 3: Practice -->
+      <div class="nav-group-wrapper">
+        <span class="nav-group-label">Tools</span>
+        <button class="nav-tab" onclick="showTab('grammatik')"><span class="dot dot-grammatik"></span> 📝 <span data-i18n="nav_grammatik">Grammatik</span></button>
+        <button class="nav-tab" onclick="showTab('vokabeln')"><span class="dot dot-vokabeln" style="background:var(--purple)"></span> 📇 <span data-i18n="nav_vokabeln">Vokabeln</span></button>
+        <button class="nav-tab" onclick="showTab('ressourcen')"><span class="dot" style="background:var(--green)"></span> 🧰 <span data-i18n="nav_ressourcen">Ressourcen</span></button>
+      </div>
     </div>
   </div>
 </nav>
@@ -1034,6 +1133,54 @@ a:focus:not(:focus-visible),
     <div class="hero-cta-row">
       <button class="hero-cta" onclick="showTab('plan')">📅 30-Tage-Plan starten / Start 30-Day Plan</button>
       <a class="hero-cta secondary" href="#exam-comparison">📋 Prüfung vergleichen / Compare Exams</a>
+    </div>
+  </div>
+
+  <!-- B1 BEGINNER LEARNING JOURNEY MAP -->
+  <div class="card journey-container" style="border-top:3px solid var(--gold); margin-bottom: 24px;">
+    <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:4px">🗺️ Your Interactive B1 Study Journey / Dein Lernweg</h2>
+    <div class="card-sub">Are you a beginner? Follow this step-by-step path to master the B1 exam easily!</div>
+    
+    <div class="journey-steps">
+      <!-- Step 1 -->
+      <div class="journey-card" onclick="showTab('home'); document.getElementById('exam-comparison').scrollIntoView({behavior: 'smooth'})">
+        <div>
+          <div class="journey-badge">Step 1: Focus</div>
+          <div class="journey-title">Choose Exam Format</div>
+          <div class="journey-desc">Compare the structure, timing, and modular requirements of Goethe B1 vs telc B1.</div>
+        </div>
+        <div class="journey-action">Compare Exams &rarr;</div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="journey-card" onclick="showTab('vokabeln')">
+        <div>
+          <div class="journey-badge" style="color: var(--purple);">Step 2: Foundation</div>
+          <div class="journey-title">Grammar & Vocab</div>
+          <div class="journey-desc">Learn verbs with prepositions and thematic words. Practice with flashcards and try the quizzes.</div>
+        </div>
+        <div class="journey-action" style="color: var(--purple);">Start Studying &rarr;</div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="journey-card" onclick="showTab('lesen')">
+        <div>
+          <div class="journey-badge" style="color: var(--blue);">Step 3: Training</div>
+          <div class="journey-title">Train Core Skills</div>
+          <div class="journey-desc">Practice Reading, Listening (with speed control), Writing (with feedback), and Speaking (with STT).</div>
+        </div>
+        <div class="journey-action" style="color: var(--blue);">Open Skills &rarr;</div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="journey-card" onclick="showTab('plan')">
+        <div>
+          <div class="journey-badge" style="color: var(--green);">Step 4: Final Prep</div>
+          <div class="journey-title">30-Day Plan & Tests</div>
+          <div class="journey-desc">Follow the structured daily task planner and download official model exams to test yourself.</div>
+        </div>
+        <div class="journey-action" style="color: var(--green);">Open Plan &rarr;</div>
+      </div>
     </div>
   </div>
 
