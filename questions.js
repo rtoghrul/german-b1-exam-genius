@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 // ===========================
 // WORKSHEET IMAGE PATHS
@@ -560,4 +560,35 @@ const VOCAB_VERBS = [
   { verb: 'abhängen', prep: 'von', case: 'Dativ', emoji: '🔗', text: 'Das hängt vom Wetter ab.', translation: { az: 'Bu, havadan asılıdır.', ru: 'Это зависит от погоды.', de: 'Das hängt vom Wetter ab.' } },
   { verb: 'einladen', prep: 'zu', case: 'Dativ', emoji: '🎉', text: 'Ich lade dich zu meiner Party ein.', translation: { az: 'Səni partiyama dəvət edirəm.', ru: 'Я приглашаю тебя на свою вечеринку.', de: 'Ich lade dich zu meiner Party ein.' } },
   { verb: 'gratulieren', prep: 'zu', case: 'Dativ', emoji: '🥳', text: 'Wir gratulieren dir zum Geburtstag!', translation: { az: 'Ad günün münasibətilə təbrik edirik!', ru: 'Мы поздравляем тебя с днём рождения!', de: 'Wir gratulieren dir zum Geburtstag!' } }
+];
+
+// ===========================
+// B1 VOCABULARY DATABASE
+// ===========================
+const VOCABULARY = [
+  { de: 'die Ausbildung', pos: 'Nomen, f.', cat: 'Arbeit & Beruf', ex: 'Ich mache eine Ausbildung zum Kfz-Mechatroniker.', ru: 'профессиональное обучение', az: 'peşə təhsili' },
+  { de: 'sich bewerben', pos: 'Verb (um + A)', cat: 'Arbeit & Beruf', ex: 'Ich möchte mich um diese Stelle bewerben.', ru: 'подавать заявление о приеме на работу', az: 'iş üçün müraciət etmək' },
+  { de: 'der Bereich', pos: 'Nomen, m.', cat: 'Arbeit & Beruf', ex: 'In welchem Bereich arbeiten Sie?', ru: 'сфера, область', az: 'sahə, bölmə' },
+  { de: 'die Erfahrung', pos: 'Nomen, f.', cat: 'Alltag', ex: 'Haben Sie schon Erfahrung in diesem Beruf?', ru: 'опыт', az: 'təcrübə' },
+  { de: 'sich erholen', pos: 'Verb', cat: 'Gesundheit', ex: 'Im Urlaub konnte ich mich gut erholen.', ru: 'отдыхать, поправляться', az: 'dincəlmək, sağalmaq' },
+  { de: 'empfehlen', pos: 'Verb', cat: 'Alltag', ex: 'Welches Restaurant können Sie empfehlen?', ru: 'рекомендовать, советовать', az: 'tövsiyə etmək, məsləhət görmək' },
+  { de: 'die Unterkunft', pos: 'Nomen, f.', cat: 'Reisen & Urlaub', ex: 'Unsere Unterkunft war sehr sauber.', ru: 'жилье, ночлег', az: 'sığınacaq, qalacaq yer' },
+  { de: 'die Umgebung', pos: 'Nomen, f.', cat: 'Alltag', ex: 'Die Umgebung von Berlin ist sehr schön.', ru: 'окрестность, ocean', az: 'ətraf mühit, ətraf ərazi' },
+  { de: 'entscheiden', pos: 'Verb', cat: 'Alltag', ex: 'Wir müssen uns bald entscheiden.', ru: 'решать, определяться', az: 'qərar vermək' },
+  { de: 'die Beziehung', pos: 'Nomen, f.', cat: 'Familie & Freundschaft', ex: 'Sie haben eine sehr gute Beziehung zueinander.', ru: 'отношение, связь', az: 'münasibət, əlaqə' },
+  { de: 'unterstützen', pos: 'Verb', cat: 'Alltag', ex: 'Meine Familie unterstützt mich beim Lernen.', ru: 'поддерживать', az: 'dəstəkləmək' },
+  { de: 'die Gesundheit', pos: 'Nomen, f.', cat: 'Gesundheit', ex: 'Gesundheit ist das Wichtigste im Leben.', ru: 'здоровье', az: 'sağlamliq' },
+  { de: 'sich ernähren', pos: 'Verb', cat: 'Gesundheit', ex: 'Er ernährt sich sehr gesund.', ru: 'питаться', az: 'qidalanmaq' },
+  { de: 'die Verbindung', pos: 'Nomen, f.', cat: 'Medien & Technologie', ex: 'Die Internetverbindung ist heute sehr schlecht.', ru: 'связь, соединение', az: 'əlaqə, birləşmə' },
+  { de: 'verreisen', pos: 'Verb', cat: 'Reisen & Urlaub', ex: 'Nächste Woche wollen wir verreisen.', ru: 'уезжать, отправляться в путешествие', az: 'səyahətə çıxmaq' },
+  { de: 'die Vorbereitung', pos: 'Nomen, f.', cat: 'Bildung & Lernen', ex: 'Die Vorbereitung auf das B1-Examen dauert drei Monate.', ru: 'подготовка', az: 'hazırlıq' },
+  { de: 'erfolgreich', pos: 'Adjektiv', cat: 'Alltag', ex: 'Sie hat die Prüfung erfolgreich bestanden.', ru: 'успешный, успешно', az: 'uğurlu, müvəffəqiyyətlə' },
+  { de: 'die Mülltrennung', pos: 'Nomen, f.', cat: 'Umwelt', ex: 'In Deutschland ist Mülltrennung sehr wichtig.', ru: 'разделение мусора', az: 'tullantıların çeşidlənməsi' },
+  { de: 'umweltfreundlich', pos: 'Adjektiv', cat: 'Umwelt', ex: 'Fahrradfahren ist umweltfreundlich.', ru: 'экологически чистый', az: 'ekoloji cəhətdən təmiz' },
+  { de: 'die Wohnungssuche', pos: 'Nomen, f.', cat: 'Wohnen', ex: 'Die Wohnungssuche in München ist schwierig.', ru: 'поиск квартиры', az: 'ev axtarışı' },
+  { de: 'die Nebenkosten', pos: 'Nomen, pl.', cat: 'Wohnen', ex: 'Die Miete beträgt 600 Euro plus Nebenkosten.', ru: 'коммунальные услуги', az: 'kommunal xərclər' },
+  { de: 'sich gewöhnen an', pos: 'Verb (an + A)', cat: 'Alltag', ex: 'Ich habe mich an das deutsche Essen gewöhnt.', ru: 'привыкать к', az: 'alışmaq, öyrəşmək' },
+  { de: 'teilnehmen an', pos: 'Verb (an + D)', cat: 'Bildung & Lernen', ex: 'Möchten Sie an dem Kurs teilnehmen?', ru: 'принимать участие в', az: 'iştirak etmək' },
+  { de: 'die Veranstaltung', pos: 'Nomen, f.', cat: 'Alltag', ex: 'Am Samstag gibt es eine interessante Veranstaltung.', ru: 'мероприятие, событие', az: 'tədbir' },
+  { de: 'überzeugen', pos: 'Verb', cat: 'Alltag', ex: 'Deine Argumente überzeugen mich nicht.', ru: 'убеждать', az: 'inandırmaq' }
 ];
