@@ -2242,7 +2242,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     <div class="recorder-container">
       <div class="recorder-header">
         <div class="recorder-title">🗣 Interactive Speaking Practice & Pronunciation Checker</div>
-        <button class="rec-btn" id="record-btn" onclick="toggleRecording()">
+        <button class="rec-btn" id="record-btn" onclick="toggleSpeakingSTT()">
           <span style="display:inline-block;width:10px;height:10px;background:#fff;border-radius:50%;margin-right:2px"></span>
           Start Recording / STT
         </button>
@@ -6060,13 +6060,13 @@ function evaluateWriting(forceAlert = false) {
 // ===========================
 // SPEAKING AUDIO RECORDER & SPEECH-TO-TEXT
 // ===========================
-let mediaRecorder = null;
-let audioChunks = [];
-let isRecordingSpeaking = false;
-let speechRecognition = null;
+let speakingSTTRecorder = null;
+let speakingSTTChunks = [];
+let speakingSTTActive = false;
+let speakingSTTRecognition = null;
 
-function toggleRecording() {
-  if (isRecordingSpeaking) {
+function toggleSpeakingSTT() {
+  if (speakingSTTActive) {
     stopSpeakingRecord();
   } else {
     startSpeakingRecord();
@@ -6074,8 +6074,8 @@ function toggleRecording() {
 }
 
 function startSpeakingRecord() {
-  audioChunks = [];
-  isRecordingSpeaking = true;
+  speakingSTTChunks = [];
+  speakingSTTActive = true;
   
   const recBtn = document.getElementById('record-btn');
   if (recBtn) {
@@ -6090,12 +6090,12 @@ function startSpeakingRecord() {
 
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (SpeechRecognition) {
-    speechRecognition = new SpeechRecognition();
-    speechRecognition.lang = 'de-DE';
-    speechRecognition.continuous = true;
-    speechRecognition.interimResults = true;
+    speakingSTTRecognition = new SpeechRecognition();
+    speakingSTTRecognition.lang = 'de-DE';
+    speakingSTTRecognition.continuous = true;
+    speakingSTTRecognition.interimResults = true;
 
-    speechRecognition.onresult = (event) => {
+    speakingSTTRecognition.onresult = (event) => {
       let interimTranscript = '';
       let finalTranscript = '';
 
@@ -6115,11 +6115,11 @@ function startSpeakingRecord() {
       }
     };
 
-    speechRecognition.onerror = (e) => {
+    speakingSTTRecognition.onerror = (e) => {
       console.log("Speech recognition error:", e);
     };
 
-    speechRecognition.start();
+    speakingSTTRecognition.start();
   } else {
     console.log("Web Speech API not supported on this browser.");
   }
@@ -6127,12 +6127,12 @@ function startSpeakingRecord() {
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({ audio: true })
       .then(stream => {
-        mediaRecorder = new MediaRecorder(stream);
-        mediaRecorder.ondataavailable = e => {
-          audioChunks.push(e.data);
+        speakingSTTRecorder = new MediaRecorder(stream);
+        speakingSTTRecorder.ondataavailable = e => {
+          speakingSTTChunks.push(e.data);
         };
-        mediaRecorder.onstop = () => {
-          const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+        speakingSTTRecorder.onstop = () => {
+          const audioBlob = new Blob(speakingSTTChunks, { type: 'audio/wav' });
           const audioUrl = URL.createObjectURL(audioBlob);
           const playback = document.getElementById('speaking-playback');
           const container = document.getElementById('playback-container');
@@ -6142,7 +6142,7 @@ function startSpeakingRecord() {
           }
           stream.getTracks().forEach(track => track.stop());
         };
-        mediaRecorder.start();
+        speakingSTTRecorder.start();
       })
       .catch(err => {
         console.log("Audio recording permission denied or error:", err);
@@ -6151,7 +6151,7 @@ function startSpeakingRecord() {
 }
 
 function stopSpeakingRecord() {
-  isRecordingSpeaking = false;
+  speakingSTTActive = false;
   
   const recBtn = document.getElementById('record-btn');
   if (recBtn) {
@@ -6159,12 +6159,12 @@ function stopSpeakingRecord() {
     recBtn.innerHTML = '<span style="display:inline-block;width:10px;height:10px;background:#fff;border-radius:50%;margin-right:2px"></span> Start Recording / STT';
   }
 
-  if (speechRecognition) {
-    speechRecognition.stop();
+  if (speakingSTTRecognition) {
+    speakingSTTRecognition.stop();
   }
 
-  if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-    mediaRecorder.stop();
+  if (speakingSTTRecorder && speakingSTTRecorder.state !== 'inactive') {
+    speakingSTTRecorder.stop();
   }
 
   const output = document.getElementById('transcription-output');
