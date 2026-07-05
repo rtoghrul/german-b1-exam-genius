@@ -5,8 +5,8 @@ const ASSETS = [
   '/bank.js',
   '/questions.js',
   '/manifest.json',
-  '/audio/hoerverstehen_teil1.mp4',
-  '/audio/hoerverstehen_teil2.mp4'
+  '/audio/hoerverstehen_teil1.mp3',
+  '/audio/hoerverstehen_teil2.mp3'
 ];
 
 self.addEventListener('install', e => {

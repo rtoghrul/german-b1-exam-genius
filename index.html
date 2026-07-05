@@ -1984,7 +1984,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
         </div>
 
         <div class="custom-audio-player">
-          <audio id="audio-t2" src="audio/hoerverstehen_teil1.mp4" preload="metadata"></audio>
+          <audio id="audio-t2" src="audio/hoerverstehen_teil1.mp3" preload="metadata"></audio>
           <div class="audio-controls">
             <button class="play-btn" onclick="togglePlay('t2')" id="play-btn-t2">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" id="play-svg-t2"><path d="M8 5v14l11-7z"/></svg>
@@ -2030,7 +2030,7 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
           <button class="btn-timer" onclick="startTimer('t3', 30)">▶ Start</button>
         </div>
         <div class="custom-audio-player">
-          <audio id="audio-t3" src="audio/hoerverstehen_teil2.mp4" preload="metadata"></audio>
+          <audio id="audio-t3" src="audio/hoerverstehen_teil2.mp3" preload="metadata"></audio>
           <div class="audio-controls">
             <button class="play-btn" onclick="togglePlay('t3')" id="play-btn-t3">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" id="play-svg-t3"><path d="M8 5v14l11-7z"/></svg>
@@ -6067,9 +6067,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTP(); }
 // CUSTOM AUDIO PLAYER LOGIC
 // ===========================
 const AUDIO_SEGMENTS = {
-  g1:  { start: 0,   end: 325,  duration: 325  }, // Goethe Part 1 (approx 5 min 25 sec)
-  t2:  { start: 325, end: 720,  duration: 395  }, // telc Part 2 (approx 6 min 35 sec)
-  t3:  { start: 0,   end: 420,  duration: 420  }  // telc Part 3 (approx 7 min)
+  t2:  { start: 210, end: 390,  duration: 180  }, // telc Part 2 (Au Pair: 3:30 to 6:30)
+  t3:  { start: 390, end: 590,  duration: 200  }  // telc Part 3 (Announcements: 6:30 to 9:50)
 };
 
 function initAudioPlayers() {

@@ -236,7 +236,7 @@ const LISTENING = {
     title: 'Hörverstehen — Teil 2 (telc) / Teil 3 (Goethe)', subtitle: 'Au Pair — Richtig oder Falsch?',
     instruction: 'Sie hören ein Gespräch. Sie hören das Gespräch zweimal. Sind die Aussagen richtig (+) oder falsch (–)?',
     readingTime: 60,
-    audioFile: 'audio/hoerverstehen_teil1.mp4',
+    audioFile: 'audio/hoerverstehen_teil1.mp3',
     questions: [
       { id:46, text:'Als Au Pair ist man hauptsächlich mit den Kindern beschäftigt.', answer: true },
       { id:47, text:'Um in Frankreich als Au Pair zu arbeiten, braucht man mindestens 200 Stunden Erfahrung in der Kinderbetreuung.', answer: true },
@@ -257,7 +257,7 @@ const LISTENING = {
     title: 'Hörverstehen — Teil 3 (telc) / Teil 1 (Goethe)', subtitle: '5 kurze Texte — Richtig oder Falsch?',
     instruction: 'Sie hören fünf kurze Texte. Sie hören die Texte zweimal. Richtig (+) oder Falsch (–)?',
     readingTime: 30,
-    audioFile: 'audio/hoerverstehen_teil2.mp4',
+    audioFile: 'audio/hoerverstehen_teil2.mp3',
     questions: [
       { id:56, text:'Die Regionalbahnen zwischen Brühl und Sechtem fahren am Wochenende nicht.', answer: false, context:'🚂 Nahverkehr' },
       { id:57, text:'Die Praxis ist donnerstags bis 13 Uhr geöffnet.', answer: false, context:'🏥 Arztpraxis' },
