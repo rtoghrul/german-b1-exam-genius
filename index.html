@@ -1619,28 +1619,6 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
       </div>
       <div class="ex-body">
         <div class="instruction green">Sie hören fünf kurze Texte. Jeder Text wird zweimal gespielt. Beantworten Sie zu jedem Text zwei Fragen.</div>
-        <div class="custom-audio-player">
-          <audio id="audio-g1" src="audio/hoerverstehen_teil1.mp4" preload="metadata"></audio>
-          <div class="audio-controls">
-            <button class="play-btn" onclick="togglePlay('g1')" id="play-btn-g1">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" id="play-svg-g1"><path d="M8 5v14l11-7z"/></svg>
-            </button>
-            <div class="audio-progress-container">
-              <span class="audio-time-label" id="time-curr-g1">0:00</span>
-              <div class="audio-progress-bar" onclick="seekAudio(event, 'g1')" id="progress-bar-g1">
-                <div class="audio-progress-fill" id="progress-fill-g1"></div>
-              </div>
-              <span class="audio-time-label" id="time-dur-g1">0:00</span>
-            </div>
-            <div class="speed-selector">
-              <button class="speed-btn" onclick="setSpeed('g1', 0.8, this)">0.8x</button>
-              <button class="speed-btn active" onclick="setSpeed('g1', 1.0, this)">1.0x</button>
-              <button class="speed-btn" onclick="setSpeed('g1', 1.2, this)">1.2x</button>
-              <button class="speed-btn" onclick="setSpeed('g1', 1.5, this)">1.5x</button>
-            </div>
-          </div>
-          <div class="audio-note">📌 This audio contains real listening practice. Listen carefully and answer the questions below. In the real Goethe exam, each short clip is played twice.</div>
-        </div>
         <div id="goethe-mcq-clips"></div>
         <div class="submit-row">
           <button class="btn-primary" onclick="checkGoethePart1()">Antworten prüfen ✓</button>
@@ -3170,9 +3148,40 @@ function resetSituations(){
 function buildGoethePart1(){
   const c=document.getElementById('goethe-mcq-clips');if(!c)return;
   const clips=LISTENING.goethe_p1.clips;
+  const audioUrls = [
+    'https://bfu.goethe.de/medien/b1_m/audio1.mp4',
+    'https://bfu.goethe.de/medien/b1_m/audio2.mp4',
+    'https://bfu.goethe.de/medien/b1_m/audio3.mp4',
+    'https://bfu.goethe.de/medien/b1_m/audio4.mp4',
+    'https://bfu.goethe.de/medien/b1_m/audio5.mp4'
+  ];
   c.innerHTML=clips.map((clip,ci)=>`
     <div class="card" style="margin-bottom:16px">
       <div style="font-size:.82rem;font-weight:700;color:var(--green);margin-bottom:12px">🔊 Clip ${clip.id}: ${clip.context}</div>
+      
+      <!-- Dynamic audio player for this monologue -->
+      <div class="custom-audio-player" style="margin-bottom:16px">
+        <audio id="audio-gp1-${ci}" src="${audioUrls[ci]}" preload="metadata"></audio>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="togglePlay('gp1-${ci}')" id="play-btn-gp1-${ci}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" id="play-svg-gp1-${ci}"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="audio-progress-container">
+            <span class="audio-time-label" id="time-curr-gp1-${ci}">0:00</span>
+            <div class="audio-progress-bar" onclick="seekAudio(event, 'gp1-${ci}')" id="progress-bar-gp1-${ci}">
+              <div class="audio-progress-fill" id="progress-fill-gp1-${ci}"></div>
+            </div>
+            <span class="audio-time-label" id="time-dur-gp1-${ci}">0:00</span>
+          </div>
+          <div class="speed-selector">
+            <button class="speed-btn" onclick="setSpeed('gp1-${ci}', 0.8, this)">0.8x</button>
+            <button class="speed-btn active" onclick="setSpeed('gp1-${ci}', 1.0, this)">1.0x</button>
+            <button class="speed-btn" onclick="setSpeed('gp1-${ci}', 1.2, this)">1.2x</button>
+            <button class="speed-btn" onclick="setSpeed('gp1-${ci}', 1.5, this)">1.5x</button>
+          </div>
+        </div>
+      </div>
+
       <div class="question-block">
         <div class="q-num">Frage 1</div>
         <div class="q-text">${clip.q1.question}</div>
@@ -3184,6 +3193,45 @@ function buildGoethePart1(){
         ${clip.q2.options.map(o=>`<button class="option-btn" onclick="selectMCQ2('g-p1-${ci}-q2','${o.charAt(0)}')">${o}</button>`).join('')}
       </div>
     </div>`).join('');
+
+  setTimeout(initGoetheClipPlayers, 100);
+}
+
+function initGoetheClipPlayers() {
+  for (let ci = 0; ci < 5; ci++) {
+    const id = `gp1-${ci}`;
+    const audio = document.getElementById(`audio-${id}`);
+    if (!audio) continue;
+
+    // Set initial duration text immediately if cached/preloaded
+    const durText = document.getElementById(`time-dur-${id}`);
+    if (durText && audio.duration) {
+      durText.textContent = formatTime(audio.duration);
+    }
+
+    if (!audio.dataset.listenersHooked) {
+      audio.dataset.listenersHooked = 'true';
+
+      audio.addEventListener('loadedmetadata', () => {
+        const dText = document.getElementById(`time-dur-${id}`);
+        if (dText) dText.textContent = formatTime(audio.duration);
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        const fill = document.getElementById(`progress-fill-${id}`);
+        const currText = document.getElementById(`time-curr-${id}`);
+        if (fill && audio.duration) fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+        if (currText) currText.textContent = formatTime(audio.currentTime);
+      });
+
+      audio.addEventListener('ended', () => {
+        const svg = document.getElementById(`play-svg-${id}`);
+        if (svg) svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        const fill = document.getElementById(`progress-fill-${id}`);
+        if (fill) fill.style.width = '0%';
+      });
+    }
+  }
 }
 function selectMCQ2(gid,v){
   document.querySelectorAll(`.option-btn[onclick*="'${gid}'"]`).forEach(b=>{
@@ -6024,6 +6072,67 @@ const AUDIO_SEGMENTS = {
   t3:  { start: 0,   end: 420,  duration: 420  }  // telc Part 3 (approx 7 min)
 };
 
+function initAudioPlayers() {
+  const playerIds = ['t2', 't3', 'gm0', 'gm1', 'gm2', 'gm3', 'gm4', 'gm5', 'gm6', 'gm7', 'gm8'];
+  playerIds.forEach(id => {
+    const audio = document.getElementById(`audio-${id}`);
+    if (!audio) return;
+    
+    const segment = AUDIO_SEGMENTS[id];
+    
+    // Set initial duration text immediately
+    const durText = document.getElementById(`time-dur-${id}`);
+    if (durText) {
+      if (segment) {
+        durText.textContent = formatTime(segment.duration);
+      } else if (audio.duration) {
+        durText.textContent = formatTime(audio.duration);
+      }
+    }
+
+    if (!audio.dataset.listenersHooked) {
+      audio.dataset.listenersHooked = 'true';
+
+      audio.addEventListener('loadedmetadata', () => {
+        const dText = document.getElementById(`time-dur-${id}`);
+        if (dText) dText.textContent = formatTime(segment ? segment.duration : audio.duration);
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        const fill = document.getElementById(`progress-fill-${id}`);
+        const currText = document.getElementById(`time-curr-${id}`);
+        const svg = document.getElementById(`play-svg-${id}`);
+        
+        let currentVal = audio.currentTime;
+        let durationVal = audio.duration;
+
+        if (segment) {
+          if (audio.currentTime >= segment.end) {
+            audio.pause();
+            audio.currentTime = segment.start;
+            if (svg) svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+            if (fill) fill.style.width = '0%';
+            if (currText) currText.textContent = formatTime(0);
+            return;
+          }
+          currentVal = audio.currentTime - segment.start;
+          durationVal = segment.duration;
+        }
+
+        if (fill && durationVal) fill.style.width = (currentVal / durationVal * 100) + '%';
+        if (currText) currText.textContent = formatTime(currentVal);
+      });
+
+      audio.addEventListener('ended', () => {
+        const svg = document.getElementById(`play-svg-${id}`);
+        if (svg) svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        const fill = document.getElementById(`progress-fill-${id}`);
+        if (fill) fill.style.width = '0%';
+      });
+    }
+  });
+}
+
 function togglePlay(id) {
   const audio = document.getElementById(`audio-${id}`);
   const btn = document.getElementById(`play-btn-${id}`);
@@ -6056,50 +6165,6 @@ function togglePlay(id) {
   } else {
     audio.pause();
     if (svg) svg.innerHTML = '<path d="M8 5v14l11-7z"/>'; // play icon
-  }
-
-  // Hook up event listeners if not already done
-  if (!audio.dataset.listenersHooked) {
-    audio.dataset.listenersHooked = 'true';
-    audio.addEventListener('timeupdate', () => {
-      const fill = document.getElementById(`progress-fill-${id}`);
-      const currText = document.getElementById(`time-curr-${id}`);
-      
-      let currentVal = audio.currentTime;
-      let durationVal = audio.duration;
-
-      if (segment) {
-        if (audio.currentTime >= segment.end) {
-          audio.pause();
-          audio.currentTime = segment.start;
-          if (svg) svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
-          if (fill) fill.style.width = '0%';
-          return;
-        }
-        currentVal = audio.currentTime - segment.start;
-        durationVal = segment.duration;
-      }
-
-      if (fill && durationVal) fill.style.width = (currentVal / durationVal * 100) + '%';
-      if (currText) currText.textContent = formatTime(currentVal);
-    });
-
-    audio.addEventListener('loadedmetadata', () => {
-      const durText = document.getElementById(`time-dur-${id}`);
-      if (durText) durText.textContent = formatTime(segment ? segment.duration : audio.duration);
-    });
-
-    audio.addEventListener('ended', () => {
-      if (svg) svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
-      const fill = document.getElementById(`progress-fill-${id}`);
-      if (fill) fill.style.width = '0%';
-    });
-
-    // In case metadata is already loaded
-    if (audio.duration) {
-      const durText = document.getElementById(`time-dur-${id}`);
-      if (durText) durText.textContent = formatTime(segment ? segment.duration : audio.duration);
-    }
   }
 }
 
@@ -6373,6 +6438,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWritingAutosave();
   initGrammarLessons();
   initThematicVocab();
+  initAudioPlayers();
   if (typeof updateDashboard === 'function') updateDashboard();
 });
 if (document.readyState !== 'loading') {
@@ -6380,6 +6446,7 @@ if (document.readyState !== 'loading') {
   initWritingAutosave();
   initGrammarLessons();
   initThematicVocab();
+  initAudioPlayers();
   if (typeof updateDashboard === 'function') updateDashboard();
 }
 
