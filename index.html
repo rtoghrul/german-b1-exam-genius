@@ -1234,6 +1234,9 @@ a:focus:not(:focus-visible),
         <span class="pl-sub">Kostenloser kompletter B1-Kurs mit Videos — perfekt als Ergänzung — dw.com</span></span>
       </a>
     </div>
+    <div style="margin-top:16px;text-align:center">
+      <button class="btn-primary" onclick="showTab('ressourcen'); setTimeout(() => { document.getElementById('pdf-library-card').scrollIntoView({behavior:'smooth'}); }, 100);" style="background:var(--purple);color:#fff;border:none;font-size:.85rem;padding:10px 16px;cursor:pointer">📂 Zur zweisprachigen PDF-Bibliothek & Lernmaterialien (DE / EN / RU) &rarr;</button>
+    </div>
   </div>
 
   <!-- Exam Format Comparison -->
@@ -2587,6 +2590,74 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     <h2 class="hero-title" data-i18n="res_hero_title">🧰 Ressourcen — Alles Gute & Kostenlose fürs Deutschlernen</h2>
     <div class="hero-sub" data-i18n="res_hero_sub">Handverlesene kostenlose Kurse, YouTube-Kanäle, Podcasts, Filme, Bücher und Tools. Deutsch lernst du am schnellsten, wenn es Spaß macht — bau 2–3 davon in deinen Alltag ein!</div>
     <div class="hero-badges"><span class="badge badge-both">✅ 100% kostenlos oder mit Gratis-Version</span></div>
+  </div>
+
+  <!-- B1 PDF-BIBLIOTHEK -->
+  <div class="card" style="margin-bottom:24px;border-top:3px solid var(--purple)" id="pdf-library-card">
+    <div class="card-title" style="margin-bottom:4px">📂 B1 PDF-Bibliothek & Lernmaterialien (German, English, Russian)</div>
+    <div class="card-sub">Hier findest du offizielle B1 Wortschatzlisten, Modelltests und Grammatik-Handouts zum Herunterladen und Ausdrucken.</div>
+    
+    <div class="pdf-links" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:16px">
+      <!-- German - English Resources -->
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+        <div>
+          <span style="font-size:1.5rem">🇬🇧</span>
+          <h4 style="margin:8px 0 4px;font-size:.9rem;color:var(--text2)">Goethe B1 Wortliste (German-English)</h4>
+          <p style="font-size:.78rem;color:var(--text3);line-height:1.4">Die offizielle Vokabelliste des Goethe-Instituts mit englischen Übersetzungen, Beispielen und Erläuterungen (ca. 2400 Wörter).</p>
+        </div>
+        <a href="https://www.goethe.de/pro/relaunch/prf/en/Goethe-Zertifikat_B1_Wortliste.pdf" target="_blank" class="btn-primary" style="margin-top:12px;text-align:center;font-size:.78rem;padding:6px 12px;text-decoration:none;display:inline-block">PDF Download ⬇️</a>
+      </div>
+
+      <!-- German - Russian Resources -->
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+        <div>
+          <span style="font-size:1.5rem">🇷🇺</span>
+          <h4 style="margin:8px 0 4px;font-size:.9rem;color:var(--text2)">B1 Wortschatz Glossar (Deutsch-Russisch)</h4>
+          <p style="font-size:.78rem;color:var(--text3);line-height:1.4">Ein vollständiges zweisprachiges B1 Glossar (Deutsch-Russisch) mit Übersetzungen aller wichtigen Vokabeln und Beispielsätze.</p>
+        </div>
+        <a href="https://vk.com/wall-625807_5081" target="_blank" class="btn-primary" style="margin-top:12px;text-align:center;font-size:.78rem;padding:6px 12px;text-decoration:none;display:inline-block">Dokument öffnen ⬇️</a>
+      </div>
+
+      <!-- telc B1 Mock Test -->
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+        <div>
+          <span style="font-size:1.5rem">🇩🇪</span>
+          <h4 style="margin:8px 0 4px;font-size:.9rem;color:var(--text2)">telc Deutsch B1 Übungstest 1 (PDF)</h4>
+          <p style="font-size:.78rem;color:var(--text3);line-height:1.4">Der offizielle und vollständige telc B1 Modellsatz inklusive aller Fragen zu Lesen, Hören, Schreiben und Sprechen sowie Lösungen.</p>
+        </div>
+        <a href="https://www.telc.net/fileadmin/user_upload/telc_deutsch_b1_uebungstest_1.pdf" target="_blank" class="btn-primary" style="margin-top:12px;text-align:center;font-size:.78rem;padding:6px 12px;text-decoration:none;display:inline-block">PDF Download ⬇️</a>
+      </div>
+
+      <!-- Goethe B1 Mock Test -->
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+        <div>
+          <span style="font-size:1.5rem">🦁</span>
+          <h4 style="margin:8px 0 4px;font-size:.9rem;color:var(--text2)">Goethe B1 Modellsatz Erwachsene (PDF)</h4>
+          <p style="font-size:.78rem;color:var(--text3);line-height:1.4">Der offizielle Modellsatz 1 des Goethe-Instituts für Erwachsene mit allen vier Modulen und Antwortbögen zum Ausdrucken.</p>
+        </div>
+        <a href="https://www.goethe.de/pro/relaunch/prf/de/de_b1_vs01.pdf" target="_blank" class="btn-primary" style="margin-top:12px;text-align:center;font-size:.78rem;padding:6px 12px;text-decoration:none;display:inline-block">PDF Download ⬇️</a>
+      </div>
+
+      <!-- Schubert Grammar Overview -->
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+        <div>
+          <span style="font-size:1.5rem">📝</span>
+          <h4 style="margin:8px 0 4px;font-size:.9rem;color:var(--text2)">B1 Grammatik-Übersicht (Schubert)</h4>
+          <p style="font-size:.78rem;color:var(--text3);line-height:1.4">Kompakte Übersicht aller wichtigen B1-Grammatikthemen (Passiv, Konjunktiv II, Nebensätze, Wechselpräpositionen) zum Lernen.</p>
+        </div>
+        <a href="https://www.schubert-verlag.de/pdf/arbeitsblaetter/b1/b1_grammatik_uebersicht.pdf" target="_blank" class="btn-primary" style="margin-top:12px;text-align:center;font-size:.78rem;padding:6px 12px;text-decoration:none;display:inline-block">PDF Download ⬇️</a>
+      </div>
+
+      <!-- Klett Prepositions guide -->
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+        <div>
+          <span style="font-size:1.5rem">🔀</span>
+          <h4 style="margin:8px 0 4px;font-size:.9rem;color:var(--text2)">Klett Wechselpräpositionen Guide</h4>
+          <p style="font-size:.78rem;color:var(--text3);line-height:1.4">Ein nützliches, farbig gestaltetes Handout über Wechselpräpositionen im Dativ und Akkusativ (Wo? vs. Wohin?).</p>
+        </div>
+        <a href="https://www.klett-sprachen.de/download/2361/wechselpraepositionen.pdf" target="_blank" class="btn-primary" style="margin-top:12px;text-align:center;font-size:.78rem;padding:6px 12px;text-decoration:none;display:inline-block">PDF Download ⬇️</a>
+      </div>
+    </div>
   </div>
 
   <!-- Kurse -->
