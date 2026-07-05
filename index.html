@@ -6018,11 +6018,19 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTP(); }
 // ===========================
 // CUSTOM AUDIO PLAYER LOGIC
 // ===========================
+const AUDIO_SEGMENTS = {
+  g1:  { start: 0,   end: 325,  duration: 325  }, // Goethe Part 1 (approx 5 min 25 sec)
+  t2:  { start: 325, end: 720,  duration: 395  }, // telc Part 2 (approx 6 min 35 sec)
+  t3:  { start: 0,   end: 420,  duration: 420  }  // telc Part 3 (approx 7 min)
+};
+
 function togglePlay(id) {
   const audio = document.getElementById(`audio-${id}`);
   const btn = document.getElementById(`play-btn-${id}`);
   const svg = document.getElementById(`play-svg-${id}`);
   if (!audio) return;
+
+  const segment = AUDIO_SEGMENTS[id];
 
   if (audio.paused) {
     // Pause other playing audios
@@ -6035,6 +6043,14 @@ function togglePlay(id) {
         if (otherSvg) otherSvg.innerHTML = '<path d="M8 5v14l11-7z"/>';
       }
     });
+
+    // Segment start check
+    if (segment) {
+      if (audio.currentTime < segment.start || audio.currentTime >= segment.end) {
+        audio.currentTime = segment.start;
+      }
+    }
+
     audio.play();
     if (svg) svg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'; // pause icon
   } else {
@@ -6048,22 +6064,41 @@ function togglePlay(id) {
     audio.addEventListener('timeupdate', () => {
       const fill = document.getElementById(`progress-fill-${id}`);
       const currText = document.getElementById(`time-curr-${id}`);
-      if (fill) fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
-      if (currText) currText.textContent = formatTime(audio.currentTime);
+      
+      let currentVal = audio.currentTime;
+      let durationVal = audio.duration;
+
+      if (segment) {
+        if (audio.currentTime >= segment.end) {
+          audio.pause();
+          audio.currentTime = segment.start;
+          if (svg) svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+          if (fill) fill.style.width = '0%';
+          return;
+        }
+        currentVal = audio.currentTime - segment.start;
+        durationVal = segment.duration;
+      }
+
+      if (fill && durationVal) fill.style.width = (currentVal / durationVal * 100) + '%';
+      if (currText) currText.textContent = formatTime(currentVal);
     });
+
     audio.addEventListener('loadedmetadata', () => {
       const durText = document.getElementById(`time-dur-${id}`);
-      if (durText) durText.textContent = formatTime(audio.duration);
+      if (durText) durText.textContent = formatTime(segment ? segment.duration : audio.duration);
     });
+
     audio.addEventListener('ended', () => {
       if (svg) svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
       const fill = document.getElementById(`progress-fill-${id}`);
       if (fill) fill.style.width = '0%';
     });
+
     // In case metadata is already loaded
     if (audio.duration) {
       const durText = document.getElementById(`time-dur-${id}`);
-      if (durText) durText.textContent = formatTime(audio.duration);
+      if (durText) durText.textContent = formatTime(segment ? segment.duration : audio.duration);
     }
   }
 }
@@ -6078,11 +6113,21 @@ function formatTime(secs) {
 function seekAudio(e, id) {
   const audio = document.getElementById(`audio-${id}`);
   const bar = document.getElementById(`progress-bar-${id}`);
-  if (!audio || !bar || !audio.duration) return;
+  if (!audio || !bar) return;
+  
+  const segment = AUDIO_SEGMENTS[id];
+  const durationVal = segment ? segment.duration : audio.duration;
+  if (!durationVal) return;
+
   const rect = bar.getBoundingClientRect();
   const clickX = e.clientX - rect.left;
   const pct = clickX / rect.width;
-  audio.currentTime = pct * audio.duration;
+  
+  if (segment) {
+    audio.currentTime = segment.start + (pct * durationVal);
+  } else {
+    audio.currentTime = pct * durationVal;
+  }
 }
 
 function setSpeed(id, val, btn) {
