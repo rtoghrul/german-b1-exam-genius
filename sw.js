@@ -1,4 +1,4 @@
-const CACHE = 'b1-genius-v6';
+const CACHE = 'b1-genius-v7';
 const ASSETS = [
   '/',
   '/index.html',
@@ -28,26 +28,16 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
 
-  // Network-first for audio (large files)
-  if (e.request.url.includes('/audio/')) {
-    e.respondWith(
-      fetch(e.request).then(res => {
-        const clone = res.clone();
-        caches.open(CACHE).then(cache => cache.put(e.request, clone));
-        return res;
-      }).catch(() => caches.match(e.request))
-    );
-    return;
-  }
-
-  // Cache-first for everything else
   e.respondWith(
-    caches.match(e.request).then(cached =>
-      cached || fetch(e.request).then(res => {
-        const clone = res.clone();
-        caches.open(CACHE).then(cache => cache.put(e.request, clone));
+    fetch(e.request)
+      .then(res => {
+        // Cache audio files and other successful GET requests
+        if (res.status === 200 || res.status === 0) {
+          const clone = res.clone();
+          caches.open(CACHE).then(cache => cache.put(e.request, clone));
+        }
         return res;
       })
-    )
+      .catch(() => caches.match(e.request))
   );
 });
