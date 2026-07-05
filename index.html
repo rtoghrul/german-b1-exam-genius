@@ -2277,41 +2277,40 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     <div class="speaking-parts" id="telc-speaking-parts"></div></div>
   </div>
 
-  <!-- MUSTER-PRÄSENTATION -->
-  <div class="card" style="margin-top:20px;border-top:3px solid var(--purple)" id="muster-praesentation">
-    <div class="card-title" style="margin-bottom:4px">🎤 Muster-Präsentation (Teil 2) — komplett zum Nachsprechen</div>
-    <div class="card-sub" style="margin-bottom:16px">Eine vollständige 2-Minuten-Präsentation zum Thema „Fast Food". Diese 5-Schritte-Struktur funktioniert für JEDES Thema — lerne sie auswendig! Klicke 🔊, um jeden Teil zu hören.</div>
-    <div style="display:flex;flex-direction:column;gap:12px" id="muster-praes-steps"></div>
-    <div class="tip-card" style="margin-top:16px">
-      <h4>💡 So bereitest du JEDES Thema in 5 Minuten vor</h4>
-      <ul>
-        <li>Schreibe zu jedem der 5 Schritte nur <strong>Stichwörter</strong> (keine Sätze!) auf deinen Notizzettel</li>
-        <li>Persönliche Erfahrung: eine kleine Geschichte aus deinem Leben — echt oder erfunden, das prüft niemand!</li>
-        <li>Heimatland: „In meinem Heimatland ist das ähnlich/ganz anders, weil..."</li>
-        <li>Vor- und Nachteile: je 2 reichen völlig — mit „einerseits... andererseits..."</li>
-        <li>Sprich langsam! 2 Minuten sind kürzer als du denkst — Qualität schlägt Tempo.</li>
-      </ul>
-    </div>
-  </div>
+  <div id="muster-praesentation"></div>
+  <div id="muster-dialog"></div>
 
-  <!-- MUSTERDIALOG TEIL 3 -->
-  <div class="card" style="margin-top:20px;border-top:3px solid var(--purple)" id="muster-dialog">
-    <div class="card-title" style="margin-bottom:4px">💬 Musterdialog (Teil 3) — Gemeinsam etwas planen</div>
-    <div class="card-sub" style="margin-bottom:16px">Aufgabe: „Planen Sie zusammen eine Abschiedsparty für einen Kollegen." So klingt ein sehr gutes B1-Gespräch — die markierten Redemittel kannst du in JEDER Planung benutzen:</div>
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:18px;font-size:.88rem;line-height:1.9">
-      <div><strong style="color:var(--purple)">A:</strong> <span class="hl-phrase" style="color:var(--gold);font-weight:600">Wollen wir zuerst über den Termin sprechen?</span> Ich schlage vor, wir machen die Party am Freitagabend.</div>
-      <div><strong style="color:var(--blue)">B:</strong> <span style="color:var(--gold);font-weight:600">Das ist eine gute Idee, aber</span> am Freitag können viele Kollegen nicht. <span style="color:var(--gold);font-weight:600">Wie wäre es mit</span> Samstag?</div>
-      <div><strong style="color:var(--purple)">A:</strong> <span style="color:var(--gold);font-weight:600">Einverstanden!</span> Und wo feiern wir? <span style="color:var(--gold);font-weight:600">Was hältst du von</span> einem Restaurant?</div>
-      <div><strong style="color:var(--blue)">B:</strong> Hmm, <span style="color:var(--gold);font-weight:600">ich bin nicht sicher.</span> Ein Restaurant ist teuer. <span style="color:var(--gold);font-weight:600">Ich finde, es wäre besser,</span> wenn wir im Büro feiern und alle etwas zu essen mitbringen.</div>
-      <div><strong style="color:var(--purple)">A:</strong> <span style="color:var(--gold);font-weight:600">Da hast du recht.</span> Dann kümmere ich mich um die Getränke. <span style="color:var(--gold);font-weight:600">Könntest du</span> die Einladungen schreiben?</div>
-      <div><strong style="color:var(--blue)">B:</strong> <span style="color:var(--gold);font-weight:600">Ja, das mache ich gern.</span> Und was schenken wir ihm? <span style="color:var(--gold);font-weight:600">Hast du eine Idee?</span></div>
-      <div><strong style="color:var(--purple)">A:</strong> <span style="color:var(--gold);font-weight:600">Vielleicht könnten wir</span> alle zusammen Geld sammeln und einen Gutschein kaufen?</div>
-      <div><strong style="color:var(--blue)">B:</strong> <span style="color:var(--gold);font-weight:600">Perfekt, dann machen wir es so!</span> Also: Samstag, im Büro, du bringst Getränke, ich schreibe die Einladungen.</div>
+  <!-- INTERACTIVE SPEAKING EXAM SIMULATOR -->
+  <div class="card" style="margin-top:20px;border-top:3px solid var(--purple)" id="speaking-simulator-card">
+    <div class="card-title" style="margin-bottom:4px">🗣 Mündliche Prüfung — Interaktiver Exam-Simulator</div>
+    <div class="card-sub" style="margin-bottom:16px">Simuliere alle 3 Teile der Sprechen-Prüfung wie im echten B1-Exam. Höre zwei Partnern (Mädchen Anna & Junge Lukas) zu, steuere sie einzeln oder schalte eine Rolle stumm, um selbst zu sprechen!</div>
+    
+    <!-- Simulator Tabs -->
+    <div class="sim-tabs" style="display:flex;gap:8px;margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:10px;flex-wrap:wrap">
+      <button class="pick-btn active-goethe" id="sim-tab-1" onclick="switchSimTab(1)">👋 Teil 1: Kennenlernen</button>
+      <button class="pick-btn" id="sim-tab-2" onclick="switchSimTab(2)">🎤 Teil 2: Präsentation</button>
+      <button class="pick-btn" id="sim-tab-3" onclick="switchSimTab(3)">🖼 Teil 3: Bildbeschreibung & Gespräch</button>
     </div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-      <button class="btn-secondary" onclick="speakDE(document.getElementById('muster-dialog').innerText.replace(/A:|B:/g,''))">🔊 Dialog anhören</button>
+
+    <!-- Simulator Settings -->
+    <div class="sim-controls-panel" style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);padding:12px 16px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span style="font-size:.82rem;font-weight:700;color:var(--text2)">Rolle üben:</span>
+        <button class="pick-btn active-goethe" id="sim-role-both" onclick="setSimRole('both')" style="font-size:.78rem;padding:4px 10px">Beide Stimmen</button>
+        <button class="pick-btn" id="sim-role-girl" onclick="setSimRole('girl')" style="font-size:.78rem;padding:4px 10px">👩 Ich bin Anna (Lukas spricht)</button>
+        <button class="pick-btn" id="sim-role-boy" onclick="setSimRole('boy')" style="font-size:.78rem;padding:4px 10px">👨 Ich bin Lukas (Anna spricht)</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <input type="checkbox" id="sim-autoplay" checked style="accent-color:var(--purple)">
+        <label for="sim-autoplay" style="font-size:.8rem;color:var(--text2);cursor:pointer">Auto-Play Dialog</label>
+        <button class="btn-secondary" onclick="stopSpeech()" style="font-size:.78rem;padding:4px 10px;background:var(--red);color:#fff;border:none">⏹ Stop</button>
+      </div>
     </div>
-    <div style="margin-top:12px;font-size:.82rem;color:var(--text2)">✅ <strong>Das erwarten die Prüfer:</strong> Vorschläge machen · auf den Partner reagieren (nicht nur „ja") · höflich widersprechen · nachfragen · am Ende zusammenfassen. Es geht NICHT darum, wer recht hat!</div>
+
+    <!-- Simulator Chat Area -->
+    <div id="sim-chat-container" style="display:flex;flex-direction:column;gap:16px;max-height:450px;overflow-y:auto;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:16px">
+      <!-- Chat bubbles rendered dynamically -->
+    </div>
   </div>
 
   <!-- Virtual Speech Recorder -->
@@ -4260,31 +4259,213 @@ function toggleTheme(){
 })();
 
 // ===========================
-// MUSTER-PRÄSENTATION (Sprechen Teil 2)
+// INTERACTIVE SPEAKING SIMULATOR (Sprechen Parts 1, 2, 3)
 // ===========================
-const MUSTER_PRAES = [
-  { step:'1. Einleitung & Thema nennen', color:'var(--gold)',
-    text:'Ich möchte heute über das Thema „Fast Food" sprechen. Zuerst erzähle ich von meinen persönlichen Erfahrungen, dann berichte ich über die Situation in meinem Heimatland, und zum Schluss nenne ich Vor- und Nachteile.' },
-  { step:'2. Persönliche Erfahrungen', color:'var(--blue)',
-    text:'Ich persönlich esse ungefähr einmal pro Woche Fast Food, meistens wenn ich wenig Zeit habe. Früher habe ich viel öfter Burger und Pommes gegessen, aber seit zwei Jahren koche ich lieber selbst, weil das gesünder ist.' },
-  { step:'3. Situation im Heimatland', color:'var(--purple)',
-    text:'In meinem Heimatland ist Fast Food besonders bei jungen Leuten sehr beliebt. An jeder Ecke gibt es Imbisse und amerikanische Ketten. Traditionelles Essen kochen oft nur noch die Großeltern — das finde ich ein bisschen schade.' },
-  { step:'4. Vor- und Nachteile', color:'var(--orange)',
-    text:'Fast Food hat Vor- und Nachteile. Einerseits ist es schnell, billig und schmeckt vielen Menschen gut. Andererseits ist es sehr ungesund, weil es viel Fett und Zucker enthält. Wer oft Fast Food isst, kann Gesundheitsprobleme bekommen.' },
-  { step:'5. Meinung & Schluss', color:'var(--green)',
-    text:'Meiner Meinung nach ist Fast Food ab und zu in Ordnung, aber man sollte nicht jeden Tag so essen. Ich denke, eine gesunde Ernährung ist auf Dauer wichtiger als Bequemlichkeit. Vielen Dank für Ihre Aufmerksamkeit! Haben Sie noch Fragen?' },
-];
-function initMusterPraes(){
-  const c = document.getElementById('muster-praes-steps');
-  if(!c) return;
-  c.innerHTML = MUSTER_PRAES.map((p,i) => `
-    <div style="background:var(--bg2);border:1px solid var(--border);border-left:4px solid ${p.color};border-radius:var(--r2);padding:14px 16px">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        <div style="font-weight:800;font-size:.85rem;color:${p.color}">${p.step}</div>
-        <button class="btn-secondary" style="padding:4px 12px;font-size:.78rem" onclick="speakDE(MUSTER_PRAES[${i}].text)">🔊 Anhören</button>
+const SIM_DIALOGUES = {
+  1: [
+    { id: 0, speaker: 'girl', name: 'Anna', text: 'Hallo, ich heiße Anna. Wie heißt du und woher kommst du?', translation: 'Hello, I am Anna. What is your name and where do you come from?' },
+    { id: 1, speaker: 'boy', name: 'Lukas', text: 'Hallo Anna! Ich bin Lukas und ich komme aus Polen. Und du?', translation: 'Hello Anna! I am Lukas and I come from Poland. And you?' },
+    { id: 2, speaker: 'girl', name: 'Anna', text: 'Ich komme aus der Ukraine. Wie lange lebst du schon in Deutschland?', translation: 'I come from Ukraine. How long have you been living in Germany?' },
+    { id: 3, speaker: 'boy', name: 'Lukas', text: 'Seit etwa einem Jahr. Ich wohne jetzt in Frankfurt. Was machst du beruflich?', translation: 'Since about a year. I live in Frankfurt now. What is your occupation?' },
+    { id: 4, speaker: 'girl', name: 'Anna', text: 'Ich arbeite als Krankenschwester. Und du? Arbeitest du oder lernst du noch?', translation: 'I work as a nurse. And you? Do you work or are you still studying?' },
+    { id: 5, speaker: 'boy', name: 'Lukas', text: 'Ich mache gerade ein Praktikum als Automechaniker und besuche den B1-Kurs.', translation: 'I am currently doing an internship as a car mechanic and attending the B1 course.' }
+  ],
+  2: [
+    { id: 0, speaker: 'girl', name: 'Anna (Präsentation)', text: 'Ich möchte heute über das Thema „Handys in der Schule" sprechen. Meine persönliche Erfahrung ist, dass Schüler ihr Handy oft im Unterricht nutzen, was stört.', translation: 'I would like to speak about the topic "Smartphones in school" today. My personal experience is that students often use their phone during class, which is disruptive.' },
+    { id: 1, speaker: 'girl', name: 'Anna (Präsentation)', text: 'In meinem Heimatland dürfen Kinder Handys in der Schule haben, aber im Unterricht müssen sie stummgeschaltet sein. Ein Vorteil von Handys ist, dass Eltern ihre Kinder immer erreichen können. Ein großer Nachteil ist jedoch, dass die Schüler abgelenkt werden.', translation: 'In my home country, children are allowed to have phones in school, but they must be muted during class. An advantage of phones is that parents can always reach their children. A major disadvantage, however, is that students get distracted.' },
+    { id: 2, speaker: 'girl', name: 'Anna (Präsentation)', text: 'Zusammenfassend finde ich, dass Handys in den Pausen erlaubt sein sollten, aber im Unterricht verboten gehören. Vielen Dank für Ihre Aufmerksamkeit!', translation: 'In conclusion, I think phones should be allowed during breaks, but banned during class. Thank you for your attention!' },
+    { id: 3, speaker: 'boy', name: 'Lukas (Partner-Feedback)', text: 'Vielen Dank für deine Präsentation, Anna. Das war sehr interessant. Du hast deutlich gesprochen und gute Beispiele genannt. Ich habe aber noch eine Frage: Denkst du, dass Lehrer Handys im Unterricht als Lernwerkzeug nutzen sollten?', translation: 'Thank you for your presentation, Anna. That was very interesting. You spoke clearly and gave good examples. But I have a question: Do you think teachers should use phones in class as learning tools?' },
+    { id: 4, speaker: 'girl', name: 'Anna (Antwort)', text: 'Das ist eine gute Frage, Lukas. Ja, wenn der Lehrer es kontrolliert, zum Beispiel für ein Online-Quiz, kann es nützlich sein. Sonst ist die Ablenkung zu groß.', translation: 'That is a good question, Lukas. Yes, if the teacher controls it, for example for an online quiz, it can be useful. Otherwise, the distraction is too great.' }
+  ],
+  3: [
+    { id: 0, speaker: 'girl', name: 'Anna (Bildbeschreibung)', text: 'Auf diesem Bild sehe ich zwei Personen, eine junge Frau und einen Mann. Sie stehen im Wald und sammeln Plastikmüll in einen großen blauen Sack. Sie tragen Handschuhe und sehen konzentriert aus. Das Bild gehört zum Thema Umweltschutz.', translation: 'In this picture, I see two people, a young woman and a man. They are standing in the forest and collecting plastic waste into a large blue bag. They are wearing gloves and look focused. The picture belongs to the theme of environmental protection.' },
+    { id: 1, speaker: 'boy', name: 'Lukas (Diskussion)', text: 'Das ist eine sehr schöne Beschreibung, Anna. Ich finde diese Aktion vorbildlich. Ich versuche auch, Plastik zu vermeiden. Zum Beispiel nehme ich beim Einkaufen immer eine Stofftasche mit. Wie machst du das?', translation: 'That is a very nice description, Anna. I find this action exemplary. I also try to avoid plastic. For example, I always take a cloth bag with me when shopping. How do you do it?' },
+    { id: 2, speaker: 'girl', name: 'Anna (Diskussion)', text: 'Ich trenne zu Hause den Müll sehr genau und fahre oft mit dem Fahrrad statt mit dem Auto. Das schont die Umwelt und spart Geld.', translation: 'I separate trash very carefully at home and often ride my bike instead of driving. That protects the environment and saves money.' },
+    { id: 3, speaker: 'boy', name: 'Lukas (Diskussion)', text: 'Da hast du absolut recht. Jeder kleine Schritt hilft. Wir sollten alle aktiver für den Umweltschutz sein.', translation: 'You are absolutely right. Every small step helps. We should all be more active for environmental protection.' }
+  ]
+};
+
+let currentSimTab = 1;
+let currentSimRole = 'both'; // 'both', 'girl', 'boy'
+let currentPlayingLineIdx = -1;
+
+function initMusterPraes() {
+  switchSimTab(1);
+}
+
+function switchSimTab(tabIdx) {
+  currentSimTab = tabIdx;
+  stopSpeech();
+  
+  [1, 2, 3].forEach(idx => {
+    const btn = document.getElementById(`sim-tab-${idx}`);
+    if (btn) {
+      if (idx === tabIdx) {
+        btn.classList.add('active-goethe');
+      } else {
+        btn.classList.remove('active-goethe');
+      }
+    }
+  });
+  
+  renderSimChat();
+}
+
+function setSimRole(role) {
+  currentSimRole = role;
+  stopSpeech();
+  
+  const roles = ['both', 'girl', 'boy'];
+  roles.forEach(r => {
+    const btn = document.getElementById(`sim-role-${r === 'girl' ? 'girl' : r === 'boy' ? 'boy' : r}`);
+    if (btn) {
+      if (r === role) {
+        btn.classList.add('active-goethe');
+      } else {
+        btn.classList.remove('active-goethe');
+      }
+    }
+  });
+  
+  renderSimChat();
+}
+
+function renderSimChat() {
+  const container = document.getElementById('sim-chat-container');
+  if (!container) return;
+  
+  const dialogue = SIM_DIALOGUES[currentSimTab];
+  container.innerHTML = dialogue.map((line, idx) => {
+    const isGirl = line.speaker === 'girl';
+    const isMuted = (isGirl && currentSimRole === 'girl') || (!isGirl && currentSimRole === 'boy');
+    
+    const bubbleAlign = isGirl ? 'flex-start' : 'flex-end';
+    const bubbleBg = isGirl 
+      ? 'var(--bg3)' 
+      : 'var(--blue-light, rgba(59, 130, 246, 0.08))';
+    const borderAccent = isGirl ? 'var(--purple)' : 'var(--blue)';
+    const nameColor = isGirl ? 'var(--purple)' : 'var(--blue)';
+    const avatarIcon = isGirl ? '👩' : '👨';
+    
+    return `
+      <div style="display:flex;flex-direction:column;align-items:${bubbleAlign};width:100%">
+        <div style="display:flex;align-items:flex-start;gap:10px;max-width:80%;flex-direction:${isGirl ? 'row' : 'row-reverse'}">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--bg3);border:2px solid ${borderAccent};display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;user-select:none">
+            ${avatarIcon}
+          </div>
+          
+          <div id="sim-bubble-${idx}" style="background:${bubbleBg};border:1px solid var(--border);border-left:4px solid ${borderAccent};border-radius:var(--r2);padding:12px 16px;position:relative;flex-grow:1">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:6px">
+              <span style="font-weight:800;font-size:.78rem;color:${nameColor}">${line.name} ${isMuted ? '🎤 (Du / You)' : ''}</span>
+              <div style="display:flex;gap:6px">
+                <button class="btn-secondary" style="padding:2px 8px;font-size:.72rem;display:flex;align-items:center;gap:4px" onclick="speakSimLine(${idx})">
+                  ${isMuted ? '👁️ Text zeigen / Du sprechen' : '🔊 Play'}
+                </button>
+                <button class="btn-secondary" style="padding:2px 8px;font-size:.72rem;background:var(--red);color:#fff;border:none;display:none" id="sim-stop-btn-${idx}" onclick="stopSpeech()">
+                  ⏹ Stop
+                </button>
+              </div>
+            </div>
+            
+            <div style="font-size:.88rem;line-height:1.6;color:var(--text2)">${line.text}</div>
+            <div style="font-size:.78rem;color:var(--text3);margin-top:6px;font-style:italic">${line.translation}</div>
+            
+            ${isMuted ? `
+              <div style="margin-top:10px;background:var(--gold-light, rgba(234, 179, 8, 0.05));border:1px dashed var(--gold);border-radius:4px;padding:6px 10px;font-size:.78rem;color:var(--text2)">
+                📢 <strong>Dein Zug!</strong> Sprich diesen Text laut aus. Klicke danach auf den nächsten Satz!
+              </div>
+            ` : ''}
+          </div>
+        </div>
       </div>
-      <div style="font-size:.88rem;line-height:1.7;color:var(--text2)">${p.text}</div>
-    </div>`).join('');
+    `;
+  }).join('');
+}
+
+function speakSimLine(lineIdx) {
+  if (!window.speechSynthesis) return;
+  stopSpeech();
+  
+  const dialogue = SIM_DIALOGUES[currentSimTab];
+  const line = dialogue[lineIdx];
+  if (!line) return;
+  
+  const isGirl = line.speaker === 'girl';
+  const isMuted = (isGirl && currentSimRole === 'girl') || (!isGirl && currentSimRole === 'boy');
+  
+  const bubble = document.getElementById(`sim-bubble-${lineIdx}`);
+  if (bubble) {
+    bubble.style.boxShadow = '0 0 0 2px var(--gold)';
+  }
+  
+  currentPlayingLineIdx = lineIdx;
+  
+  if (isMuted) {
+    return;
+  }
+  
+  const playBtn = bubble?.querySelector('button');
+  const stopBtn = document.getElementById(`sim-stop-btn-${lineIdx}`);
+  if (playBtn) playBtn.style.display = 'none';
+  if (stopBtn) stopBtn.style.display = 'block';
+  
+  const utterance = new SpeechSynthesisUtterance(line.text);
+  utterance.lang = 'de-DE';
+  
+  const voices = window.speechSynthesis.getVoices();
+  let selectedVoice = null;
+  
+  if (isGirl) {
+    selectedVoice = voices.find(v => v.lang.startsWith('de') && (v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('google') || v.name.toLowerCase().includes('hazel') || v.name.toLowerCase().includes('hedda') || v.name.toLowerCase().includes('zira') || v.name.toLowerCase().includes('katja') || v.name.toLowerCase().includes('sara') || v.name.toLowerCase().includes('anna') || v.name.toLowerCase().includes('steffi')));
+  } else {
+    selectedVoice = voices.find(v => v.lang.startsWith('de') && (v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('stefan') || v.name.toLowerCase().includes('daniel') || v.name.toLowerCase().includes('lothar') || v.name.toLowerCase().includes('markus')));
+  }
+  
+  if (!selectedVoice) {
+    selectedVoice = voices.find(v => v.lang.startsWith('de'));
+  }
+  
+  if (selectedVoice) utterance.voice = selectedVoice;
+  
+  utterance.onend = () => {
+    if (playBtn) playBtn.style.display = 'block';
+    if (stopBtn) stopBtn.style.display = 'none';
+    if (bubble) bubble.style.boxShadow = 'none';
+    
+    const autoPlayCheck = document.getElementById('sim-autoplay');
+    if (autoPlayCheck && autoPlayCheck.checked && lineIdx + 1 < dialogue.length) {
+      setTimeout(() => {
+        speakSimLine(lineIdx + 1);
+      }, 1500);
+    }
+  };
+  
+  utterance.onerror = () => {
+    if (playBtn) playBtn.style.display = 'block';
+    if (stopBtn) stopBtn.style.display = 'none';
+    if (bubble) bubble.style.boxShadow = 'none';
+  };
+  
+  window.speechSynthesis.speak(utterance);
+}
+
+function stopSpeech() {
+  if (window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+  }
+  const dialogue = SIM_DIALOGUES[currentSimTab];
+  if (dialogue) {
+    dialogue.forEach((_, idx) => {
+      const bubble = document.getElementById(`sim-bubble-${idx}`);
+      if (bubble) {
+        bubble.style.boxShadow = 'none';
+        const playBtn = bubble.querySelector('button');
+        const stopBtn = document.getElementById(`sim-stop-btn-${idx}`);
+        if (playBtn) playBtn.style.display = 'block';
+        if (stopBtn) stopBtn.style.display = 'none';
+      }
+    });
+  }
 }
 
 // Deep-link navigation from plan tasks straight to the right exercise
