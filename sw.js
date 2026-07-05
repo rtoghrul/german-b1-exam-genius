@@ -1,9 +1,10 @@
-const CACHE = 'b1-genius-v10';
+const CACHE = 'b1-genius-v11';
 const ASSETS = [
   '/',
   '/index.html',
   '/bank.js',
   '/questions.js',
+  '/speaking_dialogues.js',
   '/manifest.json',
   '/audio/hoerverstehen_teil1.mp3',
   '/audio/hoerverstehen_teil2.mp3'
