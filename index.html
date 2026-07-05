@@ -2296,11 +2296,14 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
     </div>
 
     <!-- Example Selector -->
-    <div class="sim-example-selector" style="display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+    <div class="sim-example-selector" style="display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap;width:100%">
       <span style="font-size:.82rem;font-weight:700;color:var(--text2)">Beispiel / Thema:</span>
       <button class="pick-btn active-goethe" id="sim-ex-btn-0" onclick="switchSimExample(0)" style="font-size:.78rem;padding:4px 10px">Option 1</button>
       <button class="pick-btn" id="sim-ex-btn-1" onclick="switchSimExample(1)" style="font-size:.78rem;padding:4px 10px">Option 2</button>
       <button class="pick-btn" id="sim-ex-btn-2" onclick="switchSimExample(2)" style="font-size:.78rem;padding:4px 10px">Option 3</button>
+      <button class="btn-secondary" onclick="document.getElementById('bank-card-sprechen').scrollIntoView({behavior:'smooth'})" style="font-size:.78rem;padding:4px 10px;margin-left:auto;border-color:var(--purple);color:var(--purple);font-weight:700;display:flex;align-items:center;gap:4px">
+        📂 50+ Sprech-Themen unten &rarr;
+      </button>
     </div>
 
     <!-- Simulator Settings -->

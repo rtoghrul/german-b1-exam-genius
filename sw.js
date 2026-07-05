@@ -1,4 +1,4 @@
-const CACHE = 'b1-genius-v9';
+const CACHE = 'b1-genius-v10';
 const ASSETS = [
   '/',
   '/index.html',
