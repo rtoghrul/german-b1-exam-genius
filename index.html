@@ -2292,6 +2292,14 @@ Was vermisse ich? Das Essen aus meiner Heimat natürlich! Deutsches Essen ist gu
       <button class="pick-btn" id="sim-tab-3" onclick="switchSimTab(3)">🖼 Teil 3: Bildbeschreibung & Gespräch</button>
     </div>
 
+    <!-- Example Selector -->
+    <div class="sim-example-selector" style="display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+      <span style="font-size:.82rem;font-weight:700;color:var(--text2)">Beispiel / Thema:</span>
+      <button class="pick-btn active-goethe" id="sim-ex-btn-0" onclick="switchSimExample(0)" style="font-size:.78rem;padding:4px 10px">Option 1</button>
+      <button class="pick-btn" id="sim-ex-btn-1" onclick="switchSimExample(1)" style="font-size:.78rem;padding:4px 10px">Option 2</button>
+      <button class="pick-btn" id="sim-ex-btn-2" onclick="switchSimExample(2)" style="font-size:.78rem;padding:4px 10px">Option 3</button>
+    </div>
+
     <!-- Simulator Settings -->
     <div class="sim-controls-panel" style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);padding:12px 16px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
@@ -4263,29 +4271,93 @@ function toggleTheme(){
 // ===========================
 const SIM_DIALOGUES = {
   1: [
-    { id: 0, speaker: 'girl', name: 'Anna', text: 'Hallo, ich heiße Anna. Wie heißt du und woher kommst du?', translation: 'Hello, I am Anna. What is your name and where do you come from?' },
-    { id: 1, speaker: 'boy', name: 'Lukas', text: 'Hallo Anna! Ich bin Lukas und ich komme aus Polen. Und du?', translation: 'Hello Anna! I am Lukas and I come from Poland. And you?' },
-    { id: 2, speaker: 'girl', name: 'Anna', text: 'Ich komme aus der Ukraine. Wie lange lebst du schon in Deutschland?', translation: 'I come from Ukraine. How long have you been living in Germany?' },
-    { id: 3, speaker: 'boy', name: 'Lukas', text: 'Seit etwa einem Jahr. Ich wohne jetzt in Frankfurt. Was machst du beruflich?', translation: 'Since about a year. I live in Frankfurt now. What is your occupation?' },
-    { id: 4, speaker: 'girl', name: 'Anna', text: 'Ich arbeite als Krankenschwester. Und du? Arbeitest du oder lernst du noch?', translation: 'I work as a nurse. And you? Do you work or are you still studying?' },
-    { id: 5, speaker: 'boy', name: 'Lukas', text: 'Ich mache gerade ein Praktikum als Automechaniker und besuche den B1-Kurs.', translation: 'I am currently doing an internship as a car mechanic and attending the B1 course.' }
+    // Example 0: Kurs & Herkunft
+    [
+      { id: 0, speaker: 'girl', name: 'Anna', text: 'Hallo, ich heiße Anna. Wie heißt du und woher kommst du?', translation: 'Hello, I am Anna. What is your name and where do you come from?' },
+      { id: 1, speaker: 'boy', name: 'Lukas', text: 'Hallo Anna! Ich bin Lukas und ich komme aus Polen. Und du?', translation: 'Hello Anna! I am Lukas and I come from Poland. And you?' },
+      { id: 2, speaker: 'girl', name: 'Anna', text: 'Ich komme aus der Ukraine. Wie lange lebst du schon in Deutschland?', translation: 'I come from Ukraine. How long have you been living in Germany?' },
+      { id: 3, speaker: 'boy', name: 'Lukas', text: 'Seit etwa einem Jahr. Ich wohne jetzt in Frankfurt. Was machst du beruflich?', translation: 'Since about a year. I live in Frankfurt now. What is your occupation?' },
+      { id: 4, speaker: 'girl', name: 'Anna', text: 'Ich arbeite als Krankenschwester. Und du? Arbeitest du oder lernst du noch?', translation: 'I work as a nurse. And you? Do you work or are you still studying?' },
+      { id: 5, speaker: 'boy', name: 'Lukas', text: 'Ich mache gerade ein Praktikum als Automechaniker und besuche den B1-Kurs.', translation: 'I am currently doing an internship as a car mechanic and attending the B1 course.' }
+    ],
+    // Example 1: Beruf & Zukunft
+    [
+      { id: 0, speaker: 'girl', name: 'Sofia', text: 'Guten Tag! Ich bin Sofia. Darf ich dich fragen, was dein Traumberuf ist?', translation: 'Good day! I am Sofia. May I ask you what your dream job is?' },
+      { id: 1, speaker: 'boy', name: 'David', text: 'Hallo Sofia! Ich bin David. Mein Traumberuf ist Softwareentwickler. Ich lerne viel am Computer. Was möchtest du machen?', translation: 'Hello Sofia! I am David. My dream job is software developer. I learn a lot on the computer. What would you like to do?' },
+      { id: 2, speaker: 'girl', name: 'Sofia', text: 'Ich möchte gerne als Erzieherin im Kindergarten arbeiten, weil ich Kinder sehr mag.', translation: 'I would like to work as a kindergarten teacher because I like children very much.' },
+      { id: 3, speaker: 'boy', name: 'David', text: 'Das ist ein schöner Beruf! Musst du dafür noch eine Ausbildung machen?', translation: 'That is a nice job! Do you have to do an apprenticeship for that?' },
+      { id: 4, speaker: 'girl', name: 'Sofia', text: 'Ja, eine dreijährige Ausbildung. Davor muss ich aber zuerst die B1-Prüfung bestehen.', translation: 'Yes, a three-year apprenticeship. But before that, I must first pass the B1 exam.' },
+      { id: 5, speaker: 'boy', name: 'David', text: 'Das wirst du bestimmt schaffen! Wir lernen ja fleißig zusammen.', translation: 'You will surely manage that! We are studying hard together after all.' }
+    ],
+    // Example 2: Hobbys & Freizeit
+    [
+      { id: 0, speaker: 'girl', name: 'Marie', text: 'Hallo! Ich heiße Marie. Was machst du eigentlich gerne in deiner Freizeit?', translation: 'Hello! I am Marie. What do you actually like to do in your free time?' },
+      { id: 1, speaker: 'boy', name: 'Jonas', text: 'Hallo Marie! Ich spiele sehr gerne Fußball und gehe am Wochenende oft wandern. Und du?', translation: 'Hello Marie! I like playing football very much and often go hiking on the weekend. And you?' },
+      { id: 2, speaker: 'girl', name: 'Marie', text: 'Ich lese viel und koche gerne für meine Freunde. Treibst du auch Sport unter der Woche?', translation: 'I read a lot and like to cook for my friends. Do you also do sports during the week?' },
+      { id: 3, speaker: 'boy', name: 'Jonas', text: 'Ja, jeden Dienstagabend spiele ich im Verein. Das hilft mir, mich nach der Arbeit zu entspannen.', translation: 'Yes, every Tuesday evening I play in a club. That helps me relax after work.' },
+      { id: 4, speaker: 'girl', name: 'Marie', text: 'Klingt super! Vielleicht können wir mal zusammen kochen oder eine Fahrradtour machen?', translation: 'Sounds great! Maybe we can cook together sometime or do a bike tour?' },
+      { id: 5, speaker: 'boy', name: 'Jonas', text: 'Sehr gerne! Das ist eine tolle Idee, um unser Deutsch zu üben.', translation: 'Very gladly! That is a great idea to practice our German.' }
+    ]
   ],
   2: [
-    { id: 0, speaker: 'girl', name: 'Anna (Präsentation)', text: 'Ich möchte heute über das Thema „Handys in der Schule" sprechen. Meine persönliche Erfahrung ist, dass Schüler ihr Handy oft im Unterricht nutzen, was stört.', translation: 'I would like to speak about the topic "Smartphones in school" today. My personal experience is that students often use their phone during class, which is disruptive.' },
-    { id: 1, speaker: 'girl', name: 'Anna (Präsentation)', text: 'In meinem Heimatland dürfen Kinder Handys in der Schule haben, aber im Unterricht müssen sie stummgeschaltet sein. Ein Vorteil von Handys ist, dass Eltern ihre Kinder immer erreichen können. Ein großer Nachteil ist jedoch, dass die Schüler abgelenkt werden.', translation: 'In my home country, children are allowed to have phones in school, but they must be muted during class. An advantage of phones is that parents can always reach their children. A major disadvantage, however, is that students get distracted.' },
-    { id: 2, speaker: 'girl', name: 'Anna (Präsentation)', text: 'Zusammenfassend finde ich, dass Handys in den Pausen erlaubt sein sollten, aber im Unterricht verboten gehören. Vielen Dank für Ihre Aufmerksamkeit!', translation: 'In conclusion, I think phones should be allowed during breaks, but banned during class. Thank you for your attention!' },
-    { id: 3, speaker: 'boy', name: 'Lukas (Partner-Feedback)', text: 'Vielen Dank für deine Präsentation, Anna. Das war sehr interessant. Du hast deutlich gesprochen und gute Beispiele genannt. Ich habe aber noch eine Frage: Denkst du, dass Lehrer Handys im Unterricht als Lernwerkzeug nutzen sollten?', translation: 'Thank you for your presentation, Anna. That was very interesting. You spoke clearly and gave good examples. But I have a question: Do you think teachers should use phones in class as learning tools?' },
-    { id: 4, speaker: 'girl', name: 'Anna (Antwort)', text: 'Das ist eine gute Frage, Lukas. Ja, wenn der Lehrer es kontrolliert, zum Beispiel für ein Online-Quiz, kann es nützlich sein. Sonst ist die Ablenkung zu groß.', translation: 'That is a good question, Lukas. Yes, if the teacher controls it, for example for an online quiz, it can be useful. Otherwise, the distraction is too great.' }
+    // Example 0: Handys in der Schule
+    [
+      { id: 0, speaker: 'girl', name: 'Anna (Präsentation)', text: 'Ich möchte heute über das Thema „Handys in der Schule" sprechen. Meine persönliche Erfahrung ist, dass Schüler ihr Handy oft im Unterricht nutzen, was stört.', translation: 'I would like to speak about the topic "Smartphones in school" today. My personal experience is that students often use their phone during class, which is disruptive.' },
+      { id: 1, speaker: 'girl', name: 'Anna (Präsentation)', text: 'In meinem Heimatland dürfen Kinder Handys in der Schule haben, aber im Unterricht müssen sie stummgeschaltet sein. Ein Vorteil von Handys ist, dass Eltern ihre Kinder immer erreichen können. Ein großer Nachteil ist jedoch, dass die Schüler abgelenkt werden.', translation: 'In my home country, children are allowed to have phones in school, but they must be muted during class. An advantage of phones is that parents can always reach their children. A major disadvantage, however, is that students get distracted.' },
+      { id: 2, speaker: 'girl', name: 'Anna (Präsentation)', text: 'Zusammenfassend finde ich, dass Handys in den Pausen erlaubt sein sollten, aber im Unterricht verboten gehören. Vielen Dank für Ihre Aufmerksamkeit!', translation: 'In conclusion, I think phones should be allowed during breaks, but banned during class. Thank you for your attention!' },
+      { id: 3, speaker: 'boy', name: 'Lukas (Partner-Feedback)', text: 'Vielen Dank für deine Präsentation, Anna. Das war sehr interessant. Du hast deutlich gesprochen und gute Beispiele genannt. Ich habe aber noch eine Frage: Denkst du, dass Lehrer Handys im Unterricht als Lernwerkzeug nutzen sollten?', translation: 'Thank you for your presentation, Anna. That was very interesting. You spoke clearly and gave good examples. But I have a question: Do you think teachers should use phones in class as learning tools?' },
+      { id: 4, speaker: 'girl', name: 'Anna (Antwort)', text: 'Das ist eine gute Frage, Lukas. Ja, wenn der Lehrer es kontrolliert, zum Beispiel für ein Online-Quiz, kann es nützlich sein. Sonst ist die Ablenkung zu groß.', translation: 'That is a good question, Lukas. Yes, if the teacher controls it, for example for an online quiz, it can be useful. Otherwise, the distraction is too great.' }
+    ],
+    // Example 1: Haustiere in der Stadt
+    [
+      { id: 0, speaker: 'girl', name: 'Marie (Präsentation)', text: 'Mein Thema ist „Haustiere in der Großstadt". Ich habe selbst eine Katze in meiner Wohnung in Berlin, was gut funktioniert.', translation: 'My topic is "Pets in the big city". I have a cat myself in my apartment in Berlin, which works well.' },
+      { id: 1, speaker: 'girl', name: 'Marie (Präsentation)', text: 'In meinem Heimatland haben viele Leute Hunde und Katzen, oft auch in kleineren Wohnungen. Ein Vorteil von Haustieren ist, dass sie gegen Einsamkeit helfen und Kindern Verantwortung beibringen. Ein Nachteil in der Stadt ist jedoch der Platzmangel, besonders für große Hunde.', translation: 'In my home country, many people have dogs and cats, often also in smaller apartments. An advantage of pets is that they help against loneliness and teach children responsibility. A disadvantage in the city, however, is the lack of space, especially for large dogs.' },
+      { id: 2, speaker: 'girl', name: 'Marie (Präsentation)', text: 'Ich denke, Haustiere sind eine Bereicherung, aber man muss genug Zeit für sie haben. Vielen Dank für Ihre Aufmerksamkeit!', translation: 'I think pets are an enrichment, but you must have enough time for them. Thank you for your attention!' },
+      { id: 3, speaker: 'boy', name: 'Jonas (Partner-Feedback)', text: 'Deine Präsentation war sehr gut strukturiert, Marie. Du hast flüssig gesprochen. Meine Frage an dich: Findest du es tierfreundlich, einen Hund in einer Dreizimmerwohnung zu halten?', translation: 'Your presentation was very well structured, Marie. You spoke fluently. My question to you: Do you find it animal-friendly to keep a dog in a three-room apartment?' },
+      { id: 4, speaker: 'girl', name: 'Marie (Antwort)', text: 'Danke für die Frage. Wenn man täglich zwei Stunden mit dem Hund im Park spazieren geht, ist es okay. Wenn er nur in der Wohnung liegt, ist es nicht gut.', translation: 'Thanks for the question. If you walk the dog in the park for two hours daily, it is okay. If he just lies in the apartment, it is not good.' }
+    ],
+    // Example 2: Einkaufen im Internet
+    [
+      { id: 0, speaker: 'girl', name: 'Sofia (Präsentation)', text: 'Ich präsentiere heute das Thema „Einkaufen im Internet". Ich persönlich kaufe fast alle meine Kleider und Bücher online.', translation: 'I present the topic "Online shopping" today. Personally, I buy almost all of my clothes and books online.' },
+      { id: 1, speaker: 'girl', name: 'Sofia (Präsentation)', text: 'In meinem Heimatland wächst der Online-Handel sehr schnell, besonders in den Städten. Der größte Vorteil ist die Zeitersparnis und die Möglichkeit, Preise einfach zu vergleichen. Der Nachteil ist, dass man die Produkte vor dem Kauf nicht anprobieren kann.', translation: 'In my home country, online trade is growing very fast, especially in the cities. The biggest advantage is the time saving and the possibility to easily compare prices. The disadvantage is that you cannot try on the products before buying.' },
+      { id: 2, speaker: 'girl', name: 'Sofia (Präsentation)', text: 'Meiner Meinung nach hat das Online-Shopping mehr Vorteile, aber wir sollten auch lokale Geschäfte unterstützen. Vielen Dank fürs Zuhören!', translation: 'In my opinion, online shopping has more advantages, but we should also support local shops. Thank you for listening!' },
+      { id: 3, speaker: 'boy', name: 'David (Partner-Feedback)', text: 'Das war eine informative Präsentation, Sofia. Mir haben deine Argumente gefallen. Ich habe folgende Frage: Was tust du, wenn ein online bestelltes Produkt beschädigt ankommt?', translation: 'That was an informative presentation, Sofia. I liked your arguments. I have the following question: What do you do when a product ordered online arrives damaged?' },
+      { id: 4, speaker: 'girl', name: 'Sofia (Antwort)', text: 'Das passiert leider manchmal. In diesem Fall schicke ich es sofort zurück. Die meisten Online-Händler bieten eine kostenlose Rücksendung an.', translation: 'That unfortunately happens sometimes. In this case, I send it back immediately. Most online retailers offer a free return.' }
+    ]
   ],
   3: [
-    { id: 0, speaker: 'girl', name: 'Anna (Bildbeschreibung)', text: 'Auf diesem Bild sehe ich zwei Personen, eine junge Frau und einen Mann. Sie stehen im Wald und sammeln Plastikmüll in einen großen blauen Sack. Sie tragen Handschuhe und sehen konzentriert aus. Das Bild gehört zum Thema Umweltschutz.', translation: 'In this picture, I see two people, a young woman and a man. They are standing in the forest and collecting plastic waste into a large blue bag. They are wearing gloves and look focused. The picture belongs to the theme of environmental protection.' },
-    { id: 1, speaker: 'boy', name: 'Lukas (Diskussion)', text: 'Das ist eine sehr schöne Beschreibung, Anna. Ich finde diese Aktion vorbildlich. Ich versuche auch, Plastik zu vermeiden. Zum Beispiel nehme ich beim Einkaufen immer eine Stofftasche mit. Wie machst du das?', translation: 'That is a very nice description, Anna. I find this action exemplary. I also try to avoid plastic. For example, I always take a cloth bag with me when shopping. How do you do it?' },
-    { id: 2, speaker: 'girl', name: 'Anna (Diskussion)', text: 'Ich trenne zu Hause den Müll sehr genau und fahre oft mit dem Fahrrad statt mit dem Auto. Das schont die Umwelt und spart Geld.', translation: 'I separate trash very carefully at home and often ride my bike instead of driving. That protects the environment and saves money.' },
-    { id: 3, speaker: 'boy', name: 'Lukas (Diskussion)', text: 'Da hast du absolut recht. Jeder kleine Schritt hilft. Wir sollten alle aktiver für den Umweltschutz sein.', translation: 'You are absolutely right. Every small step helps. We should all be more active for environmental protection.' }
+    // Example 0: Umweltschutz im Alltag
+    [
+      { id: 0, speaker: 'girl', name: 'Anna (Bildbeschreibung)', text: 'Auf diesem Bild sehe ich zwei Personen, eine junge Frau und einen Mann. Sie stehen im Wald und sammeln Plastikmüll in einen großen blauen Sack. Sie tragen Handschuhe und sehen konzentriert aus. Das Bild gehört zum Thema Umweltschutz.', translation: 'In this picture, I see two people, a young woman and a man. They are standing in the forest and collecting plastic waste into a large blue bag. They are wearing gloves and look focused. The picture belongs to the theme of environmental protection.' },
+      { id: 1, speaker: 'boy', name: 'Lukas (Diskussion)', text: 'Das ist eine sehr schöne Beschreibung, Anna. Ich finde diese Aktion vorbildlich. Ich versuche auch, Plastik zu vermeiden. Zum Beispiel nehme ich beim Einkaufen immer eine Stofftasche mit. Wie machst du das?', translation: 'That is a very nice description, Anna. I find this action exemplary. I also try to avoid plastic. For example, I always take a cloth bag with me when shopping. How do you do it?' },
+      { id: 2, speaker: 'girl', name: 'Anna (Diskussion)', text: 'Ich trenne zu Hause den Müll sehr genau und fahre oft mit dem Fahrrad statt mit dem Auto. Das schont die Umwelt und spart Geld.', translation: 'I separate trash very carefully at home and often ride my bike instead of driving. That protects the environment and saves money.' },
+      { id: 3, speaker: 'boy', name: 'Lukas (Diskussion)', text: 'Da hast du absolut recht. Jeder kleine Schritt hilft. Wir sollten alle aktiver für den Umweltschutz sein.', translation: 'You are absolutely right. Every small step helps. We should all be more active for environmental protection.' }
+    ],
+    // Example 1: Gesunde Ernährung
+    [
+      { id: 0, speaker: 'girl', name: 'Marie (Bildbeschreibung)', text: 'Auf dem Bild sieht man eine Familie in der Küche: Vater, Mutter und zwei kleine Kinder. Sie schneiden frisches Gemüse wie Tomaten und Gurken und lachen zusammen. Sie bereiten offensichtlich ein gesundes Essen vor.', translation: 'In the picture, one sees a family in the kitchen: father, mother, and two small children. They are cutting fresh vegetables like tomatoes and cucumbers and laughing together. They are obviously preparing a healthy meal.' },
+      { id: 1, speaker: 'boy', name: 'Jonas (Diskussion)', text: 'Ja, das Bild strahlt eine glückliche Atmosphäre aus! Ich koche auch sehr gerne frisch. Ich finde es wichtig, dass man sich Zeit für das Essen nimmt. Kochst du lieber selbst oder kaufst du Fertiggerichte?', translation: 'Yes, the picture radiates a happy atmosphere! I also like to cook fresh very much. I think it is important to take time for eating. Do you prefer cooking yourself or do you buy ready-made meals?' },
+      { id: 2, speaker: 'girl', name: 'Marie (Diskussion)', text: 'Ich koche fast jeden Tag selbst, weil es gesünder ist und besser schmeckt. Fertiggerichte enthalten mir zu viel Salz und Konservierungsstoffe.', translation: 'I cook myself almost every day because it is healthier and tastes better. Ready-made meals contain too much salt and preservatives for me.' },
+      { id: 3, speaker: 'boy', name: 'Jonas (Diskussion)', text: 'Das stimmt. Außerdem lernt die ganze Familie beim gemeinsamen Kochen, wie wichtig frische Lebensmittel sind.', translation: 'That is true. Besides, the whole family learns during cooking together how important fresh foods are.' }
+    ],
+    // Example 2: Mobilität in der Stadt
+    [
+      { id: 0, speaker: 'girl', name: 'Sofia (Bildbeschreibung)', text: 'Das Bild zeigt eine breite Straße in einer Stadt. Man sieht viele Menschen auf Fahrrädern auf einem speziellen Fahrradweg. Im Hintergrund sieht man ein paar Autos, die im Stau stehen. Das Bild beschreibt das Thema moderne Mobilität.', translation: 'The picture shows a wide street in a city. You see many people on bicycles on a special bicycle path. In the background, you see a few cars standing in a traffic jam. The picture describes the topic of modern mobility.' },
+      { id: 1, speaker: 'boy', name: 'David (Diskussion)', text: 'Eine interessante Szene! Ich fahre in der Stadt auch am liebsten Fahrrad, weil man schneller am Ziel ist und keinen Parkplatz suchen muss. Wie findest du das öffentliche Verkehrsnetz hier?', translation: 'An interesting scene! In the city, I also prefer riding a bicycle because you get to the destination faster and do not have to look for a parking space. How do you find the public transport network here?' },
+      { id: 2, speaker: 'girl', name: 'Sofia (Diskussion)', text: 'Die U-Bahnen und Busse sind sehr gut und pünktlich. Ich benutze sie oft, wenn das Wetter schlecht ist oder es regnet.', translation: 'The subways and buses are very good and punctual. I use them often when the weather is bad or it rains.' },
+      { id: 3, speaker: 'boy', name: 'David (Diskussion)', text: 'Genau, eine Mischung aus Fahrrad und Bahn ist meiner Meinung nach die beste Lösung für Großstädte, um Staus und Abgase zu reduzieren.', translation: 'Exactly, a mixture of bicycle and train is in my opinion the best solution for big cities to reduce traffic jams and exhaust fumes.' }
+    ]
   ]
 };
 
+const SIM_EXAMPLE_NAMES = {
+  1: ["1. Kurs & Herkunft", "2. Beruf & Zukunft", "3. Hobbys & Freizeit"],
+  2: ["1. Handys in der Schule", "2. Haustiere in der Stadt", "3. Einkaufen im Internet"],
+  3: ["1. Umweltschutz im Alltag", "2. Gesunde Ernährung", "3. Mobilität in der Stadt"]
+};
+
 let currentSimTab = 1;
+let currentSimExampleIdx = 0;
 let currentSimRole = 'both'; // 'both', 'girl', 'boy'
 let currentPlayingLineIdx = -1;
 
@@ -4295,6 +4367,7 @@ function initMusterPraes() {
 
 function switchSimTab(tabIdx) {
   currentSimTab = tabIdx;
+  currentSimExampleIdx = 0; // reset to first example
   stopSpeech();
   
   [1, 2, 3].forEach(idx => {
@@ -4308,7 +4381,30 @@ function switchSimTab(tabIdx) {
     }
   });
   
+  updateExampleButtons();
   renderSimChat();
+}
+
+function switchSimExample(exIdx) {
+  currentSimExampleIdx = exIdx;
+  stopSpeech();
+  updateExampleButtons();
+  renderSimChat();
+}
+
+function updateExampleButtons() {
+  const names = SIM_EXAMPLE_NAMES[currentSimTab];
+  for (let idx = 0; idx < 3; idx++) {
+    const btn = document.getElementById(`sim-ex-btn-${idx}`);
+    if (btn) {
+      btn.textContent = names[idx];
+      if (idx === currentSimExampleIdx) {
+        btn.classList.add('active-goethe');
+      } else {
+        btn.classList.remove('active-goethe');
+      }
+    }
+  }
 }
 
 function setSimRole(role) {
@@ -4334,7 +4430,7 @@ function renderSimChat() {
   const container = document.getElementById('sim-chat-container');
   if (!container) return;
   
-  const dialogue = SIM_DIALOGUES[currentSimTab];
+  const dialogue = SIM_DIALOGUES[currentSimTab][currentSimExampleIdx];
   container.innerHTML = dialogue.map((line, idx) => {
     const isGirl = line.speaker === 'girl';
     const isMuted = (isGirl && currentSimRole === 'girl') || (!isGirl && currentSimRole === 'boy');
@@ -4386,7 +4482,7 @@ function speakSimLine(lineIdx) {
   if (!window.speechSynthesis) return;
   stopSpeech();
   
-  const dialogue = SIM_DIALOGUES[currentSimTab];
+  const dialogue = SIM_DIALOGUES[currentSimTab][currentSimExampleIdx];
   const line = dialogue[lineIdx];
   if (!line) return;
   
@@ -4453,7 +4549,7 @@ function stopSpeech() {
   if (window.speechSynthesis) {
     window.speechSynthesis.cancel();
   }
-  const dialogue = SIM_DIALOGUES[currentSimTab];
+  const dialogue = SIM_DIALOGUES[currentSimTab][currentSimExampleIdx];
   if (dialogue) {
     dialogue.forEach((_, idx) => {
       const bubble = document.getElementById(`sim-bubble-${idx}`);
